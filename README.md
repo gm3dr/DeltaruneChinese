@@ -4,6 +4,7 @@
 将汉化补丁放到安装器根目录，打开安装器<br>
 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
 点击「安装补丁」即可
+（对于 macOS 平台，选中安装目录下 `DELTARUNE/Contents/Resources`）
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>
 使用 [DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher) 按照以下表格输入<br>
@@ -17,8 +18,10 @@
 |chapter3_windows/data.win|chapter3.xdelta|
 |chapter4_windows/data.win|chapter4.xdelta|
 
-（如果是 macOS 平台，除了要使用 macOS 版本的补丁外，<br>
+（对于 macOS 平台，除了要使用 macOS 版本的补丁<br>
+以及安装目录需要换为安装目录下 `DELTARUNE/Contents/Resources` 外，<br>
 还需要把`Original file`一栏的`_windows`改为`_mac`<br>
-Linux 不需要额外操作，可以与 Windows 共用补丁）
+以及把 `data.win` 换为 `game.ios` ）<br>
+（Linux 不需要额外操作，可以与 Windows 共用补丁）
 
 完成后即可

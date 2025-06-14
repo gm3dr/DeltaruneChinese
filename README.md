@@ -3,7 +3,7 @@
 前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases 下载安装器<br>
 将汉化补丁放到安装器根目录，打开安装器<br>
 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
-点击「安装补丁」即可
+点击「安装补丁」即可<br>
 （对于 macOS 平台，选中安装目录下 `DELTARUNE/Contents/Resources`）
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>

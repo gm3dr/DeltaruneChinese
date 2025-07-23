@@ -1,4 +1,6 @@
 ## DELTARUNE 中文本地化补丁 By 好人汉化组
+**从 [此处](https://github.com/gm3dr/DeltaruneChinese/releases/latest) 下载最新版汉化补丁**
+
 ### 一键安装器
 前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases 下载安装器<br>
 将汉化补丁放到安装器根目录，打开安装器<br>

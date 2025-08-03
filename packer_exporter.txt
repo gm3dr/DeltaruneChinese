@@ -1,0 +1,6 @@
+{{config.imageWidth}},{{config.imageHeight}}
+{{#rects}}
+{{{name}}},{{frame.x}},{{frame.y}},{{frame.w}},{{frame.h}}
+{{^last}}
+{{/last}}
+{{/rects}}

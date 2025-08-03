@@ -55,6 +55,11 @@
 5. 三个输入框分别为 Weblate 路径、Weblate API 地址（站点域名/api/）、Weblate 个人 Token
 6. 执行结束后保存 data
 7. 语言 json 生成在了 imports 文件夹旁边的 result 文件夹中，将其放置到游戏章节目录下的 lang 文件夹中即可
+> [!IMPORTANT]  
+> 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
+> 使用脚本时需要保证第4步的目标路径无汉字等特殊字符<br>
+> 否则将会无法生成位图字体并因为找不到 `.fnt` 而报错
+
 > [!NOTE]  
 > 目前只支持自动从 Weblate 下载文本，而不能手动导入文本 json<br>
 > 这不难实现，你可以自己修改，未来我们会补上这个功能
@@ -62,10 +67,6 @@
 ### 主要的 Undertale Mod Tool 脚本（*.csx）
 export.csx 从游戏文件中导出文本字体与贴图<br>
 import.csx 基于原版 data 生成成品 data 与语言 json 文件
-> [!IMPORTANT]  
-> 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
-> 使用 `import.csx` 时需要保证目标路径无汉字等特殊字符<br>
-> 否则将会无法生成位图字体并因为找不到 `.fnt` 而报错
 ### 每个章节对应 imports 内结构（ch*/imports）
 `atlas` 生成的纹理页图集，包含所有新纹理<br>
 `code` 修改过的 GML 代码<br>

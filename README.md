@@ -69,9 +69,9 @@ export.csx 从游戏文件中导出文本字体与贴图<br>
 import.csx 基于原版 data 生成成品 data 与语言 json 文件
 ### 每个章节对应 imports 内结构（ch*/imports）
 `atlas` 生成的纹理页图集，包含所有新纹理<br>
-`code` 修改过的 GML 代码<br>
+`code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)<br>
 `font` 字体<br>
-`font/font` 原字体的补字字体<br>
+`font/font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93chimportsfontfont)<br>
 `font/pics` 原字体的字符单图<br>
 `font/bmfc` 补字字体的 bmfont 基础配置<br>
 `pics` 贴图<br>

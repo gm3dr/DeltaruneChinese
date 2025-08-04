@@ -101,6 +101,12 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 #### todo 补充
 `obj_writer`<br>
 ch2 `obj_welcometothecity_backinglights`
+### 补字用字体（ch*/imports/font/font）
+`battle.ttf`/`normal.ttf` SimSun 10x（中易宋体 内嵌点阵 10）<br>
+`sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）<br>
+`noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）<br>
+`8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）<br>
+`legend.ttf` 基于 DR 日文使用的 Maru Monica 补字，By 晓晓_Akatsuki
 ### 杂项脚本（misc_scripts）
 `convert.py` 繁中初始化用的脚本（仅用于初次导入，后续全部需要进行人工校对）<br>
 `collecting_spr.py` 从一个目录中提取另一个目录中有的所有文件<br>

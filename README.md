@@ -111,4 +111,6 @@ ch2 `obj_welcometothecity_backinglights`
 `convert.py` 繁中初始化用的脚本（仅用于初次导入，后续全部需要进行人工校对）<br>
 `collecting_spr.py` 从一个目录中提取另一个目录中有的所有文件<br>
 `compare_sprs.py` 匹配已翻译和全部 spr 的目录来找出未翻译的 spr<br>
-`move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中
+`move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中<br>
+`nameconverter.py` 人名翻译替换脚本<br>
+`zhnames.json` 人名翻译替换表

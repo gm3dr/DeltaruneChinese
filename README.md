@@ -50,23 +50,19 @@
 ## 基于原版 data 生成成品 data 方法
 1. 使用 Undertale Mod Tool 打开一个章节的 data
 2. 选择 Scripts -> Run other script...
-3. 选择仓库中的 import.csx
+3. 选择仓库中的 import_offline.csx
 4. 选择仓库中对应章节的文件夹 ***不是 imports 文件夹***
-5. 三个输入框分别为 Weblate 路径、Weblate API 地址（站点域名/api/）、Weblate 个人 Token
-6. 执行结束后保存 data
-7. 语言 json 生成在了 imports 文件夹旁边的 result 文件夹中，将其放置到游戏章节目录下的 lang 文件夹中即可
+5. 执行结束后保存 data
+6. 两个语言 json 生成在了 imports 文件夹旁边的 result 文件夹中，将其放置到游戏章节目录下的 lang 文件夹中即可
 > [!IMPORTANT]  
 > 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
 > 使用脚本时需要保证第4步的目标路径无汉字等特殊字符<br>
 > 否则将会无法生成位图字体并因为找不到 `.fnt` 而报错
-
-> [!NOTE]  
-> 目前只支持自动从 Weblate 下载文本，而不能手动导入文本 json<br>
-> 这不难实现，你可以自己修改，未来我们会补上这个功能
 ## 本仓库结构
 ### 主要的 Undertale Mod Tool 脚本（*.csx）
 export.csx 从游戏文件中导出文本字体与贴图<br>
-import.csx 基于原版 data 生成成品 data 与语言 json 文件
+import_offline.csx 基于原版 data 生成成品 data 与语言 json 文件<br>
+import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从 Weblate 获取文本的版本
 ### 每个章节对应 imports 内结构（ch*/imports）
 `atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
 `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)<br>
@@ -76,7 +72,7 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件
 `font/bmfc` 补字字体的 bmfont 基础配置<br>
 `pics` 贴图留档，打包时不使用<br>
 `pics_zhname` 人名翻译版贴图留档，打包时不使用<br>
-`text_src` 游戏自带的语言文件作为模板（除了 ch1 有英文外其余章节使用日文）
+`text_src` 语言文件
 > [!IMPORTANT]  
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
 > 其余贴图都需要保证大小与原本的相同，否则会报错
@@ -89,12 +85,14 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件
 4. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
 5. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
 这个功能原本用于保证日文玩家名也能在英文时正常显示
+6. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换
+7. 改动了所有使用了含有人名贴图的代码用于加载人名翻译版贴图，对应贴图名为在 `spr_` 后加上 `zhname_`
 #### 第一章
 1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
 2. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
 #### 第二章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
-2. 改动了 `obj_welcometothecity_backinglights` 
+2. `obj_welcometothecity_backinglights`，逐字效果的适配
 #### 第三章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 改动了 `obj_writer_quiz` 添加了汉字字符字宽逻辑

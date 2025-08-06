@@ -245,25 +245,25 @@ if (MENU_NO >= 0)
         
         if (MENUCOORD[MENU_NO] == 3)
         {
-            HEARTX = 40;
+            HEARTX = /*40*/44;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 4)
         {
-            HEARTX = 125;
+            HEARTX = /*125*/124;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 5)
         {
-            HEARTX = 190;
+            HEARTX = /*190*/194;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 6)
         {
-            HEARTX = 125;
+            HEARTX = /*125*/124;
             HEARTY = 215;
         }
     }
@@ -289,22 +289,23 @@ if (MENU_NO >= 0)
         ERASETEXT = scr_84_get_lang_string("DEVICE_MENU_slash_Draw_0_gml_200_0");
         CHSELECTTEXT = /*(TYPE == 1) ? "Chapter Select" : "CHAPTER SELECT"*/"选择章节";
         
-        if (global.lang == "ja")
-        {
-            CHSELECTTEXT = "チャプター選択";
-            LANGUAGETEXT = /*"ENGLISH"*/"简体中文";
+        // if (global.lang == "ja")
+        // {
+        //     CHSELECTTEXT = "チャプター選択";
+        //     LANGUAGETEXT = "ENGLISH"";
             
-            if (TYPE == 1)
-                LANGUAGETEXT = /*"ENGLISH"*/"简体中文";
-        }
-        else
-        {
-            LANGUAGETEXT = "日本語";
+        //     if (TYPE == 1)
+        //         LANGUAGETEXT = "ENGLISH"";
+        // }
+        // else
+        // {
+        //     LANGUAGETEXT = "日本語";
             
-            if (TYPE == 1)
-                LANGUAGETEXT = "日本語";
-        }
-        
+        //     if (TYPE == 1)
+        //         LANGUAGETEXT = "日本語";
+        // }
+        LANGUAGETEXT = global.names ? "保留人名" : "翻译人名";
+        //
         if (TYPE == 1)
         {
             COPYTEXT = scr_84_get_lang_string("DEVICE_MENU_slash_Draw_0_gml_201_0");
@@ -322,7 +323,7 @@ if (MENU_NO >= 0)
         if (MENUCOORD[0] == 4)
             draw_set_color(COL_B);
         
-        draw_text_shadow(140, 190, ERASETEXT);
+        draw_text_shadow(/*140*/135, 190, ERASETEXT);
         draw_set_color(COL_A);
         
         if (MENUCOORD[0] == 5)
@@ -355,22 +356,33 @@ if (MENU_NO >= 0)
         
         var lang_offset = 0;
         
-        if (global.lang == "en")
-        {
-            lang_offset -= 2;
-            draw_set_font(fnt_ja_main);
-        }
-        else
-        {
+        // if (global.lang == "en")
+        // {
+        //     lang_offset -= 2;
+        //     draw_set_font(fnt_ja_main);
+        // }
+        // else
+        // {
             draw_set_font(fnt_main);
-        }
+        // }
         
-        draw_text_shadow(140 + lang_offset, 210, LANGUAGETEXT);
-        scr_84_set_draw_font("main");
+        draw_text_shadow(/*140*/135 + lang_offset, 210, LANGUAGETEXT);
+        // scr_84_set_draw_font("main");
     }
     
     draw_set_font(fnt_main);
     
+    if (names_countdown > 0)
+    {
+        draw_set_alpha(0.4);
+        draw_set_color(c_white);
+        
+        if (global.names)
+            draw_text_transformed(5, 230, "从现在起角色名称将会被翻译。", 0.5, 0.5, 0);
+        else
+            draw_text_transformed(5, 230, "从现在起角色名称将会保留原文不翻译。", 0.5, 0.5, 0);
+    }
+    //
     if (TYPE == 1)
     {
         draw_set_alpha(0.4);
@@ -434,7 +446,7 @@ if (MENU_NO >= 0)
     {
         if (MENUCOORD[0] == 7)
         {
-            HEARTX = 190;
+            HEARTX = /*190*/194;
             HEARTY = 215;
         }
     }

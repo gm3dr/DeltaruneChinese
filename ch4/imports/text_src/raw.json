@@ -1,5 +1,5 @@
 {
-  "date": "1750908075991",
+  "date": "1751944448098",
   "DEVICE_CONTACT_slash_Step_0_gml_5_0": " ^9 ^8 %",
   "DEVICE_CONTACT_slash_Step_0_gml_6_0": "聞コエマスカ^6？\\M1 ^6 %",
   "DEVICE_CONTACT_slash_Step_0_gml_7_0": "^6 \\M0ワレワレハ^6& 接続サレテ& イマスカ^6？\\M1 ^6 ^6 %%",
@@ -15014,7 +15014,7 @@
   "obj_readable_room1_slash_Other_10_gml_4886_0": "＊ (…とびらだ)/%",
   "obj_titan_enemy_slash_Step_0_gml_1544_0": "＊ 空気が　張りつめる…\n＊ (「解放」を　使えるようになった！)/%",
   "obj_titan_spawn_enemy_slash_Step_0_gml_161_0": "＊ 空気が　張りつめる…\n＊ (「\\cYバニッシュ\\c0」を　使えるようになった！)/%",
-  "scr_armorinfo_slash_scr_armorinfo_gml_803_0": "$ -10%",
+  "scr_armorinfo_slash_scr_armorinfo_gml_803_0": "$ -10％",
   "scr_credit_slash_scr_credit_gml_120_0_b": "-追加アニメーション アシスタント-",
   "scr_encountersetup_slash_scr_encountersetup_gml_1120_0": "＊ (正義の鐘が　鳴り響く…)\n　 (「こうげき」して　力を示せ！)",
   "scr_gamestart_slash_scr_gamestart_gml_340_0": "TERUTERUBOUZU",
@@ -15472,5 +15472,10 @@
   "obj_titan_spawn_enemy_slash_Step_0_gml_143_0": "＊ 空気が　張りつめる…\n＊ (「\\cYバニッシュ\\c0」を　使えるようになった！)",
   "obj_micmenu_slash_Draw_0_gml_172_0": "~1 [こちらも非推奨]",
   "scr_weaponinfo_slash_scr_weaponinfo_gml_716_0": "$ +5％",
-  "scr_weaponinfo_slash_scr_weaponinfo_gml_739_0": "吸血"
+  "scr_weaponinfo_slash_scr_weaponinfo_gml_739_0": "吸血",
+  "scr_armorinfo_slash_scr_armorinfo_gml_782_0": "エレガント",
+  "obj_npc_room_slash_Other_10_gml_1874_0_b": "＊ ライトナーたちが　欲しがるモノ\n　 ひとつだけデース！　キショ^1…\n　 じゃなくて^1　オイシーやつデース。/",
+  "obj_npc_room_slash_Other_10_gml_1895_0": "＊ オー　ミーバ！^1　オー　マーマ^1！\n　 もちものが　いっぱいデース！\n　 なに　持ってますカー！？/",
+  "obj_npc_room_slash_Other_10_gml_1896_0": "＊ 「少年と　セールスマン」！？\n　 オー　ミーバ^1…オー　マーマ…/%",
+  "scr_weaponinfo_slash_scr_weaponinfo_gml_624_0": "闇斬り"
 }

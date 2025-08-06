@@ -90,8 +90,8 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件
 5. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
 这个功能原本用于保证日文玩家名也能在英文时正常显示
 #### 第一章
-2. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
-3. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
+1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
+2. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
 #### 第二章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 改动了 `obj_welcometothecity_backinglights` 

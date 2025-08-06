@@ -84,23 +84,30 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件
 #### 通用
 0. 废话：把代码中硬编码没有走游戏多语言系统的文本改动了<br>修改了各种坐标值来微调文字显示位置和动画
 1. 改动了 `is_english` 使得游戏即使当 `lang` 为 `en` 时也会从语言文件夹中加载 json
-2. 改动了 `DEVICE_MENU`（读档界面）使得日文下显示的是`简体中文`而不是`English`
-3. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
-4. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
+2. 改动了 `obj_writer` 添加了汉字字符字宽逻辑
+3. 改动了 `DEVICE_MENU`（读档界面）使得日文下显示的是`简体中文`而不是`English`
+4. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
+5. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
 这个功能原本用于保证日文玩家名也能在英文时正常显示
+#### 第一章
+2. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
+3. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
+#### 第二章
+1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+2. 改动了 `obj_welcometothecity_backinglights` 
 #### 第三章
-1. 改动了 `scr_rhythmgame_lyrics` 使得音游小游戏强制使用日文方式显示字间隙
-2. 改动了 `obj_ch3_closet` 加长了 Tenna 发癫
-3. 改动了 `obj_watercooler`/`obj_holywatercooler` 把 Watercooler/Holywatercooler 说话逻辑改为和日文一样随机字符
-4. 改动了 `obj_rouxls_annyoing_dog_controller` 把 Rouxls 战的 `神烦狗 参战` 从英文的文本改为了和日文一样的贴图形式
+1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+2. 改动了 `obj_writer_quiz` 添加了汉字字符字宽逻辑
+3. 改动了 `scr_rhythmgame_lyrics` 使得音游小游戏强制使用日文方式显示字间隙
+4. 改动了 `obj_ch3_closet` 加长了 Tenna 发癫
+5. 改动了 `obj_watercooler`/`obj_holywatercooler` 把 Watercooler/Holywatercooler 说话逻辑改为和日文一样随机字符
+6. 改动了 `obj_rouxls_annyoing_dog_controller` 把 Rouxls 战的 `神烦狗 参战` 从英文的文本改为了和日文一样的贴图形式
 #### 第四章
-1. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
-2. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
-3. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
+1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+2. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
+3. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
+4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
-#### todo 补充
-`obj_writer`<br>
-ch2 `obj_welcometothecity_backinglights`
 ### 补字用字体（ch*/imports/font/font）
 `battle.ttf`/`normal.ttf` SimSun 10x（中易宋体 内嵌点阵 10）<br>（修改过拼音、全角问号叹号、双层直角引号）<br>
 `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）<br>

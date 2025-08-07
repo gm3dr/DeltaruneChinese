@@ -1,10 +1,6 @@
-#load "import_offline.csx"
-using System;
-using System.Diagnostics;
-using System.IO;
-using System.Net.Http;
+#load "scripts/import.csx"
 using System.Text;
-using System.Linq;
+using System.Net.Http;
 using System.Threading.Tasks;
 
 using UndertaleModLib.Util;
@@ -24,6 +20,6 @@ using(HttpClient client = new()){
         File.WriteAllTextAsync(Path.Combine(workspace, "imports/text_src/en.json"), await client.GetStringAsync($"translations/{name}/en/file/"), Encoding.UTF8),
         File.WriteAllTextAsync(Path.Combine(workspace, "imports/text_src/cn.json"), await client.GetStringAsync($"translations/{name}/zh_Hans/file/"), Encoding.UTF8)
     );
-    Run(workspace, name);
+    await Run(workspace, name);
 }
 

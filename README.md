@@ -17,7 +17,7 @@
 > 获取安装目录方法：在 Steam 右键 DELTARUNE<br>
 > 选择 `管理 -> 浏览本地文件`
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 对于 macOS 平台，需要选中的是安装目录下 `DELTARUNE.app/Contents/Resources`
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>
@@ -32,7 +32,7 @@
 |chapter3_windows/data.win|chapter3.xdelta|
 |chapter4_windows/data.win|chapter4.xdelta|
 
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 对于 macOS 平台，除了需要使用 macOS 版本的补丁外<br>
 > 还需要进行以下操作<br>
 > 把安装目录替换为安装目录下 `DELTARUNE.app/Contents/Resources` <br>
@@ -54,16 +54,20 @@
 4. 选择仓库中对应章节的文件夹 ***不是 imports 文件夹***
 5. 执行结束后保存 data
 6. 两个语言 json 生成在了 imports 文件夹旁边的 result 文件夹中，将其放置到游戏章节目录下的 lang 文件夹中即可
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
 > 使用脚本时需要保证第4步的目标路径无汉字等特殊字符<br>
 > 否则将会无法生成位图字体并因为找不到 `.fnt` 而报错
 ## 本仓库结构
-### 主要的 Undertale Mod Tool 脚本（*.csx）
-export.csx 从游戏文件中导出文本字体与贴图<br>
-import_offline.csx 基于原版 data 生成成品 data 与语言 json 文件<br>
-import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从 Weblate 获取文本的版本
-### 每个章节对应 imports 内结构（ch*/imports）
+### 主要的 Undertale Mod Tool 脚本（scripts & \*.csx）
+- `export.csx` 从游戏文件中导出文本字体与贴图<br>
+- `import_offline.csx` 基于原版 data 生成成品 data 与语言 json 文件<br>
+- `import_online.csx` 基于原版 data 生成成品 data 与语言 json 文件，自动从 Weblate 获取文本的版本<br>
+- `scripts/import.csx` 上述两个脚本的实际运行逻辑<br>
+  - `scripts/import_sprites.csx` 导入 Sprite<br>
+  - `scripts/import_cnfonts.csx` 导入字体<br>
+  - `scripts/import_strings.csx` 导入文本
+### 每个章节对应 imports 内结构（ch\*/imports）
 - `atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
 - `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)<br>
 - `font` 字体<br>
@@ -73,10 +77,10 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从
 - `pics` 贴图留档，打包时不使用<br>
 - `pics_zhname` 人名翻译版贴图留档，打包时不使用<br>
 - `text_src` 语言文件
-> [!IMPORTANT]  
+> [!IMPORTANT]
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
 > 其余贴图都需要保证大小与原本的相同，否则会报错
-### 修改过的 GML 代码实现（ch*/imports/code）
+### 修改过的 GML 代码实现（ch\*/imports/code）
 #### 通用
 0. 废话：把代码中硬编码没有走游戏多语言系统的文本改动了<br>修改了各种坐标值来微调文字显示位置和动画
 1. 改动了 `is_english` 使得游戏即使当 `lang` 为 `en` 时也会从语言文件夹中加载 json
@@ -85,7 +89,8 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从
 4. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
 5. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
 这个功能原本用于保证日文玩家名也能在英文时正常显示
-6. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换
+6. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>
+添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
 7. 改动了所有使用了含有人名贴图的代码用于加载人名翻译版贴图，对应贴图名为在 `spr_` 后加上 `zhname_`
 #### 第一章
 1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
@@ -106,7 +111,7 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从
 3. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
 4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
-### 补字用字体（ch*/imports/font/font）
+### 补字用字体（ch\*/imports/font/font）
 - `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）<br>
 - `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）<br>
 - `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）<br>

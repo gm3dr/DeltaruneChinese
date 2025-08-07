@@ -112,7 +112,7 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 - `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）<br>
 - `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）<br>
 - `legend.ttf` 基于 DR 日文使用的 Maru Monica 补字，By 晓晓_Akatsuki
-### PR 工程项目（prproj）使用 Premiere Pro 2025
+### Adobe Premiere Pro 2025 工程项目（prproj）
 - `tennaIntroF1_compressed_28` 第三章的 Tenna 神人小视频<br>
 - `1-4宣传片` https://www.bilibili.com/video/BV1BPhWzdEao<br>
 为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>

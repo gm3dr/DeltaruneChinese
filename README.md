@@ -64,15 +64,15 @@ export.csx 从游戏文件中导出文本字体与贴图<br>
 import_offline.csx 基于原版 data 生成成品 data 与语言 json 文件<br>
 import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从 Weblate 获取文本的版本
 ### 每个章节对应 imports 内结构（ch*/imports）
-`atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
-`code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)<br>
-`font` 字体<br>
-`font/font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93chimportsfontfont)<br>
-`font/pics` 原字体的字符单图<br>
-`font/bmfc` 补字字体的 bmfont 基础配置<br>
-`pics` 贴图留档，打包时不使用<br>
-`pics_zhname` 人名翻译版贴图留档，打包时不使用<br>
-`text_src` 语言文件
+- `atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
+- `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)<br>
+- `font` 字体<br>
+  - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93chimportsfontfont)<br>
+  - `pics` 原字体的字符单图<br>
+  - `bmfc` 补字字体的 bmfont 基础配置<br>
+- `pics` 贴图留档，打包时不使用<br>
+- `pics_zhname` 人名翻译版贴图留档，打包时不使用<br>
+- `text_src` 语言文件
 > [!IMPORTANT]  
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
 > 其余贴图都需要保证大小与原本的相同，否则会报错
@@ -107,15 +107,21 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从
 4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
 ### 补字用字体（ch*/imports/font/font）
-`battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）<br>
-`sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）<br>
-`noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）<br>
-`8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）<br>
-`legend.ttf` 基于 DR 日文使用的 Maru Monica 补字，By 晓晓_Akatsuki
+- `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）<br>
+- `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）<br>
+- `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）<br>
+- `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）<br>
+- `legend.ttf` 基于 DR 日文使用的 Maru Monica 补字，By 晓晓_Akatsuki
+### PR 工程项目（prproj）使用 Premiere Pro 2025
+- `tennaIntroF1_compressed_28` 第三章的 Tenna 神人小视频<br>
+- `1-4宣传片` https://www.bilibili.com/video/BV1BPhWzdEao<br>
+为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>
+https://www.123912.com/s/KPMSVv-ydDjv <br>
+（不含所有生成的代理文件，格式全是 mov 大小几十个 G，但是 PR 2025 性能优化也是烂完了没代理剪不动都）
 ### 杂项脚本（misc_scripts）
-`convert.py` 繁中初始化用的脚本（仅用于初次导入，后续全部需要进行人工校对）<br>
-`collecting_spr.py` 从一个目录中提取另一个目录中有的所有文件<br>
-`compare_sprs.py` 匹配已翻译和全部 spr 的目录来找出未翻译的 spr<br>
-`move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中<br>
-`nameconverter.py` 人名翻译替换脚本<br>
-`zhnames.json` 人名翻译替换表
+- `convert.py` 繁中初始化用的脚本（仅用于初次导入，后续全部需要进行人工校对）<br>
+- `collecting_spr.py` 从一个目录中提取另一个目录中有的所有文件<br>
+- `compare_sprs.py` 匹配已翻译和全部 spr 的目录来找出未翻译的 spr<br>
+- `move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中<br>
+- `nameconverter.py` 人名翻译替换脚本<br>
+- `zhnames.json` 人名翻译替换表

@@ -107,7 +107,7 @@ import.csx 基于原版 data 生成成品 data 与语言 json 文件，自动从
 4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
 ### 补字用字体（ch*/imports/font/font）
-`battle.ttf`/`normal.ttf` SimSun 10x（中易宋体 内嵌点阵 10）<br>（修改过拼音、全角问号叹号、双层直角引号）<br>
+`battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）<br>
 `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）<br>
 `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）<br>
 `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）<br>

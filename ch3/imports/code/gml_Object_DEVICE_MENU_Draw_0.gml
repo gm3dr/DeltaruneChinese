@@ -377,7 +377,18 @@ if (MENU_NO >= 0)
         CHSELECTTEXT = stringsetloc("Chapter Select", "DEVICE_MENU_slash_Draw_0_gml_284_0");
         QUITTEXT = stringsetloc("End Program", "DEVICE_MENU_slash_Draw_0_gml_285_0");
         // LANGUAGETEXT = (global.lang == "en") ? stringset("日本語") : stringset("English");
-        LANGUAGETEXT = global.names ? "保留人名" : "翻译人名";
+		switch (global.names)
+		{
+			case 0:
+				LANGUAGETEXT = "翻译招揽";
+				break;
+			case 1:
+				LANGUAGETEXT = "翻译人名";
+				break;
+			case 2:
+				LANGUAGETEXT = "保留人名";
+				break;
+		}
         //
         if (TYPE == 1)
         {
@@ -444,10 +455,18 @@ if (MENU_NO >= 0)
         draw_set_alpha(0.4);
         draw_set_color(c_white);
         
-        if (global.names)
-            draw_text_transformed(5, 230, "从现在起角色名称将会被翻译。", 0.5, 0.5, 0);
-        else
-            draw_text_transformed(5, 230, "从现在起角色名称将会保留原文不翻译。", 0.5, 0.5, 0);
+		switch (global.names)
+		{
+			case 0:
+            	draw_text_transformed(5, 230, "从现在起所有角色名称都将保留原文不翻译。", 0.5, 0.5, 0);
+        		break
+			case 1:
+				draw_text_transformed(5, 230, "从现在起可招揽的角色名称将会被翻译。", 0.5, 0.5, 0);
+				break
+			case 2:
+				draw_text_transformed(5, 230, "从现在起所有角色名称都会被翻译。", 0.5, 0.5, 0);
+				break
+		}
     }
     //
     if (TYPE == 1)

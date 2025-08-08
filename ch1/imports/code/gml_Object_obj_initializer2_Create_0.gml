@@ -79,7 +79,7 @@ if (global.is_console)
 }
 else
 {
-    global.names = false;
+    global.names = 0;
     scr_84_init_localization();
     scr_84_load_ini();
     scr_gamestart();

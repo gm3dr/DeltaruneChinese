@@ -131,7 +131,7 @@
     "Suz": "苏",
     "Cap'n": "头儿",
     "Capn": "头儿",
-    "Seap": "小“桑”店",
+    "小“Seap”": "“小桑店”",
     "Starwalker": "星之行者",
     "Star Walker": "星之行者",
     "Ambyu-Lance": "救护矛兵",

@@ -84,7 +84,7 @@ if (global.is_console)
 else
 {
     global_flagname_init();
-    global.names = false;
+    global.names = 0;
     scr_84_init_localization();
     pal_swap_init_system(18);
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);

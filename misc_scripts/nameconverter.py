@@ -4,7 +4,7 @@ import os
 from pathlib import Path
 
 def load_name_mappings(cnname_path):
-    with open(cnname_path, 'r', encoding='utf-8') as f:
+    with open(cnname_path, 'r', encoding='utf-8-sig') as f:
         return json.load(f)
 
 def convert_names(text, name_mappings):
@@ -16,22 +16,24 @@ def convert_names(text, name_mappings):
 
 def process_json_file(input_path, output_path, name_mappings):
     # 读取源文件
-    with open(input_path, 'r', encoding='utf-8') as f:
+    with open(input_path, 'r', encoding='utf-8-sig') as f:
         data = json.load(f)
     
     # 处理所有值
     converted_data = {}
+    exception_keys = {"special_name_check", "spelling_bee", "DEVICE_CONTACT"}
     for key, value in data.items():
         if isinstance(value, str):
-            if "special_name_check" in key:
-                converted_data[key] = value  # 保留特殊名称不转换
-            else:
+            key_needs_conversion = not any(exc in key for exc in exception_keys)
+            if  key_needs_conversion:
                 converted_data[key] = convert_names(value, name_mappings)
+            else:
+                converted_data[key] = value  # 保留特殊名称不转换
         else:
             converted_data[key] = value
 
     # 保存结果
-    with open(output_path, 'w', encoding='utf-8') as f:
+    with open(output_path, 'w', encoding='utf-8-sig') as f:
         json.dump(converted_data, f, ensure_ascii=False, indent=2)
 
 def main():
@@ -44,11 +46,11 @@ def main():
 
     # 处理各章节
     for chapter in range(1, 5):
-        pattern = f"ch{chapter}_*_v1"
+        pattern = f"ch{chapter}/imports/text_src"
         for chapter_dir in base_path.glob(pattern):
             if chapter_dir.is_dir():
-                input_file = chapter_dir / 'lang_en.json'
-                output_file = chapter_dir / 'lang_en_names.json'
+                input_file = chapter_dir / 'cn.json'
+                output_file = chapter_dir / 'cn_names.json'
                 
                 if input_file.exists():
                     process_json_file(input_file, output_file, name_mappings)

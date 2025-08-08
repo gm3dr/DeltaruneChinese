@@ -12,7 +12,7 @@ function scr_84_init_localization()
             _lang = (substr(_locale, 1, 2) != "ja") ? "en" : "ja";
         
         global.lang = ini_read_string("LANG", "LANG", _lang);
-        global.names = ini_read_string("NAMES", "NAMES", false);
+        global.names = ini_read_real("L10N_ZH", "NAMES", 0);
         ossafe_ini_close();
         ossafe_savedata_save();
     }
@@ -102,10 +102,20 @@ function scr_84_init_localization()
         ds_map_add(fm, "legend", fnt_legend);
         ds_map_add(fm, "legend_alt", fnt_legend);
         var sm = global.chemg_sprite_map;
-        ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
-        ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
-        ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
-        ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
+		if (global.names < 2)
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
+			ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
+		}
+		else
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
+			ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
+		}
         ds_map_add(sm, "spr_battlemsg", spr_battlemsg);
         ds_map_add(sm, "spr_btact", spr_btact);
         ds_map_add(sm, "spr_btdefend", spr_btdefend);

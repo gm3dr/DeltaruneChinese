@@ -14,7 +14,7 @@ function scr_84_init_localization()
     {
         ossafe_ini_open("true_config.ini");
         global.lang = ini_read_string("LANG", "LANG", _lang);
-        global.names = ini_read_string("NAMES", "NAMES", false);
+        global.names = ini_read_real("L10N_ZH", "NAMES", 0);
         ossafe_ini_close();
     }
     
@@ -96,9 +96,18 @@ function scr_84_init_localization()
         ds_map_add(fm, "comicsans", fnt_comicsans);
         ds_map_add(fm, "small", fnt_small);
         var sm = global.chemg_sprite_map;
-        ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
-        ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
-        ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
+		if (global.names < 2)
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
+		}
+		else
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
+		}
         ds_map_add(sm, "spr_btact", spr_btact);
         ds_map_add(sm, "spr_btdefend", spr_btdefend);
         ds_map_add(sm, "spr_btfight", spr_btfight);

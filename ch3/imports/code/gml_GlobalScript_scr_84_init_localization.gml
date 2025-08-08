@@ -12,7 +12,7 @@ function scr_84_init_localization()
             _lang = (substr(_locale, 1, 2) != "ja") ? "en" : "ja";
         
         global.lang = ini_read_string("LANG", "LANG", _lang);
-        global.names = ini_read_string("NAMES", "NAMES", false);
+        global.names = ini_read_real("L10N_ZH", "NAMES", 0);
         ossafe_ini_close();
         ossafe_savedata_save();
     }
@@ -152,10 +152,34 @@ function scr_84_init_localization()
         ds_map_add(fm, "8bit", fnt_8bit);
         ds_map_add(fm, "8bit_mixed", fnt_8bit);
         var sm = global.chemg_sprite_map;
-        ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
-        ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
-        ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
-        ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
+		if (global.names >= 2)
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
+			ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
+			ds_map_add(sm, "spr_btrouxls", spr_zhname_btrouxls);
+			ds_map_add(sm, "spr_btrouxls_select1", spr_zhname_btrouxls_select1);
+			ds_map_add(sm, "spr_btrouxls_select2", spr_zhname_btrouxls_select2);
+			ds_map_add(sm, "spr_btspade", spr_zhname_btspade);
+			ds_map_add(sm, "spr_dw_tv_mysterySign", spr_zhname_dw_tv_mysterySign);
+			ds_map_add(sm, "spr_dw_tv_mysterySign_gray", spr_zhname_dw_tv_mysterySign_gray);
+			ds_map_add(sm, "spr_funnytext_toriel", spr_funnytext_toriel);
+		}
+		else
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
+			ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
+			ds_map_add(sm, "spr_btrouxls", spr_btrouxls);
+			ds_map_add(sm, "spr_btrouxls_select1", spr_btrouxls_select1);
+			ds_map_add(sm, "spr_btrouxls_select2", spr_btrouxls_select2);
+			ds_map_add(sm, "spr_btspade", spr_btspade);
+			ds_map_add(sm, "spr_dw_tv_mysterySign", spr_dw_tv_mysterySign);
+			ds_map_add(sm, "spr_dw_tv_mysterySign_gray", spr_dw_tv_mysterySign_gray);
+			ds_map_add(sm, "spr_funnytext_toriel", spr_zhname_funnytext_toriel);
+		}
         ds_map_add(sm, "spr_battlemsg", spr_battlemsg);
         ds_map_add(sm, "spr_btact", spr_btact);
         ds_map_add(sm, "spr_btdefend", spr_btdefend);
@@ -167,9 +191,6 @@ function scr_84_init_localization()
         ds_map_add(sm, "spr_dmenu_captions", spr_dmenu_captions);
         ds_map_add(sm, "spr_quitmessage", spr_quitmessage);
         ds_map_add(sm, "spr_fieldmuslogo", spr_fieldmuslogo);
-        ds_map_add(sm, "spr_btrouxls_select1", spr_btrouxls_select1);
-        ds_map_add(sm, "spr_btrouxls_select2", spr_btrouxls_select2);
-        ds_map_add(sm, "spr_btspade", spr_btspade);
         ds_map_add(sm, "spr_dw_ch3_b3bs_stealthzone", spr_dw_ch3_b3bs_stealthzone);
         ds_map_add(sm, "spr_dw_interstitial_poster_green", spr_dw_interstitial_poster_green);
         ds_map_add(sm, "spr_gameshow_pushingbuddies", spr_gameshow_pushingbuddies);
@@ -182,14 +203,11 @@ function scr_84_init_localization()
         ds_map_add(sm, "border_dw_word", border_dw_word);
         ds_map_add(sm, "spr_dw_tv_cancelled", spr_dw_tv_cancelled);
         ds_map_add(sm, "spr_dw_tv_funometer_base_2x", spr_dw_tv_funometer_base_2x);
-        ds_map_add(sm, "spr_dw_tv_mysterySign", spr_dw_tv_mysterySign);
-        ds_map_add(sm, "spr_dw_tv_mysterySign_gray", spr_dw_tv_mysterySign_gray);
         ds_map_add(sm, "spr_dw_tv_prize_car", spr_dw_tv_prize_car);
         ds_map_add(sm, "spr_shadowman_caption2", spr_shadowman_caption2);
         ds_map_add(sm, "spr_shop_space_ui", spr_shop_space_ui);
         ds_map_add(sm, "spr_funnytext_dark_fountain", spr_funnytext_dark_fountain);
         ds_map_add(sm, "spr_funnytext_susiezilla", spr_funnytext_susiezilla);
-        ds_map_add(sm, "spr_funnytext_toriel", spr_funnytext_toriel);
         ds_map_add(sm, "spr_funnytext_tears", spr_funnytext_tears);
         ds_map_add(sm, "spr_funnytext_lovely", spr_funnytext_lovely);
         ds_map_add(sm, "spr_funnytext_star", spr_funnytext_star);

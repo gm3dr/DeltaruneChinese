@@ -129,4 +129,5 @@ https://www.123912.com/s/KPMSVv-ydDjv <br>
 - `compare_sprs.py` 匹配已翻译和全部 spr 的目录来找出未翻译的 spr<br>
 - `move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中<br>
 - `nameconverter.py` 人名翻译替换脚本<br>
-- `zhnames.json` 人名翻译替换表
+- `zhnames_full.json` 人名翻译替换表<br>
+- `zhnames_recruit.json` 可招揽人名翻译替换表

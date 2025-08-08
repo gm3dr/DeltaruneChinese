@@ -120,7 +120,7 @@ Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
 3. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
 4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
-5. 改动了 `obj_town_event` 来实现 Sans 店名的人名翻译切换
+5. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
 6. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
 ### 补字用字体（ch\*/imports/font/font）
 - `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）

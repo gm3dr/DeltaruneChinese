@@ -60,22 +60,24 @@
 > 否则将会无法生成位图字体并因为找不到 `.fnt` 而报错
 ## 本仓库结构
 ### 主要的 Undertale Mod Tool 脚本（scripts & \*.csx）
-- `export.csx` 从游戏文件中导出文本字体与贴图<br>
-- `import_offline.csx` 基于原版 data 生成成品 data 与语言 json 文件<br>
-- `import_online.csx` 基于原版 data 生成成品 data 与语言 json 文件，自动从 Weblate 获取文本的版本<br>
-- `scripts/import.csx` 上述两个脚本的实际运行逻辑<br>
-  - `scripts/import_sprites.csx` 导入 Sprite<br>
-  - `scripts/import_cnfonts.csx` 导入字体<br>
+- `export.csx` 从游戏文件中导出文本字体与贴图
+- `import_offline.csx` 基于原版 data 生成成品 data 与语言 json 文件
+- `import_online.csx` 基于原版 data 生成成品 data 与语言 json 文件，自动从 Weblate 获取文本的版本
+- `scripts/import.csx` 上述两个脚本的实际运行逻辑
+  - `scripts/import_sprites.csx` 导入 Sprite
+  - `scripts/import_cnfonts.csx` 导入字体
   - `scripts/import_strings.csx` 导入文本
 ### 每个章节对应 imports 内结构（ch\*/imports）
 - `atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
-- `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)<br>
-- `font` 字体<br>
-  - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93chimportsfontfont)<br>
-  - `pics` 原字体的字符单图<br>
-  - `bmfc` 补字字体的 bmfont 基础配置<br>
-- `pics` 贴图留档，打包时不使用<br>
-- `pics_zhname` 人名翻译版贴图留档，打包时不使用<br>
+Format 选择 `custom`，然后填写 `packer_exporter.txt` 里的内容，Padding 填 `1`，<br>
+勾选 `Power of two` 和 `Detect identical`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`
+- `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)
+- `font` 字体
+  - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93chimportsfontfont)
+  - `pics` 原字体的字符单图
+  - `bmfc` 补字字体的 bmfont 基础配置
+- `pics` 贴图留档，打包时不使用
+- `pics_zhname` 人名翻译版贴图留档，打包时不使用
 - `text_src` 语言文件
 > [!IMPORTANT]
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
@@ -91,13 +93,17 @@
 这个功能原本用于保证日文玩家名也能在英文时正常显示
 6. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>
 添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
-7. 改动了所有使用了含有人名贴图的代码用于加载人名翻译版贴图，对应贴图名为在 `spr_` 后加上 `zhname_`
 #### 第一章
 1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
 2. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
+3. 改动了 `obj_town_event` 来实现 Sans 店名的人名翻译切换
+4. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
 #### 第二章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. `obj_welcometothecity_backinglights`，逐字效果的适配
+3. 改动了 `obj_town_event` 来实现 Sans 店名的人名翻译切换
+4. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+5. 改动了 `obj_pipis_egg_bullet`/`obj_pipis_enemy` 来实现 Pipis 的人名翻译切换
 #### 第三章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 改动了 `obj_writer_quiz` 添加了汉字字符字宽逻辑
@@ -105,29 +111,33 @@
 4. 改动了 `obj_ch3_closet` 加长了 Tenna 发癫
 5. 改动了 `obj_watercooler`/`obj_holywatercooler` 把 Watercooler/Holywatercooler 说话逻辑改为和日文一样随机字符
 6. 改动了 `obj_rouxls_annyoing_dog_controller` 把 Rouxls 战的 `神烦狗 参战` 从英文的文本改为了和日文一样的贴图形式
+7. 改动了 `obj_room_green_room` 来实现 Ramb 位置上方的人名翻译切换
+8. 改动了 `obj_dw_ranking_t_explain` 来实现 T 级房间 Tenna 的人名翻译切换
 #### 第四章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
 3. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
 4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
+5. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+6. 改动了 `obj_pipis_egg_bullet`/`obj_pipis_enemy` 来实现 Pipis 的人名翻译切换
 ### 补字用字体（ch\*/imports/font/font）
-- `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）<br>
-- `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）<br>
-- `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）<br>
-- `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）<br>
+- `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）
+- `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）
+- `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）
+- `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）
 - `legend.ttf` 基于 DR 日文使用的 Maru Monica 补字，By 晓晓_Akatsuki
 ### Adobe Premiere Pro 2025 工程项目（prproj）
-- `tennaIntroF1_compressed_28` 第三章的 Tenna 神人小视频<br>
+- `tennaIntroF1_compressed_28` 第三章的 Tenna 神人小视频
 - `1-4宣传片` https://www.bilibili.com/video/BV1BPhWzdEao<br>
 为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>
 https://www.123912.com/s/KPMSVv-ydDjv <br>
 （不含所有生成的代理文件，格式全是 mov 大小几十个 G，但是 PR 2025 性能优化也是烂完了没代理剪不动都）
 ### 杂项脚本（misc_scripts）
-- `convert.py` 繁中初始化用的脚本（仅用于初次导入，后续全部需要进行人工校对）<br>
-- `collecting_spr.py` 从一个目录中提取另一个目录中有的所有文件<br>
-- `compare_sprs.py` 匹配已翻译和全部 spr 的目录来找出未翻译的 spr<br>
-- `move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中<br>
-- `nameconverter.py` 人名翻译替换脚本<br>
-- `zhnames_full.json` 人名翻译替换表<br>
+- `convert.py` 繁中初始化用的脚本（仅用于初次导入，后续全部需要进行人工校对）
+- `collecting_spr.py` 从一个目录中提取另一个目录中有的所有文件
+- `compare_sprs.py` 匹配已翻译和全部 spr 的目录来找出未翻译的 spr
+- `move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中
+- `nameconverter.py` 人名翻译替换脚本
+- `zhnames_full.json` 人名翻译替换表
 - `zhnames_recruit.json` 可招揽人名翻译替换表

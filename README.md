@@ -69,9 +69,9 @@
   - `scripts/import_strings.csx` 导入文本
 ### 每个章节对应 imports 内结构（ch\*/imports）
 - `atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
-Format 选择 `custom`，然后填写 `packer_exporter.txt` 里的内容，Padding 填 `1`，<br>
-Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
-勾选 `Power of two` `Detect identical` `Remove file ext`
+Format 选择 `custom`，点击右边的笔图标填写 `packer_exporter.txt` 里的内容，<br>
+Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
+勾选 `Power of two` `Detect identical` `Remove file ext`，取消勾选 `Allow trim` `Allow rotation`
 - `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)
 - `font` 字体
   - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93chimportsfontfont)

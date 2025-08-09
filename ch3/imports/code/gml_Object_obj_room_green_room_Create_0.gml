@@ -30,7 +30,7 @@ ramb_npc.sprite_index = spr_npc_ramb_clean;
 with (ramb_npc)
     scr_depth();
 
-var bar_front = scr_dark_marker(550, 40, spr_dw_green_room_bar_front);
+var bar_front = scr_dark_marker(550, 40, global.names >= 2 ? spr_zhname_dw_green_room_bar_front : spr_dw_green_room_bar_front);
 bar_front.depth = ramb_npc.depth - 10;
 lancer_npc = instance_create(92, 118, obj_npc_room_animated);
 
@@ -470,12 +470,3 @@ if (global.flag[1067] == 0 && global.flag[1055] >= 6 && global.plot >= 280)
 
 repeat (array_length(global.keyitem))
     scr_keyitemremove(8);
-
-var sprite = spr_dw_green_room_bar_back;
-
-if (global.names >= 2)
-{
-	sprite = spr_zhname_dw_green_room_bar_back;
-}
-
-layer_sprite_create(ASSETS_FURNITURE, 550, 40, sprite);

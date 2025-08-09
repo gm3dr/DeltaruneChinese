@@ -380,13 +380,13 @@ if (MENU_NO >= 0)
 		switch (global.names)
 		{
 			case 0:
-				LANGUAGETEXT = "翻译招揽";
+				LANGUAGETEXT = "保留人名";
 				break;
 			case 1:
-				LANGUAGETEXT = "翻译人名";
+				LANGUAGETEXT = "翻译招揽";
 				break;
 			case 2:
-				LANGUAGETEXT = "保留人名";
+				LANGUAGETEXT = "翻译人名";
 				break;
 		}
         
@@ -468,8 +468,6 @@ if (MENU_NO >= 0)
 				break
 		}
     }
-    }
-    //
     if (TYPE == 1)
     {
         draw_set_alpha(0.4);
@@ -545,7 +543,7 @@ if (MENU_NO >= 0)
     }
     
     MESSAGETIMER -= 1;
-}
+} 
 
 if (abs(HEARTX - HEARTXCUR) <= 2)
     HEARTXCUR = HEARTX;

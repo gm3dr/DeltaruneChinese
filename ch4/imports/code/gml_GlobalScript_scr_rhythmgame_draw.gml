@@ -91,18 +91,18 @@ function scr_rhythmgame_draw_border(arg0, arg1 = false)
         
         if (instrument == 0)
         {
-            _name = _jp ? 3182 : 3138;
+            _name = scr_84_get_sprite("spr_bnamekris");
             _hoff = 21;
         }
         else if (instrument == 1)
         {
-            _name = _jp ? 3184 : 3142;
+            _name = scr_84_get_sprite("spr_bnamesusie");
             _hoff = 24;
         }
         else if (instrument == 2)
         {
-            _name = _jp ? 3183 : 3139;
-            _hoff = 30;
+            _name = scr_84_get_sprite("spr_bnameralsei");
+            _hoff = global.names >= 2 ? 27 : 30;
         }
         
         draw_sprite_ext(_name, 0, arg0 - _hoff, bottomy - 230, 1, 1, 0, draw_get_color(), 1);

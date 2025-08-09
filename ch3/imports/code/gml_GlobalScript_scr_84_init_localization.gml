@@ -152,21 +152,7 @@ function scr_84_init_localization()
         ds_map_add(fm, "8bit", fnt_8bit);
         ds_map_add(fm, "8bit_mixed", fnt_8bit);
         var sm = global.chemg_sprite_map;
-		if (global.names >= 2)
-		{
-			ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
-			ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
-			ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
-			ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
-			ds_map_add(sm, "spr_btrouxls", spr_zhname_btrouxls);
-			ds_map_add(sm, "spr_btrouxls_select1", spr_zhname_btrouxls_select1);
-			ds_map_add(sm, "spr_btrouxls_select2", spr_zhname_btrouxls_select2);
-			ds_map_add(sm, "spr_btspade", spr_zhname_btspade);
-			ds_map_add(sm, "spr_dw_tv_mysterySign", spr_zhname_dw_tv_mysterySign);
-			ds_map_add(sm, "spr_dw_tv_mysterySign_gray", spr_zhname_dw_tv_mysterySign_gray);
-			ds_map_add(sm, "spr_funnytext_toriel", spr_funnytext_toriel);
-		}
-		else
+		if (global.names < 2)
 		{
 			ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
 			ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
@@ -178,6 +164,20 @@ function scr_84_init_localization()
 			ds_map_add(sm, "spr_btspade", spr_btspade);
 			ds_map_add(sm, "spr_dw_tv_mysterySign", spr_dw_tv_mysterySign);
 			ds_map_add(sm, "spr_dw_tv_mysterySign_gray", spr_dw_tv_mysterySign_gray);
+			ds_map_add(sm, "spr_funnytext_toriel", spr_funnytext_toriel);
+		}
+        else
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
+			ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
+			ds_map_add(sm, "spr_btrouxls", spr_zhname_btrouxls);
+			ds_map_add(sm, "spr_btrouxls_select1", spr_zhname_btrouxls_select1);
+			ds_map_add(sm, "spr_btrouxls_select2", spr_zhname_btrouxls_select2);
+			ds_map_add(sm, "spr_btspade", spr_zhname_btspade);
+			ds_map_add(sm, "spr_dw_tv_mysterySign", spr_zhname_dw_tv_mysterySign);
+			ds_map_add(sm, "spr_dw_tv_mysterySign_gray", spr_zhname_dw_tv_mysterySign_gray);
 			ds_map_add(sm, "spr_funnytext_toriel", spr_zhname_funnytext_toriel);
 		}
         ds_map_add(sm, "spr_battlemsg", spr_battlemsg);

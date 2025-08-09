@@ -380,13 +380,13 @@ if (MENU_NO >= 0)
 		switch (global.names)
 		{
 			case 0:
-				LANGUAGETEXT = "翻译招揽";
+				LANGUAGETEXT = "保留人名";
 				break;
 			case 1:
-				LANGUAGETEXT = "翻译人名";
+				LANGUAGETEXT = "翻译招揽";
 				break;
 			case 2:
-				LANGUAGETEXT = "保留人名";
+				LANGUAGETEXT = "翻译人名";
 				break;
 		}
         //

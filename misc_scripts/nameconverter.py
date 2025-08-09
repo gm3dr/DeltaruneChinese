@@ -46,11 +46,11 @@ def main():
 
     # 处理各章节
     for chapter in range(1, 5):
-        pattern = f"ch{chapter}/imports/text_src"
+        pattern = f"ch{chapter}/result"
         for chapter_dir in base_path.glob(pattern):
             if chapter_dir.is_dir():
-                input_file = chapter_dir / 'cn.json'
-                output_file = chapter_dir / 'cn_names.json'
+                input_file = chapter_dir / 'lang_en.json'
+                output_file = chapter_dir / 'lang_en_names.json'
                 
                 if input_file.exists():
                     process_json_file(input_file, output_file, name_mappings)

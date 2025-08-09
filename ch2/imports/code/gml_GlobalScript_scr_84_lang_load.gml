@@ -1,6 +1,6 @@
 function scr_84_lang_load()
 {
-    var name = "lang_" + global.lang + (global.names > 0 ? "_names" : "") + (global.names < 2 ? "_recruitable" : "") + ".json";
+    var name = "lang_" + global.lang + (global.names == 0 ? "" : (global.names == 1 ? "_names_recruitable" : "_names")) + ".json";
     var orig_filename = working_directory + "lang/" + name;
     var new_filename = working_directory + "lang-new/" + name;
     var filename = orig_filename;

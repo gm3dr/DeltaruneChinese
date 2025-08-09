@@ -94,17 +94,17 @@ function scr_84_init_localization()
         var sm = global.chemg_sprite_map;
 		if (global.names < 2)
 		{
-			ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
-			ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
-			ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
-			ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
-		}
-		else
-		{
 			ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
 			ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
 			ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
 			ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
+		}
+		else
+		{
+			ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
+			ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
+			ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
+			ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
 		}
 		ds_map_add(sm, "spr_bnamethrash", spr_bnamethrash);
         ds_map_add(sm, "spr_btact", spr_btact);

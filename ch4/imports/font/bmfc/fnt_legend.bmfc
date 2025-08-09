@@ -4,7 +4,7 @@ fileVersion=1
 # font settings
 fontName=x12y16MaruMonicaForDRCN 2025
 fontFile=legend.ttf
-charSet=0
+charSet=161
 fontSize=-16
 aa=1
 scaleH=100

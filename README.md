@@ -123,7 +123,7 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 5. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
 6. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
 ### 补字用字体（ch\*/imports/font/font）
-- `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、双层直角引号）
+- `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、全角逗号句号、双层直角引号）
 - `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）
 - `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）
 - `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）

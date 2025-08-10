@@ -70,7 +70,7 @@ if (type == 3 && init == 1)
         draw_set_halign(fa_center);
         draw_text(xx + 473, yy + 240, recruitName[menuCoord[0]]);
         draw_set_halign(fa_left);
-        draw_text_transformed(xx + 368, yy + 280, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_47_0") + string(recruitChapter[menuCoord[0]]), 1, 1, 0);
+        draw_text_transformed(xx + 368, yy + 280, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_47_0") + string(recruitChapter[menuCoord[0]]) + "章", 1, 1, 0);
         draw_set_halign(fa_right);
         draw_text_transformed(xx + 576, yy + 280, stringsetloc("LV ", "obj_fusionmenu_slash_Draw_0_gml_48_0") + string(recruitLevel[menuCoord[0]]), 1, 1, 0);
         draw_set_halign(fa_left);
@@ -144,7 +144,7 @@ if (type == 3 && init == 1)
         draw_set_halign(fa_right);
         draw_text_transformed(xx + 590, yy + 30, string(menuCoord[menu] + 1) + "/" + string(menuMaximumID[menu] + 1), squished, 1, 0);
         draw_set_halign(fa_left);
-        draw_text_transformed(xx + 300, yy + 30, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_84_0") + string(recruitChapter[menuCoord[1]]), squished, 1, 0);
+        draw_text_transformed(xx + 300, yy + 30, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_84_0") + string(recruitChapter[menuCoord[1]]) + "章", squished, 1, 0);
         var ymod = 120;
         
         if (jp)

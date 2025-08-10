@@ -9,7 +9,7 @@ if (myself == 1)
             lang = 1;
 
 		var pipis = spr_pipissign;
-		if (global.lang == 2)
+		if (global.names >= 2)
 		{
 			pipis = spr_zhname_pipissign;
 		}

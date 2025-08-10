@@ -4,13 +4,13 @@ if (global.chapter >= 4)
     customcon = 0;
     sans_face = -4;
     sans_face_timer = 0;
-	if (global.names >= 2)
-	{
-		var conbini = scr_marker(940, -50, bg_zhname_building_store);
-		conbini.depth = 980000;
-	}
     var conbini = scr_marker_animated(960, 43, spr_conbini_windows_open, 0.05);
     conbini.depth = 980000;
+	if (global.names >= 2)
+	{
+		var store_bg = scr_marker(940, -50, bg_zhname_building_store);
+		store_bg.depth = conbini.depth + 1;
+	}
     var conbini_sign = scr_marker_animated(1004, 60, spr_conbini_sign_open, 0.05);
     conbini_sign.depth = conbini.depth - 10;
     

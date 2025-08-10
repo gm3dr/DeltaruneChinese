@@ -1,5 +1,3 @@
 {{#rects}}
-{{{name}}},{{frame.x}},{{frame.y}},{{frame.w}},{{frame.h}}
-{{^last}}
-{{/last}}
-{{/rects}}
+{{{name}}},{{frame.x}},{{frame.y}},{{frame.w}},{{frame.h},{{frame.hw}},{{frame.hh}}{{^last}}
+{{/last}}{{/rects}}

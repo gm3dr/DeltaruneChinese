@@ -68,8 +68,8 @@ if (minigame > 0)
         draw_text_ext_transformed(550, 110, string(latestscore[minigame]), 0, 999, scale, 1, 0);
     
     draw_set_halign(fa_left);
-    draw_text(330, 80, "HISCORE");
+    draw_text(330, 80, "最高分");
     
     if (latestscore[minigame] > 0)
-        draw_text(330, 110, "LAST SCORE");
+        draw_text(330, 110, "上一次得分");
 }

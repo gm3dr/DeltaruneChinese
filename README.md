@@ -114,6 +114,9 @@ Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
 6. 改动了 `obj_rouxls_annyoing_dog_controller` 把 Rouxls 战的 `神烦狗 参战` 从英文的文本改为了和日文一样的贴图形式
 7. 改动了 `obj_room_green_room` 来实现 Ramb 位置上方的人名翻译切换
 8. 改动了 `obj_dw_ranking_t_explain` 来实现 T 级房间 Tenna 的人名翻译切换
+9. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+10. 改动了 `obj_ch3_couch_video` 来实现 Tenna 小视频的人名翻译切换
+11. 改动了 `obj_rouxls_biplane_flag` 来实现 Rouxls 战飞机旗帜弹幕的人名翻译切换
 #### 第四章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
@@ -122,8 +125,10 @@ Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
 5. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
 6. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+7. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
 ### 补字用字体（ch\*/imports/font/font）
-- `battle.ttf`/`normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、全角逗号句号、双层直角引号）
+- `normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、全角逗号句号、双层直角引号）
+- `battle.ttf` SimSun 16x（中易宋体 内嵌点阵 16）
 - `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）
 - `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）
 - `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）

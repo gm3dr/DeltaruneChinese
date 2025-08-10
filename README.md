@@ -53,7 +53,7 @@
 3. 选择仓库中的 import_offline.csx
 4. 选择仓库中对应章节的文件夹 ***不是 imports 文件夹***
 5. 执行结束后保存 data
-6. 两个语言 json 生成在了 imports 文件夹旁边的 result 文件夹中，将其放置到游戏章节目录下的 lang 文件夹中即可
+6. 语言 json 生成在了 imports 文件夹旁边的 result 文件夹中，将其放置到游戏章节目录下的 lang 文件夹中即可
 > [!IMPORTANT]
 > 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
 > 使用脚本时需要保证第4步的目标路径无汉字等特殊字符<br>

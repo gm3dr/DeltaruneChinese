@@ -255,7 +255,7 @@ if (formatted == 0)
             else
             {
                 //charpos += 1;
-                if (ord(thischar) > 505)
+                if (ord(thischar) > 505 || ord(thischar) == 183)
                     charpos += 1.75;
                 else
                     charpos += 1;
@@ -815,7 +815,7 @@ for (n = 1; n < pos; n += 1)
             }
         }
         // wx += hspace;
-        if (ord(mychar) > 505)
+        if (ord(mychar) > 505 || ord(mychar) == 183)
             wx += ((hspace * 7) div 4);
         else
             wx += hspace;

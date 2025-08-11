@@ -792,7 +792,7 @@ if (view_current == 0)
                 }
             }
             // wx += hspace;
-            if (ord(mychar) > 505)
+            if (ord(mychar) > 505 || ord(mychar) == 183)
                 wx += ((hspace * 7) div 4);
             else
                 wx += hspace;

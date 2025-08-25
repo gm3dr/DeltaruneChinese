@@ -24,6 +24,9 @@ function generate_credits()
     if (global.lang == "ja")
         credits[4][1].header = [stringset("-アニメーション-"), stringset("（タイタンの手／クリスのピアノ）")];
     
+    if (global.names == 2)
+        credits[4][1].header = [stringset("Smallbu Animation"), stringset("-泰坦之手, 克里斯弹钢琴动画-")];
+    
     credits[5] = [new scr_credit([stringsetloc("-Additional FX-", "scr_credit_slash_scr_credit_gml_113_0")], [stringset("James Begg")]), new scr_credit([stringsetloc("-Additional Animation Assistance-", "scr_credit_slash_scr_credit_gml_120_0_b")], [stringset("Mariel Kinuko Cartwright")])];
     credits[6] = [new scr_credit([stringsetloc("-Guest Character Design-", "scr_credit_slash_scr_credit_gml_64_0")], [stringsetloc("(Lancer, Rudinn, Hathy)", "scr_credit_slash_scr_credit_gml_67_0"), stringsetloc("(Clover, King, Jevil)", "scr_credit_slash_scr_credit_gml_68_0"), stringset("Kanotynes")]), new scr_credit([stringsetloc("-Ch. 2&3 Guest Character Design-", "scr_credit_slash_scr_credit_gml_146_0")], [stringset("Samanthuel Gillson (splendidland)"), stringset("NELNAL")])];
     credits[7] = [new scr_credit([stringsetloc("-3D Assets, Anim, Posing-", "scr_credit_slash_scr_credit_gml_129_0")], [stringset("Chelsea Saunders (pixelatedcrown)")]), new scr_credit([stringsetloc("-Development Tools (Cool)-", "scr_credit_slash_scr_credit_gml_164_0")], [stringset("Juju Adams")]), new scr_credit([stringsetloc("-UT Character Design-", "scr_credit_slash_scr_credit_gml_171_0")], [stringset("Betty Kwong (Temmie)"), stringset("Magnolia Porter (Snowdrake, Monster Kid)")])];

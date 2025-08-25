@@ -45,8 +45,11 @@
 > 这是因为 Steam 使用 Proton 兼容层运行 Windows 版 DELTARUNE
 # 由此开始是本仓库源码的内容<br>玩家看上面就足够了
 ## 协议 License
-翻译文本与修改后的贴图使用 **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)** 协议许可<br>
+翻译文本（`ch*/imports/text_src`）与修改后的贴图（`ch*/imports/pics`/`ch*/imports/pics_zhname`）使用 **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)** 协议许可<br>
 在保留好人汉化组署名的前提下，您可以对补丁的文本和贴图进行修改，并在不违反相关法律规范的前提下合理使用，好人汉化组对修改后的内容不负任何责任。
+
+打包脚本 `import_*.csx`/`scripts/*`/`export.csx` 在 **[GPL 通用公共许可证 v3（GPL v3）](https://www.gnu.org/licenses/gpl-3.0.zh-cn.html)** 下开源<br>
+杂项脚本 `misc_scripts/*.py` 在 **[MIT 许可证](https://opensource.org/license/MIT)** 下开源
 ## 基于原版 data 生成成品 data 方法
 1. 使用 Undertale Mod Tool 打开一个章节的 data
 2. 选择 Scripts -> Run other script...

@@ -18,7 +18,8 @@
 > 选择 `管理 -> 浏览本地文件`
 
 > [!IMPORTANT]
-> 对于 macOS 平台，需要选中的是安装目录下 `DELTARUNE.app/Contents/Resources`
+> 对于 macOS 平台，补丁需要放到安装器包 `DELTARUNE Chinese Patcher.app/Contents/MacOS` 内<br>
+> 以及需要选中的目录是安装目录下 `DELTARUNE.app/Contents/Resources`
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>
 使用 [DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher) 按照以下表格输入<br>

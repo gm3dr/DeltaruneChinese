@@ -53,10 +53,8 @@
 杂项脚本 `misc_scripts/*.py` 在 **[MIT 许可证](https://opensource.org/license/MIT)** 下开源
 ## 基于原版 data 生成成品 data 方法
 1. 将四个章节的 data 分别命名为 `data<章节阿拉伯数字>.win` 并全部放置到 workspace 目录下
-2. 将英文与中文的文本 json 放置在 `workspace/ch*/imports/text_src` 下（替换`en.json`与`cn.json`）
-3. 将贴图放置在 `workspace/ch*/imports/pics` 下，[使用 `FreeTexturePacker` 生成位图存储至 `workspace/ch*/imports/atlas`](#%E6%AF%8F%E4%B8%AA%E7%AB%A0%E8%8A%82%E5%AF%B9%E5%BA%94-imports-%E5%86%85%E7%BB%93%E6%9E%84workspacechimports)
-4. 命令行运行 `bin/deltarunePacker.exe` ，传入 workspace 目录作为参数
-5. 在 workspace 目录下的 result 文件夹中获取结果
+2. 命令行运行 `bin/deltarunePacker.exe` ，传入 workspace 目录作为参数
+3. 在 workspace 目录下的 result 文件夹中获取结果
 > [!IMPORTANT]
 > 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
 > 使用脚本时需要保证 workspace 路径无汉字等特殊字符<br>
@@ -80,7 +78,7 @@ Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
   - `bmfc` 补字字体的 bmfont 基础配置
 - `pics` 贴图留档，打包时不使用
 - `pics_zhname` 人名翻译版贴图留档，打包时不使用
-- `text_src` 语言文件
+- `text_src` 打包使用的语言文件
 > [!IMPORTANT]
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
 > 其余贴图都需要保证大小与原本的相同，否则会报错

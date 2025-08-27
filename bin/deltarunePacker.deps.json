@@ -1,0 +1,71 @@
+{
+  "runtimeTarget": {
+    "name": ".NETCoreApp,Version=v9.0",
+    "signature": ""
+  },
+  "compilationOptions": {},
+  "targets": {
+    ".NETCoreApp,Version=v9.0": {
+      "deltarunePacker/1.0.0": {
+        "dependencies": {
+          "Microsoft.DotNet.ILCompiler": "9.0.8",
+          "Microsoft.NET.ILLink.Tasks": "9.0.8",
+          "Underanalyzer": "1.0.0.0",
+          "UndertaleModLib": "0.8.3.0"
+        },
+        "runtime": {
+          "deltarunePacker.dll": {}
+        }
+      },
+      "Microsoft.DotNet.ILCompiler/9.0.8": {},
+      "Microsoft.NET.ILLink.Tasks/9.0.8": {},
+      "Underanalyzer/1.0.0.0": {
+        "runtime": {
+          "Underanalyzer.dll": {
+            "assemblyVersion": "1.0.0.0",
+            "fileVersion": "1.0.0.0"
+          }
+        }
+      },
+      "UndertaleModLib/0.8.3.0": {
+        "runtime": {
+          "UndertaleModLib.dll": {
+            "assemblyVersion": "0.8.3.0",
+            "fileVersion": "0.8.3.0"
+          }
+        }
+      }
+    }
+  },
+  "libraries": {
+    "deltarunePacker/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "Microsoft.DotNet.ILCompiler/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-cMwVh5hsxAhv+oMHQdgcXodt2kDpfviofBO4IXupSAHJW2vZOZOOIhvPWRGO6NeGcP8SR4OpSwktRqb0i79KFA==",
+      "path": "microsoft.dotnet.ilcompiler/9.0.8",
+      "hashPath": "microsoft.dotnet.ilcompiler.9.0.8.nupkg.sha512"
+    },
+    "Microsoft.NET.ILLink.Tasks/9.0.8": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-rd1CbIsMtVPtZNTIVD6Xydue//klYOOQIDpRgu3BHtv17AlpRs74/6QFbcYgMm/jL+naVU2T3OFLxVSLV5lQLQ==",
+      "path": "microsoft.net.illink.tasks/9.0.8",
+      "hashPath": "microsoft.net.illink.tasks.9.0.8.nupkg.sha512"
+    },
+    "Underanalyzer/1.0.0.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    },
+    "UndertaleModLib/0.8.3.0": {
+      "type": "reference",
+      "serviceable": false,
+      "sha512": ""
+    }
+  }
+}

@@ -46,32 +46,29 @@
 > 这是因为 Steam 使用 Proton 兼容层运行 Windows 版 DELTARUNE
 # 由此开始是本仓库源码的内容<br>玩家看上面就足够了
 ## 协议 License
-翻译文本（`ch*/imports/text_src`）与修改后的贴图（`ch*/imports/pics`/`ch*/imports/pics_zhname`）使用 **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)** 协议许可<br>
+翻译文本（`workspace/ch*/imports/text_src`）与修改后的贴图（`workspace/ch*/imports/pics`/`workspace/ch*/imports/pics_zhname`）使用 **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)** 协议许可<br>
 在保留好人汉化组署名的前提下，您可以对补丁的文本和贴图进行修改，并在不违反相关法律规范的前提下合理使用，好人汉化组对修改后的内容不负任何责任。
 
-打包脚本 `import_*.csx`/`scripts/*`/`export.csx` 在 **[GPL 通用公共许可证 v3（GPL v3）](https://www.gnu.org/licenses/gpl-3.0.zh-cn.html)** 下开源<br>
+打包脚本源码 `src` 与 `export.csx` 在 **[GPL 通用公共许可证 v3（GPL v3）](https://www.gnu.org/licenses/gpl-3.0.zh-cn.html)** 下开源<br>
 杂项脚本 `misc_scripts/*.py` 在 **[MIT 许可证](https://opensource.org/license/MIT)** 下开源
 ## 基于原版 data 生成成品 data 方法
-1. 使用 Undertale Mod Tool 打开一个章节的 data
-2. 选择 Scripts -> Run other script...
-3. 选择仓库中的 import_offline.csx
-4. 选择仓库中对应章节的文件夹 ***不是 imports 文件夹***
-5. 执行结束后保存 data
-6. 语言 json 生成在了 imports 文件夹旁边的 result 文件夹中，将其放置到游戏章节目录下的 lang 文件夹中即可
+1. 将四个章节的 data 分别命名为 `data<章节阿拉伯数字>.win` 并全部放置到 workspace 目录下
+2. 将英文与中文的文本 json 放置在 `workspace/ch*/imports/text_src` 下（替换`en.json`与`cn.json`）
+3. 将贴图放置在 `workspace/ch*/imports/pics` 下，[使用 `FreeTexturePacker` 生成位图存储至 `workspace/ch*/imports/atlas`](#%E6%AF%8F%E4%B8%AA%E7%AB%A0%E8%8A%82%E5%AF%B9%E5%BA%94-imports-%E5%86%85%E7%BB%93%E6%9E%84workspacechimports)
+4. 命令行运行 `bin/deltarunePacker.exe` ，传入 workspace 目录作为参数
+5. 在 workspace 目录下的 result 文件夹中获取结果
 > [!IMPORTANT]
 > 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
-> 使用脚本时需要保证第4步的目标路径无汉字等特殊字符<br>
+> 使用脚本时需要保证 workspace 路径无汉字等特殊字符<br>
 > 否则将会无法生成位图字体并因为找不到 `.fnt` 而报错
 ## 本仓库结构
-### 主要的 Undertale Mod Tool 脚本（scripts & \*.csx）
+### 主要的构建程序与脚本
 - `export.csx` 从游戏文件中导出文本字体与贴图
-- `import_offline.csx` 基于原版 data 生成成品 data 与语言 json 文件
-- `import_online.csx` 基于原版 data 生成成品 data 与语言 json 文件，自动从 Weblate 获取文本的版本
-- `scripts/import.csx` 上述两个脚本的实际运行逻辑
-  - `scripts/import_sprites.csx` 导入 Sprite
-  - `scripts/import_cnfonts.csx` 导入字体
-  - `scripts/import_strings.csx` 导入文本
-### 每个章节对应 imports 内结构（ch\*/imports）
+- `src` 构建程序源代码
+  - `Importer.cs` 主逻辑
+- `bin` 构建程序二进制
+  - `deltarunePacker.exe` 程序本体，需要传入 workspace 目录作为参数
+### 每个章节对应 imports 内结构（workspace/ch\*/imports）
 - `atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
 Format 选择 `custom`，点击右边的笔图标填写 `packer_exporter.txt` 里的内容，<br>
 Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
@@ -87,16 +84,16 @@ Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
 > [!IMPORTANT]
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
 > 其余贴图都需要保证大小与原本的相同，否则会报错
-### 修改过的 GML 代码实现（ch\*/imports/code）
+### 修改过的 GML 代码实现（workspace/ch\*/imports/code）
 #### 通用
-0. 废话：把代码中硬编码没有走游戏多语言系统的文本改动了<br>修改了各种坐标值来微调文字显示位置和动画
-1. 改动了 `is_english` 使得游戏即使当 `lang` 为 `en` 时也会从语言文件夹中加载 json
-2. 改动了 `obj_writer` 添加了汉字字符字宽逻辑
-3. 改动了 `DEVICE_MENU`（读档界面）使得日文下显示的是`简体中文`而不是`English`
-4. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
-5. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
+1. 废话：把代码中硬编码没有走游戏多语言系统的文本改动了<br>修改了各种坐标值来微调文字显示位置和动画
+2. 改动了 `is_english` 使得游戏即使当 `lang` 为 `en` 时也会从语言文件夹中加载 json
+3. 改动了 `obj_writer` 添加了汉字字符字宽逻辑
+4. 改动了 `DEVICE_MENU`（读档界面）使得日文下显示的是`简体中文`而不是`English`
+5. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
+6. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
 这个功能原本用于保证日文玩家名也能在英文时正常显示
-6. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>
+1. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>
 添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
 #### 第一章
 1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
@@ -127,10 +124,10 @@ Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
 3. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
 4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
 Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
-5. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
-6. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
-7. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
-### 补字用字体（ch\*/imports/font/font）
+1. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
+2. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+3. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+### 补字用字体（workspace/ch\*/imports/font/font）
 - `normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、全角逗号句号、双层直角引号）
 - `battle.ttf` SimSun 16x（中易宋体 内嵌点阵 16）
 - `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）

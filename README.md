@@ -71,9 +71,9 @@
 Format 选择 `custom`，点击右边的笔图标填写 `packer_exporter.txt` 里的内容，<br>
 Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
 勾选 `Power of two` `Detect identical` `Remove file ext`，取消勾选 `Allow trim` `Allow rotation`
-- `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0chimportscode)
+- `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0workspacechimportscode)
 - `font` 字体
-  - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93chimportsfontfont)
+  - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93workspacechimportsfontfont)
   - `pics` 原字体的字符单图
   - `bmfc` 补字字体的 bmfont 基础配置
 - `pics` 贴图留档，打包时不使用

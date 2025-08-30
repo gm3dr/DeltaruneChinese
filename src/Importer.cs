@@ -1,35 +1,44 @@
-﻿using System.Collections.Concurrent;
-using System.Diagnostics;
-using System.Linq;
-using System.Text;
-using System.Text.Encodings.Web;
-using System.Text.Json;
+﻿using Newtonsoft.Json.Linq;
+using Newtonsoft.Json;
 using System.Text.RegularExpressions;
-using System.Threading.Tasks;
-using UndertaleModLib;
+using System.Collections.Concurrent;
+using System.Diagnostics;
+using System.Text;
 using UndertaleModLib.Compiler;
 using UndertaleModLib.Models;
 using UndertaleModLib.Util;
-using static System.Net.Mime.MediaTypeNames;
+using UndertaleModLib;
 namespace DeltarunePacker
 {
-
-    public partial class Importer(string datawinPath, string workspace, string resultPath)
+    public enum LogLevel { All, Info, Warning, Error, Assert, Off}
+    public partial class Importer(string datawinPath, string workspace, string resultPath, LogLevel logLevel = LogLevel.Info)
     {
         private readonly UndertaleData datawin = UndertaleIO.Read(new FileStream(datawinPath, FileMode.Open, FileAccess.Read), (warning, isImportant) => Console.WriteLine($"[LoadDataWin]warning: {warning}"));
         private readonly StreamWriter m_logger = new(new FileStream(Path.Combine(resultPath, "log.txt"), FileMode.Create, FileAccess.Write));
 
-        private void Info(string msg) {
-            Console.WriteLine(msg);
-        }
+        private void Verbose(string msg) { if (logLevel <= LogLevel.All) Console.WriteLine("[V]" + msg); }
+        private void Info(string msg) { if (logLevel <= LogLevel.Info) Console.WriteLine("[I]" + msg); }
         private void Warning(string msg) {
-            m_logger.WriteLine(msg);
-            Console.WriteLine(msg);
+            if (logLevel <= LogLevel.Warning) {
+                string full = "[W]" + msg;
+                m_logger.WriteLine(full);
+                Console.WriteLine(full);
+            }
         }
         private void Error(string msg) {
-            m_logger.WriteLine(msg);
-            Console.Error.WriteLine(msg);
-            Console.Error.Write(new StackTrace().ToString());
+            if (logLevel <= LogLevel.Error) {
+                string full = $"[E]{msg}\n{new StackTrace().ToString()}";
+                m_logger.Write(full);
+                Console.Error.Write(full);
+            }
+        }
+        private void Assert(string msg) {
+            if (logLevel <= LogLevel.Assert) {
+                string full = $"{msg}\n{new StackTrace().ToString()}";
+                m_logger.Write(full);
+                Console.Error.Write(full);
+            }
+            throw new Exception(msg);
         }
         #region ImportSprite
         private UndertaleSprite? GetSprite(string name) {
@@ -41,23 +50,24 @@ namespace DeltarunePacker
             if (baseSprite == null) {
                 return null;
             }
-            sprite = new();
+            sprite = new() {
+                Name = datawin.Strings.MakeString(name),
+                Width = baseSprite.Width,
+                Height = baseSprite.Height,
+                MarginLeft = baseSprite.MarginLeft,
+                MarginRight = baseSprite.MarginRight,
+                MarginTop = baseSprite.MarginTop,
+                MarginBottom = baseSprite.MarginBottom,
+                OriginX = baseSprite.OriginX,
+                OriginY = baseSprite.OriginY,
+                Transparent = baseSprite.Transparent,
+                Smooth = baseSprite.Smooth,
+                Preload = baseSprite.Preload,
+                BBoxMode = baseSprite.BBoxMode,
+                SepMasks = baseSprite.SepMasks,
+                CollisionMasks = baseSprite.CollisionMasks
+            };
             datawin.Sprites.Add(sprite);
-            sprite.Name = datawin.Strings.MakeString(name);
-            sprite.Width = baseSprite.Width;
-            sprite.Height = baseSprite.Height;
-            sprite.MarginLeft = baseSprite.MarginLeft;
-            sprite.MarginRight = baseSprite.MarginRight;
-            sprite.MarginTop = baseSprite.MarginTop;
-            sprite.MarginBottom = baseSprite.MarginBottom;
-            sprite.OriginX = baseSprite.OriginX;
-            sprite.OriginY = baseSprite.OriginY;
-            sprite.Transparent = baseSprite.Transparent;
-            sprite.Smooth = baseSprite.Smooth;
-            sprite.Preload = baseSprite.Preload;
-            sprite.BBoxMode = baseSprite.BBoxMode;
-            sprite.SepMasks = baseSprite.SepMasks;
-            sprite.CollisionMasks = baseSprite.CollisionMasks;
             foreach (var frame in baseSprite.Textures) {
                 UndertaleTexturePageItem item = frame.Texture;
                 UndertaleTexturePageItem resultItem = new() {
@@ -79,18 +89,18 @@ namespace DeltarunePacker
             return sprite;
         }
 
-        public async Task ImportSprites()
-        {
+        public async Task ImportSprites() {
+            Range[] segment = new Range[9];
             foreach(var file in new DirectoryInfo(Path.Combine(workspace, "imports/atlas")).EnumerateFiles("*.cfg")) {
                 Task<byte[]> png = File.ReadAllBytesAsync(Path.ChangeExtension(file.FullName, ".png"));
                 Task<string[]> lines = File.ReadAllLinesAsync(file.FullName, Encoding.UTF8);
-                UndertaleEmbeddedTexture texture = new();
-                texture.TextureData.Image = GMImage.FromPng(await png);
-                texture.Scaled = 1;
+                UndertaleEmbeddedTexture texture = new() {
+                    Scaled = 1
+                };
                 lock (datawin.EmbeddedTextures) {
                     datawin.EmbeddedTextures.Add(texture);
                 }
-                Range[] segment = new Range[9];
+                texture.TextureData.Image = GMImage.FromPng(await png);
                 foreach (var line in await lines) {
                     int split_pos = line.LastIndexOf('_');
                     ReadOnlySpan<char> lineSpan = line.AsSpan(split_pos + 1);
@@ -125,6 +135,7 @@ namespace DeltarunePacker
                         pageItem.SourceY = (ushort)y;
                         pageItem.SourceWidth = (ushort)iw;
                         pageItem.SourceHeight = (ushort)ih;
+                        Verbose($"[ImportSprite]{name} directly imported!");
                         continue;
                     }
                     pageItem.SourceX = (ushort)x;
@@ -137,9 +148,14 @@ namespace DeltarunePacker
                         pageItem.SourceHeight = (ushort)ih;
                         pageItem.TargetX += (ushort)ix;
                         pageItem.TargetY += (ushort)iy;
+                        Verbose($"[ImportSprite]{name} arranged imported!");
                         continue;
                     }
                     // 尺寸不一致
+                    if (!name.Contains("zhname") && !name.Contains("funnytext", StringComparison.Ordinal) && !name.Contains("battlemsg", StringComparison.Ordinal)) {
+                        // 这条只是提醒尺寸变了 不一定有问题 自查下即可
+                        Info($"[ImportSprites]{file.Name}: {name}_{id} is {w}*{h}, requires {pageItem.SourceWidth}*{pageItem.SourceHeight}");
+                    }
                     pageItem.SourceWidth = (ushort)iw;
                     pageItem.SourceHeight = (ushort)ih;
                     pageItem.TargetX = (ushort)ix;
@@ -158,22 +174,17 @@ namespace DeltarunePacker
                         sprite.MarginRight = (int)w;
                         sprite.MarginBottom = (int)h;
                     }
-                    if (!name.Contains("funnytext", StringComparison.Ordinal) && !name.Contains("battlemsg", StringComparison.Ordinal)) {
-                        // 这条只是提醒尺寸变了 不一定有问题 自查下即可
-                        if (name.Contains("zhname")) {
-                            continue;
-                        }
-                        Info($"[ImportSprites]{file.Name}: {name}_{id} is {w}*{h}, requires{pageItem.SourceWidth}*{pageItem.SourceHeight}");
-                    }
+
                     if (sprite.CollisionMasks.Count > 0) {
                         Warning($"[ImportSprites] size changed for sprite {name} with CollisionMask");
                     }
-                    continue;
+                    Verbose($"[ImportSprite]{name} resized imported!");
                 }
             }
         }
         #endregion
         #region ImportTexts
+        // 开头的\\cX要保留
         [GeneratedRegex(@"^(\s*\\[A-Zabd-z][A-Za-z0-9]\s*)+")]
         private static partial Regex RegexPrefix();
         [GeneratedRegex(@"/%*\s*$")]
@@ -182,80 +193,60 @@ namespace DeltarunePacker
         private static partial Regex RestoreEN();
         [GeneratedRegex(@"(?<!\^[0-9])([：？！，。]*)([：？！，。])(?=\s*[\w&])")]
         private static partial Regex RestoreCN();
-        private string RestoreItem(string key, string item, string fmt)
-        {
-            if (item.StartsWith('@'))
-            {
+        private string RestoreItem(string key, string item, string fmt) {
+            if (item.StartsWith('@')) {
                 // 标记为不用加^1
                 item = item[1..];
-            }
-            else
-            {
+            } else {
                 // 标点前面加^1
                 item = RestoreEN().Replace(item, "$1^1.");
                 item = RestoreCN().Replace(item, "$1^1$2");
             }
 
-            if (!string.IsNullOrEmpty(item) && string.IsNullOrEmpty(fmt))
-            {
+            if (!string.IsNullOrEmpty(item) && string.IsNullOrEmpty(fmt)) {
                 Warning($"[RestoreItem]fmt empty: {key}");
-            }
-            else
-            {
+            } else {
                 // 恢复前后的特殊符号
-                // 开头的\\cX要保留
-                string? prefix = RegexPrefix().Match(fmt)?.Value;
-                string? suffix = RegexSuffix().Match(fmt)?.Value;
-                item = prefix + item + suffix;
+                item = RegexPrefix().Match(fmt).Value + item + RegexSuffix().Match(fmt).Value;
             }
-            // 不换行空格换成普通空格
-            item = item.Replace('\u00A0', ' ');
-            // 全角空格换成两个半角空格
-            if (item.StartsWith("\\m"))
-            {
+            if (item.StartsWith("\\m")) {
                 // 小头像格式全角空格变一个普通空格
                 item = item.Replace("\u3000", " ");
-            }
-            else
-            {
+            } else {
                 // 其他格式全角空格变两个普通空格
                 item = item.Replace("\u3000", "  ");
             }
+            // 不换行空格换成普通空格
+            item = item.Replace('\u00A0', ' ');
 
             return item;
         }
-        public void ImportTexts(string targetJson, string baseJson, string fmtJson)
-        {
-            using JsonDocument baseData = JsonDocument.Parse(baseJson);
-            using JsonDocument targetData = JsonDocument.Parse(targetJson);
-            using JsonDocument fmtData = JsonDocument.Parse(fmtJson);
-            using FileStream outStream = new(Path.Combine(resultPath, "lang_en.json"), FileMode.Create);
-            using Utf8JsonWriter writer = new(outStream, new JsonWriterOptions() { Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping, Indented = true });
-            writer.WriteStartObject();
-            foreach (var item in fmtData.RootElement.EnumerateObject()) {
-                // profiler显示的热点 待优化
-                bool hasFmt = baseData.RootElement.TryGetProperty(item.Name, out JsonElement baseItem);
-                bool found = targetData.RootElement.TryGetProperty(item.Name, out JsonElement targetItem);
-                if (!found && !hasFmt)
-                {
+        public void ImportTexts(string targetJson, string baseJson, string fmtJson) {
+            JObject fmtData = JObject.Parse(fmtJson);
+            JObject baseData = JObject.Parse(baseJson);
+            JObject targetData = JObject.Parse(targetJson);
+            using JsonTextWriter writer = new(File.CreateText(Path.Combine(resultPath, "lang_en.json")));
+            writer.Formatting = Formatting.Indented;
+            Task writeTask = writer.WriteStartObjectAsync();
+            foreach (var fmtItem in fmtData.Properties()) {
+                var (fmtKey, fmtValue) = (fmtItem.Name, fmtItem.Value.ToString());
+                bool hasFmt = baseData.TryGetValue(fmtKey, out var baseItem);
+                bool found = targetData.TryGetValue(fmtKey, out var targetItem);
+                if (!found && !hasFmt) {
+                    continue;
+                } else if (!found) {
+                    Warning($"[WriteRestoredJson]no translation for {fmtKey}: {fmtValue}");
+                } else if (!hasFmt) {
+                    Warning($"[WriteRestoredJson]missing fmtKey {fmtKey}: {fmtValue}");
                     continue;
                 }
-                else if (!found)
-                {
-                    Warning($"[WriteRestoredJson]no translation for {item.Name}: {item.Value}");
-                }
-                else if (!hasFmt)
-                {
-                    Warning($"[WriteRestoredJson]missing fmtKey {item.Name}: {item.Value}");
-                    continue;
-                }
-                writer.WriteString(item.Name, RestoreItem(
-                    item.Name,
-                    found ? targetItem.ToString() : baseItem.ToString(),
-                    item.Value.ToString()
-                ));
+                string targetValue = RestoreItem(fmtKey, (found ? targetItem : baseItem)!.ToString(), fmtValue);
+                writeTask = writeTask.ContinueWith(_ => {
+                    writer.WritePropertyName(fmtKey);
+                    writer.WriteValue(targetValue);
+                });
             }
-            writer.WriteEndObject();
+            writeTask.ContinueWith(_ => writer.WriteEndObject()).Wait();
         }
         #endregion
         #region ImportFonts
@@ -269,164 +260,154 @@ namespace DeltarunePacker
         private static partial Regex CNShift();
         private readonly string dumpPath = Path.Combine(resultPath, "dump");
         private readonly string dictPath = Path.Combine(resultPath, "dump/dict.txt");
-        public Task ImportFonts(IEnumerable<Task<(string fileName, string content)> > taskBag, string extraString) {
+        public void ImportFonts(IEnumerable<Task<(string fileName, string content)> > taskBag, string extraString) {
             // 清一下上次的dump 防止出错
             if (Directory.Exists(dumpPath)) {
                 Directory.Delete(dumpPath, true);
             }
             Directory.CreateDirectory(dumpPath);
 
-            Task copyFiles = Parallel.ForEachAsync(new DirectoryInfo(Path.Combine(workspace, "imports/font/font")).EnumerateFiles(), (config, _) => {
-                File.Copy(config.ToString(), Path.Combine(dumpPath, config.Name));
-                return new ValueTask();
+            Task copyFiles = Task.Run(() => {
+                foreach (var config in new DirectoryInfo(Path.Combine(workspace, "imports/font/font")).EnumerateFiles().AsParallel()) {
+                    File.Copy(config.ToString(), Path.Combine(dumpPath, config.Name));
+                }
             });
             Task writeDict = Task.Run(async () => {
+                // dic.txt需要是UTF-16的
                 using FileStream dict = new(dictPath, FileMode.Create, FileAccess.Write);
-                foreach (var taskItem in taskBag) {
-                    dict.Write(Encoding.Unicode.GetBytes((await taskItem).content)); // dic.txt需要是UTF-16的
-                }
                 dict.Write(Encoding.Unicode.GetBytes(extraString));
-                dict.Close();
+                foreach (var taskItem in taskBag) {
+                    dict.Write(Encoding.Unicode.GetBytes((await taskItem).content)); 
+                }
             });
-            return Parallel.ForEachAsync(new DirectoryInfo(Path.Combine(workspace, "imports/font/bmfc")).EnumerateFiles(), async (config, _) => {
+            Parallel.ForEach(new DirectoryInfo(Path.Combine(workspace, "imports/font/bmfc")).EnumerateFiles(), config => {
                 Task<string> bmfc = File.ReadAllTextAsync(config.FullName, Encoding.UTF8);
                 string font_name = Path.GetFileNameWithoutExtension(config.Name);
-                if (font_name == null)
-                {
+                if (font_name == null) {
                     return;
                 }
                 string configPath = Path.Combine(dumpPath, config.Name);
-                string outputPath = Path.Combine(dumpPath, $"{font_name}.fnt");
                 StringBuilder cfgPics = new();
-                foreach (FileInfo img in new DirectoryInfo(Path.Combine(workspace, "imports/font/pics", font_name)).EnumerateFiles())
-                {
+                foreach (FileInfo img in new DirectoryInfo(Path.Combine(workspace, "imports/font/pics", font_name)).EnumerateFiles()) {
                     //33,2,1.png
                     string[] tokens = img.Name.Split(',');
                     //参考格式: icon=".../imports/font/pics/fnt_main/id,xadv,xoff.png",id,xoff,yoff,xadv
-                    cfgPics.AppendLine($"""icon="{img.FullName}",{tokens[0]},{tokens[2].Replace(".png", "")},{0},{tokens[1]}""");
+                    cfgPics.Append($"icon=\"{img.FullName}\",{tokens[0]},{tokens[2].Replace(".png", "")},{0},{tokens[1]}'\n'");
                 }
-                //回写完整的配置文件
-                Task writeCfg = bmfc.ContinueWith(task => File.WriteAllTextAsync(configPath, task.Result + cfgPics.ToString(), Encoding.UTF8));
-                await Task.WhenAll(copyFiles, writeDict, writeCfg);
-                //跑bmfont转字库
-                using Process? p = Process.Start(new ProcessStartInfo() {
-                    FileName = Path.Combine(workspace, "../bmfont64.com"),
+                // 回写完整的配置文件
+                Task writeCfg = bmfc.ContinueWith(task => File.WriteAllText(configPath, cfgPics.Insert(0, task.Result).ToString(), Encoding.UTF8));
+                string outputPath = Path.Combine(dumpPath, $"{font_name}.fnt");
+                using Process bmfont = new();
+                bmfont.StartInfo = new ProcessStartInfo() {
+                    FileName = Path.Combine(workspace, "../bmfont64.exe"),
                     WorkingDirectory = workspace,
                     CreateNoWindow = true,
+                    RedirectStandardOutput = true,
                     ArgumentList = {
                         "-c", configPath,
                         "-o", outputPath,
                         "-t", Path.Combine(dumpPath, "dict.txt")
                     }
-                });
-                if (p == null)
-                {
-                    Error($"[ImportFonts]{font_name} bmfont start failed!");
-                    return;
-                }
-                await p.WaitForExitAsync().ContinueWith(async _ =>
-                {
-                    p.Close();
-                    if (!File.Exists(Path.Combine(dumpPath, $"{font_name}_0.png")))
-                    {
-                        Warning($"[ImportFonts]{font_name} bmfont exec failed!");
-                        return;
-                    }
-                    if (File.Exists(Path.Combine(dumpPath, $"{font_name}_1.png")))
-                    {
-                        Warning($"[ImportFonts]{font_name} exceed font texture size!");
-                        return;
-                    }
-                    Task<string> generateGlyphs = File.ReadAllTextAsync(outputPath, Encoding.UTF8);
-                    Task<byte[]> readTexture = File.ReadAllBytesAsync(Path.Combine(dumpPath, $"{font_name}_0.png"));
-                    UndertaleEmbeddedTexture texture = new();
-                    lock (datawin.EmbeddedTextures)
-                    {
-                        datawin.EmbeddedTextures.Add(texture);
-                    }
-
-                    UndertaleFont font = datawin.Fonts.ByName(font_name);
-                    font.Glyphs.Clear();
-                    font.RangeStart = 1;
-                    font.RangeEnd = 65535;
-
-                    UndertaleTexturePageItem pageItem = font.Texture;
-                    pageItem.SourceX = 0;
-                    pageItem.SourceY = 0;
-                    pageItem.TargetX = 0;
-                    pageItem.TargetY = 0;
-                    Int16 xoffset = Int16.Parse(XOffset().Match(bmfc.Result).Groups[1].Value);
-                    Int16 yoffset = Int16.Parse(YOffset().Match(bmfc.Result).Groups[1].Value);
-                    Int16 cnShift = Int16.Parse(CNShift().Match(bmfc.Result).Groups[1].Value);
-                    UInt16 extraH = (UInt16)Math.Abs(yoffset);
-                    string fnt = await generateGlyphs;
-                    if (string.IsNullOrEmpty(fnt)) {
-                        Warning($"[ImportFonts]{font_name} exported config is empty!");
-                    }
-                    foreach (Match match in Pattern().Matches(fnt))
-                    {
-                        UndertaleFont.Glyph glyph = new()
-                        {
-                            Character = UInt16.Parse(match.Groups[1].Value),
-                            SourceX = (UInt16)(int.Parse(match.Groups[2].Value) + 1),
-                            SourceY = (UInt16)(int.Parse(match.Groups[3].Value) + 1),
-                            SourceWidth = (UInt16)(int.Parse(match.Groups[4].Value) - 2),
-                            SourceHeight = (UInt16)(int.Parse(match.Groups[5].Value) - 2),
-                            Offset = (Int16)(int.Parse(match.Groups[6].Value) + 1),
-                            Shift = Int16.Parse(match.Groups[8].Value)
-                        };
-                        // 解决中英混排问题
-                        if (glyph.Character > 127)
-                        {
-                            glyph.Offset += xoffset;
-                            glyph.Shift += cnShift;
+                };
+                // 这里是关键路径 一点都不能耽搁
+                // 检查后置 自旋等待 出错了直接把任务崩掉就行
+                Task.WhenAll(copyFiles, writeDict, writeCfg).ContinueWith(_ => {
+                    bmfont.Start();
+                    Info($"[ImportFonts]{font_name} started!");
+                    bmfont!.WaitForExitAsync().ContinueWith(_ => {
+                        string pngPath = Path.Combine(dumpPath, $"{font_name}_0.png");
+                        while (!File.Exists(outputPath) || !File.Exists(pngPath)) {
+                            Info($"[ImportFonts]{font_name} bmfont output not found!");
                         }
-                        if ((yoffset > 0 && glyph.Character <= 127) ||
-                            (yoffset < 0 && glyph.Character > 127))
-                        {
-                            glyph.SourceY += extraH;
-                            glyph.SourceHeight -= extraH;
+                        Task<string> readGlyphs = File.ReadAllTextAsync(outputPath, Encoding.UTF8);
+                        Task<byte[]> readTexture = File.ReadAllBytesAsync(pngPath);
+                        UndertaleFont font = datawin.Fonts.ByName(font_name);
+                        font.Glyphs.Clear();
+                        Int16 xoffset = Int16.Parse(XOffset().Match(bmfc.Result).Groups[1].Value);
+                        Int16 yoffset = Int16.Parse(YOffset().Match(bmfc.Result).Groups[1].Value);
+                        Int16 cnShift = Int16.Parse(CNShift().Match(bmfc.Result).Groups[1].Value);
+                        UInt16 extraH = (UInt16)Math.Abs(yoffset);
+                        Task importGlyphs = readGlyphs.ContinueWith(fnt => {
+                            foreach (Match match in Pattern().Matches(fnt.Result)) {
+                                UndertaleFont.Glyph glyph = new() {
+                                    Character = UInt16.Parse(match.Groups[1].Value),
+                                    SourceX = (UInt16)(int.Parse(match.Groups[2].Value) + 1),
+                                    SourceY = (UInt16)(int.Parse(match.Groups[3].Value) + 1),
+                                    SourceWidth = (UInt16)(int.Parse(match.Groups[4].Value) - 2),
+                                    SourceHeight = (UInt16)(int.Parse(match.Groups[5].Value) - 2),
+                                    Offset = (Int16)(int.Parse(match.Groups[6].Value) + 1),
+                                    Shift = Int16.Parse(match.Groups[8].Value)
+                                };
+                                // 解决中英混排问题
+                                if (glyph.Character > 127) {
+                                    glyph.Offset += xoffset;
+                                    glyph.Shift += cnShift;
+                                }
+                                if ((yoffset > 0 && glyph.Character <= 127) ||
+                                    (yoffset < 0 && glyph.Character > 127)) {
+                                    glyph.SourceY += extraH;
+                                    glyph.SourceHeight -= extraH;
+                                }
+                                font.Glyphs.Add(glyph);
+                            }
+                        });
+                        UndertaleEmbeddedTexture texture = new();
+                        UndertaleTexturePageItem pageItem = font.Texture;
+                        Task importTexture = readTexture.ContinueWith(png => {
+                            GMImage image = GMImage.FromPng(png.Result);
+                            texture.TextureData.Image = image;
+                            pageItem.SourceWidth = (ushort)image.Width;
+                            pageItem.SourceHeight = (ushort)image.Height;
+                            pageItem.TargetWidth = (ushort)image.Width;
+                            pageItem.TargetHeight = (ushort)image.Height;
+                            pageItem.BoundingWidth = (ushort)image.Width;
+                            pageItem.BoundingHeight = (ushort)image.Height;
+                        });
+                        font.RangeStart = 1;
+                        font.RangeEnd = 65535;
+                        pageItem.SourceX = 0;
+                        pageItem.SourceY = 0;
+                        pageItem.TargetX = 0;
+                        pageItem.TargetY = 0;
+                        pageItem.TexturePage = texture;
+                        lock (datawin.EmbeddedTextures) {
+                            datawin.EmbeddedTextures.Add(texture);
                         }
-                        font.Glyphs.Add(glyph);
-                    }
-                    GMImage image = GMImage.FromPng(await readTexture);
-                    texture.TextureData.Image = image;
-                    pageItem.TexturePage = texture;
-                    pageItem.SourceWidth = (ushort)image.Width;
-                    pageItem.SourceHeight = (ushort)image.Height;
-                    pageItem.TargetWidth = (ushort)image.Width;
-                    pageItem.TargetHeight = (ushort)image.Height;
-                    pageItem.BoundingWidth = (ushort)image.Width;
-                    pageItem.BoundingHeight = (ushort)image.Height;
-                });
-                Info($"[ImportFonts]{font_name} imported!");
+                        if (File.Exists(Path.Combine(dumpPath, $"{font_name}_1.png"))) {
+                            Warning($"[ImportFonts]{font_name} exceed font texture size!");
+                        } else {
+                            Task.WaitAll(importGlyphs, importTexture);
+                            Info($"[ImportFonts]{font_name} imported!");
+                        }
+                    }).Wait();
+                }).Wait();
             });
         }
         #endregion
         #region ImportCodes
-        public async Task ImportCodes(IEnumerable<Task<(string fileName, string content)> > taskBag, Task previousTask)
-        {
+        public void ImportCodes(IEnumerable<Task<(string fileName, string content)> > taskBag, Task previousTask) {
             CodeImportGroup importGroup = new(datawin);
             foreach (var taskItem in taskBag) {
-                var (fileName, content) = await taskItem;
+                taskItem.Wait();
+                var (fileName, content) = taskItem.Result;
                 if (datawin.Code.ByName(fileName) == null) {
                     Warning($"[MainTask]code not exist within data.win: {fileName}");
                     continue;
                 }
                 importGroup.QueueReplace(fileName, content);
             }
-            // 代码编译可能依赖新增的sprite
-            await previousTask;
+            previousTask.Wait();// 代码编译可能依赖新增的sprite
             CompileResult result = importGroup.Import();
             if (!result.Successful) {
-                Error($"[ImportCodes]compile failed: {result.Errors}");
+                Warning($"[ImportCodes]compile failed: { result.PrintAllErrors(true) }");
             }
             if (datawin.Variables.Any(x => x.Name.Content.Contains("zhname"))) {
                 Error($"[ImportCodes]unexpected result!");
             }
         }
         #endregion
-        private IEnumerable<Task<(string fileName, string content)> > ReadCodes() {
+
+        private ConcurrentBag<Task<(string fileName, string content)>> ReadCodes() {
             ConcurrentBag<Task<(string fileName, string content)> > taskBag = [];
             Parallel.ForEach(new DirectoryInfo(Path.Combine(workspace, "imports/code")).EnumerateFiles(), 
                 file => taskBag.Add(File.ReadAllTextAsync(file.FullName, Encoding.UTF8).ContinueWith(
@@ -435,21 +416,21 @@ namespace DeltarunePacker
             ));
             return taskBag;
         }
-        public void Run()
-        {
+        public void Run() {
             Task<string> en = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/en.json"), Encoding.UTF8);
             Task<string> cn = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/cn.json"), Encoding.UTF8);
             Task<string> fmt = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/raw.json"), Encoding.UTF8);
             Task<string> extra = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/extra.txt"), Encoding.UTF8);
             var taskBag = ReadCodes();
-            Task importFonts = Task.Run(async () => await ImportFonts(taskBag, await cn + await extra));
-            Task importSprites = ImportSprites();
-            Task importCodes = Task.Run(async () => await ImportCodes(taskBag, importSprites));
+            Task importFonts = Task.Run(async () => ImportFonts(taskBag, await cn + await extra));
             Task importTexts = Task.Run(async () => ImportTexts(await cn, await en, await fmt));
+            Task importCodes = Task.Run(() => ImportCodes(taskBag, ImportSprites()));
             using FileStream output = new(Path.Combine(resultPath, "data.win"), FileMode.Create, FileAccess.Write);
             Task.WaitAll(importFonts, importCodes);
+            Info($"saving {resultPath} ...");
             UndertaleIO.Write(output, datawin);// 打包完成 保存data.win
             importTexts.Wait();// 这里是生成json
+            Info($"{resultPath} saved!");
         }
     }
 }

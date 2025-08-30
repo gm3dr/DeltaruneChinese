@@ -10,6 +10,7 @@
         "dependencies": {
           "Microsoft.DotNet.ILCompiler": "9.0.8",
           "Microsoft.NET.ILLink.Tasks": "9.0.8",
+          "Newtonsoft.Json": "13.0.3",
           "Underanalyzer": "1.0.0.0",
           "UndertaleModLib": "0.8.3.0"
         },
@@ -19,6 +20,14 @@
       },
       "Microsoft.DotNet.ILCompiler/9.0.8": {},
       "Microsoft.NET.ILLink.Tasks/9.0.8": {},
+      "Newtonsoft.Json/13.0.3": {
+        "runtime": {
+          "lib/net6.0/Newtonsoft.Json.dll": {
+            "assemblyVersion": "13.0.0.0",
+            "fileVersion": "13.0.3.27908"
+          }
+        }
+      },
       "Underanalyzer/1.0.0.0": {
         "runtime": {
           "Underanalyzer.dll": {
@@ -56,6 +65,13 @@
       "sha512": "sha512-rd1CbIsMtVPtZNTIVD6Xydue//klYOOQIDpRgu3BHtv17AlpRs74/6QFbcYgMm/jL+naVU2T3OFLxVSLV5lQLQ==",
       "path": "microsoft.net.illink.tasks/9.0.8",
       "hashPath": "microsoft.net.illink.tasks.9.0.8.nupkg.sha512"
+    },
+    "Newtonsoft.Json/13.0.3": {
+      "type": "package",
+      "serviceable": true,
+      "sha512": "sha512-HrC5BXdl00IP9zeV+0Z848QWPAoCr9P3bDEZguI+gkLcBKAOxix/tLEAAHC+UvDNPv4a2d18lOReHMOagPa+zQ==",
+      "path": "newtonsoft.json/13.0.3",
+      "hashPath": "newtonsoft.json.13.0.3.nupkg.sha512"
     },
     "Underanalyzer/1.0.0.0": {
       "type": "reference",

@@ -607,7 +607,7 @@ if (global.myfight == 3)
             timer++;
             
             if (timer == 1)
-                scr_battle_sprite_set("kris", 1492, 1, 1);
+                scr_battle_sprite_set("kris", 1493, 1, 1);
             
             if (timer == 1)
                 snd_play_x(snd_bell_bounce_short, 1, 1);
@@ -660,7 +660,7 @@ if (global.myfight == 3)
                 obj_herosusie.y = y - 10;
                 obj_herosusie.vspeed = 0;
                 snd_play(snd_bump);
-                scr_battle_sprite_set("susie", 1209, 0, 1);
+                scr_battle_sprite_set("susie", 1210, 0, 1);
                 scr_shakeobj();
                 
                 with (obj_herosusie)
@@ -816,7 +816,7 @@ if (global.myfight == 3)
                 with (obj_heroralsei)
                     x += 8;
                 
-                scr_battle_sprite_set("ralsei", 3260, 0.16666666666666666, 1);
+                scr_battle_sprite_set("ralsei", 3261, 0.16666666666666666, 1);
                 snd_play(snd_ralseising1);
             }
             
@@ -828,13 +828,13 @@ if (global.myfight == 3)
                     y -= 12;
                 }
                 
-                scr_battle_sprite_set("susie", 1091, 1, 1);
+                scr_battle_sprite_set("susie", 1092, 1, 1);
                 snd_play(snd_suslaugh);
             }
             
             if (timer == 75)
             {
-                scr_battle_sprite_set("ralsei", 2674, 1, 1);
+                scr_battle_sprite_set("ralsei", 2675, 1, 1);
                 snd_stop(snd_ralseising1);
                 
                 with (obj_heroralsei)

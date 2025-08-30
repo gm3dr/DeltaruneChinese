@@ -1,6 +1,6 @@
 if (shakeobj == 0 || !i_ex(shakeobj))
 {
-    shakeobj = scr_marker_ext(0, 0, 1021);
+    shakeobj = scr_marker_ext(0, 0, 1022);
     
     with (shakeobj)
         visible = 0;

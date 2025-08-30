@@ -62,13 +62,13 @@ global.savedata_async_id = -1;
 global.savedata_async_load = false;
 global.savedata_error = false;
 global.savedata_debuginfo = "";
-global.version = "1.46";
+global.version = "1.47";
 
 if (scr_is_switch_os())
-    global.version = "1.34";
+    global.version = "1.35";
 
 if (os_type == os_ps4 || os_type == os_ps5)
-    global.version = "1.34";
+    global.version = "1.35";
 
 global.game_won = false;
 global.chapter = 2;

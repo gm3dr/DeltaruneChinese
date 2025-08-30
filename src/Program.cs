@@ -12,7 +12,6 @@ namespace deltarunePacker
             Directory.CreateDirectory(Path.Combine(workspace, "result/ch2"));
             Directory.CreateDirectory(Path.Combine(workspace, "result/ch1"));
             DateTime begin = DateTime.Now;
-            // await new Importer(Path.Combine(workspace, "data4.win"), Path.Combine(workspace, "ch4"), Path.Combine(workspace, "result/ch4")).Run();
             Task.WaitAll(
                 Task.Run(() => new Importer(Path.Combine(workspace, "data4.win"), Path.Combine(workspace, "ch4"), Path.Combine(workspace, "result/ch4")).Run()),
                 Task.Run(() => new Importer(Path.Combine(workspace, "data3.win"), Path.Combine(workspace, "ch3"), Path.Combine(workspace, "result/ch3")).Run()),

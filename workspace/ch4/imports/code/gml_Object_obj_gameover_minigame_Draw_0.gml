@@ -266,7 +266,7 @@ if (quitcon == 1)
     if (os_type == os_macosx)
     {
         if (quittimer >= (timetoquit - 2))
-            scr_marker_ext(0, 0, 1021, room_width, room_height, undefined, undefined, 0, -99999);
+            scr_marker_ext(0, 0, 1022, room_width, room_height, undefined, undefined, 0, -99999);
     }
     
     if (quittimer == timetoquit)

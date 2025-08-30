@@ -525,7 +525,7 @@ if (global.monster[myself] == 1)
             with (obj_herosusie)
                 scr_shakeobj();
             
-            scr_battle_sprite_set("susie", 3687, 0, 1);
+            scr_battle_sprite_set("susie", 3688, 0, 1);
             global.canact[myself][3] = 0;
             global.actname[myself][3] = "";
             global.actactor[myself][3] = 0;
@@ -599,7 +599,7 @@ if (global.monster[myself] == 1)
             with (obj_herosusie)
                 scr_shakeobj();
             
-            scr_battle_sprite_set("susie", 5029, 0, 1);
+            scr_battle_sprite_set("susie", 5031, 0, 1);
         }
         
         if ((button3_p() && endingtimer > 85) || (!i_ex(obj_writer) && endingtimer >= 70))
@@ -628,7 +628,7 @@ if (global.monster[myself] == 1)
             with (obj_heroralsei)
                 scr_shakeobj();
             
-            scr_battle_sprite_set("ralsei", 1741, 0.16666666666666666, 1);
+            scr_battle_sprite_set("ralsei", 1742, 0.16666666666666666, 1);
         }
         
         if ((button3_p() && endingtimer > 185) || (!i_ex(obj_writer) && endingtimer >= 170))
@@ -664,7 +664,7 @@ if (global.monster[myself] == 1)
             with (obj_herosusie)
                 scr_shakeobj();
             
-            scr_battle_sprite_set("susie", 5029, 0, 1);
+            scr_battle_sprite_set("susie", 5031, 0, 1);
         }
         
         if ((button3_p() && endingtimer > 15) || !i_ex(obj_writer))
@@ -690,7 +690,7 @@ if (global.monster[myself] == 1)
             with (obj_heroralsei)
                 scr_shakeobj();
             
-            scr_battle_sprite_set("ralsei", 1741, 0.16666666666666666, 1);
+            scr_battle_sprite_set("ralsei", 1742, 0.16666666666666666, 1);
         }
         
         if ((button3_p() && endingtimer > 15) || !i_ex(obj_writer))
@@ -754,7 +754,7 @@ if (global.monster[myself] == 1)
             with (obj_heroralsei)
                 scr_shakeobj();
             
-            scr_battle_sprite_set("ralsei", 1741, 0.16666666666666666, 1);
+            scr_battle_sprite_set("ralsei", 1742, 0.16666666666666666, 1);
         }
         
         if ((button3_p() && endingtimer > 15) || !i_ex(obj_writer))
@@ -974,7 +974,7 @@ if (global.monster[myself] == 1)
             }
             
             scr_battle_sprite_set("susie", 719, 0, 1);
-            scr_battle_sprite_set("ralsei", 2674, 0, 1);
+            scr_battle_sprite_set("ralsei", 2675, 0, 1);
             instance_create(x, y, obj_shake);
             var _x = camerax() + 500;
             var _y = cameray() + 300;
@@ -1765,7 +1765,7 @@ if (global.myfight == 3)
         if (endingtimer == 1)
         {
             snd_play(snd_cymbal_reverse);
-            scr_battle_sprite_set("susie", 5379, 0, 0);
+            scr_battle_sprite_set("susie", 5381, 0, 0);
             obj_herosusie.hspeed = 0;
             obj_herosusie.x -= 8;
             obj_herosusie.y -= 6;
@@ -1876,7 +1876,7 @@ if (global.myfight == 3)
     
     if (acting == 21)
     {
-        scr_battle_sprite_set("susie", 5533, 1/3, 0);
+        scr_battle_sprite_set("susie", 5535, 1/3, 0);
         
         with (obj_herosusie)
         {
@@ -1924,7 +1924,7 @@ if (global.myfight == 3)
             with (obj_heroralsei)
                 state = 0;
             
-            scr_battle_sprite_set("susie", 3129, 1/3, 1);
+            scr_battle_sprite_set("susie", 3130, 1/3, 1);
             global.faceaction[1] = 2;
             actcon = 1;
             dualhealcon = 1;
@@ -2036,7 +2036,7 @@ if (global.myfight == 3)
     
     if (actingsus == 2 && actconsus == 1 && !i_ex(obj_writer))
     {
-        scr_battle_sprite_set("susie", 1612, 1/3, 0);
+        scr_battle_sprite_set("susie", 1613, 1/3, 0);
         snd_play(snd_smallswing);
         snd_play(snd_damage);
         actingsus = 3;
@@ -2095,7 +2095,7 @@ if (global.myfight == 3)
     
     if (actingral == 2 && actconral == 1 && !i_ex(obj_writer))
     {
-        scr_battle_sprite_set("ralsei", 1679, 0.5, 0);
+        scr_battle_sprite_set("ralsei", 1680, 0.5, 0);
         actingral = 2.5;
         instance_create(obj_herokris.x, obj_herokris.y, obj_ralsei_cherub);
     }
@@ -2201,7 +2201,7 @@ if (acting == 20 || acting == 21 || acting == 22)
 }
 
 if (obj_heroralsei.thissprite == spr_ralsei_spell && obj_herosusie.state == 8 && obj_heroralsei.image_index == 3)
-    scr_battle_sprite_set("susie", 1755, 1/3, 0);
+    scr_battle_sprite_set("susie", 1756, 1/3, 0);
 
 if (obj_herosusie.sprite_index == spr_susie_heal_end && obj_herosusie.image_index > 13)
 {

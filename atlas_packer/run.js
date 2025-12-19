@@ -1,6 +1,6 @@
-
 import { promises as fs } from 'fs';
 import { packAsync } from "free-tex-packer-core";
+
 async function readFiles(path, result) {
     const fileList = await fs.readdir(path);
     await Promise.all(
@@ -10,9 +10,11 @@ async function readFiles(path, result) {
     );
 }
 async function Pack(pathIns, pathOut) {
+    await fs.rm(pathOut, { recursive: true, force: true });
+    await fs.mkdir(pathOut, { recursive: true });
     const images = [];
     await Promise.all(pathIns.map(async v => await readFiles(v, images)));
-    await packAsync(
+    const results = await packAsync(
         images,
         {
             textureName: "texture",
@@ -24,7 +26,6 @@ async function Pack(pathIns, pathOut) {
             tinifyKey: "",
             scale: 1,
             filter: "none",
-            exporter: "custom",
             fileName: "pack-result",
             width: 2048,
             height: 2048,
@@ -45,13 +46,16 @@ async function Pack(pathIns, pathOut) {
                 template: "atlas_packer/template.mst"
             }
         }
-    ).then(async results => 
-        await Promise.all(
-            results.map(v => fs.writeFile(pathOut + v.name, v.buffer))
-        )
+    );
+    await Promise.all(
+        results.map(v => fs.writeFile(pathOut + v.name, v.buffer))
     );
 }
-Pack(["workspace/ch1/imports/pics/","workspace/ch1/imports/pics_zhname/"], "workspace/ch1/imports/atlas/");
-Pack(["workspace/ch2/imports/pics/","workspace/ch2/imports/pics_zhname/"], "workspace/ch2/imports/atlas/");
-Pack(["workspace/ch3/imports/pics/","workspace/ch3/imports/pics_zhname/"], "workspace/ch3/imports/atlas/");
-Pack(["workspace/ch4/imports/pics/","workspace/ch4/imports/pics_zhname/"], "workspace/ch4/imports/atlas/");
+
+const total = 4;
+for (var i = 1; i <= total; i++) {
+    Pack(
+        [`workspace/ch${i}/imports/pics/`, `workspace/ch${i}/imports/pics_zhname/`], 
+        `workspace/ch${i}/imports/atlas/`
+    ).catch(err => console.error(`Error packing ch${i}:`, err));
+}

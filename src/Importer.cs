@@ -414,13 +414,13 @@ namespace deltarunePacker{
             IEnumerable<(string fileName, Task<string> content)> taskBag = [.. new DirectoryInfo(Path.Combine(workspace, "imports/code")).GetFiles()
                 .Select(file => (Path.GetFileNameWithoutExtension(file.Name), File.ReadAllTextAsync(file.FullName, Encoding.UTF8))
             ).ToArray()];
-            Task<string> re_cnname = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/re_cnname.json"), Encoding.UTF8);
+            Task<string> re_cnname = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_cnname.json"), Encoding.UTF8);
             Task<string> cn = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/cn.json"), Encoding.UTF8);
             Task<UndertaleData> datawinTask = Task.Run(LoadData);
             Task importFonts = ImportFonts(datawinTask, taskBag.Select(x => x.content).Append(re_cnname).Append(cn));
 
             UndertaleData datawin = await datawinTask; // 卡一下后面的任务 腾出CPU让bmfont早点执行完
-            Task<string> re_recruit = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/re_recruit.json"), Encoding.UTF8);
+            Task<string> re_recruit = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_recruit.json"), Encoding.UTF8);
             Task<string> fmt = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/raw.json"), Encoding.UTF8);
             Task<string> en = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/en.json"), Encoding.UTF8);
             using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);

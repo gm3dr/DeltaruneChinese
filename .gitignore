@@ -3,5 +3,6 @@
 **/dump
 src/obj
 src/bin
+/temp
 /*.7z
 /*.tar.gz

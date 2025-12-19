@@ -25,5 +25,3 @@ if exist "!SRC!" (
 ) else (
     echo [W] !SRC! not found.
 )
-
-pause

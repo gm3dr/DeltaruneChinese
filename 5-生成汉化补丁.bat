@@ -18,9 +18,7 @@ mkdir "temp\chapter3_windows\vid"
 xcopy /e /i /y "workspace\ch3\vid" "temp\chapter3_windows\vid"
 bin\xdelta3.exe -e -s "workspace\main\data.win" "workspace\main\data_new.win" "temp\main.xdelta"
 
-cd temp
-..\bin\7z.exe a -t7z "..\patch_chs_windowslinux_%date%.7z" .
-cd ..
+bin\7z.exe a -t7z "patch_chs_windowslinux_%date%.7z" ".\temp\*"
 
 set "platforms=linux win"
 for %%p in (%platforms%) do (
@@ -28,10 +26,10 @@ for %%p in (%platforms%) do (
     xcopy /e /i /y "cn_installer\%%p" "temp\%%p"
     copy "cn_installer\readme.txt" "temp\%%p\汉化安装教程-readme-%date%.txt"
     copy "patch_chs_windowslinux_%date%.7z" "temp\%%p\"
-    cd temp\%%p
-    ..\..\bin\7z a -t7z "..\..\【%%p-%date%】三角符文安装补丁.7z" .
-    cd ..\..
+    bin\7z a -t7z "【%%p-%date%】三角符文安装补丁.7z" ".\temp\%%p\*"
 )
+
+rd /s /q temp
 
 echo Done!
 pause

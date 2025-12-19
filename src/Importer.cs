@@ -300,13 +300,18 @@ namespace deltarunePacker{
                     result.Add(item);
                     return result;
                 });
-                if (glyphs.Count < 512) Error($"[ImportFonts]{font_name} missing lots of glyphs! \n{fnt.Result}");
+                if (glyphs.Count < 512) Error($"[ImportFonts]{font_name} missing lots of glyphs!");
                 return glyphs;
             });
-            var readPng = File.ReadAllBytesAsync(pngPath).ContinueWith(png => new UndertaleEmbeddedTexture() {
-                TextureData = new() {
-                    Image = GMImage.FromPng(png.Result) 
-                } 
+            var readPng = File.ReadAllBytesAsync(pngPath).ContinueWith(png => {
+                GMImage img = GMImage.FromPng(png.Result);
+                return new UndertaleEmbeddedTexture() {
+                    TextureWidth = img.Width,
+                    TextureHeight = img.Height,
+                    TextureData = new() {
+                        Image = img
+                    }
+                };
             });
             UndertaleData datawin = await datawinTask;
             UndertaleFont font = datawin.Fonts.ByName(font_name);
@@ -386,7 +391,7 @@ namespace deltarunePacker{
         #endregion
         #region ImportCodes
         public async Task ImportCodes(UndertaleData datawin, IEnumerable<(string, Task<string>)> taskBag, Task previousTask) {
-            CodeImportGroup importGroup = new CodeImportGroup(datawin);
+            CodeImportGroup importGroup = new(datawin);
             foreach (var (fileName, content) in taskBag) {
                 if (datawin.Code.ByName(fileName) == null) {
                     Warning($"[ImportCodes]code not exist within data.win: {fileName}");

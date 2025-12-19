@@ -15,7 +15,7 @@ namespace deltarunePacker{
         private readonly StreamWriter m_logger = new(new FileStream(Path.Combine(resultPath, "log.txt"), FileMode.Create, FileAccess.Write));
 
         protected string ResultPath { get => resultPath; }
-
+        protected string DatawinPath { get => datawinPath; }
         public void Dispose() {
             m_logger.Dispose();
             GC.SuppressFinalize(this);

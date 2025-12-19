@@ -20,6 +20,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Magick.NET.Core" Version="14.8.2" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NReco.Text.AhoCorasickDoubleArrayTrie" Version="1.1.1" />
   </ItemGroup>

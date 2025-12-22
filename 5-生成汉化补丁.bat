@@ -3,7 +3,6 @@ setlocal enabledelayedexpansion
 chcp 65001
 
 for /f "tokens=*" %%a in ('powershell -Command "Get-Date -Format 'MMddHHmm'"') do set "date=%%a"
-
 if exist temp rd /s /q temp
 mkdir temp
 
@@ -29,10 +28,10 @@ for %%p in (%platforms%) do (
     copy "cn_installer\readme.txt" "temp\%%p\汉化安装教程-readme-%date%.txt"
     copy "patch_chs_windowslinux_%date%.7z" "temp\%%p\"
     if "%%p" == "linux" (
-        tar -czf "【%%p-%date%】三角符文安装补丁.tar.gz" -C "temp\%%p" .
+        %MSYS_HOME%\usr\bin\tar -czf "【%%p-%date%】三角符文汉化补丁.tar.gz" -C "temp\%%p" .
     )
     if "%%p" == "win" (
-        bin\7z a -t7z "【%%p-%date%】三角符文安装补丁.7z" ".\temp\%%p\*"
+        bin\7z a -t7z "【%%p-%date%】三角符文汉化补丁.7z" ".\temp\%%p\*"
     )
 )
 

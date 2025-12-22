@@ -1,5 +1,6 @@
 ﻿**/node_modules
 **/data.win
+**/game.ios
 **/dump
 src/obj
 src/bin

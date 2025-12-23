@@ -8,37 +8,42 @@
 > 请先尝试在 Steam 右键 DELTARUNE<br>
 > 选择 `属性 -> 本地文件 -> 验证游戏文件完整性`<br>
 > 待 Steam 验证完毕后再次尝试
+
+> [!TIP]
+> 获取安装目录方法：在 Steam 右键 DELTARUNE<br>
+> 选择 `管理 -> 浏览本地文件`
+
 ### 一键安装器
 前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases/latest 下载安装器<br>
 将汉化补丁放到安装器根目录，打开安装器<br>
 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
 点击「安装补丁」即可
-> [!TIP]
-> 获取安装目录方法：在 Steam 右键 DELTARUNE<br>
-> 选择 `管理 -> 浏览本地文件`
 
 > [!IMPORTANT]
 > 对于 macOS 平台，补丁需要放到安装器包 `DELTARUNE Chinese Patcher.app/Contents/MacOS` 内<br>
 > 以及需要选中的目录是安装目录下 `DELTARUNE.app/Contents/Resources`
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>
-使用 [DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher) 按照以下表格输入<br>
+使用 [DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher) 按照以下表格逐行进行输入<br>
 输入后点击 `Apply patch`<br>
-对以下表格每一行执行相同操作<br>
 |Original file|XDelta patch|
 |-|-|
-|data.win|main.xdelta|
-|chapter1_windows/data.win|chapter1.xdelta|
-|chapter2_windows/data.win|chapter2.xdelta|
-|chapter3_windows/data.win|chapter3.xdelta|
-|chapter4_windows/data.win|chapter4.xdelta|
+|`DELTARUNE 安装路径`/data.win|`补丁路径`/main.xdelta|
+|`DELTARUNE 安装路径`/chapter1_windows/data.win|`补丁路径`/chapter1.xdelta|
+|`DELTARUNE 安装路径`/chapter2_windows/data.win|`补丁路径`/chapter2.xdelta|
+|`DELTARUNE 安装路径`/chapter3_windows/data.win|`补丁路径`/chapter3.xdelta|
+|`DELTARUNE 安装路径`/chapter4_windows/data.win|`补丁路径`/chapter4.xdelta|
+
+> [!TIP]
+> 如果按照前面步骤解压补丁到 DELTARUNE 安装目录下
+> 则 `补丁路径` 与 `DELTARUNE 安装路径` 一致
 
 > [!IMPORTANT]
-> 对于 macOS 平台，除了需要使用 macOS 版本的补丁外<br>
-> 还需要进行以下操作<br>
-> 把安装目录替换为安装目录下 `DELTARUNE.app/Contents/Resources` <br>
-> 把 `Original file` 一栏的 `_windows` 改为 `_mac` <br>
-> 把 `data.win` 改为 `game.ios`
+> 对于 macOS 平台，需要：<br>
+> 使用 macOS 版本的补丁压缩包<br>
+> 把「安装目录」换成「安装目录下 `DELTARUNE.app/Contents/Resources`」<br>
+> 把 `Original file` 一栏的 `_windows` 换成 `_mac` <br>
+> 把 `data.win` 换成 `game.ios`
 
 > [!TIP]
 > Linux 不需要额外操作，可以与 Windows 共用补丁<br>

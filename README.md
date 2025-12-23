@@ -35,7 +35,7 @@
 |`DELTARUNE 安装路径`/chapter4_windows/data.win|`补丁路径`/chapter4.xdelta|
 
 > [!TIP]
-> 如果按照前面步骤解压补丁到 DELTARUNE 安装目录下
+> 如果按照前面步骤解压补丁到 DELTARUNE 安装目录下<br>
 > 则 `补丁路径` 与 `DELTARUNE 安装路径` 一致
 
 > [!IMPORTANT]

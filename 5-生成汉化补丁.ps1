@@ -104,10 +104,17 @@ Copy-Item "cn_installer\manual\汉化手动安装器Windows版.exe" $PatchWinDir
 Copy-Item "cn_installer\manual\汉化手动安装器Linux版.sh" $PatchWinDir
 Copy-Item "cn_installer\manual\安装教程.pdf" $PatchWinDir
 Copy-Item "cn_installer\$QQGroupFile" $PatchWinDir
-& $SevenZip a -t7z $PatchWinManual ".\$PatchWinDir\*"
 Copy-Item "cn_installer\manual\汉化手动安装器macOS版（请先解压）.zip" $PatchMacDir
 Copy-Item "cn_installer\manual\安装教程_macOS版.pdf" $PatchMacDir
 Copy-Item "cn_installer\$QQGroupFile" $PatchMacDir
+
+Get-ChildItem $TempDir -Recurse -Force | ForEach-Object {
+    $_.LastWriteTime = $ts
+}
+
+(Get-Item $TempDir).LastWriteTime = $ts
+
+& $SevenZip a -t7z $PatchWinManual ".\$PatchWinDir\*"
 & $SevenZip a $PatchMacManual ".\$PatchMacDir\*"
 
 # ---------- 平台安装包 ----------

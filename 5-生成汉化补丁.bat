@@ -3,7 +3,7 @@ setlocal enabledelayedexpansion
 chcp 65001
 
 for /f "tokens=*" %%a in ('powershell -Command "Get-Date -Format 'MMddHHmm'"') do set "date=%%a"
-set "date=1225rc1"
+set "date=1225"
 set "fixedTime=2025-12-25 12:25"
 if exist temp rd /s /q temp
 mkdir "temp\patch"

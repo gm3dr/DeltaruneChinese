@@ -10,6 +10,10 @@ $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
 $date      = Get-Date -Format "yyMMdd"
 $ts        = Get-Date $fixedTime
 
+$fixedTime = "2025-12-25 12:25"
+$date = "1225"
+$ts = Get-Date $fixedTime
+
 Write-Host "Build time : $fixedTime"
 Write-Host "Build date : $date"
 
@@ -94,7 +98,7 @@ $PatchMacName = "patch_chs_macos_$date.7z"
 
 $PatchWinManual = "【winlinux手动安装-$date】三角符文汉化补丁.7z"
 $PatchMacManual = "【mac手动安装-$date】三角符文汉化补丁.zip"
-$QQGroupFile = "汉化答疑QQ群-遇到问题可以来求助.jpg"
+$QQGroupFile = "汉化答疑QQ群1033065757-遇到问题可以来求助.jpg"
 
 Copy-Item "cn_installer\manual\汉化手动安装器Windows版.exe" $PatchWinDir
 Copy-Item "cn_installer\manual\汉化手动安装器Linux版.sh" $PatchWinDir

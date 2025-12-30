@@ -12,13 +12,15 @@
       "System.ComponentModel.TypeConverter.EnableUnsafeBinaryFormatterInDesigntimeLicenseContextSerialization": false,
       "System.ComponentModel.TypeDescriptor.IsComObjectDescriptorSupported": false,
       "System.Data.DataSet.XmlSerializationIsSupported": false,
+      "System.Diagnostics.Tracing.EventSource.IsSupported": false,
       "System.Globalization.Invariant": true,
       "System.Globalization.PredefinedCulturesOnly": true,
+      "System.Linq.Enumerable.IsSizeOptimized": true,
       "System.Net.SocketsHttpHandler.Http3Support": false,
       "System.Reflection.Metadata.MetadataUpdater.IsSupported": false,
       "System.Resources.ResourceManager.AllowCustomResourceTypes": false,
       "System.Resources.UseSystemResourceKeys": false,
-      "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported": true,
+      "System.Runtime.CompilerServices.RuntimeFeature.IsDynamicCodeSupported": false,
       "System.Runtime.InteropServices.BuiltInComInterop.IsSupported": false,
       "System.Runtime.InteropServices.EnableConsumingManagedCodeFromNativeHosting": false,
       "System.Runtime.InteropServices.EnableCppCLIHostActivation": false,
@@ -27,7 +29,8 @@
       "System.StartupHookProvider.IsSupported": false,
       "System.Text.Encoding.EnableUnsafeUTF7Encoding": false,
       "System.Text.Json.JsonSerializer.IsReflectionEnabledByDefault": false,
-      "System.Threading.Thread.EnableAutoreleasePool": false
+      "System.Threading.Thread.EnableAutoreleasePool": false,
+      "System.Linq.Expressions.CanEmitObjectArrayDelegate": false
     }
   }
 }

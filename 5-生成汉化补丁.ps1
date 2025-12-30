@@ -10,10 +10,6 @@ $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
 $date      = Get-Date -Format "yyMMdd"
 $ts        = Get-Date $fixedTime
 
-$fixedTime = "2025-12-25 12:25"
-$date = "1225"
-$ts = Get-Date $fixedTime
-
 Write-Host "Build time : $fixedTime"
 Write-Host "Build date : $date"
 

@@ -18,7 +18,7 @@ $TempDir      = "temp"
 $PatchWinDir  = "$TempDir\patch"
 $PatchMacDir  = "$TempDir\patch_mac"
 
-$XDelta = "bin\xdelta3.exe"
+$HDiffZ = "bin\hdiffz.exe"
 $SevenZip = "bin\7z.exe"
 
 # ---------- 清理 ----------
@@ -33,8 +33,8 @@ New-Item -ItemType Directory -Path $PatchMacDir | Out-Null
     Write-Host "Processing Chapter $_..."
 
     # Windows / Linux
-    & $XDelta -e `
-        -s "workspace\ch$_\data.win" `
+    & $HDiffZ -VCD-9 `
+        "workspace\ch$_\data.win" `
         "workspace\result\ch$_\data.win" `
         "$PatchWinDir\chapter$_.xdelta"
 
@@ -43,8 +43,8 @@ New-Item -ItemType Directory -Path $PatchMacDir | Out-Null
     Copy-Item "workspace\result\ch$_\*.json" $langWin
 
     # macOS
-    & $XDelta -e `
-        -s "workspace\ch$_\game.ios" `
+    & $HDiffZ -VCD-9 `
+        "workspace\ch$_\game.ios" `
         "workspace\result\ch$_\data.win" `
         "$PatchMacDir\chapter$_.xdelta"
 
@@ -66,13 +66,13 @@ Copy-Item "workspace\ch3\vid\*" $vidWin -Recurse -Force
 Copy-Item "workspace\ch3\vid\*" $vidMac -Recurse -Force
 
 # ---------- Main Patch ----------
-& $XDelta -e `
-    -s "workspace\main\data.win" `
+& $HDiffZ -VCD-9 `
+    "workspace\main\data.win" `
     "workspace\main\data_new.win" `
     "$PatchWinDir\main.xdelta"
 
-& $XDelta -e `
-    -s "workspace\main\game.ios" `
+& $HDiffZ -VCD-9 `
+    "workspace\main\game.ios" `
     "workspace\main\data_new.win" `
     "$PatchMacDir\main.xdelta"
 
@@ -89,8 +89,8 @@ Get-ChildItem $TempDir -Recurse -Force | ForEach-Object {
 $PatchWinName = "patch_chs_windowslinux_$date.7z"
 $PatchMacName = "patch_chs_macos_$date.7z"
 
-& $SevenZip a -t7z $PatchWinName ".\$PatchWinDir\*"
-& $SevenZip a -t7z $PatchMacName ".\$PatchMacDir\*"
+& $SevenZip a -t7z -mx=9 -ms=on -mmt=on $PatchWinName ".\$PatchWinDir\*"
+& $SevenZip a -t7z -mx=9 -ms=on -mmt=on $PatchMacName ".\$PatchMacDir\*"
 
 $PatchWinManual = "【winlinux手动安装-$date】三角符文汉化补丁.7z"
 $PatchMacManual = "【mac手动安装-$date】三角符文汉化补丁.zip"
@@ -110,8 +110,8 @@ Get-ChildItem $TempDir -Recurse -Force | ForEach-Object {
 
 (Get-Item $TempDir).LastWriteTime = $ts
 
-& $SevenZip a -t7z $PatchWinManual ".\$PatchWinDir\*"
-& $SevenZip a $PatchMacManual ".\$PatchMacDir\*"
+& $SevenZip a -t7z -mx=9 -ms=on -mmt=on $PatchWinManual ".\$PatchWinDir\*"
+& $SevenZip a -tzip $PatchMacManual ".\$PatchMacDir\*"
 
 # ---------- 平台安装包 ----------
 $Platforms = @("linux", "win")
@@ -150,8 +150,8 @@ foreach ($p in $Platforms) {
     }
 
     if ($p -eq "win") {
-        & $SevenZip a `
-            -t7z "【$p-$date】三角符文汉化补丁.7z" `
+        & $SevenZip a -t7z -mx=9 -ms=on -mmt=on `
+            "【$p-$date】三角符文汉化补丁.7z" `
             ".\$PlatformDir\*"
     }
 }

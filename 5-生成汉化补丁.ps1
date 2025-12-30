@@ -23,7 +23,7 @@ $SevenZip = "bin\7z.exe"
 
 # ---------- 清理 ----------
 Remove-Item $TempDir -Recurse -Force -ErrorAction SilentlyContinue
-Remove-Item *.7z, *.tar.gz *.zip -Force -ErrorAction SilentlyContinue
+Remove-Item *.7z, *.tar.gz, *.zip -Force -ErrorAction SilentlyContinue
 
 New-Item -ItemType Directory -Path $PatchWinDir | Out-Null
 New-Item -ItemType Directory -Path $PatchMacDir | Out-Null
@@ -89,19 +89,22 @@ Get-ChildItem $TempDir -Recurse -Force | ForEach-Object {
 $PatchWinName = "patch_chs_windowslinux_$date.7z"
 $PatchMacName = "patch_chs_macos_$date.7z"
 
-& $SevenZip a -t7z $PatchWinName "$PatchWinDir\*"
-& $SevenZip a -t7z $PatchMacName "$PatchMacDir\*"
+& $SevenZip a -t7z $PatchWinName ".\$PatchWinDir\*"
+& $SevenZip a -t7z $PatchMacName ".\$PatchMacDir\*"
 
 $PatchWinManual = "【winlinux手动安装-$date】三角符文汉化补丁.7z"
 $PatchMacManual = "【mac手动安装-$date】三角符文汉化补丁.zip"
+$QQGroupFile = "汉化答疑QQ群-遇到问题可以来求助.jpg"
 
 Copy-Item "cn_installer\manual\汉化手动安装器Windows版.exe" $PatchWinDir
 Copy-Item "cn_installer\manual\汉化手动安装器Linux版.sh" $PatchWinDir
-Copy-Item "cn_installer\manual\安装教程.md" $PatchWinDir
-& $SevenZip a -t7z $PatchWinManual "$PatchWinDir\*"
-Copy-Item "cn_installer\manual\汉化手动安装器Linux版.sh" $PatchWinDir
-Copy-Item "cn_installer\manual\汉化手动安装器macOS版（请先解压）" $PatchMacDir
-& $SevenZip a -tzip $PatchWinManual "$PatchMacDir\*"
+Copy-Item "cn_installer\manual\安装教程.pdf" $PatchWinDir
+Copy-Item "cn_installer\$QQGroupFile" $PatchWinDir
+& $SevenZip a -t7z $PatchWinManual ".\$PatchWinDir\*"
+Copy-Item "cn_installer\manual\汉化手动安装器macOS版（请先解压）.zip" $PatchMacDir
+Copy-Item "cn_installer\manual\安装教程_macOS版.pdf" $PatchMacDir
+Copy-Item "cn_installer\$QQGroupFile" $PatchMacDir
+& $SevenZip a $PatchMacManual ".\$PatchMacDir\*"
 
 # ---------- 平台安装包 ----------
 $Platforms = @("linux", "win")
@@ -116,6 +119,7 @@ foreach ($p in $Platforms) {
 
     $ReadmePath = "$PlatformDir\汉化安装教程-readme-$date.txt"
     Copy-Item "cn_installer\readme.txt" $ReadmePath
+    Copy-Item "cn_installer\$QQGroupFile" $PlatformDir
 
     # readme 占位符替换
     (Get-Content -Raw $ReadmePath) `
@@ -141,7 +145,7 @@ foreach ($p in $Platforms) {
     if ($p -eq "win") {
         & $SevenZip a `
             -t7z "【$p-$date】三角符文汉化补丁.7z" `
-            "$PlatformDir\*"
+            ".\$PlatformDir\*"
     }
 }
 

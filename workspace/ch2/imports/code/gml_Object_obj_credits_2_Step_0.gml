@@ -190,7 +190,7 @@ if (timer == 906)
     line[5] = stringset("无辣味wdw，Neubulae[Almona]，JH");
     line[6] = stringset("鲟鱼子，瑶玲，^1瓶洋酒[Unsub]");
     line[7] = stringset("以太[EtherKo]，Coco，Buttons");
-    line[7] = stringset("TNN_Endymion，wiike，田澄，iNTb");
+    line[8] = stringset("TNN_Endymion，wiike，田澄，iNTb");
     linecolor[0] = menugray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;

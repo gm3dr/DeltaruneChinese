@@ -4,7 +4,7 @@ fileVersion=1
 # font settings
 fontName=精品点阵体9×9 1.92 B
 fontFile=8bit.ttf
-charSet=134
+charSet=1
 fontSize=-20
 aa=1
 scaleH=100

@@ -1,3 +1,0 @@
-{{#rects}}
-{{{name}}},{{frame.x}},{{frame.y}},{{sourceSize.w}},{{sourceSize.h}},{{spriteSourceSize.x}},{{spriteSourceSize.y}}{{spriteSourceSize.w}},{{spriteSourceSize.h}}{{^last}}
-{{/last}}{{/rects}}

@@ -51,15 +51,28 @@
 > 这是因为 Steam 使用 Proton 兼容层运行 Windows 版 DELTARUNE
 # 由此开始是本仓库源码的内容<br>玩家看上面就足够了
 ## 协议 License
-翻译文本（`workspace/ch*/imports/text_src`）与修改后的贴图（`workspace/ch*/imports/pics`/`workspace/ch*/imports/pics_zhname`）使用 **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)** 协议许可<br>
-在保留好人汉化组署名的前提下，您可以对补丁的文本和贴图进行修改，并在不违反相关法律规范的前提下合理使用，好人汉化组对修改后的内容不负任何责任。
+翻译文本（`workspace/ch*/imports/text_src`）与中文贴图经过修改的部分（`workspace/ch*/imports/pics`/`workspace/ch*/imports/pics_zhname`）使用 **[CC BY-NC-SA 4.0](https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans)** 协议许可<br>
+在保留好人汉化组署名的前提下，您可以对补丁的文本和贴图进行修改，并在不违反相关法律规范的前提下合理使用，好人汉化组对修改后的内容不承担任何责任。
 
-打包脚本源码 `src` 与 `export.csx` 在 **[GPL 通用公共许可证 v3（GPL v3）](https://www.gnu.org/licenses/gpl-3.0.zh-cn.html)** 下开源<br>
+打包脚本工具源码 `src` 在 **[GPL 通用公共许可证 v3（GPL v3）](https://www.gnu.org/licenses/gpl-3.0.zh-cn.html)** 下开源<br>
 杂项脚本 `misc_scripts/*.py` 在 **[MIT 许可证](https://opensource.org/license/MIT)** 下开源
+
+GML 代码 `workspace/ch*/imports/code` 由于是基于使用 Undertale Mod Tool 解出的 DELTARUNE 本身 GML 代码修改，且改动较小无法分别列出，恕我们无法给出授权协议<br>
+但您可以在自行承担责任的情况下自由使用或修改这些代码，后果自负，好人汉化组对于这些代码的改动不承担任何责任。
 ## 基于原版 data 生成成品 data 方法
-1. 将四个章节的 data 分别命名为 `data<章节阿拉伯数字>.win` 并全部放置到 workspace 目录下
+1. 将四个章节的 data 分别放置到 workspace 目录下的对应章节目录下
+2. 将游戏目录下的 data 放置到 workspace 目录下的 main 目录下
+3. 命令行运行 `bin/deltarunePacker.exe` ，传入 workspace 目录作为参数
+4. 在 workspace 目录下的 result 文件夹中获取结果
+### Demo 版生成方法
+1. 将 Demo 版目录下的 data 放置到 workspace 目录下的 demo 目录下
 2. 命令行运行 `bin/deltarunePacker.exe` ，传入 workspace 目录作为参数
 3. 在 workspace 目录下的 result 文件夹中获取结果
+> [!TIPS]
+> 需要使用 Steam 最新的 Demo 版而非官网版
+> 可以在 DELTARUNE 的 Steam 页面看到 Demo 版的获取
+> 也可以透过按下 Win+R，然后运行 `steam://install/1690940` 来快速安装 Demo 版本
+
 > [!IMPORTANT]
 > 由于使用了 bmfont 来生成位图字体，bmfont 这个程序过于老旧<br>
 > 使用脚本时需要保证 workspace 路径无汉字等特殊字符<br>
@@ -71,18 +84,22 @@
   - `Importer.cs` 主逻辑
 - `bin` 构建程序二进制
   - `deltarunePacker.exe` 程序本体，需要传入 workspace 目录作为参数
+  - `7z.exe` 压缩工具，用于生成安装器使用的最终补丁档案
+  - `bmfont64.exe` 位图字体生成工具
+  - `hdiffz.exe` 差分生成工具，用于生成补丁档案
+- `atlas_packer` 纹理图集生成工具，使用 `node atlas_packer/run` 来调用
+- `workspace/global`
+  - `re_cnname.json` 完整人名翻译替换表
+  - `re_recruit.json` 仅可招揽人名翻译替换表
 ### 每个章节对应 imports 内结构（workspace/ch\*/imports）
-- `atlas` 使用的纹理页图集，包含所有新纹理，使用 `FreeTexturePacker.exe` 生成<br>
-Format 选择 `custom`，点击右边的笔图标填写 `packer_exporter.txt` 里的内容，<br>
-Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
-勾选 `Power of two` `Detect identical` `Remove file ext`，取消勾选 `Allow trim` `Allow rotation`
+- `atlas` 使用的纹理页图集，包含所有新纹理，使用 `node atlas_packer/run` 生成
 - `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0workspacechimportscode)
 - `font` 字体
   - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93workspacechimportsfontfont)
   - `pics` 原字体的字符单图
   - `bmfc` 补字字体的 bmfont 基础配置
-- `pics` 贴图留档，打包时不使用
-- `pics_zhname` 人名翻译版贴图留档，打包时不使用
+- `pics` 贴图，用于生成纹理页图集
+- `pics_zhname` 人名翻译版贴图，用于生成纹理页图集
 - `text_src` 打包使用的语言文件
 > [!IMPORTANT]
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
@@ -94,10 +111,8 @@ Padding 填 `1`，Packer 选择 `OptimalPacker`，Method 选择 `Automatic`<br>
 3. 改动了 `obj_writer` 添加了汉字字符字宽逻辑
 4. 改动了 `DEVICE_MENU`（读档界面）使得日文下显示的是`简体中文`而不是`English`
 5. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
-6. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>
-这个功能原本用于保证日文玩家名也能在英文时正常显示
-1. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>
-添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
+6. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>这个功能原本用于保证日文玩家名也能在英文时正常显示
+7. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
 #### 第一章
 1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
 2. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
@@ -149,5 +164,3 @@ https://www.123912.com/s/KPMSVv-ydDjv <br>
 - `compare_sprs.py` 匹配已翻译和全部 spr 的目录来找出未翻译的 spr
 - `move_spr.py` 把没有按文件夹分类的 spr 覆盖到分类好的 spr 目录中
 - `nameconverter.py` 人名翻译替换脚本
-- `zhnames.json` 完整人名翻译替换表
-- `zhnames_recruit.json` 仅可招揽人名翻译替换表

@@ -1,4 +1,4 @@
-﻿**/node_modules
+**/node_modules
 **/data.win
 **/game.ios
 **/dump
@@ -7,4 +7,5 @@ src/bin
 /temp
 /*.7z
 /*.tar.gz
+/*.zip
 secrets.bat

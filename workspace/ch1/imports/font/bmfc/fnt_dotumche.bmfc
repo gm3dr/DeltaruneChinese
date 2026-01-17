@@ -4,7 +4,7 @@ fileVersion=1
 # font settings
 fontName=SimSun Book
 fontFile=battle.ttf
-charSet=134
+charSet=1
 fontSize=-14
 aa=1
 scaleH=100

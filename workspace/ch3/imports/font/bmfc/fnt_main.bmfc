@@ -4,7 +4,7 @@ fileVersion=1
 # font settings
 fontName=SimSun Book
 fontFile=normal.ttf
-charSet=0
+charSet=1
 fontSize=-12
 aa=1
 scaleH=100

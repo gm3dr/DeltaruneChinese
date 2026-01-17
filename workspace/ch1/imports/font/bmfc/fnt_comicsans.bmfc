@@ -4,7 +4,7 @@ fileVersion=1
 # font settings
 fontName=方正少儿体
 fontFile=sans.ttf
-charSet=0
+charSet=1
 fontSize=-14
 aa=1
 scaleH=100

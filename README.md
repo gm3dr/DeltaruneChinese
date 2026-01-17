@@ -14,14 +14,18 @@
 > 选择 `管理 -> 浏览本地文件`
 
 ### 一键安装器
-前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases/latest 下载安装器<br>
-将汉化补丁放到安装器根目录，打开安装器<br>
-输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
-点击「安装补丁」即可
+1. 前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases/latest 下载安装器<br>
+2. 将汉化补丁放到安装器根目录，打开安装器<br>
+3. *（Windows 可选）* 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
+4. 点击「安装补丁」即可
+
+> [!TIP]
+> 对于 Windows 平台，安装器已实现全自动从 Steam 获取 DELTARUNE 安装路径<br>
+> 在首次启动安装器时就会自动填入，无需再改动路径
 
 > [!IMPORTANT]
 > 对于 macOS 平台，补丁需要放到安装器包 `DELTARUNE Chinese Patcher.app/Contents/MacOS` 内<br>
-> 以及需要选中的目录是安装目录下 `DELTARUNE.app/Contents/Resources`
+> 以及需要选中的目录是 DR 安装目录下 `DELTARUNE.app/Contents/Resources`
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>
 使用 [DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher) 按照以下表格逐行进行输入<br>
@@ -68,7 +72,7 @@ GML 代码 `workspace/ch*/imports/code` 由于是基于使用 Undertale Mod Tool
 1. 将 Demo 版目录下的 data 放置到 workspace 目录下的 demo 目录下
 2. 命令行运行 `bin/deltarunePacker.exe` ，传入 workspace 目录作为参数
 3. 在 workspace 目录下的 result 文件夹中获取结果
-> [!TIPS]
+> [!TIP]
 > 需要使用 Steam 最新的 Demo 版而非官网版
 > 可以在 DELTARUNE 的 Steam 页面看到 Demo 版的获取
 > 也可以透过按下 Win+R，然后运行 `steam://install/1690940` 来快速安装 Demo 版本

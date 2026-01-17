@@ -73,8 +73,8 @@ GML 代码 `workspace/ch*/imports/code` 由于是基于使用 Undertale Mod Tool
 2. 命令行运行 `bin/deltarunePacker.exe` ，传入 workspace 目录作为参数
 3. 在 workspace 目录下的 result 文件夹中获取结果
 > [!TIP]
-> 需要使用 Steam 最新的 Demo 版而非官网版
-> 可以在 DELTARUNE 的 Steam 页面看到 Demo 版的获取
+> 需要使用 Steam 最新的 Demo 版而非官网版<br>
+> 可以在 DELTARUNE 的 Steam 页面看到 Demo 版的获取<br>
 > 也可以透过按下 Win+R，然后运行 `steam://install/1690940` 来快速安装 Demo 版本
 
 > [!IMPORTANT]

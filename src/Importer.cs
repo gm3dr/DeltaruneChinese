@@ -422,7 +422,7 @@ namespace deltarunePacker
                 {
                     StartInfo = new ProcessStartInfo()
                     {
-                        FileName = "bmfont64.exe",
+                        FileName = "tool/bmfont64.exe",
                         CreateNoWindow = true,
                         RedirectStandardOutput = true,
                         ArgumentList = {
@@ -485,13 +485,14 @@ namespace deltarunePacker
             Task<string> re_recruit = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_recruit.json"), Encoding.UTF8);
             Task<string> fmt = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/raw.json"), Encoding.UTF8);
             Task<string> en = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/en.json"), Encoding.UTF8);
-            using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);
             Task importTexts = ImportTexts(await cn, await en, await fmt, await re_cnname, await re_recruit);
 
             // using UndertaleData datawin = await datawinTask;// 如果对CPU很有信心的可以把上面那行await挪到这里
             Task importCodes = ImportCodes(datawin, taskBag, ImportSprites(datawin));
-            await importFonts;
-            await importCodes;
+            await Task.WhenAll(importFonts, importCodes);
+
+            using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);
+
             Info($"saving {ResultPath} ...");
             UndertaleIO.Write(output, datawin);
             await importTexts;
@@ -507,15 +508,43 @@ namespace deltarunePacker
             ).ToArray()];
             Task<UndertaleData> datawinTask = Task.Run(LoadData);
             // ⭐ 字体：只用 code 的字符集
-            Task importFonts = ImportFonts(datawinTask,taskBag.Select(x => x.content));
+            Task importFonts = ImportFonts(datawinTask, taskBag.Select(x => x.content));
 
             UndertaleData datawin = await datawinTask;
 
             // code 本身还是照常导入
-            Task importCodes = ImportCodes(datawin,taskBag, Task.CompletedTask);
+            Task importCodes = ImportCodes(datawin, taskBag, Task.CompletedTask);
             await Task.WhenAll(importFonts, importCodes);
 
-            using FileStream output = new(Path.Combine(ResultPath, "data.win"),FileMode.Create,FileAccess.Write);
+            using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);
+
+            Info($"saving {ResultPath} ...");
+            UndertaleIO.Write(output, datawin);
+            Info($"{ResultPath} saved!");
+        }
+
+        /**
+        * 文本不做处理，字体使用ch1+ch2的字符集
+        **/
+        public async Task RunDemo()
+        {
+            IEnumerable<(string fileName, Task<string> content)> taskBag = [.. new DirectoryInfo(Path.Combine(workspace, "imports/code")).GetFiles()
+                .Select(file => (Path.GetFileNameWithoutExtension(file.Name), File.ReadAllTextAsync(file.FullName, Encoding.UTF8))
+            ).ToArray()];
+            Task<UndertaleData> datawinTask = Task.Run(LoadData);
+            // 生成字体
+            Task<string> re_cnname = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_cnname.json"), Encoding.UTF8);
+            Task<string> ch1_cn = File.ReadAllTextAsync(Path.Combine(workspace, "../ch1/imports/text_src/cn.json"), Encoding.UTF8);
+            Task<string> ch2_cn = File.ReadAllTextAsync(Path.Combine(workspace, "../ch2/imports/text_src/cn.json"), Encoding.UTF8);
+            Task importFonts = ImportFonts(datawinTask, taskBag.Select(x => x.content).Append(re_cnname).Append(ch1_cn).Append(ch2_cn));
+
+            UndertaleData datawin = await datawinTask;
+
+            // code 本身还是照常导入
+            Task importCodes = ImportCodes(datawin, taskBag, ImportSprites(datawin));
+            await Task.WhenAll(importFonts, importCodes);
+
+            using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);
 
             Info($"saving {ResultPath} ...");
             UndertaleIO.Write(output, datawin);

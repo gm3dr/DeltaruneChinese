@@ -4,8 +4,8 @@ import { packAsync } from "free-tex-packer-core";
 async function readFiles(path, result) {
     const fileList = await fs.readdir(path);
     await Promise.all(
-        fileList.map(async v => 
-            result.push({path: path + v, contents: await fs.readFile(path + v)})
+        fileList.map(async v =>
+            result.push({ path: path + v, contents: await fs.readFile(path + v) })
         )
     );
 }
@@ -52,10 +52,10 @@ async function Pack(pathIns, pathOut) {
     );
 }
 
-const total = 4;
-for (var i = 1; i <= total; i++) {
+const chapters = ["ch1", "ch2", "ch3", "ch4", "demo"]
+for (const ch of chapters) {
     Pack(
-        [`workspace/ch${i}/imports/pics/`, `workspace/ch${i}/imports/pics_zhname/`], 
-        `workspace/ch${i}/imports/atlas/`
-    ).catch(err => console.error(`Error packing ch${i}:`, err));
+        [`workspace/${ch}/imports/pics/`, `workspace/${ch}/imports/pics_zhname/`],
+        `workspace/${ch}/imports/atlas/`
+    ).catch(err => console.error(`Error packing ${ch}:`, err));
 }

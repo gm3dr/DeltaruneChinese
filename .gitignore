@@ -9,3 +9,4 @@ src/bin
 /*.tar.gz
 /*.zip
 secrets.bat
+workspace/result

@@ -1,6 +1,7 @@
 # DELTARUNE 中文本地化补丁 By 好人汉化组
 **从 [此处](https://github.com/gm3dr/DeltaruneChinese/releases/latest) 下载最新版汉化补丁**<br>
-本仓库源码为不定期手动更新，**不代表** 目前最新构建
+本仓库源码为不定期手动更新，**不代表** 目前最新构建，亦 **不代表** 任何特定版本的构建<br>
+仓库更新时间：2026.04.26，对应补丁构建版本：260418
 
 ## 补丁安装方法
 > [!NOTE]
@@ -20,12 +21,19 @@
 4. 点击「安装补丁」即可
 
 > [!TIP]
+> 路径获取方法：在 Steam 库左侧列表右键 DELTARUNE<br>
+> 选择「管理」「浏览本地文件」<br>
+> 在弹出的窗口中，鼠标右键地址栏，选择复制路径，粘贴到安装器的输入框中即可
+
+> [!TIP]
 > 对于 Windows 平台，安装器已实现全自动从 Steam 获取 DELTARUNE 安装路径<br>
+> 只要在安装 DELTARUNE 后重启过电脑，安装器就能从注册表一路全自动获取到 DELTARUNE 安装路径<br>
 > 在首次启动安装器时就会自动填入，无需再改动路径
 
 > [!IMPORTANT]
 > 对于 macOS 平台，补丁需要放到安装器包 `DELTARUNE Chinese Patcher.app/Contents/MacOS` 内<br>
-> 以及需要选中的目录是 DR 安装目录下 `DELTARUNE.app/Contents/Resources`
+> 以及需要选中的目录是 DR 安装目录下 `DELTARUNE.app/Contents/Resources`<br>
+> 你可以通过右键 `DELTARUNE.app` 或 `DELTARUNE Chinese Patcher.app`，选择「显示包内容」来打开包内
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>
 使用 [DeltaPatcher](https://github.com/marco-calautti/DeltaPatcher) 按照以下表格逐行进行输入<br>
@@ -87,10 +95,10 @@ GML 代码 `workspace/ch*/imports/code` 由于是基于使用 Undertale Mod Tool
 - `src` 构建程序源代码
   - `Importer.cs` 主逻辑
 - `bin` 构建程序二进制
-  - `deltarunePacker.exe` 程序本体，需要传入 workspace 目录作为参数
+- `tool` 工具
   - `7z.exe` 压缩工具，用于生成安装器使用的最终补丁档案
   - `bmfont64.exe` 位图字体生成工具
-  - `hdiffz.exe` 差分生成工具，用于生成补丁档案
+  - `xdelta3.exe` 差分生成工具，用于生成补丁档案
 - `atlas_packer` 纹理图集生成工具，使用 `node atlas_packer/run` 来调用
 - `workspace/global`
   - `re_cnname.json` 完整人名翻译替换表

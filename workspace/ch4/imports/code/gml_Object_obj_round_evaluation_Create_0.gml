@@ -153,9 +153,9 @@ for (var i = 0; i < 20; i++)
 
 currenttotalpoints = 0;
 currentphyspoints = 0;
-currentbattlegrade = /*"?-RANK"*/"?-级";
-currenttotalgrade = /*"?-RANK"*/"?-级";
-currentphysgrade = /*"?-RANK"*/"?-级";
+currentbattlegrade = /*"?-RANK"*/"?级";
+currenttotalgrade = /*"?-RANK"*/"?级";
+currentphysgrade = /*"?-RANK"*/"?级";
 c_pink = make_color_rgb(248, 173, 227);
 missednotes = 0;
 normalnotes = 0;

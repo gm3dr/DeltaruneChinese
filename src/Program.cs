@@ -1,12 +1,13 @@
-namespace deltarunePacker {
-    internal class Program {
-        static async Task Main(string[] args) {
+namespace deltarunePacker
+{
+    internal class Program
+    {
+        static async Task Main(string[] args)
+        {
             string workspace = Path.GetFullPath(args[0]);
-            Directory.CreateDirectory(Path.Combine(workspace, "result/ch4"));
-            Directory.CreateDirectory(Path.Combine(workspace, "result/ch3"));
-            Directory.CreateDirectory(Path.Combine(workspace, "result/ch2"));
-            Directory.CreateDirectory(Path.Combine(workspace, "result/ch1"));
-            Directory.CreateDirectory(Path.Combine(workspace, "result/main"));
+            var res = Path.Combine(workspace, "result");
+            foreach (var dir in new[] { "ch1", "ch2", "ch3", "ch4", "main", "demo" })
+                Directory.CreateDirectory(Path.Combine(res, dir));
             DateTime begin = DateTime.Now;
             await Task.WhenAll(
                 new Importer(Path.Combine(workspace, "ch4"), Path.Combine(workspace, "result/ch4"), Path.Combine(workspace, "ch4/data.win")).Run(),
@@ -15,6 +16,15 @@ namespace deltarunePacker {
                 new Importer(Path.Combine(workspace, "ch1"), Path.Combine(workspace, "result/ch1"), Path.Combine(workspace, "ch1/data.win")).Run(),
                 new Importer(Path.Combine(workspace, "main"), Path.Combine(workspace, "result/main"), Path.Combine(workspace, "main/data.win")).RunMain()
             );
+            await Task.WhenAll(
+                new Importer(Path.Combine(workspace, "demo"), Path.Combine(workspace, "result/demo"), Path.Combine(workspace, "demo/data.win")).RunDemo()
+            );
+
+            // 复制文本到demo
+            foreach (var f in Directory.GetFiles(Path.Combine(res, "ch1"), "lang_*.json"))
+                File.Copy(f, Path.Combine(res, "demo", Path.GetFileNameWithoutExtension(f) + "_ch1.json"), true);
+            foreach (var f in Directory.GetFiles(Path.Combine(res, "ch2"), "lang_*.json"))
+                File.Copy(f, Path.Combine(res, "demo", Path.GetFileName(f)), true);
             Console.WriteLine($"build time: {DateTime.Now - begin}");
         }
     }

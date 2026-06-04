@@ -16,9 +16,10 @@
 
 ### 一键安装器
 1. 前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases/latest 下载安装器<br>
-2. 将汉化补丁放到安装器根目录，打开安装器<br>
-3. *（Windows 可选）* 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
-4. 点击「安装补丁」即可
+2. *（仅限 macOS）* 将安装器移动到 `Applications` 目录下<br>
+3. 将汉化补丁放到安装器根目录 *（macOS 见下文）*，打开安装器<br>
+4. *（Windows 可选）* 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
+5. 点击「安装补丁」即可
 
 > [!TIP]
 > 路径获取方法：在 Steam 库左侧列表右键 DELTARUNE<br>

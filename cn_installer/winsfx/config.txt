@@ -1,0 +1,4 @@
+;!@Install@!UTF-8!
+Title="DELTARUNE 汉化补丁"
+RunProgram="win\DELTARUNE Chinese Patcher.exe"
+;!@InstallEnd@!

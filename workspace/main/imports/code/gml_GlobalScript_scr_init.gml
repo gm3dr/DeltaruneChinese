@@ -13,23 +13,27 @@ function get_chapter_confirm_sound(arg0)
     switch (arg0)
     {
         case UnknownEnum.Value_1:
-            return 1;
-            break;
-        
-        case UnknownEnum.Value_2:
-            return 0;
-            break;
-        
-        case UnknownEnum.Value_3:
             return 2;
             break;
         
+        case UnknownEnum.Value_2:
+            return 1;
+            break;
+        
+        case UnknownEnum.Value_3:
+            return 3;
+            break;
+        
         case UnknownEnum.Value_4:
-            return 4;
+            return 5;
+            break;
+        
+        case UnknownEnum.Value_5:
+            return 0;
             break;
         
         default:
-            return 3;
+            return 4;
             break;
     }
 }
@@ -54,6 +58,10 @@ function get_chapter_title(arg0)
             return (global.lang == "en") ? "预言" : "予言";
             break;
         
+        case UnknownEnum.Value_5:
+            return (global.lang == "en") ? "Festival Day" : "お祭り";
+            break;
+        
         default:
             return "- -";
             break;
@@ -62,7 +70,7 @@ function get_chapter_title(arg0)
 
 function get_version()
 {
-    var version = "v17";
+    var version = "v22";
     return version;
 }
 
@@ -86,6 +94,10 @@ function get_chapter_icon_index(arg0)
             return UnknownEnum.Value_5;
             break;
         
+        case UnknownEnum.Value_5:
+            return UnknownEnum.Value_6;
+            break;
+        
         default:
             return UnknownEnum.Value_0;
             break;
@@ -105,5 +117,6 @@ enum UnknownEnum
     Value_2,
     Value_3,
     Value_4,
-    Value_5
+    Value_5,
+    Value_6
 }

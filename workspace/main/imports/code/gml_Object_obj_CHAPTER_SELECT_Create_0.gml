@@ -18,7 +18,7 @@ _load_type = UnknownEnum.Value_0;
 init = function()
 {
     var max_chapter = UnknownEnum.Value_7;
-    var max_available_chapter = UnknownEnum.Value_4;
+    var max_available_chapter = UnknownEnum.Value_5;
     _current_state = UnknownEnum.Value_1;
     
     for (var i = 0; i < max_available_chapter; i++)
@@ -43,6 +43,14 @@ init = function()
     if (_chapter_completed > 0)
     {
         _current_state = UnknownEnum.Value_3;
+        
+        if (_chapter_in_progress > _chapter_completed)
+        {
+            _current_state = UnknownEnum.Value_2;
+            
+            if ((_chapter_in_progress - _chapter_completed) >= 2)
+                _current_state = UnknownEnum.Value_4;
+        }
         
         if (_chapter_completed >= max_available_chapter)
             _current_state = UnknownEnum.Value_4;

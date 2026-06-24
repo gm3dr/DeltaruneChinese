@@ -45,7 +45,7 @@ function Copy-File($src, $dest) {
 Write-Host "Starting file extraction..." -ForegroundColor Cyan
 
 # 4. 批量处理 Chapters 1-4 (合并循环逻辑)
-1..4 | ForEach-Object {
+1..5 | ForEach-Object {
     $ch = $_
     if ($IsMacOS) { Copy-File (Join-Path $DirInst "chapter$ch`_mac/game.ios") "workspace/ch$ch/data.win" }
     else { Copy-File (Join-Path $DirInst "chapter$ch`_windows/data.win") "workspace/ch$ch/data.win" }

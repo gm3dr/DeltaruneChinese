@@ -66,7 +66,7 @@ namespace deltarunePacker
         private static string Unescape(string text)
         {
             // from UndertaleModTool
-            return text.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\\"", "\"").Replace("\\\\", "\\");
+            return text.Replace("\\r", "\r").Replace("\\t", "\t").Replace("\\n", "\n").Replace("\\\"", "\"").Replace("\\\\", "\\");
         }
         private static readonly TextureWorker worker = new();
         public async Task ExportTexts(IEnumerable<string> codes, string json) 

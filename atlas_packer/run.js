@@ -52,7 +52,7 @@ async function Pack(pathIns, pathOut) {
     );
 }
 
-const chapters = ["ch1", "ch2", "ch3", "ch4", "demo"]
+const chapters = ["ch1", "ch2", "ch3", "ch4", "ch5", "demo"]
 for (const ch of chapters) {
     Pack(
         [`workspace/${ch}/imports/pics/`, `workspace/${ch}/imports/pics_zhname/`],

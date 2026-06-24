@@ -1,38 +1,37 @@
-﻿function scr_84_init_localization()
+function scr_84_init_localization()
 {
     if (ossafe_file_exists("true_config.ini"))
     {
         ossafe_ini_open("true_config.ini");
         var _locale = os_get_language();
         var _lang;
+        
         if (scr_is_switch_os())
-        {
             _lang = substr(switch_language_get_desired_language(), 1, 2);
-        }
         else
-        {
             _lang = (substr(_locale, 1, 2) != "ja") ? "en" : "ja";
-        }
+        
         global.lang = ini_read_string("LANG", "LANG", _lang);
+        global.names = ini_read_real("L10N_ZH", "NAMES", 0);
         ossafe_ini_close();
         ossafe_savedata_save();
     }
+    
+    global.lang = "en";
+    
     if (!variable_global_exists("lang_loaded"))
-    {
         global.lang_loaded = "";
-    }
+    
     if (!variable_global_exists("lang"))
     {
         var _locale = os_get_language();
         var _lang;
+        
         if (scr_is_switch_os())
-        {
             _lang = substr(switch_language_get_desired_language(), 1, 2);
-        }
         else
-        {
             _lang = (substr(_locale, 1, 2) != "ja") ? "en" : "ja";
-        }
+        
         global.lang = _lang;
     }
     if (global.lang_loaded != global.lang)

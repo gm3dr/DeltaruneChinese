@@ -1,5 +1,5 @@
 ﻿depth = -99999999;
-with (1050)
+with (1198)
 {
     cutscene = 1;
 }
@@ -18,7 +18,7 @@ battlepoints = global.flag[1116];
 totalpoints = global.flag[1117];
 physicalchallengepoints = global.flag[1118];
 setboardranking = false;
-if (room == 262)
+if (room == 108)
 {
     physicalchallengepoints = global.flag[1118];
 }
@@ -75,16 +75,18 @@ if (global.chapter == 3 && room == room_dw_chef)
         secretitemfound = true;
     }
 }
-if (room == 262)
+if (room == 108)
 {
     totalbattles = global.flag[1171];
     boardnumber = 2;
     maxcombo = -1;
-    if (i_ex(197))
+    maxnote = 0;
+    if (i_ex(238))
     {
         replayversion = obj_rhythmgame.replayversion;
         maxcombo = obj_rhythmgame.max_combo;
-        debug_print("max combo=" + string(maxcombo));
+        maxnote = obj_rhythmgame.maxnote;
+        scr_debug_print("max combo=" + string(maxcombo) + "/" + string(maxnote));
     }
     if ((global.flag[1041] + global.flag[1042] + global.flag[1043] + global.flag[1227]) == 4)
     {
@@ -144,14 +146,14 @@ for (var i = 0; i < 20; i++)
 }
 currenttotalpoints = 0;
 currentphyspoints = 0;
-currentbattlegrade = "?-RANK";
-currenttotalgrade = "?-RANK";
-currentphysgrade = "?-RANK";
+currentbattlegrade = /*"?-RANK"*/"?级";
+currenttotalgrade = /*"?-RANK"*/"?级";
+currentphysgrade = /*"?-RANK"*/"?级";
 c_pink = make_color_rgb(248, 173, 227);
 missednotes = 0;
 normalnotes = 0;
 goldnotes = 0;
-if (i_ex(197))
+if (i_ex(238))
 {
     missednotes = obj_rhythmgame.savemiss;
     normalnotes = obj_rhythmgame.saveokay + obj_rhythmgame.savegood;
@@ -172,6 +174,21 @@ function sp_draw_text(arg0, arg1, arg2)
     draw_set_color(memcol);
     draw_set_alpha(memalph);
     draw_text(arg0, arg1, arg2);
+}
+
+function sp_draw_text_transformed(arg0, arg1, arg2, arg3, arg4, arg5)
+{
+    var shadcolor = 3934982;
+    var shadalph = 0.65;
+    var shadoff = 2;
+    var memcol = draw_get_color();
+    var memalph = draw_get_alpha();
+    draw_set_color(shadcolor);
+    draw_set_alpha(shadalph);
+    draw_text_transformed(arg0 + shadoff, arg1 + shadoff, arg2, arg3, arg4, arg5);
+    draw_set_color(memcol);
+    draw_set_alpha(memalph);
+    draw_text_transformed(arg0, arg1, arg2, arg3, arg4, arg5);
 }
 
 function checkskip(arg0, arg1)

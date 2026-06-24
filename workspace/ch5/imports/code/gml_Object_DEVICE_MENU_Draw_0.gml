@@ -366,7 +366,19 @@ if (MENU_NO >= 0)
         CHFILETEXT = stringsetsubloc("Ch ~1 Files", string(global.chapter - 1), "DEVICE_MENU_slash_Draw_0_gml_305_0");
         CHSELECTTEXT = stringsetloc("Chapter Select", "DEVICE_MENU_slash_Draw_0_gml_284_0");
         QUITTEXT = stringsetloc("End Program", "DEVICE_MENU_slash_Draw_0_gml_285_0");
-        LANGUAGETEXT = (global.lang == "en") ? stringset("日本語") : stringset("English");
+        // LANGUAGETEXT = (global.lang == "en") ? stringset("日本語") : stringset("English");
+		switch (global.names)
+		{
+			case 0:
+				LANGUAGETEXT = "保留人名";
+				break;
+			case 1:
+				LANGUAGETEXT = "翻译招揽";
+				break;
+			case 2:
+				LANGUAGETEXT = "翻译人名";
+				break;
+		}
         if (TYPE == 1)
         {
             COPYTEXT = stringsetloc("Copy", "DEVICE_MENU_slash_Draw_0_gml_201_0");
@@ -405,28 +417,38 @@ if (MENU_NO >= 0)
         {
             draw_text_shadow(204, 210, QUITTEXT);
         }
-        if (global.lang == "en")
-        {
-            draw_set_font(14);
-        }
-        else
-        {
-            draw_set_font(6);
-        }
+        draw_set_font(6);
         draw_set_color(COL_A);
         if (MENUCOORD[0] == 6)
         {
             draw_set_color(COL_B);
         }
-        var languagex = 140;
-        if (global.lang == "en")
-        {
-            languagex = 136;
-        }
+        // var languagex = 140;
+        var languagex = 135;
+        // if (global.lang == "en")
+        //     languagex = 136;
         draw_text_shadow(languagex, 210, LANGUAGETEXT);
         scr_84_set_draw_font("main");
     }
     draw_set_font(6);
+        if (names_countdown > 0)
+    {
+        draw_set_alpha(0.4);
+        draw_set_color(c_white);
+        
+		switch (global.names)
+		{
+			case 0:
+            	draw_text_transformed(5, 230, "从现在起所有角色名称都将保留原文不翻译。", 0.5, 0.5, 0);
+        		break
+			case 1:
+				draw_text_transformed(5, 230, "从现在起可招揽的角色名称将会被翻译。", 0.5, 0.5, 0);
+				break
+			case 2:
+				draw_text_transformed(5, 230, "从现在起所有角色名称都会被翻译。", 0.5, 0.5, 0);
+				break
+		}
+    }
     if (TYPE == 1)
     {
         draw_set_alpha(0.4);

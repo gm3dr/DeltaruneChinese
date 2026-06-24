@@ -24,25 +24,25 @@ for (m = 0; m < menuMax; m++)
         if (menuBoxDraw[m] == 1)
         {
             draw_set_color(16777215);
-            ossafe_fill_rectangle(xx + menuBoxDrawX1[m], yy + menuBoxDrawY1[m], xx + menuBoxDrawX2[m], yy + menuBoxDrawY2[m], false);
+            d_rectangle(xx + menuBoxDrawX1[m], yy + menuBoxDrawY1[m], xx + menuBoxDrawX2[m], yy + menuBoxDrawY2[m], false);
             draw_set_color(0);
-            ossafe_fill_rectangle(xx + menuBoxDrawX1[m] + 4, yy + menuBoxDrawY1[m] + 4, (xx + menuBoxDrawX2[m]) - 4, (yy + menuBoxDrawY2[m]) - 4, false);
+            d_rectangle(xx + menuBoxDrawX1[m] + 4, yy + menuBoxDrawY1[m] + 4, (xx + menuBoxDrawX2[m]) - 4, (yy + menuBoxDrawY2[m]) - 4, false);
             trimove = round((sin(siner / 6) * 2) / 2) * 2;
             if (menuVEdgeBehavior[m] == 2 && menu == m)
             {
                 if (maxj < (menuMaximumID[m] + 1))
                 {
-                    draw_sprite_ext(1413, 0, xx + ((menuBoxDrawX1[m] + menuBoxDrawX2[m]) / 2), yy + menuBoxDrawY2[m] + trimove, 2, 2, 0, 16777215, 1);
+                    draw_sprite_ext(2038, 0, xx + ((menuBoxDrawX1[m] + menuBoxDrawX2[m]) / 2), yy + menuBoxDrawY2[m] + trimove, 2, 2, 0, 16777215, 1);
                 }
                 if (minj > menuMinimumID[m])
                 {
-                    draw_sprite_ext(1413, 0, xx + ((menuBoxDrawX1[m] + menuBoxDrawX2[m]) / 2), (yy + menuBoxDrawY1[m]) - trimove, 2, -2, 0, 16777215, 1);
+                    draw_sprite_ext(2038, 0, xx + ((menuBoxDrawX1[m] + menuBoxDrawX2[m]) / 2), (yy + menuBoxDrawY1[m]) - trimove, 2, -2, 0, 16777215, 1);
                 }
             }
             if (menuHEdgeBehavior[m] == 2 && menu == m)
             {
-                draw_sprite_ext(1413, 0, xx + menuBoxDrawX1[m] + trimove, yy + ((menuBoxDrawY1[m] + menuBoxDrawY2[m]) / 2), 2, 2, 270, 16777215, 1);
-                draw_sprite_ext(1413, 0, (xx + menuBoxDrawX2[m]) - trimove, yy + ((menuBoxDrawY1[m] + menuBoxDrawY2[m]) / 2), 2, -2, 270, 16777215, 1);
+                draw_sprite_ext(2038, 0, xx + menuBoxDrawX1[m] + trimove, yy + ((menuBoxDrawY1[m] + menuBoxDrawY2[m]) / 2), 2, 2, 270, 16777215, 1);
+                draw_sprite_ext(2038, 0, (xx + menuBoxDrawX2[m]) - trimove, yy + ((menuBoxDrawY1[m] + menuBoxDrawY2[m]) / 2), 2, -2, 270, 16777215, 1);
             }
         }
         draw_set_font(menuTextFont[m]);
@@ -71,7 +71,7 @@ for (m = 0; m < menuMax; m++)
             {
                 scr_84_set_draw_font("mainbig");
                 draw_set_color(0);
-                ossafe_fill_rectangle(xx - 10, yy - 10, xx + 700, yy + 120, false);
+                d_rectangle(xx - 10, yy - 10, xx + 700, yy + 120, false);
                 draw_set_color(16777215);
                 if (display_buttons)
                 {
@@ -122,18 +122,6 @@ for (m = 0; m < menuMax; m++)
             texty = optionY[m][j] + menuTextOffsetY[m];
             textxscale = 1;
             textyscale = 1;
-            if (menuTextXScale[m] > 0)
-            {
-                textxscale = menuTextXScale[m];
-            }
-            if (menuTextXScale[m] >= 5)
-            {
-                textxscale = clamp(menuTextXScale[m] / string_width(string_hash_to_newline(optionText[m][j])), 0.5, 1);
-            }
-            if (menuTextYScale[m] > 0)
-            {
-                textyscale = menuTextYScale[m];
-            }
             draw_text_transformed(textx, texty, string_hash_to_newline(optionText[m][j]), textxscale, textyscale, 0);
             wrap++;
             if (wrap >= menuWidth[m])
@@ -146,18 +134,6 @@ for (m = 0; m < menuMax; m++)
                 draw_set_color(optionCommentAColor[m][j]);
                 textxscale = 1;
                 textyscale = 1;
-                if (optionCommentAWidth[m][j] > 0)
-                {
-                    textxscale = optionCommentAWidth[m][j];
-                }
-                if (optionCommentAWidth[m][j] >= 5)
-                {
-                    textxscale = clamp(optionCommentAWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
-                }
-                if (optionCommentAHeight[m][j] > 0)
-                {
-                    textyscale = optionCommentAHeight[m][j];
-                }
                 draw_text_transformed(textx + optionCommentAXOffset[m][j], texty + optionCommentAYOffset[m][j], string(optionCommentA[m][j]), textxscale, textyscale, 0);
             }
             if (optionCommentB[m][j] != " ")
@@ -165,18 +141,6 @@ for (m = 0; m < menuMax; m++)
                 draw_set_color(optionCommentBColor[m][j]);
                 textxscale = 1;
                 textyscale = 1;
-                if (optionCommentBWidth[m][j] > 0)
-                {
-                    textxscale = optionCommentBWidth[m][j];
-                }
-                if (optionCommentBWidth[m][j] >= 5)
-                {
-                    textxscale = clamp(optionCommentBWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
-                }
-                if (optionCommentBHeight[m][j] > 0)
-                {
-                    textyscale = optionCommentBHeight[m][j];
-                }
                 draw_text_transformed(textx + optionCommentBXOffset[m][j], texty + optionCommentBYOffset[m][j], string(optionCommentB[m][j]), textxscale, textyscale, 0);
             }
             if (optionCommentC[m][j] != " ")
@@ -184,18 +148,6 @@ for (m = 0; m < menuMax; m++)
                 draw_set_color(optionCommentCColor[m][j]);
                 textxscale = 1;
                 textyscale = 1;
-                if (optionCommentCWidth[m][j] > 0)
-                {
-                    textxscale = optionCommentCWidth[m][j];
-                }
-                if (optionCommentCWidth[m][j] >= 5)
-                {
-                    textxscale = clamp(optionCommentCWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
-                }
-                if (optionCommentCHeight[m][j] > 0)
-                {
-                    textyscale = optionCommentCHeight[m][j];
-                }
                 draw_text_transformed(textx + optionCommentCXOffset[m][j], texty + optionCommentCYOffset[m][j], string(optionCommentC[m][j]), textxscale, textyscale, 0);
             }
         }

@@ -1,4 +1,4 @@
-init = false;
+﻿init = false;
 text_timer = 0;
 text_speed = -2;
 text_y_pos = 0;
@@ -13,6 +13,8 @@ _highscore_rank = 0;
 _highscore_rank_hard = 0;
 _highscore_hard = 0;
 _track_name = "";
+_song_id = 0;
+_string_width = 0;
 scrolling_text = "";
 show_active = false;
 draw_set_font(scr_84_get_font("mainbig"));
@@ -26,25 +28,14 @@ init_song = function(arg0)
     _track_name = string(arg0[4]);
     _song_id = string(arg0[5]);
     scrolling_text = "! " + _track_name + " ! " + /*"High Score (Normal) - "*/"最高得分（普通）- " + _highscore + " ! " + /*"High Score (Hard) - "*/"最高得分（困难） - " + _highscore_hard + " ! ";
+    _string_width = string_width(scrolling_text);
     init = true;
 };
 
 show_banner = function()
 {
-    var x_offset = 0;
-    
-    if (global.lang == "ja")
-    {
-        if (_song_id == 0)
-            x_offset = 400;
-        else if (_song_id == 2)
-            x_offset = 160;
-        else if (_song_id == 10)
-            x_offset = 160;
-    }
-    
     text_x_pos[0] = 40;
-    text_x_pos[1] = 40 + (string_width(scrolling_text) * 2) + x_offset;
+    text_x_pos[1] = 40 + _string_width;
     scr_lerpvar("banner_alpha", banner_alpha, 1, 30, 2, "out");
     scr_lerpvar("target_ypos", target_ypos, 16, 20, 2, "out");
 };

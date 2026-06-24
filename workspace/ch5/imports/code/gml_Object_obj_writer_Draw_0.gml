@@ -1059,7 +1059,12 @@ for (n = 1; n < pos; n += 1)
                 draw_set_alpha(1);
             }
         }
-        wx += hspace;
+        // wx += hspace;
+        if (ord(mychar) > 505 || ord(mychar) == 183)
+            wx += ((hspace * 7) div 4);
+        else
+            wx += hspace;
+        //
         if (global.lang == "ja")
         {
             if (ord(mychar) < 256 || (ord(mychar) >= 65377 && ord(mychar) <= 65439))

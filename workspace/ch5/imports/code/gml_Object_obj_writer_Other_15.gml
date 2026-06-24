@@ -55,6 +55,49 @@
                         global.fe = __nextface - 61;
                     }
                 }
+                if (nextchar == "M")
+                {
+                    if (nextchar2 == "0")
+                    {
+                        global.flag[20] = 0;
+                    }
+                    if (nextchar2 == "1")
+                    {
+                        global.flag[20] = 1;
+                    }
+                    if (nextchar2 == "2")
+                    {
+                        global.flag[20] = 2;
+                    }
+                    if (nextchar2 == "3")
+                    {
+                        global.flag[20] = 3;
+                    }
+                    if (nextchar2 == "4")
+                    {
+                        global.flag[20] = 4;
+                    }
+                    if (nextchar2 == "5")
+                    {
+                        global.flag[20] = 5;
+                    }
+                    if (nextchar2 == "6")
+                    {
+                        global.flag[20] = 6;
+                    }
+                    if (nextchar2 == "7")
+                    {
+                        global.flag[20] = 7;
+                    }
+                    if (nextchar2 == "8")
+                    {
+                        global.flag[20] = 8;
+                    }
+                    if (nextchar2 == "9")
+                    {
+                        global.flag[20] = 9;
+                    }
+                }
                 if (nextchar == "F")
                 {
                     if (nextchar2 == "0")
@@ -117,6 +160,10 @@
                     {
                         global.fc = 21;
                     }
+                    if (nextchar2 == "◘")
+                    {
+                        global.fc = 25;
+                    }
                     if (global.fc == 0)
                     {
                         charline = originalcharline;
@@ -175,6 +222,18 @@
             {
                 aster = 1;
             }
+            if (global.typer == 97)
+            {
+                charline = 23;
+            }
+            if (i_ex(1412))
+            {
+                charline = 37;
+            }
+            if (i_ex(1412) && i_ex(242) && global.fc != 0)
+            {
+                charline = 29;
+            }
             if (charpos >= charline)
             {
                 if (remspace > 2)
@@ -208,7 +267,12 @@
             }
             else
             {
-                charpos += 1;
+                // charpos += 1;
+                if (ord(thischar) > 505 || ord(thischar) == 183)
+                    charpos += 1.75;
+                else
+                    charpos += 1;
+                //
             }
         }
     }

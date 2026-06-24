@@ -19,7 +19,7 @@ if (init == 0)
         else
         {
             minigametext = instance_create(x, y - 150, obj_tenna_enemy_minigametext);
-            minigametext.mystring = "GAME CLEAR!";
+            minigametext.mystring = /*"GAME CLEAR!"*/"游戏通关！";
             snd_play(180);
         }
     }

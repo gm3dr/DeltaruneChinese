@@ -1,5 +1,5 @@
 ﻿depth = -99999999;
-with (1050)
+with (1198)
 {
     cutscene = 1;
 }
@@ -18,7 +18,7 @@ battlepoints = global.flag[1116];
 totalpoints = global.flag[1117];
 physicalchallengepoints = global.flag[1118];
 setboardranking = false;
-if (room == 262)
+if (room == 108)
 {
     physicalchallengepoints = global.flag[1118];
 }
@@ -75,16 +75,16 @@ if (room == room_dw_chef)
         secretitemfound = true;
     }
 }
-if (room == 262)
+if (room == 108)
 {
     totalbattles = global.flag[1171];
     boardnumber = 2;
     maxcombo = -1;
-    if (i_ex(197))
+    if (i_ex(238))
     {
         replayversion = obj_rhythmgame.replayversion;
         maxcombo = obj_rhythmgame.max_combo;
-        debug_print("max combo=" + string(maxcombo));
+        scr_debug_print("max combo=" + string(maxcombo));
     }
     if ((global.flag[1041] + global.flag[1042] + global.flag[1043] + global.flag[1227]) == 4)
     {
@@ -144,14 +144,14 @@ for (var i = 0; i < 20; i++)
 }
 currenttotalpoints = 0;
 currentphyspoints = 0;
-currentbattlegrade = "?-RANK";
-currenttotalgrade = "?-RANK";
-currentphysgrade = "?-RANK";
+currentbattlegrade = "?级";
+currenttotalgrade = "?级";
+currentphysgrade = "?级";
 c_pink = make_color_rgb(248, 173, 227);
 missednotes = 0;
 normalnotes = 0;
 goldnotes = 0;
-if (i_ex(197))
+if (i_ex(238))
 {
     missednotes = obj_rhythmgame.savemiss;
     normalnotes = obj_rhythmgame.saveokay + obj_rhythmgame.savegood;

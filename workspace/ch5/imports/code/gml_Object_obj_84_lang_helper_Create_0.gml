@@ -7,10 +7,18 @@ for (var __i = 0; __i < __numlayers; __i++)
     var __numels = array_length_1d(__els);
     var __name = layer_get_name(__layer_id);
     var __pos = string_pos("_lang_", __name);
+
     if (__pos > 0 && string_length(__name) > (__pos + 8))
     {
         var __lang = string_copy(__name, __pos + 6, 2);
-        if (__lang != global.lang)
+        
+        if (__lang != global.lang && room_get_name(room) != "room_torielclass")
+        {
+            layer_set_visible(__layer_id, false);
+            continue;
+        }
+        
+        if (room_get_name(room) == "room_torielclass" && global.names < 2)
         {
             layer_set_visible(__layer_id, false);
             continue;
@@ -32,10 +40,11 @@ for (var __i = 0; __i < __numlayers; __i++)
             if (__pos > 0 && string_length(__name) > (__pos + 8))
             {
                 var __lang = string_copy(__name, __pos + 6, 2);
-                if (__lang != global.lang)
-                {
+                if (__lang != global.lang && room_get_name(room) != "room_torielclass")
                     layer_sprite_destroy(__id);
-                }
+                
+                if (room_get_name(room) == "room_torielclass" && global.names < 2)
+                    layer_sprite_destroy(__id);
             }
         }
         else if (__eltype == 1)

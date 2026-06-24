@@ -68,8 +68,8 @@ function Build-Patch($dir, $tag, $type) {
     tool/7z a -t7z -mx=9 -ms=on -mmt=on $PureName ".\$dir\*"
 }
 
-function Build-SfxInstaller($outputFile) {
-    $cmdLine = "copy /b /y `"cn_installer\winsfx\7zS2.sfx`"+`"cn_installer\winsfx\config.txt`"+`"temp\win.7z`" `"$outputFile`""
+function Build-SfxInstaller($outputFile, $Platform) {
+    $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$Platform\config.txt`"+`"temp\$Platform.7z`" `"$outputFile`""
     cmd.exe /d /c $cmdLine
     if ($LASTEXITCODE -ne 0) {
         throw "SFX binary merge failed: $outputFile"
@@ -79,7 +79,7 @@ function Build-SfxInstaller($outputFile) {
 # ---------- 清理 & 创建目录 ----------
 New-CleanDir $TempDir
 foreach ($d in $PatchDirs.Values) { New-CleanDir $d }
-Remove-Item *.7z, *.tar.gz, *.zip -Force -ErrorAction SilentlyContinue
+Remove-Item *.7z, *.tar.gz, *.zip *.dmg *.exe -Force -ErrorAction SilentlyContinue
 
 # ---------- Chapters ----------
 1..4 | ForEach-Object { Process-Chapter $_ }
@@ -124,14 +124,14 @@ foreach ($p in @("linux", "win", "winold")) {
         Copy-Item "patch_chs_windowslinux_demo_$date.7z" $PlatformDir
         Normalize-Timestamp $PlatformDir
         tool/7z a -t7z -mx=9 -ms=on -mmt=on "temp\win.7z" ".\$PlatformDir" 
-        Build-SfxInstaller "【Win10及以上】三角符文汉化补丁-V$date.exe"
+        Build-SfxInstaller "【Win10及以上】三角符文汉化补丁-V$date.exe" $p
     }
     elseif ($p -eq "winold") { 
         Copy-Item "patch_chs_windowslinux_$date.7z" $PlatformDir
         Copy-Item "patch_chs_windowslinux_demo_$date.7z" $PlatformDir
         Normalize-Timestamp $PlatformDir
-        tool/7z a -t7z -mx=9 -ms=on -mmt=on "temp\win.7z" ".\$PlatformDir" 
-        Build-SfxInstaller "【Win7及老电脑】三角符文汉化补丁-V$date.exe"
+        tool/7z a -t7z -mx=9 -ms=on -mmt=on "temp\winold.7z" ".\$PlatformDir" 
+        Build-SfxInstaller "【Win7及老电脑】三角符文汉化补丁-V$date.exe" $p
     }
     elseif ($p -eq "linux") { 
         Copy-Item "cn_installer\linux\*" $PlatformDir -Recurse -Force

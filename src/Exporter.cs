@@ -65,15 +65,15 @@ namespace deltarunePacker
         
         private static readonly TextureWorker worker = new();
         public async Task ExportTexts(IEnumerable<string> codes, string json) {
-            string outPath = Path.Combine(ResultPath, "texts");
-            Directory.CreateDirectory(outPath);
-
             IEnumerable<KeyValuePair<string, string>> dictFromCode = codes.SelectMany(code => regexes
                 .SelectMany(regex => regex.Matches(code))
+                .Where(m => m.Groups.Count >= 3)
+                .Where(m => !string.IsNullOrWhiteSpace(m.Groups[2].Value))
                 .Select(match => new KeyValuePair<string, string>(match.Groups[2].Value, match.Groups[1].Value))
                 .Distinct()
             ); ;
             IEnumerable<KeyValuePair<string, string>> dictFromJson = JObject.Parse(json).Properties()
+                .Where(p => !string.IsNullOrWhiteSpace(p.Name))
                 .Select(prop => new KeyValuePair<string, string>(prop.Name, prop.Value.ToString()));
             foreach (var group in dictFromCode.GroupBy(pair => pair.Key).Where(group => group.Count() > 1)) {
                 Warning($"{group.Key} colliding!");
@@ -83,6 +83,7 @@ namespace deltarunePacker
             }
             IEnumerable<KeyValuePair<string, string>> result = dictFromCode
                 .IntersectBy(dictFromJson.Select(pair => pair.Key), pair => pair.Key)
+                .Where(p => !string.IsNullOrWhiteSpace(p.Key))
                 .Select(pair => processors.Aggregate(
                     pair.Value, 
                     (content, processor) => processor.regex.Replace(content, processor.replacement),
@@ -90,19 +91,22 @@ namespace deltarunePacker
                 ));
             IEnumerable<string> common = result.Select(pair => pair.Key);
             foreach (var pair in dictFromCode.ExceptBy(common, pair => pair.Key)) {
-                Warning($"[DictFromJson]key {pair.Key} not found!");
+                Warning($"[DictFromJson]key {pair.Key} from code not found in json!");
             }
             foreach(var pair in dictFromJson.ExceptBy(common, pair => pair.Key)) {
-                Warning($"[DictFromCode]key {pair.Key} not found!");
+                Warning($"[DictFromCode]key {pair.Key} from json not found in code!");
             }
             
             JsonTextWriter writer = new(File.CreateText(Path.Combine(ResultPath, "lang_en.json")));
+            writer.Formatting = Formatting.Indented;
             await writer.WriteStartObjectAsync();
-            await Task.WhenAll(result.Select(async pair => {
+            foreach (var pair in result)
+            {
                 await writer.WritePropertyNameAsync(pair.Key);
-                await writer.WriteValueAsync(pair.Value.ToString());
-            }));
+                await writer.WriteValueAsync(pair.Value ?? "");
+            }
             await writer.WriteEndObjectAsync();
+            await writer.FlushAsync();
         }
         public async Task ExportFont(UndertaleFont font) {            
             string font_name = font.Name.Content;
@@ -120,7 +124,7 @@ namespace deltarunePacker
             string outPath = Path.Combine(ResultPath, "codes");
             Directory.CreateDirectory(outPath);
 
-            await Task.WhenAll(codes.Select(pair => File.WriteAllTextAsync(Path.Combine(outPath, pair.Key), pair.Value, Encoding.UTF8)));
+            await Task.WhenAll(codes.Select(pair => File.WriteAllTextAsync(Path.Combine(outPath, $"{pair.Key}.gml"), pair.Value, Encoding.UTF8)));
         }
         public async Task ExportSprites(UndertaleData datawin) {
             string outPath = Path.Combine(ResultPath, "pics");
@@ -129,7 +133,7 @@ namespace deltarunePacker
             await Task.WhenAll(datawin.Sprites
                 .SelectMany(sprite => sprite.Textures.Where(x => x.Texture != null)
                 .Select((item, idx) => {
-                    string name = $"{sprite.Name.Content}_{idx}";
+                    string name = $"{sprite.Name.Content}_{idx}.png";
                     return worker.GetTextureFor(item.Texture, name).WriteAsync(Path.Combine(outPath, name), MagickFormat.Png32);
                 })
             ));

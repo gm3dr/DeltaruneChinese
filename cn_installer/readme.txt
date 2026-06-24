@@ -1,12 +1,16 @@
 ﻿【三角符文汉化补丁 说明文档】
 * 构建时间：$(CURRENT_TIME)
 * 补丁版本：$(CURRENT_DATE)
-* 适配游戏：Steam 正版 DELTARUNE V1.04（一至四章）
+* 适配游戏：Steam 正版 DELTARUNE 一至五章 最新版
   及 Steam 版 DELTARUNE demo 最新正式版
 * 这不是 UNDERTALE / 传说之下 汉化补丁
   如有需要请到 Undertale 贴吧置顶帖下载
 ---
 【更新日志】
+2026-06-24 Build 260624
+* 庆祝 Deltarune 第五章正式发布！
+* 紧急修复 游戏更新造成前四章汉化无法安装的问题
+
 2026-04-01 Build 260401
 * 去掉 Ch3 Ch4 小游戏评级中字母
   与“级”之间的短横线，避免误导

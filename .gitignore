@@ -9,9 +9,11 @@ temp
 *.tar.gz
 *.zip
 /*.exe
+*.dmg
 data_win
 secrets.*
 .DS_Store
 **/Media Cache/
 /patcher/
 log.txt
+export_result/

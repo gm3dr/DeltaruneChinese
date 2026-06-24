@@ -69,7 +69,7 @@ function Build-Patch($dir, $tag, $type) {
 }
 
 function Build-SfxInstaller($outputFile) {
-    $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\config.txt`"+`"temp\win.7z`" `"$outputFile`""
+    $cmdLine = "copy /b /y `"cn_installer\winsfx\7zS2.sfx`"+`"cn_installer\winsfx\config.txt`"+`"temp\win.7z`" `"$outputFile`""
     cmd.exe /d /c $cmdLine
     if ($LASTEXITCODE -ne 0) {
         throw "SFX binary merge failed: $outputFile"

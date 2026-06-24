@@ -53,28 +53,28 @@ namespace deltarunePacker
                     }
                 });
         }
-        [GeneratedRegex(@"\\\\")] private static partial Regex ReplaceDoubleSlash();
-        [GeneratedRegex(@"\\n")] private static partial Regex ReplaceNewlineEscape();
         [GeneratedRegex(@"(?<!`)[#&]")] private static partial Regex ReplaceNewlines();
         [GeneratedRegex(@"\^1")] private static partial Regex RemoveSmallPauses();
         [GeneratedRegex(@"/\s*%*\s*$")] private static partial Regex TrimBack();
         [GeneratedRegex(@"^\s*(\\(?!c)[A-Za-z0-9]{2}\s*)+")] private static partial Regex TrimFront();
         private static readonly (Regex regex, string replacement)[] processors = [
-            (ReplaceDoubleSlash(), "\\"), // 双slash换成单个
-            (ReplaceNewlineEscape(), "\n"), // 双slash换成单个
             (ReplaceNewlines(), "\n"), // #和&替换成回车
             (RemoveSmallPauses(), ""), // 去掉标点前的^1
             (TrimBack(), ""), // 去掉头尾的控制字符
             (TrimFront(), ""), // 去掉头尾的控制字符
         ];
-        
+        private static string Unescape(string str)
+        {
+            // from UndertaleModTool
+            return text.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\\"", "\"").Replace("\\\\", "\\");
+        }
         private static readonly TextureWorker worker = new();
         public async Task ExportTexts(IEnumerable<string> codes, string json) 
         {
             var dictFromCode = codes.SelectMany(code => regexes
                     .SelectMany(regex => regex.Matches(code))
                     .Where(m => !string.IsNullOrWhiteSpace(m.Groups[2].Value))
-                    .Select(match => new KeyValuePair<string, string>(match.Groups[2].Value, match.Groups[1].Value))
+                    .Select(match => new KeyValuePair<string, string>(match.Groups[2].Value, Unescape(match.Groups[1].Value)))
                 )
                 // 分组取第一个，避免 Key 碰撞报错
                 .GroupBy(p => p.Key)

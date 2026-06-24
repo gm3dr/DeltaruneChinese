@@ -63,7 +63,7 @@ namespace deltarunePacker
             (TrimBack(), ""), // 去掉头尾的控制字符
             (TrimFront(), ""), // 去掉头尾的控制字符
         ];
-        private static string Unescape(string str)
+        private static string Unescape(string text)
         {
             // from UndertaleModTool
             return text.Replace("\\r", "\r").Replace("\\n", "\n").Replace("\\\"", "\"").Replace("\\\\", "\\");

@@ -24,7 +24,7 @@
 > [!TIP]
 > Windows 版安装器可以全自动从 Steam 获取 DELTARUNE 安装路径<br>
 > 安装 DELTARUNE 后重启电脑，再运行汉化安装器，就会自动填入路径，无需手动操作<br>
-> 
+
 > [!IMPORTANT]
 > macOS 没有注册表，所以无法自动填写游戏路径<br>
 > 在 Finder 中右键 `DELTARUNE Chinese Patcher.app`，选择「显示包内容」即可显示包内文件<br>

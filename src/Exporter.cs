@@ -20,8 +20,8 @@ namespace deltarunePacker
         [GeneratedRegex("""stringsetloc\("((?:[^"\\]|\\.)*)", "((?:[^"\\]|\\.)*)"\)""")] private static partial Regex Re_stringsetloc();
         // msgsetloc(id, 原文, key)
         [GeneratedRegex("""msgsetloc\([\w\+]+, "((?:[^"\\]|\\.)*)", "((?:[^"\\]|\\.)*)"\)""")] private static partial Regex Re_msgsetloc();
-        // msgnextsubloc(原文, 参数, key)
-        [GeneratedRegex("""msgsetsubloc\("((?:[^"\\]|\\.)*)"(?:\s*,[^,]*)*?, "((?:[^"\\]|\\.)*)"\)""")] private static partial Regex Re_msgsetsubloc();
+        // msgnextsubloc(id, 原文, 参数, key)
+        [GeneratedRegex("""msgsetsubloc\([\w\+]+, "((?:[^"\\]|\\.)*)"(?:\s*,[^,]*)*?, "((?:[^"\\]|\\.)*)"\)""")] private static partial Regex Re_msgsetsubloc();
         // msgnextsubloc(原文, 参数, key)
         [GeneratedRegex("""msgnextsubloc\("((?:[^"\\]|\\.)*)"(?:\s*,[^,]*)*?, "((?:[^"\\]|\\.)*)"\)""")] private static partial Regex Re_msgnextsubloc();
         // stringsetsubloc(原文, 参数, key)

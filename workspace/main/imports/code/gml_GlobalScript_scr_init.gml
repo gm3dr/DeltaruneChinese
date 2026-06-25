@@ -59,7 +59,7 @@ function get_chapter_title(arg0)
             break;
         
         case UnknownEnum.Value_5:
-            return (global.lang == "en") ? "节日" : "お祭り";
+            return (global.lang == "en") ? "庆典日" : "お祭り";
             break;
         
         default:

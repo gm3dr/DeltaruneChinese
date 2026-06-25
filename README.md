@@ -222,4 +222,5 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 - `tennaIntroF1_compressed_28` [第三章的 Tenna 神人小视频](https://www.bilibili.com/video/BV15mT5zAEJS)
 - `1-4宣传片` [B站官号发布的 1-4 章汉化发布宣传片](https://www.bilibili.com/video/BV1BPhWzdEao)<br>
 为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>
-https://www.123912.com/s/KPMSVv-ydDjv <br>
+https://www.123912.com/s/KPMSVv-ydDjv
+- `ch5_intro_en` 第五章的 Flowery 出场动画

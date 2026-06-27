@@ -61,6 +61,15 @@ function Process-Chapter($ch) {
             Copy-Item "workspace\ch3\vid\*" $vidDir -Recurse -Force
         }
     }
+    # Chapter 5 videos
+    if ($ch -eq 3) {
+        foreach ($p in @("Win","Mac")) {
+            $plower = if ($p -eq "Win") { "windows" } else { "mac" }
+            $vidDir = Join-Path $PatchDirs[$p] "chapter5_${plower}\vid"
+            New-Item -ItemType Directory -Path $vidDir -Force | Out-Null
+            Copy-Item "workspace\ch3\vid\*" $vidDir -Recurse -Force
+        }
+    }
 }
 
 function Build-Patch($dir, $tag, $type) {

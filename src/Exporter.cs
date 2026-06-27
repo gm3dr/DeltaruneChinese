@@ -53,7 +53,7 @@ namespace deltarunePacker
                     }
                 });
         }
-        [GeneratedRegex(@"(?<!`)[#&]")] private static partial Regex ReplaceNewlines();
+        [GeneratedRegex(@"(?<!`\\)[#&]")] private static partial Regex ReplaceNewlines();
         [GeneratedRegex(@"\^1")] private static partial Regex RemoveSmallPauses();
         [GeneratedRegex(@"/\s*%*\s*$")] private static partial Regex TrimBack();
         [GeneratedRegex(@"^\s*(\\(?!c)[A-Za-z0-9]{2}\s*)+")] private static partial Regex TrimFront();

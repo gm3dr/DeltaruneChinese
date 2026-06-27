@@ -186,13 +186,8 @@ namespace deltarunePacker
         [GeneratedRegex(@"(?<!\\[a-zA-Z0-9]*)[a-zA-Z0-9]$")] private static partial Regex ReplacerPrefix();
         private string RestoreItem(string key, string item, string fmt)
         {
-            bool noNumberTag = string.IsNullOrEmpty(fmt) || !Regex.IsMatch(fmt, @"\^[0-9]");
-            if (item.StartsWith('@') || noNumberTag)
-            {
-                // 标记为不用加^1
-                item = item[1..];
-            }
-            else
+            bool hasNumberTag = !string.IsNullOrEmpty(fmt) && Regex.IsMatch(fmt, @"\^[0-9]");
+            if (hasNumberTag)
             {
                 // 标点前面加^1
                 item = RestoreEN().Replace(item, "$1^1.");

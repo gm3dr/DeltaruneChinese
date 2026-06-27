@@ -82,7 +82,7 @@ foreach ($d in $PatchDirs.Values) { New-CleanDir $d }
 Remove-Item *.7z,*.tar.gz,*.dmg,*.exe -Force -ErrorAction SilentlyContinue
 
 # ---------- Chapters ----------
-1..4 | ForEach-Object { Process-Chapter $_ }
+1..5 | ForEach-Object { Process-Chapter $_ }
 
 New-Item -ItemType Directory -Path "$($PatchDirs.WinDemo)/lang" -Force | Out-Null
 New-Item -ItemType Directory -Path "$($PatchDirs.MacDemo)/lang" -Force | Out-Null

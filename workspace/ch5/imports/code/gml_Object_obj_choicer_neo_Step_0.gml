@@ -108,7 +108,7 @@ if (neostyle == 1)
             textposx[i] = xx + (textposx[i] * scale);
             textposy[i] = yy + ((textposy[i] + d_add + textyoff) * scale);
             var biggest = 0;
-            var arraySplit = string_split_ext(global.choicemsg[i], {"#", "\n"}, true, 20);//var arraySplit = string_split(global.choicemsg[i], "#", true, 20);
+            var arraySplit = string_split_ext(global.choicemsg[i], ["#", "\n"], true, 20);//var arraySplit = string_split(global.choicemsg[i], "#", true, 20);
             neolinecount[i] = array_length(arraySplit);
             
             for (var w = 0; w < neolinecount[i]; w++)

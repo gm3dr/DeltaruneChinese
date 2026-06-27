@@ -136,9 +136,7 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 │   ├── run.js         # 主脚本
 │   └── template.mst   # 模板
 ├── cn_installer       # 汉化安装器、打包依赖、自解压模块
-├── prproj
-│   ├── 1-4宣传片       # 官方 1-4 章宣传片
-│   └── tennaIntroF1_compressed_28 # 第三章 Tenna 神人小视频工程
+├── prproj             # Adobe Premiere Pro 2025 工程项目
 ├── src                # 汉化打包核心工具源码 (C#)
 │   ├── Importer.cs / Exporter.cs / Loader.cs / Program.cs
 │   └── lib            # 底层基础库（UndertaleModLib.dll, Underanalyzer.dll）

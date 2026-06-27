@@ -29,7 +29,7 @@
 > macOS 没有注册表，所以无法自动填写游戏路径<br>
 > 在 Finder 中右键 `DELTARUNE Chinese Patcher.app`，选择「显示包内容」即可显示包内文件<br>
 > 补丁需要放到安装器 `DELTARUNE Chinese Patcher.app/Contents/MacOS` 文件夹<br>
-> 并在“游戏路径”中填写 `DELTARUNE.app/Contents/Resources`
+> 需要填入的游戏目录为 DELTARUNE 目录下 `DELTARUNE.app/Contents/Resources`
 
 ### 手动安装
 下载汉化补丁，将里面所有的内容全部解压到 DELTARUNE 安装目录下，全部覆盖<br>

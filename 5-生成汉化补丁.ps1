@@ -6,7 +6,7 @@ Set-StrictMode -Version Latest
 
 # ---------- 时间 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
-$date      = (Get-Date -Format "yyMMdd") + "-AIfix4"
+$date      = (Get-Date -Format "yyMMddHHmm") + "-t"
 $ts        = Get-Date $fixedTime
 
 Write-Host "Build time : $fixedTime"

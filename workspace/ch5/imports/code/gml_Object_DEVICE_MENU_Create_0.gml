@@ -240,3 +240,4 @@ MENU_NO = INITMENU;
 depth = 5;
 jamod = 0;
 input_enabled = true;
+names_countdown = 0;

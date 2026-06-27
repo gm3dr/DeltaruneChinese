@@ -1,11 +1,11 @@
 jp = 0;
 
-if (global.lang == "ja")
-    jp = 1;
+// if (global.lang == "ja")
+//     jp = 1;
 
-squished = 0.5;
+// squished = 0.5;
 
-if (jp)
+// if (jp)
     squished = 1;
 
 animer = 0;

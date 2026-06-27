@@ -12,11 +12,15 @@ function scr_84_init_localization()
             _lang = (substr(_locale, 1, 2) != "ja") ? "en" : "ja";
         
         global.lang = ini_read_string("LANG", "LANG", _lang);
+        //
         global.names = ini_read_real("L10N_ZH", "NAMES", 0);
+        //
         ossafe_ini_close();
         ossafe_savedata_save();
     }
-    
+    //
+    global.lang = "en";
+    //
     if (!variable_global_exists("lang_loaded"))
         global.lang_loaded = "";
     
@@ -33,8 +37,8 @@ function scr_84_init_localization()
         global.lang = _lang;
     }
     
-    if (global.lang_loaded != global.lang)
-    {
+    // if (global.lang_loaded != global.lang)
+    // {
         global.lang_loaded = global.lang;
         
         if (variable_global_exists("lang_map"))
@@ -201,7 +205,7 @@ function scr_84_init_localization()
             ds_map_add(fm, "8bit", fnt_8bit);
             ds_map_add(fm, "8bit_mixed", fnt_8bit);
             var sm = global.chemg_sprite_map;
-
+            //
             if (global.names < 2)
             {
                 ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
@@ -216,6 +220,7 @@ function scr_84_init_localization()
                 ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
                 ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
             }
+            //
             ds_map_add(sm, "spr_battlemsg", spr_battlemsg);
             ds_map_add(sm, "spr_btact", spr_btact);
             ds_map_add(sm, "spr_btdefend", spr_btdefend);
@@ -333,6 +338,6 @@ function scr_84_init_localization()
             ds_map_add(sndm, "snd_jarona_orange1", snd_jarona_orange1);
             ds_map_add(sndm, "snd_jarona_orange2", snd_jarona_orange2);
             ds_map_add(sndm, "snd_ja_kidding", snd_ja_kidding);
-        }
+    //    }
     }
 }

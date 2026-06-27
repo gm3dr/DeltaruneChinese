@@ -229,7 +229,12 @@ if (formatted == 0)
             }
             else
             {
-                charpos += 1;
+                // charpos += 1;
+                if (ord(thischar) > 505 || ord(thischar) == 183)
+                    charpos += 1.75;
+                else
+                    charpos += 1;
+                //
             }
         }
     }

@@ -672,6 +672,9 @@ if (MENU_NO == 0)
         if (MENUCOORD[M] == 6)
         {
             SELNOISE = 1;
+            //
+            names_countdown = 90;
+            //
             scr_change_language();
             scr_84_load_ini();
         }
@@ -752,6 +755,10 @@ if (STARTGAME == 1)
     snd_free_all();
     room_goto(room_krisroom);
 }
+//
+if (names_countdown > 0)
+    names_countdown -= 1;
+//
 
 enum UnknownEnum
 {

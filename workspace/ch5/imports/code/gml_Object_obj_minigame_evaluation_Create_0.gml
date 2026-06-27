@@ -1,8 +1,8 @@
-﻿depth = -99999999;
-with (1198)
-{
+depth = -99999999;
+
+with (obj_mainchara)
     cutscene = 1;
-}
+
 con = 0;
 timer = 0;
 rcon = 0;
@@ -18,10 +18,10 @@ battlepoints = global.flag[1116];
 totalpoints = global.flag[1117];
 physicalchallengepoints = global.flag[1118];
 setboardranking = false;
-if (room == 108)
-{
+
+if (room == room_dw_rhythm)
     physicalchallengepoints = global.flag[1118];
-}
+
 tallestever = false;
 maxstack = 0;
 foodwasted = 0;
@@ -29,6 +29,7 @@ customersfe = 0;
 physicalchallengeletter = "C";
 chef_rank_letter = "Z";
 tchefvar = 0;
+
 if (i_ex(global.chapter == 3 && obj_chefs_game))
 {
     physicalchallengeletter = obj_chefs_game.rank;
@@ -36,16 +37,17 @@ if (i_ex(global.chapter == 3 && obj_chefs_game))
     foodwasted = obj_chefs_game.foodwasted;
     customersfed = obj_chefs_game.customersfed;
     chef_rank_letter = obj_chefs_game.rank;
+    
     if (obj_chefs_game.t_rank == true)
-    {
         chef_rank_letter = "T";
-    }
+    
     if (maxstack > global.flag[1242])
     {
         tallestever = true;
         global.flag[1242] = maxstack;
     }
 }
+
 global.flag[1116] = 0;
 global.flag[1117] = 0;
 global.flag[1118] = 0;
@@ -56,50 +58,57 @@ extrapicturecount = 0;
 totalbattles = 3;
 boardnumber = 1;
 replayversion = false;
+
 if (global.chapter == 3 && room == room_dw_chef)
 {
     totalbattles = global.flag[1049];
     boardnumber = 1;
+    
     if (i_ex(obj_chefs_game))
-    {
         replayversion = obj_chefs_game.replayversion;
-    }
+    
     if (global.flag[1122] > 3)
     {
         extrakeycount = 1;
         secretitemfound = true;
     }
+    
     if (global.flag[1122] > 4)
     {
         extrakeycount = 2;
         secretitemfound = true;
     }
 }
-if (room == 108)
+
+if (room == room_dw_rhythm)
 {
     totalbattles = global.flag[1171];
     boardnumber = 2;
     maxcombo = -1;
     maxnote = 0;
-    if (i_ex(238))
+    
+    if (i_ex(obj_rhythmgame))
     {
         replayversion = obj_rhythmgame.replayversion;
         maxcombo = obj_rhythmgame.max_combo;
         maxnote = obj_rhythmgame.maxnote;
         scr_debug_print("max combo=" + string(maxcombo) + "/" + string(maxnote));
     }
+    
     if ((global.flag[1041] + global.flag[1042] + global.flag[1043] + global.flag[1227]) == 4)
     {
         secretitemfound = true;
         extrapicturecount = 1;
     }
 }
+
 if (global.chapter == 3 && room == room_dw_susiezilla)
 {
     totalbattles = global.flag[1172];
     boardnumber = 3;
     replayversion = true;
 }
+
 star_anim = 0;
 star_anim_speed = 0.5;
 bg_speed = 1;
@@ -140,30 +149,32 @@ show_vignette = function(arg0)
 
 gradetimer = -8;
 gradecon = 0;
+
 for (var i = 0; i < 20; i++)
-{
     _battlegrade[i] = "Z";
-}
+
 currenttotalpoints = 0;
 currentphyspoints = 0;
-currentbattlegrade = /*"?-RANK"*/"?级";
-currenttotalgrade = /*"?-RANK"*/"?级";
-currentphysgrade = /*"?-RANK"*/"?级";
+currentbattlegrade = "?-RANK";
+currenttotalgrade = "?-RANK";
+currentphysgrade = "?-RANK";
 c_pink = make_color_rgb(248, 173, 227);
 missednotes = 0;
 normalnotes = 0;
 goldnotes = 0;
-if (i_ex(238))
+
+if (i_ex(obj_rhythmgame))
 {
     missednotes = obj_rhythmgame.savemiss;
     normalnotes = obj_rhythmgame.saveokay + obj_rhythmgame.savegood;
     goldnotes = obj_rhythmgame.savegreat;
 }
+
 dtype = 0;
 
 function sp_draw_text(arg0, arg1, arg2)
 {
-    var shadcolor = 3934982;
+    var shadcolor = #060B3C;
     var shadalph = 0.65;
     var shadoff = 2;
     var memcol = draw_get_color();
@@ -178,7 +189,7 @@ function sp_draw_text(arg0, arg1, arg2)
 
 function sp_draw_text_transformed(arg0, arg1, arg2, arg3, arg4, arg5)
 {
-    var shadcolor = 3934982;
+    var shadcolor = #060B3C;
     var shadalph = 0.65;
     var shadoff = 2;
     var memcol = draw_get_color();
@@ -194,20 +205,19 @@ function sp_draw_text_transformed(arg0, arg1, arg2, arg3, arg4, arg5)
 function checkskip(arg0, arg1)
 {
     var _skip = false;
+    
     if (timer > (arg0 + 5) && timer < (arg1 - 1))
     {
         if (button3_h())
-        {
             _skip = true;
-        }
     }
+    
     if (timer > (arg0 + 1) && timer < (arg1 - 1))
     {
         if (button1_p())
-        {
             _skip = true;
-        }
     }
+    
     if (_skip)
     {
         timer = arg1 - 1;
@@ -218,20 +228,19 @@ function checkskip(arg0, arg1)
 function rcheckskip(arg0, arg1)
 {
     var _skip = false;
+    
     if (rtimer > (arg0 + 5) && rtimer < (arg1 - 1))
     {
         if (button3_h())
-        {
             _skip = true;
-        }
     }
+    
     if (rtimer > (arg0 + 1) && rtimer < (arg1 - 1))
     {
         if (button1_p())
-        {
             _skip = true;
-        }
     }
+    
     if (_skip)
     {
         rtimer = arg1 - 1;

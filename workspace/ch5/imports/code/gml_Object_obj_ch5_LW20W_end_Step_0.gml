@@ -25,9 +25,9 @@ if (con == 1)
     // var rate2 = 1.4;
     // var wordbreak = 15;
     // var wordcount = 22;
-    var rate = 1.397;
-    var sidebpause = 9;
-    var rate2 = 3.917;
+    var rate = 0.917;
+    var sidebpause = 4;
+    var rate2 = 1.937;
     var wordbreak = 7;
     var wordcount = 9;
     

@@ -1,23 +1,14 @@
 xx = camerax();
 yy = cameray();
-var haveflowery = false;
-
-if (global.chapter == 5)
-{
-    with (obj_caterpillar_generic)
-    {
-        if (name == "flowery")
-            haveflowery = true;
-    }
-}
-
 tpoff = (tp - tpy) + yy;
 bpoff = -bp + bpy + yy;
 
 if (drawchar == 1)
 {
-    draw_sprite_ext(spr_pxwhite, 0, xx - 10, (yy + 480) - bp - 1, 660, 21 + bp, 0, #010000, 1);
-    draw_sprite_ext(spr_pxwhite, 0, xx - 10, yy + tp, 650, -tp - 10, 0, #010000, 1);
+    draw_set_color(c_black);
+    ossafe_fill_rectangle(xx - 10, (yy + 480) - bp - 1, xx + 650, yy + 500, false);
+    draw_set_color(c_black);
+    ossafe_fill_rectangle(xx - 10, yy + tp, xx + 650, yy - 10, false);
     scr_charbox();
     
     if (global.menuno == 0)
@@ -51,62 +42,9 @@ if (drawchar == 1)
                 draw_sprite_ext(msprite[i], off, xx + 120 + (i * 100) + spritemx, (yy + tp) - 60, 2, 2, 0, c_white, 1);
         }
         
-        var drawmoney = 1;
-        var moneyamt = string(global.gold);
-        
-        if (global.chapter == 5)
-        {
-            if (global.flag[1412] == 1)
-                moneyamt = string(global.gold + global.flag[1411]);
-            
-            if ((global.flag[1412] == 2 || global.flag[1412] == 0) && global.flag[1411] > 0)
-                drawmoney = 2;
-            
-            if (global.flag[1312] > 0)
-            {
-                if (drawmoney == 2)
-                    drawmoney = 4;
-                else
-                    drawmoney = 3;
-            }
-        }
-        
-        var moneystring = string_hash_to_newline(stringsetsubloc("D$ ~1", moneyamt, "obj_darkcontroller_slash_Draw_0_gml_47_0"));
-        var flowerydollarsstring = stringsetsubloc("F$ ~1", string(global.flag[1411]), "obj_darkcontroller_slash_Draw_0_gml_69_0");
-        var pinkdollarsstring = stringsetsubloc("P$ ~1", string(global.flag[1312]), "obj_darkcontroller_slash_Draw_0_gml_70_0");
-        
-        if (drawmoney == 1)
-        {
-            draw_set_color(c_white);
-            scr_84_set_draw_font("mainbig");
-            draw_text(xx + 520, (yy + tp) - 60, moneystring);
-        }
-        
-        if (drawmoney == 2)
-        {
-            scr_84_set_draw_font("mainbig");
-            draw_set_color(c_white);
-            draw_text(xx + 520, ((yy + tp) - 53) + 14, moneystring);
-            draw_text(xx + 520, ((yy + tp) - 81) + 14, flowerydollarsstring);
-        }
-        
-        if (drawmoney == 3)
-        {
-            scr_84_set_draw_font("mainbig");
-            draw_set_color(c_white);
-            draw_text(xx + 520, ((yy + tp) - 53) + 14, moneystring);
-            draw_text(xx + 520, ((yy + tp) - 81) + 14, pinkdollarsstring);
-        }
-        
-        if (drawmoney == 4 && tp > 0)
-        {
-            draw_sprite_ext(spr_pxwhite, 0, xx + 500, yy + tp, 140, 30, 0, c_black, 1);
-            scr_84_set_draw_font("mainbig");
-            draw_set_color(c_white);
-            draw_text(xx + 520, ((yy + tp) - 25) + 14, moneystring);
-            draw_text(xx + 520, ((yy + tp) - 53) + 14, pinkdollarsstring);
-            draw_text(xx + 520, ((yy + tp) - 81) + 14, flowerydollarsstring);
-        }
+        draw_set_color(c_white);
+        scr_84_set_draw_font("mainbig");
+        draw_text(xx + 520, (yy + tp) - 60, string_hash_to_newline(stringsetsubloc("D$ ~1", string(global.gold), "obj_darkcontroller_slash_Draw_0_gml_47_0")));
     }
 }
 
@@ -121,13 +59,6 @@ if (global.menuno == 5)
     {
         var _xPos = (global.lang == "en") ? (xx + 170) : (xx + 150);
         var _heartXPos = (global.lang == "en") ? (xx + 145) : (xx + 125);
-        
-        if (global.lang == "ja" && global.is_console)
-        {
-            _xPos -= 24;
-            _heartXPos -= 24;
-        }
-        
         var _selectXPos = (global.lang == "ja" && global.is_console) ? (xx + 385) : (xx + 430);
         draw_set_color(c_white);
         draw_text(xx + 270, yy + 100, string_hash_to_newline(stringsetloc("CONFIG", "obj_darkcontroller_slash_Draw_0_gml_74_0")));
@@ -148,10 +79,6 @@ if (global.menuno == 5)
         if (global.flag[12] == 1)
             shakeoff = stringsetloc("ON", "obj_darkcontroller_slash_Draw_0_gml_84_1");
         
-        var str_on = stringsetloc("ON", "obj_darkcontroller_slash_Draw_0_gml_140_0");
-        var str_off = stringsetloc("OFF", "obj_darkcontroller_slash_Draw_0_gml_141_0");
-        var ralseis = stringsetloc("Ralseis", "obj_darkcontroller_slash_Draw_0_gml_142_0");
-        
         if (!global.is_console)
         {
             fullscreenoff = stringsetloc("OFF", "obj_darkcontroller_slash_Draw_0_gml_87_0");
@@ -169,112 +96,13 @@ if (global.menuno == 5)
         draw_text(_selectXPos, yy + 150, string_hash_to_newline(audvol));
         draw_set_color(c_white);
         draw_text(_xPos, yy + 185, string_hash_to_newline(stringsetloc("Controls", "obj_darkcontroller_slash_Draw_0_gml_91_0")));
-        var simplifyvfx = true;
-        
-        if (global.chapter == 5)
-            simplifyvfx = false;
-        
-        if (simplifyvfx)
-        {
-            draw_text(_xPos, yy + 220, string_hash_to_newline(stringsetloc("Simplify VFX", "obj_darkcontroller_slash_Draw_0_gml_92_0")));
-            draw_text(_selectXPos, yy + 220, string_hash_to_newline(flashoff));
-        }
-        else
-        {
-            var __menuOpt = 0;
-            
-            if (global.flag[24] == 1)
-                __menuOpt = 1;
-            
-            if (__menuOpt == 0)
-            {
-                var voicelines = stringsetloc("Voice Clips", "obj_darkcontroller_slash_Draw_0_gml_176_0");
-                var thisstring = str_on;
-                
-                if (global.flag[1391] == 1)
-                    thisstring = str_off;
-                
-                draw_text(_xPos, yy + 220, string_hash_to_newline(voicelines));
-                draw_text(_selectXPos, yy + 220, thisstring);
-            }
-            
-            if (__menuOpt == 1)
-            {
-                var feathstr = stringsetloc("Feather", "obj_darkcontroller_slash_Draw_0_gml_186_0");
-                var feathSet0 = stringsetloc("Jump: Cancel\nAttack: Confirm", "obj_darkcontroller_slash_Draw_0_gml_188_0");
-                var feathSet1 = stringsetloc("Jump: Confirm\nAttack: Cancel", "obj_darkcontroller_slash_Draw_0_gml_189_0");
-                var st = [feathSet0, feathSet1];
-                var col = 16777215;
-                
-                if (scr_flag_get_ext(1762, 0, 2) == 0)
-                    col = 16776960;
-                
-                if (scr_flag_get_ext(1762, 0, 2) == 0)
-                {
-                    if (global.menuno == 5 && global.submenu == 30 && global.submenucoord[30] == 2)
-                        scr_flag_set_ext(1762, 0, 1, 2);
-                }
-                else if (scr_flag_get_ext(1762, 0, 2) == 1)
-                {
-                    yellowed++;
-                    var __endtime = 15;
-                    
-                    if (yellowed >= __endtime)
-                    {
-                        yellowed = 0;
-                        scr_flag_set_ext(1762, 0, 2, 2);
-                    }
-                    else
-                    {
-                        col = merge_color(c_yellow, c_white, lerp_inout_cubic(0, 1, yellowed / __endtime));
-                    }
-                }
-                
-                draw_set_color(col);
-                draw_text(_xPos, yy + 220, feathstr);
-                var mem = 
-                {
-                    h: draw_get_halign(),
-                    v: draw_get_valign(),
-                    f: draw_get_font()
-                };
-                draw_set_halign(fa_left);
-                draw_set_valign(fa_middle);
-                draw_set_font(scr_84_get_font("main"));
-                draw_text(_selectXPos, yy + 220 + 16, st[global.flag[25]]);
-                draw_set_halign(mem.h);
-                draw_set_valign(mem.v);
-                draw_set_font(mem.f);
-                draw_set_color(c_white);
-                var cont = 0;
-            }
-        }
+        draw_text(_xPos, yy + 220, string_hash_to_newline(stringsetloc("Simplify VFX", "obj_darkcontroller_slash_Draw_0_gml_92_0")));
+        draw_text(_selectXPos, yy + 220, string_hash_to_newline(flashoff));
         
         if (global.is_console)
         {
-            var drawautorun = true;
-            
-            if (global.chapter == 5)
-            {
-                if (global.tempflag[52] == 1)
-                    drawautorun = false;
-            }
-            
-            if (drawautorun)
-            {
-                draw_text(_xPos, yy + 255, string_hash_to_newline(autorun_text));
-                draw_text(_selectXPos, yy + 255, string_hash_to_newline(runoff));
-            }
-            else
-            {
-                var thisstring = str_on;
-                
-                if (global.flag[1392] == 1)
-                    thisstring = str_off;
-                
-                draw_text(_xPos, yy + 255, string_hash_to_newline(ralseis));
-                draw_text(_selectXPos, yy + 255, string_hash_to_newline(thisstring));
-            }
+            draw_text(_xPos, yy + 255, string_hash_to_newline(autorun_text));
+            draw_text(_selectXPos, yy + 255, string_hash_to_newline(runoff));
             
             if (global.submenu == 36)
                 draw_set_color(c_yellow);
@@ -291,30 +119,8 @@ if (global.menuno == 5)
         {
             draw_text(_xPos, yy + 255, string_hash_to_newline(stringsetloc("Fullscreen", "obj_darkcontroller_slash_Draw_0_gml_93_0")));
             draw_text(xx + 430, yy + 255, string_hash_to_newline(fullscreenoff));
-            var drawautorun = true;
-            
-            if (global.chapter == 5)
-            {
-                if (global.tempflag[52] == 1)
-                    drawautorun = false;
-            }
-            
-            if (drawautorun)
-            {
-                draw_text(_xPos, yy + 290, string_hash_to_newline(autorun_text));
-                draw_text(xx + 430, yy + 290, string_hash_to_newline(runoff));
-            }
-            else
-            {
-                var thisstring = str_on;
-                
-                if (global.flag[1392] == 1)
-                    thisstring = str_off;
-                
-                draw_text(_xPos, yy + 290, string_hash_to_newline(ralseis));
-                draw_text(xx + 430, yy + 290, thisstring);
-            }
-            
+            draw_text(_xPos, yy + 290, string_hash_to_newline(autorun_text));
+            draw_text(xx + 430, yy + 290, string_hash_to_newline(runoff));
             draw_text(_xPos, yy + 325, string_hash_to_newline(stringsetloc("Return to Title", "obj_darkcontroller_slash_Draw_0_gml_95_0")));
             draw_text(_xPos, yy + 360, string_hash_to_newline(back_text));
         }
@@ -420,6 +226,7 @@ if (global.menuno == 5)
                         _xPos = xx + 460;
                     }
                     
+                    var icon_color = 16777215;
                     draw_sprite_ext(_sprite, 0, _xPos, _yPos + (i * (_sprite_height + line_padding)) + _yOffset, 2, 2, 0, c_white, 1);
                     
                     if (!global.is_console)
@@ -469,39 +276,20 @@ if (global.menuno == 4)
     ossafe_fill_rectangle(xx + 60, yy + 90, xx + langopt(580, 612), yy + 410, false);
     scr_darkbox(xx + 50, yy + 80, xx + langopt(590, 622), yy + 420);
     draw_set_color(c_white);
-    var lhor = 
-    {
-        x: xx + 60,
-        y: yy + 216,
-        w: 521,
-        h: 6
-    };
+    ossafe_fill_rectangle(xx + 60, yy + 216, xx + 60 + langopt(520, 552), yy + 216 + 5, false);
+    ossafe_fill_rectangle(xx + 294, yy + 220, xx + 294 + 5, (yy + 220 + 195) - 4, false);
     
     if (global.lang == "ja")
-        lhor.w += 32;
+        ossafe_fill_rectangle(xx + 60, yy + 216, xx + 60 + 552, yy + 216 + 5, false);
     
-    with (lhor)
-        draw_sprite_ext(spr_pxwhite, 0, x, y, w, h, 0, c_white, 1);
-    
-    var mvert = 
-    {
-        x: xx + 294,
-        y: yy + 218,
-        w: 6,
-        h: 193
-    };
-    
-    with (mvert)
-        draw_sprite_ext(spr_pxwhite, 0, x, y, w, h, 0, c_white, 1);
-    
-    draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 0, xx + 124, yy + 84, 2, 2, 0, c_white, 1);
-    draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 4, xx + 124, yy + 210, 2, 2, 0, c_white, 1);
-    draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 5, xx + 380, yy + 210, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(_spr_dmenu_captions, 0, xx + 124, yy + 84, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(_spr_dmenu_captions, 4, xx + 124, yy + 210, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(_spr_dmenu_captions, 5, xx + 380, yy + 210, 2, 2, 0, c_white, 1);
     
     if (global.lang == "ja")
-        draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 6, xx + 310, yy + 225, 1, 1, 0, c_white, 1);
+        draw_sprite_ext(_spr_dmenu_captions, 6, xx + 310, yy + 225, 1, 1, 0, c_white, 1);
     else
-        draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 6, xx + 340, yy + 225, 1, 1, 0, c_white, 1);
+        draw_sprite_ext(_spr_dmenu_captions, 6, xx + 340, yy + 225, 1, 1, 0, c_white, 1);
     
     coord = global.submenucoord[20];
     charcoord = global.char[coord];
@@ -517,21 +305,7 @@ if (global.menuno == 4)
         if (i == coord)
             chosen = 1;
         
-        var headssprite = 4648;
-        
-        if (global.flag[1311] == 1)
-            headssprite = 4645;
-        
-        var dodraw = true;
-        
-        if (i == 2 && haveflowery)
-        {
-            dodraw = false;
-            draw_sprite_ext(spr_flowery_equipchar, 0, 90 + xx + (i * 50) + 6, (160 + yy) - 8, 2, 2, 0, c_white, chosen);
-        }
-        
-        if (dodraw)
-            draw_sprite_ext(headssprite, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
+        draw_sprite_ext(spr_equipchar_ch2, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
     }
     
     if (global.submenu == 20)
@@ -575,139 +349,79 @@ if (global.menuno == 4)
         if (global.chapter == 2 || global.chapter == 3)
             guts_amount = 2;
         
-        if (global.chapter == 5)
+        if (global.chapter == 4)
             guts_amount = 3;
         
-        if (global.chapter < 3)
-        {
-            draw_set_color(c_dkgray);
-            draw_text(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_607_0_b")));
-        }
-        else if (global.chapter == 5)
-        {
-        }
-        else
-        {
-            draw_set_color(c_white);
-            
-            if (global.flag[1255] > 0)
-            {
-                draw_text(xx + 100 + 130, ch_y[4], string(clamp(global.flag[1255], 0, 9999)));
-                draw_text(xx + 74, ch_y[4], "*");
-            }
-            else
-            {
-                draw_set_color(c_dkgray);
-                draw_text(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_620_0")));
-            }
-        }
-        
-        var drawdog = false;
+        draw_set_color(c_dkgray);
+        draw_text(xx + 100, ch_y[3], string_hash_to_newline(stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_236_0")));
+        draw_set_color(-1);
         
         if (dograndom >= 97)
         {
             draw_set_color(c_white);
-            draw_text(xx + 100, ch_y[3], string_hash_to_newline(stringsetloc("Dog:", "obj_darkcontroller_slash_Draw_0_gml_231_0")));
-            draw_sprite_ext(spr_dog_sleep, -threebuffer / 30, xx + 220, ch_y[3] + 5, 2, 2, 0, c_white, 1);
-            drawdog = true;
-        }
-        else if (global.chapter == 5)
-        {
+            draw_text(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Dog:", "obj_darkcontroller_slash_Draw_0_gml_231_0")));
+            draw_sprite_ext(spr_dog_sleep, -threebuffer / 30, xx + 220, ch_y[4] + 5, 2, 2, 0, c_white, 1);
         }
         else
         {
-            draw_set_color(c_dkgray);
-            draw_text(xx + 100, ch_y[3], string_hash_to_newline(stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_236_0")));
+            var showstat = false;
+            var puredcount = clamp(0, global.flag[1597], 9999);
+            var slaincount = clamp(0, global.flag[1598], 9999);
+            var slain = stringsetloc("Slain", "obj_darkcontroller_slash_Draw_0_gml_430_0");
+            var purify = stringsetloc("Purify", "obj_darkcontroller_slash_Draw_0_gml_431_0");
+            var readstring = slain;
+            var numstring = string(slaincount);
+            
+            if (slaincount < puredcount)
+            {
+                readstring = purify;
+                numstring = string(puredcount);
+            }
+            
+            if (puredcount || slaincount)
+                showstat = true;
+            
+            if (!showstat)
+            {
+                draw_set_color(c_dkgray);
+                draw_text(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_236_0")));
+                draw_set_color(-1);
+            }
+            else
+            {
+                draw_set_color(-1);
+                draw_text(xx + 100, ch_y[4], readstring);
+                var memfont = draw_get_font();
+                draw_set_font(fnt_mainbig);
+                draw_text(xx + 76, ch_y[4], "*");
+                draw_set_font(memfont);
+                draw_text(xx + 100 + 130, ch_y[4], numstring);
+            }
         }
         
         draw_set_color(c_white);
         
-        if (global.chapter == 5)
+        if (global.chapter == 4)
         {
-            if (global.flag[24])
-            {
-                var str_jumps = stringsetloc("Jumps: ", "obj_darkcontroller_slash_Draw_0_gml_663_0");
-                var str_slashes = stringsetloc("Slashes: ", "obj_darkcontroller_slash_Draw_0_gml_664_0");
-                var targ = 131;
-                
-                if (!drawdog)
-                {
-                    draw_item_icon(xx + 74, ch_y[3] + 8, 28);
-                    
-                    if (global.lang == "ja")
-                    {
-                        var _scale = targ / string_width(str_jumps);
-                        draw_text_transformed(xx + 100, ch_y[3], str_jumps, _scale, 1, 0);
-                    }
-                    else
-                    {
-                        draw_text(xx + 100, ch_y[3], str_jumps);
-                    }
-                    
-                    var jumpcount = string(global.flag[1904]);
-                    _wscale = min(60 / string_width(jumpcount), 1);
-                    draw_text_transformed(xx + 230, ch_y[3], jumpcount, _wscale, 1, 0);
-                }
-                
-                draw_item_icon(xx + 74, ch_y[4] + 6, 1);
-                
-                if (global.lang == "ja")
-                {
-                    var _scale = (targ - 2) / string_width(str_slashes);
-                    draw_text_transformed(xx + 100, ch_y[4], str_slashes, _scale, 1, 0);
-                }
-                else
-                {
-                    draw_text(xx + 100, ch_y[4], str_slashes);
-                }
-                
-                var slashcount = string(global.flag[1905]);
-                var _wscale = min(60 / string_width(slashcount), 1);
-                draw_text_transformed(xx + 230, ch_y[4], slashcount, _wscale, 1, 0);
-            }
-            else
-            {
-                draw_set_color(c_dkgray);
-                
-                if (!drawdog)
-                    draw_text(xx + 100, ch_y[3], string_hash_to_newline(stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_236_0")));
-                
-                draw_text(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_236_0")));
-                draw_set_color(-1);
-            }
-        }
-        
-        char_desc = stringsetloc("LV5 Blue Rose#Quiet, yet#flirtatious.", "obj_darkcontroller_slash_Draw_0_gml_638_0");
-        
-        if (global.plot >= 440)
-            char_desc = stringsetloc("LV5 Dark Rose#Conveys#departure.", "obj_darkcontroller_slash_Draw_0_gml_641_0");
-        
-        if (scr_flag_get(1846) >= 2)
-            char_desc = stringsetloc("LV5 Pink Rose#Flirtatious, and#flirtatious.", "obj_darkcontroller_slash_Draw_0_gml_646_0");
-        
-        if (scr_flag_get(1743) == 1)
-            char_desc = stringsetloc("LV5 Shattered Rose#Only one knows#the rose's meaning.", "obj_darkcontroller_slash_Draw_0_gml_651_0");
-        
-        var moss_flags = [106, 922, 1078, 1592];
-        var moss_title_active = true;
-        
-        for (var i = 0; i < array_length(moss_flags); i++)
-        {
-            if (scr_flag_get(moss_flags[i]) == 1)
-                continue;
+            char_desc = stringsetloc("LV4 Dark Hero#Carries out fate#with the blade.", "obj_darkcontroller_slash_Draw_0_gml_508_0");
+            var moss_flags = [106, 922, 1078, 1592];
+            var moss_title_active = true;
             
-            moss_title_active = false;
-            break;
+            for (var i = 0; i < array_length(moss_flags); i++)
+            {
+                if (scr_flag_get(moss_flags[i]) == 1)
+                    continue;
+                
+                moss_title_active = false;
+                break;
+            }
+            
+            if (moss_title_active)
+                char_desc = stringsetloc("LV4 Moss Most#Munched the most#moist mosses.", "obj_darkcontroller_slash_Draw_0_gml_512_0");
+            
+            if (scr_sideb_active())
+                char_desc = stringsetloc("LV4 Dark Bead#Broken off,#but still locked.", "obj_darkcontroller_slash_Draw_0_gml_517_0");
         }
-        
-        if (global.plot >= 398 && moss_title_active)
-            char_desc = stringsetloc("LV5 Last Moss#A mossliker's#final form.", "obj_darkcontroller_slash_Draw_0_gml_669_0");
-        
-        if (scr_flag_get_ext(1851, 0) == 1)
-            char_desc = stringsetloc("LV5 Walkerstar#Starwalker's#walking buddy.", "obj_darkcontroller_slash_Draw_0_gml_674_0");
-        
-        if (instance_exists(obj_room_man))
-            char_desc = stringsetloc("LV1", "obj_darkcontroller_slash_Draw_0_gml_677_0");
     }
     
     if (charcoord == 2)
@@ -727,16 +441,20 @@ if (global.menuno == 4)
         if (global.chapter == 3)
             guts_amount = 3;
         
-        if (global.chapter == 5)
+        if (global.chapter == 4)
             guts_amount = 4;
         
         draw_text(xx + 100, ch_y[3], string_hash_to_newline(stringsetloc("Rudeness ", "obj_darkcontroller_slash_Draw_0_gml_251_0")));
         draw_item_icon(xx + 74, ch_y[3] + 6, 13);
         draw_text(xx + 230, ch_y[3], string_hash_to_newline(rude_amount));
-        char_desc = stringsetloc("LV5 Violent Violet#For that special#someone.", "obj_darkcontroller_slash_Draw_0_gml_710_0");
         
-        if (global.plot >= 440)
-            char_desc = stringsetloc("LV5 Dark Vine#Assists in sealing#the Fountain.", "obj_darkcontroller_slash_Draw_0_gml_714_0");
+        if (global.chapter == 4)
+        {
+            char_desc = stringsetloc("LV4 Dark Hero#Carries out fate#with the blade.", "obj_darkcontroller_slash_Draw_0_gml_603_0");
+            
+            if (scr_flag_get(852) > 0)
+                char_desc = stringsetloc("LV4 Axe of Justice#Faces fate#with the blade.", "obj_darkcontroller_slash_Draw_0_gml_607_0");
+        }
         
         if (global.chapter >= 4)
         {
@@ -756,15 +474,17 @@ if (global.menuno == 4)
             if (!showstat)
             {
                 draw_set_color(c_dkgray);
-                // draw_text(xx + 100, ch_y[4], "???");
-                draw_text(xx + 100, ch_y[4], "？？？");
+                draw_text(xx + 100, ch_y[4], stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_236_0"));
                 draw_set_color(-1);
             }
             else
             {
                 draw_set_color(-1);
                 draw_text(xx + 100, ch_y[4], readstring);
-                draw_text(xx + 74, ch_y[4], "*");
+                var memfont = draw_get_font();
+                draw_set_font(fnt_mainbig);
+                draw_text(xx + 76, ch_y[4], "*");
+                draw_set_font(memfont);
                 draw_text(xx + 100 + 130, ch_y[4], numstring);
             }
         }
@@ -785,15 +505,16 @@ if (global.menuno == 4)
             kindness_amount = 1;
         }
         
-        char_desc = stringsetloc("LV5 Artemisia#Goes well with tea.", "obj_darkcontroller_slash_Draw_0_gml_759_0");
-        
-        if (global.plot >= 440)
-            char_desc = stringsetloc("LV5 Dark Vine#Watering their#own thorns.", "obj_darkcontroller_slash_Draw_0_gml_763_0");
-        
-        if (global.chapter == 5)
+        if (global.chapter == 4)
         {
-            if (haveflowery)
-                char_desc = stringsetloc("LV99 Roommate#Your dad's his#best friend.", "obj_darkcontroller_slash_Draw_0_gml_770_0");
+            char_desc = stringsetloc("LV4 Dark Hero#Records and faces#the fate.", "obj_darkcontroller_slash_Draw_0_gml_739_0");
+            
+            if (room == room_dw_church_bookcase && global.plot >= 145)
+                char_desc = stringsetloc("LV4 Stool Boy#Boy with stool#like abilities.", "obj_darkcontroller_slash_Draw_0_gml_744_0");
+            
+            draw_set_color(c_dkgray);
+            draw_text(xx + 100, ch_y[3], stringsetloc("???", "obj_darkcontroller_slash_Draw_0_gml_236_0"));
+            draw_set_color(-1);
         }
         
         //var __scale = 0.8;
@@ -811,7 +532,17 @@ if (global.menuno == 4)
     if (charcoord == 4)
     {
         guts_amount = 0;
-        char_desc = stringsetloc("LV5 Mistletoe#Things got#serious today.", "obj_darkcontroller_slash_Draw_0_gml_790_0");
+        char_desc = stringsetloc("LV1 Snowcaster#Might be able to#use some cool moves.", "obj_darkcontroller_slash_Draw_0_gml_382_0");
+        
+        if (global.flag[925] > 0)
+            char_desc = stringsetsubloc("LV~1 Frostmancer#Freezes the enemy.", falselv, "obj_darkcontroller_slash_Draw_0_gml_383_0");
+        
+        if (global.charweapon[4] == 13)
+            char_desc = stringsetsubloc("LV~1 Ice Trancer#Receives pain to#become stronger.", falselv, "obj_darkcontroller_slash_Draw_0_gml_384_0");
+        
+        if (global.flag[921] == 1 && scr_sideb_get_phase() == 0)
+            char_desc = stringsetsubloc("LV~1 Moss Neutral#Neither chaotic nor#lawful to moss.", falselv, "obj_darkcontroller_slash_Draw_0_gml_385_0");
+        
         var coldness_amount = clamp(47 + (global.flag[925] * 7), 47, 100);
         draw_text(xx + 100, ch_y[3], string_hash_to_newline(stringsetloc("Coldness ", "obj_darkcontroller_slash_Draw_0_gml_388_0")));
         draw_item_icon(xx + 74, ch_y[3] + 6, 17);
@@ -846,19 +577,6 @@ if (global.menuno == 4)
         }
     }
     
-    if (haveflowery)
-    {
-        if (coord == 2)
-        {
-            if (global.submenu == 20 || global.submenu == 21)
-            {
-                atsum = 999;
-                dfsum = 999;
-                magsum = 999;
-            }
-        }
-    }
-    
     draw_text(xx + 230, ch_y[0], string_hash_to_newline(floor(atsum)));
     draw_text(xx + 230, ch_y[1], string_hash_to_newline(floor(dfsum)));
     draw_text(xx + 230, ch_y[2], string_hash_to_newline(floor(magsum)));
@@ -882,17 +600,20 @@ if (global.menuno == 4)
             if (g == 1)
                 draw_set_color(c_gray);
             
+            var tpcoststring = string(floor((global.spellcost[charcoord][i] / global.maxtension) * 100)) + "%";
+            
+            if (tpcoststring == "102%")
+                tpcoststring = "??%";
+            
             if (global.lang == "ja")
-                draw_text_width(xx + 310, ch_y[i], string_hash_to_newline(string(round((global.spellcost[charcoord][i] / global.maxtension) * 100)) + "%"), 42);
+                draw_text_width(xx + 310, ch_y[i], string_hash_to_newline(tpcoststring), 42);
             else
-                draw_text(xx + 340, ch_y[i], string_hash_to_newline(string(round((global.spellcost[charcoord][i] / global.maxtension) * 100)) + "%"));
-            
-            var xloc = xx + 410;
+                draw_text(xx + 340, ch_y[i], string_hash_to_newline(tpcoststring));
             
             if (global.lang == "ja")
-                xloc = xx + 390;
-            
-            draw_text(xloc + spell_xoff, ch_y[i], string_hash_to_newline(global.spellname[charcoord][i]));
+                draw_text(xx + 390 + spell_xoff, ch_y[i], string_hash_to_newline(global.spellname[charcoord][i]));
+            else
+                draw_text(xx + 410 + spell_xoff, ch_y[i], string_hash_to_newline(global.spellname[charcoord][i]));
         }
     }
     
@@ -929,51 +650,18 @@ if (global.menuno == 2)
     ossafe_fill_rectangle(xx + 60, yy + 90, xx + ln_xoff1, yy + 410, false);
     scr_darkbox(xx + 50, yy + 80, xx + ln_xoff2, yy + 420);
     draw_set_color(c_white);
-    var vertlineTop = 
-    {
-        x: xx + 248 + 22,
-        y: yy + 88,
-        w: 6,
-        h: 134
-    };
-    
-    with (vertlineTop)
-        draw_sprite_ext(spr_pxwhite, 0, x, y, w, h, 0, c_white, 1);
-    
-    var lhor = 
-    {
-        x: xx + 59,
-        y: yy + 221,
-        w: 522,
-        h: 6
-    };
-    
-    if (global.lang == "ja")
-        lhor.w += 46;
-    
-    with (lhor)
-        draw_sprite_ext(spr_pxwhite, 0, x, y, w, h, 0, c_white, 1);
-    
-    var midVer = 
-    {
-        x: xx + 301 + 22,
-        y: yy + 222,
-        w: 6,
-        h: 189
-    };
-    
-    with (midVer)
-        draw_sprite_ext(spr_pxwhite, 0, x, y, w, h, 0, c_white, 1);
-    
-    draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 0, xx + 118, yy + 86, 2, 2, 0, c_white, 1);
-    draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 1, xx + 376, yy + 86, 2, 2, 0, c_white, 1);
+    ossafe_fill_rectangle(xx + 270, yy + 91, xx + 275, yy + 91 + 135, false);
+    ossafe_fill_rectangle(xx + 59, yy + 221, (xx + langopt(584, 628)) - 4, yy + 221 + 5, false);
+    ossafe_fill_rectangle(xx + 323, yy + 221, xx + 323 + 5, yy + 221 + 190, false);
+    draw_sprite_ext(_spr_dmenu_captions, 0, xx + 118, yy + 86, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(_spr_dmenu_captions, 1, xx + 376, yy + 86, 2, 2, 0, c_white, 1);
     
     if (global.submenucoord[11] == 1 || global.submenucoord[11] == 2)
-        draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 2, xx + 372, yy + 216, 2, 2, 0, c_white, 1);
+        draw_sprite_ext(_spr_dmenu_captions, 2, xx + 372, yy + 216, 2, 2, 0, c_white, 1);
     else
-        draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 3, xx + 372, yy + 216, 2, 2, 0, c_white, 1);
+        draw_sprite_ext(_spr_dmenu_captions, 3, xx + 372, yy + 216, 2, 2, 0, c_white, 1);
     
-    draw_sprite_ext(scr_84_get_sprite("spr_dmenu_captions"), 4, xx + 116, yy + 216, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(_spr_dmenu_captions, 4, xx + 116, yy + 216, 2, 2, 0, c_white, 1);
     coord = global.submenucoord[10];
     charcoord = global.char[coord];
     menusiner += 1;
@@ -989,21 +677,7 @@ if (global.menuno == 2)
         if (i == coord)
             chosen = 1;
         
-        var headssprite = 4648;
-        
-        if (global.flag[1311] == 1)
-            headssprite = 4645;
-        
-        var dodraw = true;
-        
-        if (i == 2 && haveflowery)
-        {
-            dodraw = false;
-            draw_sprite_ext(spr_flowery_equipchar, 0, 90 + xx + (i * 50) + 6, (160 + yy) - 8, 2, 2, 0, c_white, chosen);
-        }
-        
-        if (dodraw)
-            draw_sprite_ext(headssprite, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
+        draw_sprite_ext(spr_equipchar_ch2, global.char[i], 90 + xx + (i * 50), 160 + yy, 2, 2, 0, c_white, chosen);
     }
     
     if (global.submenu == 10)
@@ -1044,7 +718,7 @@ if (global.menuno == 2)
             draw_sprite_ext(spr_dmenu_equip, 4, xx + 302, yy + 172, 2, 2, 0, c_white, 1);
     }
     
-    if (charweaponname[charcoord] != " " || charweaponname[charcoord] != "")
+    if (charweaponname[charcoord] != " ")
     {
         draw_text(xx + 365, yy + 112, string_hash_to_newline(charweaponname[charcoord]));
         draw_item_icon(xx + 343, yy + 118, charweaponicon[charcoord]);
@@ -1302,7 +976,7 @@ if (global.menuno == 2)
             {
                 _abilitycolor[0] = 65535;
                 
-                if (weaponability[cur] == " " || weaponability[cur] == "")
+                if (weaponability[cur] == " ")
                     _abilitycolor[0] = 255;
             }
             
@@ -1358,7 +1032,7 @@ if (global.menuno == 2)
                 {
                     _abilitycolor[arno] = 65535;
                     
-                    if (armorability[cur] == " " || armorability[cur] == "")
+                    if (armorability[cur] == " ")
                         _abilitycolor[arno] = 255;
                 }
                 
@@ -1453,29 +1127,14 @@ if (global.menuno == 2)
 
 if (global.menuno == 1)
 {
-    if (evidencecheck == -1)
-    {
-        evidencecheck = scr_keyitemcheck(20) + scr_keyitemcheck(21) + scr_keyitemcheck(22) + scr_keyitemcheck(23) + scr_keyitemcheck(26) + scr_keyitemcheck(27) + scr_keyitemcheck(28);
-        evidencecheck = clamp(evidencecheck, 0, 1);
-    }
-    
     draw_set_color(c_black);
     ossafe_fill_rectangle(xx + langopt(70, 46), yy + 90, xx + langopt(570, 594), yy + 360, false);
     scr_darkbox(xx + langopt(60, 36), yy + 80, xx + langopt(580, 604), yy + 370);
     scr_84_set_draw_font("mainbig");
     scr_itemname();
-    var _xoff = 0;
-    
-    if (evidencecheck)
-    {
-        _xoff = -35;
-        
-        if (global.lang == "ja")
-            _xoff = -35;
-    }
     
     if (global.submenu == 1)
-        draw_sprite(spr_heart, 0, xx + langopt(155, 134) + (120 * global.submenucoord[1]) + _xoff, yy + 120);
+        draw_sprite(spr_heart, 0, xx + langopt(155, 134) + (120 * global.submenucoord[1]), yy + 120);
     
     draw_set_color(c_white);
     var itemoff = langopt([180, 300, 420], [158, 278, 398]);
@@ -1488,7 +1147,7 @@ if (global.menuno == 1)
             draw_set_color(c_gray);
     }
     
-    draw_text(xx + itemoff[0] + _xoff, yy + 110, string_hash_to_newline(stringsetloc("USE", "obj_darkcontroller_slash_Draw_0_gml_837_0")));
+    draw_text(xx + itemoff[0], yy + 110, string_hash_to_newline(stringsetloc("USE", "obj_darkcontroller_slash_Draw_0_gml_837_0")));
     
     if (global.submenu > 1)
     {
@@ -1498,7 +1157,7 @@ if (global.menuno == 1)
             draw_set_color(c_gray);
     }
     
-    draw_text(xx + itemoff[1] + _xoff, yy + 110, string_hash_to_newline(stringsetloc("TOSS", "obj_darkcontroller_slash_Draw_0_gml_839_0")));
+    draw_text(xx + itemoff[1], yy + 110, string_hash_to_newline(stringsetloc("TOSS", "obj_darkcontroller_slash_Draw_0_gml_839_0")));
     
     if (global.submenu > 1)
     {
@@ -1508,12 +1167,7 @@ if (global.menuno == 1)
             draw_set_color(c_gray);
     }
     
-    var keystring = stringsetloc("KEY", "obj_darkcontroller_slash_Draw_0_gml_841_0");
-    
-    if (evidencecheck)
-        keystring = stringsetloc("EVIDENCE", "obj_darkcontroller_slash_Draw_0_gml_1419_0");
-    
-    draw_text(xx + itemoff[2] + _xoff, yy + 110, string_hash_to_newline(keystring));
+    draw_text(xx + itemoff[2], yy + 110, string_hash_to_newline(stringsetloc("KEY", "obj_darkcontroller_slash_Draw_0_gml_841_0")));
     
     if (global.submenu >= 2 && global.submenu <= 6 && global.submenu != 4)
     {
@@ -1610,344 +1264,6 @@ if (global.menuno == 1)
             draw_sprite(spr_heart, 0, xheart, yheart);
             draw_set_color(c_white);
             draw_text(xx + 20, yy + 10, string_hash_to_newline(keyitemdesc[global.submenucoord[4]]));
-        }
-    }
-}
-
-if (haveflowery)
-{
-    var alpha = 1;
-    
-    if (global.submenu == 10 || global.submenu == 20)
-    {
-        if (global.submenucoord[global.submenu] == 2)
-        {
-            var _box = 
-            {
-                x: xx + 71,
-                y: yy + 110,
-                w: 171,
-                h: 26
-            };
-            
-            if (global.lang == "ja")
-            {
-                _box = 
-                {
-                    x: xx + 52,
-                    y: yy + 108,
-                    w: 183,
-                    h: 30
-                };
-                
-                if (global.submenu == 20)
-                {
-                    _box = 
-                    {
-                        x: xx + 72,
-                        y: yy + 108,
-                        w: 193,
-                        h: 30
-                    };
-                }
-            }
-            
-            with (_box)
-                draw_sprite_ext(spr_pxwhite, 0, x, y, w, h, 0, c_black, 1);
-            
-            draw_set_halign(fa_center);
-            var flname = stringsetloc("Flowery", "obj_darkcontroller_slash_Draw_0_gml_1545_0");
-            draw_set_color(c_white);
-            scr_84_set_draw_font("mainbig");
-            var fname = 
-            {
-                x: (xx + 176) - 11,
-                y: (yy + 106) - 1
-            };
-            
-            if (global.submenu == 10)
-            {
-                fname = 
-                {
-                    x: ((xx + 176) - 11) + 5,
-                    y: ((yy + 106) - 1) + 2
-                };
-            }
-            
-            if (global.lang == "ja")
-            {
-                fname = 
-                {
-                    x: xx + 142,
-                    y: yy + 106 + 1
-                };
-                
-                if (global.submenu == 20)
-                {
-                    fname = 
-                    {
-                        x: xx + 142 + 28,
-                        y: yy + 106
-                    };
-                }
-            }
-            
-            draw_text(fname.x, fname.y, flname);
-            draw_set_halign(fa_left);
-        }
-    }
-    
-    if ((global.submenu == 10 || global.submenu == 20) && coord == 2)
-    {
-        var boxwid = 222;
-        
-        if (global.submenu == 10)
-            boxwid = 220;
-        
-        if (global.lang == "en")
-        {
-            draw_sprite_ext(spr_pxwhite, 0, xx + 70, yy + 233, boxwid, 168, 0, #010000, alpha);
-        }
-        else
-        {
-            var _box = 
-            {
-                x: xx + 46,
-                y: yy + 230,
-                w: 255,
-                h: 171
-            };
-            
-            if (global.submenu == 20)
-            {
-                _box = 
-                {
-                    x: xx + 53,
-                    y: yy + 227,
-                    w: 224,
-                    h: 174
-                };
-            }
-            
-            draw_sprite_ext(spr_pxwhite, 0, _box.x, _box.y, _box.w, _box.h, 0, c_black, alpha);
-        }
-        
-        var stat = [];
-        stat[0] = stringsetloc("Attack:", "obj_darkcontroller_slash_Draw_0_gml_1535_0");
-        stat[1] = stringsetloc("Defense:", "obj_darkcontroller_slash_Draw_0_gml_1536_0");
-        stat[2] = stringsetloc("Magic:", "obj_darkcontroller_slash_Draw_0_gml_1537_0");
-        stat[3] = stringsetloc("Flowers:", "obj_darkcontroller_slash_Draw_0_gml_1538_0");
-        stat[4] = stringsetloc("Floweriness:", "obj_darkcontroller_slash_Draw_0_gml_1539_0");
-        stat[5] = stringsetloc("Guts:", "obj_darkcontroller_slash_Draw_0_gml_1540_0");
-        var statamt = [];
-        statamt[0] = "99";
-        statamt[1] = "99";
-        statamt[2] = "99";
-        statamt[3] = "99";
-        statamt[4] = " ";
-        statamt[5] = " ";
-        var icon = [];
-        icon[0] = [4392, 1, 16777215, 0];
-        icon[1] = [4392, 4, 16777215, 0];
-        icon[2] = [4392, 5, 16777215, 0];
-        icon[3] = [4392, 21, -1, 2];
-        icon[4] = [4392, 21, -1, 0];
-        icon[5] = [4392, 21, -1, 0];
-        var space = 27;
-        
-        if (global.submenu == 20)
-            space = 25;
-        
-        if (global.lang == "ja")
-        {
-            if (global.submenu == 20)
-                space = 28;
-        }
-        
-        scr_84_set_draw_font("mainbig");
-        
-        for (var i = 0; i < array_length(stat); i++)
-        {
-            var scale = 1;
-            var width = string_width(stat[i]);
-            var maxwidth = 122;
-            var _p = 
-            {
-                x1: xx + 100,
-                y1: yy + 230,
-                x2: xx + 100 + 130,
-                y2: yy + 230
-            };
-            
-            if (global.lang == "ja")
-            {
-                _p.x1 -= 15;
-                maxwidth = 131;
-                _p.x2 -= 15;
-            }
-            
-            if (width > maxwidth)
-                scale = maxwidth / width;
-            
-            draw_text_transformed(_p.x1, _p.y1 + (i * space), stat[i], scale, 1, 0);
-            draw_text(_p.x2, _p.y2 + (i * space), statamt[i]);
-            var __jxoff = 0;
-            
-            if (global.lang == "ja")
-                __jxoff -= 15;
-            
-            draw_sprite_ext(icon[i][0], icon[i][1], xx + 74 + __jxoff, yy + 236 + (i * space) + icon[i][3], 2, 2, 0, icon[i][2], 1);
-        }
-        
-        var f = 
-        {
-            x: xx + 228,
-            x2: xx + 212,
-            y: yy + 336
-        };
-        
-        if (global.submenu == 10)
-        {
-            f = 
-            {
-                x: xx + 230,
-                x2: xx + 214,
-                y: yy + 336 + 8
-            };
-        }
-        
-        if (global.lang == "ja")
-        {
-            f = 
-            {
-                x: (xx + 228) - 13,
-                x2: (xx + 212) - 15,
-                y: yy + 336 + 12
-            };
-            
-            if (global.submenu == 10)
-            {
-                f = 
-                {
-                    x: (xx + 230) - 15,
-                    x2: (xx + 214) - 15,
-                    y: yy + 336 + 8
-                };
-            }
-        }
-        
-        for (var i = 0; i < 5; i++)
-        {
-            with (f)
-            {
-                if (i < 3)
-                    draw_sprite_ext(spr_dmenu_items_floweryhead, 0, x + (16 * i), y, 2, 2, 0, -1, 1);
-                
-                draw_sprite_ext(spr_dmenu_items_floweryhead, 0, x2 + (16 * i), y + space, 2, 2, 0, -1, 1);
-            }
-        }
-    }
-    
-    if (global.submenu == 10 && coord == 2)
-    {
-        var flbox = 
-        {
-            x: xx + 336,
-            y: yy + 114,
-            w: 234,
-            h: 91
-        };
-        
-        if (global.lang == "ja")
-        {
-            flbox = 
-            {
-                x: xx + 312,
-                y: yy + 109,
-                w: 285,
-                h: 103
-            };
-        }
-        
-        with (flbox)
-            draw_sprite_ext(spr_pxwhite, 0, x, y, w, h, 0, c_black, 1);
-        
-        var equipped = [stringsetloc("WinningSmile", "obj_darkcontroller_slash_Draw_0_gml_1584_0"), stringsetloc("PetalMantle", "obj_darkcontroller_slash_Draw_0_gml_1585_0"), stringsetloc("SundayBest", "obj_darkcontroller_slash_Draw_0_gml_1586_0")];
-        var space = 30;
-        var icon = [[4392, 21], [4392, 4], [4392, 4]];
-        var loff = 0;
-        
-        if (global.lang == "ja")
-            loff = -22;
-        
-        for (var i = 0; i < array_length(equipped); i++)
-        {
-            draw_text(xx + 365 + loff, ((yy + 120) - 8) + (i * space), equipped[i]);
-            draw_sprite_ext(icon[i][0], icon[i][1], xx + 343 + loff, yy + 118 + (i * space), 2, 2, 0, c_white, 1);
-        }
-        
-        draw_sprite_ext(spr_pxwhite, 0, xx + 297 + loff, (yy + 112) - 4, 36, 34, 0, #010000, 1);
-        draw_sprite_ext(spr_dmenu_equip_flowery, 0, xx + 302 + loff, (yy + 112) - 4 - 6, 2, 2, 0, -1, 1);
-    }
-    
-    if (global.submenu == 20 && coord == 2)
-    {
-        var _box = 
-        {
-            x: xx + 302,
-            y: yy + 235,
-            w: 273,
-            h: 160
-        };
-        
-        if (global.lang == "ja")
-        {
-            _box = 
-            {
-                x: xx + 287,
-                y: yy + 234,
-                w: 296,
-                h: 161
-            };
-        }
-        
-        draw_sprite_ext(spr_pxwhite, 0, _box.x, _box.y, _box.w, _box.h, 0, #010000, alpha);
-        var spell = [];
-        spell[0] = stringsetloc("Sanfrandisco", "obj_darkcontroller_slash_Draw_0_gml_1607_0");
-        spell[1] = stringsetloc("MyJarona", "obj_darkcontroller_slash_Draw_0_gml_1608_0");
-        spell[2] = stringsetloc("Ez2Dance", "obj_darkcontroller_slash_Draw_0_gml_1609_0");
-        spell[3] = stringsetloc("PrismRush", "obj_darkcontroller_slash_Draw_0_gml_1610_0");
-        spell[4] = stringsetloc("Afinihug", "obj_darkcontroller_slash_Draw_0_gml_1611_0");
-        spell[5] = stringsetloc("HoneyKiss", "obj_darkcontroller_slash_Draw_0_gml_1612_0");
-        var cost = [];
-        cost[1] = 0;
-        cost[1] = 99;
-        cost[2] = 22;
-        cost[3] = 111;
-        cost[4] = 222;
-        cost[5] = 333;
-        var space = 25;
-        scr_84_set_draw_font("mainbig");
-        
-        for (var i = 0; i < 6; i++)
-        {
-            var scale = 1;
-            var width = string_width(spell[i]);
-            var maxwidth = 144;
-            var _x = xx + 410;
-            
-            if (global.lang == "ja")
-            {
-                _x -= 45;
-                space = 28;
-                maxwidth = 212;
-            }
-            
-            if (width > maxwidth)
-                scale = maxwidth / width;
-            
-            draw_text_transformed(_x, yy + 230 + (i * space), spell[i], scale, 1, 0);
-            draw_text_transformed(_x - 70, yy + 230 + (i * space), string(cost[i]) + "%", 1, 1, 0);
         }
     }
 }

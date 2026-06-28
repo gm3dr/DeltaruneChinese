@@ -807,7 +807,7 @@ if (interjection > 0)
     if (interjection == 2)
     {
         // var desiredpos = 15;
-        var desiredpos = string_length(stringsetloc("", "obj_ch5_DWCR01_slash_Step_0_gml_197_0"));
+        var desiredpos = string_length(stringsetloc("", "obj_ch5_DWCR01_slash_Step_0_gml_207_0"));
         
         if (global.lang == "ja")
             desiredpos = 15;

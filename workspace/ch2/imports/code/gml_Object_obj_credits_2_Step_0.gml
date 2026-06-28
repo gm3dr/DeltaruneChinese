@@ -226,7 +226,7 @@ if (timer == 1108)
 {
     line[0] = stringsetloc("-Platform Programming-", "obj_credits_2_slash_Step_0_gml_231_0");
     line[1] = stringset("Sarah O'Donnell");
-    line[2] = stringset("Henri Beeres (Enjl)");
+    line[2] = stringset("Enjl");
     line[3] = stringsetloc("-Programming Support-", "obj_credits_2_slash_Step_0_gml_234_0");
     line[4] = stringset("Gregg Tavares");
     line[5] = stringset(" ");

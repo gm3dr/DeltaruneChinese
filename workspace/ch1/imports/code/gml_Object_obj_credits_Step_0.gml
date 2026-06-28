@@ -120,7 +120,7 @@ if (timer == 573)
         line[4] = "Gregg Tavares (PC版)";
         line[5] = "Sarah O'Donnell (コンシューマー版)";
         line[6] = "Fred Wood";
-        line[7] = "Henri Beeres (Enjl)";
+        line[7] = "Enjl";
     }
     
     lyric = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_108_0");

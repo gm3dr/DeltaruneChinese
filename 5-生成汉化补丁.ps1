@@ -67,7 +67,7 @@ function Process-Chapter($ch) {
             $plower = if ($p -eq "Win") { "windows" } else { "mac" }
             $vidDir = Join-Path $PatchDirs[$p] "chapter5_${plower}\vid"
             New-Item -ItemType Directory -Path $vidDir -Force | Out-Null
-            Copy-Item "workspace\ch3\vid\*" $vidDir -Recurse -Force
+            Copy-Item "workspace\ch5\vid\*" $vidDir -Recurse -Force
         }
     }
 }
@@ -88,7 +88,7 @@ function Build-SfxInstaller($outputFile, $Platform) {
 # ---------- 清理 & 创建目录 ----------
 New-CleanDir $TempDir
 foreach ($d in $PatchDirs.Values) { New-CleanDir $d }
-Remove-Item *.7z,*.tar.gz,*.dmg,*.exe -Force -ErrorAction SilentlyContinue
+Remove-Item *.7z,*.tar.gz,*.dmg,*.exe,*.zip -Force -ErrorAction SilentlyContinue
 
 # ---------- Chapters ----------
 1..5 | ForEach-Object { Process-Chapter $_ }

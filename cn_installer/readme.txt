@@ -4,9 +4,11 @@
 * 适配游戏：Steam 正版 DELTARUNE 一至五章 最新版
   及 Steam 版 DELTARUNE demo 最新正式版
 * 这不是 UNDERTALE / 传说之下 汉化补丁
-  如有需要请到 Undertale 贴吧置顶帖下载
 ---
 【更新日志】
+2026-06-29 Build 260629
+* 修复 游戏本体更新造成汉化无法安装的Bug
+
 2026-06-27 Build 260627
 * 修复 游戏本体更新造成汉化无法安装的Bug
 

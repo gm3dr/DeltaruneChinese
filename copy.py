@@ -30,7 +30,7 @@ def copy_duplicate_files(src_dir_a, check_dir_b, dest_dir_c):
     for file_name in files_in_a:
         # 检查文件夹 B 中是否存在同名文件
         if file_name in files_in_b:
-            src_file_path = os.path.join(check_dir_b, file_name)
+            src_file_path = os.path.join(src_dir_a, file_name)
             dest_file_path = os.path.join(dest_dir_c, file_name)
 
             # 检查文件夹 C 中是否已经存在该文件（实现不覆盖逻辑）
@@ -55,7 +55,7 @@ def copy_duplicate_files(src_dir_a, check_dir_b, dest_dir_c):
 if __name__ == "__main__":
     # 在这里填写你的文件夹绝对路径或相对路径
     # 注意：Windows 系统下路径中的斜杠建议写成正斜杠 '/' 或者双反斜杠 '\\'
-    folder_a = "workspace/ch2/imports/code"
+    folder_a = "workspace/ch3/imports/code"
     folder_b = "../drcode/ch5"
     folder_c = "workspace/ch5/imports/code"
 

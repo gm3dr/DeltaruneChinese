@@ -448,7 +448,7 @@ else
                 _body_y += 30;
             }
             
-            if (ltr == 24 && date3con == 0 && global.lang != "ja")
+            /*if (ltr == 24 && date3con == 0 && global.lang != "ja")
             {
                 _body_x = camx + 200;
                 _body_y += 24;
@@ -464,7 +464,7 @@ else
             {
                 _body_x = camx + 230;
                 _body_y += 24;
-            }
+            }*/
         }
         
         draw_set_color(c_white);

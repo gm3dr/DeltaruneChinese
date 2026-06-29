@@ -133,7 +133,7 @@ foreach ($p in @("linux", "win", "winold")) {
         Copy-Item "patch_chs_windowslinux_demo_$date.7z" $PlatformDir
         Normalize-Timestamp $PlatformDir
         tool/7z a -t7z -mx=9 -ms=on -mmt=on "temp\win.7z" ".\$PlatformDir" 
-        Build-SfxInstaller "【Win10及以上_一键安装（推荐）】三角符文汉化补丁-V$date.exe" $p
+        Build-SfxInstaller "【Win10+】三角符文汉化补丁-V$date.exe" $p
 
     }
     elseif ($p -eq "winold") { 
@@ -141,7 +141,7 @@ foreach ($p in @("linux", "win", "winold")) {
         Copy-Item "patch_chs_windowslinux_demo_$date.7z" $PlatformDir
         Normalize-Timestamp $PlatformDir
         tool/7z a -t7z -mx=9 -ms=on -mmt=on "temp\winold.7z" ".\$PlatformDir" 
-        Build-SfxInstaller "【Win7及老电脑】三角符文汉化补丁-V$date.exe" $p
+        Build-SfxInstaller "【Win7-】三角符文汉化补丁-V$date.exe" $p
     }
     elseif ($p -eq "linux") { 
         Copy-Item "cn_installer\linux\*" $PlatformDir -Recurse -Force

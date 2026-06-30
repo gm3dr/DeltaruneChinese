@@ -7,6 +7,7 @@
 # download_depot 1690940 1690942 1337622988459417429
 
 # 1. 自动识别操作系统并设置 Steam 根目录
+$gameVer = "current"
 if ($IsWindows -or $env:OS -like "*Windows*") {
     $DirInst = "C:/Program Files (x86)/Steam/steamapps/common/DELTARUNE"
     $AppsDir = "C:/Program Files (x86)/Steam/steamapps/content"
@@ -49,19 +50,19 @@ Write-Host "Starting file extraction..." -ForegroundColor Cyan
     $ch = $_
     if ($IsMacOS) { Copy-File (Join-Path $DirInst "chapter$ch`_mac/game.ios") "workspace/ch$ch/data.win" }
     else { Copy-File (Join-Path $DirInst "chapter$ch`_windows/data.win") "workspace/ch$ch/data.win" }
-    Copy-File (Join-Path $DirWin "chapter$ch`_windows/data.win")  "data_win/ch$ch/data.win"
-    Copy-File (Join-Path $DirMac "chapter$ch`_mac/game.ios")       "data_win/ch$ch/game.ios"
+    Copy-File (Join-Path $DirWin "chapter$ch`_windows/data.win")  "data_win/$gameVer/ch$ch/data.win"
+    Copy-File (Join-Path $DirMac "chapter$ch`_mac/game.ios")       "data_win/$gameVer/ch$ch/game.ios"
 }
 
 # 5. 处理 Main Launcher
 if ($IsMacOS) { Copy-File (Join-Path $DirInst "game.ios") "workspace/main/data.win" }
 else { Copy-File (Join-Path $DirInst "data.win") "workspace/main/data.win" }
-Copy-File (Join-Path $DirWin "data.win")  "data_win/main/data.win"
-Copy-File (Join-Path $DirMac "game.ios")  "data_win/main/game.ios"
+Copy-File (Join-Path $DirWin "data.win")  "data_win/$gameVer/main/data.win"
+Copy-File (Join-Path $DirMac "game.ios")  "data_win/$gameVer/main/game.ios"
 
 # 6. 处理 Demo
 Copy-File (Join-Path $DirDemoWin "data.win") "workspace/demo/data.win"
-Copy-File (Join-Path $DirDemoWin "data.win") "data_win/demo/data.win"
-Copy-File (Join-Path $DirDemoMac "game.ios") "data_win/demo/game.ios"
+Copy-File (Join-Path $DirDemoWin "data.win") "data_win/$gameVer/demo/data.win"
+Copy-File (Join-Path $DirDemoMac "game.ios") "data_win/$gameVer/demo/game.ios"
 
 Write-Host "Extraction complete!" -ForegroundColor Cyan

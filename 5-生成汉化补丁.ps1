@@ -6,7 +6,7 @@ Set-StrictMode -Version Latest
 
 # ---------- 时间 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
-$date      = "Alpha3"
+$date      = "Alpha4"
 $ts        = Get-Date $fixedTime
 
 Write-Host "Build time : $fixedTime"
@@ -14,6 +14,7 @@ Write-Host "Build date : $date"
 
 # ---------- 工具 & 路径 ----------
 $TempDir     = "temp"
+$OldPatchCount = 3
 
 $PatchDirs = @{
     "Win"   = "$TempDir\patch"
@@ -46,11 +47,19 @@ function Copy-Lang($ch, $dest) {
 
 function Process-Chapter($ch) {
     Write-Host "Processing Chapter $ch..."
-    Make-XDelta "data_win\ch$ch\data.win" "workspace\result\ch$ch\data.win" "$($PatchDirs.Win)\chapter$ch.xdelta"
+    Make-XDelta "data_win\current\ch$ch\data.win" "workspace\result\ch$ch\data.win" "$($PatchDirs.Win)\chapter$ch.xdelta"
     Copy-Lang $ch "$($PatchDirs.Win)\chapter${ch}_windows"
 
-    Make-XDelta "data_win\ch$ch\game.ios" "workspace\result\ch$ch\data.win" "$($PatchDirs.Mac)\chapter$ch.xdelta"
+    Make-XDelta "data_win\current\ch$ch\game.ios" "workspace\result\ch$ch\data.win" "$($PatchDirs.Mac)\chapter$ch.xdelta"
     Copy-Lang $ch "$($PatchDirs.Mac)\chapter${ch}_mac"
+    if ($ch -eq 5) {
+        1..$OldPatchCount | ForEach-Object {
+            $hash = (Get-FileHash -Path "data_win\old-$_\ch$ch\data.win" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
+            Make-XDelta "data_win\old-$_\ch$ch\data.win" "workspace\result\ch$ch\data.win" "$($PatchDirs.Win)\chapter${ch}_$hash.xdelta"
+            $hash = (Get-FileHash -Path "data_win\old-$_\ch$ch\game.ios" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
+            Make-XDelta "data_win\old-$_\ch$ch\game.ios" "workspace\result\ch$ch\data.win" "$($PatchDirs.Mac)\chapter${ch}_$hash.xdelta"
+        }
+    }
 
     # Chapter 3 videos
     if ($ch -eq 3) {
@@ -99,8 +108,14 @@ Copy-Item "workspace\result\demo\*.json" "$($PatchDirs.WinDemo)/lang" -Force
 Copy-Item "workspace\result\demo\*.json" "$($PatchDirs.MacDemo)/lang" -Force
 
 # ---------- Main & Demo ----------
-Make-XDelta "data_win\main\data.win" "workspace\result\main\data.win" "$($PatchDirs.Win)\main.xdelta"
-Make-XDelta "data_win\main\game.ios" "workspace\result\main\data.win" "$($PatchDirs.Mac)\main.xdelta"
+Make-XDelta "data_win\current\main\data.win" "workspace\result\main\data.win" "$($PatchDirs.Win)\main.xdelta"
+Make-XDelta "data_win\current\main\game.ios" "workspace\result\main\data.win" "$($PatchDirs.Mac)\main.xdelta"
+1..$OldPatchCount | ForEach-Object {
+    $hash = (Get-FileHash -Path "data_win\old-$_\main\data.win" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
+    Make-XDelta "data_win\old-$_\main\data.win" "workspace\result\main\data.win" "$($PatchDirs.Win)\main_$hash.xdelta"
+    $hash = (Get-FileHash -Path "data_win\old-$_\main\game.ios" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
+    Make-XDelta "data_win\old-$_\main\game.ios" "workspace\result\main\data.win" "$($PatchDirs.Mac)\main_$hash.xdelta"
+}
 
 Make-XDelta "data_win\demo\data.win" "workspace\result\demo\data.win" "$($PatchDirs.WinDemo)\main.xdelta"
 Make-XDelta "data_win\demo\game.ios" "workspace\result\demo\data.win" "$($PatchDirs.MacDemo)\main.xdelta"

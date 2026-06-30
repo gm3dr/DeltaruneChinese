@@ -15,7 +15,7 @@ if ($IsWindows -or $env:OS -like "*Windows*") {
     $AppsDir = "$env:HOME/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS/steamapps/content"
 } elseif ($IsLinux) {
     $DirInst = "$env:HOME/.local/share/Steam/steamapps/common/DELTARUNE"
-    $AppsDir = "$env:HOME/.local/share/Steam/steamapps/content"
+    $AppsDir = "$env:HOME/.local/share/Steam/ubuntu12_32/steamapps/content"
 } else {
     Write-Error "Unsupported OS."
     exit

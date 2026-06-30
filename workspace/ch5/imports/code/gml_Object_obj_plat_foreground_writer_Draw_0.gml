@@ -114,10 +114,10 @@ if (instance_exists(obj_plat_player) && obj_plat_player.targetmode)
             {
                 var _len = 0;
                 
-                if (global.lang == "ja")
-                    _len = 28 * (string_length(targets[target]) + 1);
-                else
-                    _len = 16 * (string_length(targets[target]) + 1);
+                // if (global.lang == "ja")
+                //     _len = 28 * (string_length(targets[target]) + 1);
+                // else
+                _len = 28 * (string_length(targets[target]) + 1);
                 
                 draw_text(_camerax + xoffset + _len, _cameray + yoffset + 10 + ss + (_yoffset * side), "-->  " + obj_plat_player.hlit_name);
             }

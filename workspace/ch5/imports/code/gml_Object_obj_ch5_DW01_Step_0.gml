@@ -431,7 +431,7 @@ if (con == 10)
     if (global.lang == "ja")
         c_msgnext("\\E0\\VO＊ へへっ^1。\n　 お待たせしちゃって\n　 ゴメンゴメン。/");
     else
-        c_msgnext("\\E0\\V1* 呵^1。抱歉让你久等了^1，\n老伙计。/");
+        c_msgnext("\\E0\\V1* 呵^1。抱歉久等了^1，\n老伙计。/");
     
     c_facenext("asgore", "5");
     c_msgnextloc("\\E5* Oh^1, it's no trouble at all!/", "obj_ch5_DW01_slash_Step_0_gml_515_0");

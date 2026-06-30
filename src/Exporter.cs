@@ -59,9 +59,9 @@ namespace deltarunePacker
         [GeneratedRegex(@"^\s*(\\(?!c)[A-Za-z0-9]{2}\s*)+")] private static partial Regex TrimFront();
         private static readonly (Regex regex, string replacement)[] processors = [
             (ReplaceNewlines(), "\n"), // #和&替换成回车
-            (RemoveSmallPauses(), ""), // 去掉标点前的^1
             (TrimBack(), ""), // 去掉头尾的控制字符
             (TrimFront(), ""), // 去掉头尾的控制字符
+            (RemoveSmallPauses(), ""), // 去掉标点前的^1
         ];
         private static string Unescape(string text)
         {

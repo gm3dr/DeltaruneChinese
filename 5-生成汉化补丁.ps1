@@ -52,8 +52,8 @@ function Process-Chapter($ch) {
 
     Make-XDelta "data_win\current\ch$ch\game.ios" "workspace\result\ch$ch\data.win" "$($PatchDirs.Mac)\chapter$ch.xdelta"
     Copy-Lang $ch "$($PatchDirs.Mac)\chapter${ch}_mac"
-    if ($ch -eq 5) {
-        1..$OldPatchCount | ForEach-Object {
+    1..$OldPatchCount | ForEach-Object {
+        if (Test-Path -Path "data_win\old-$_\ch$ch") {
             $hash = (Get-FileHash -Path "data_win\old-$_\ch$ch\data.win" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
             Make-XDelta "data_win\old-$_\ch$ch\data.win" "workspace\result\ch$ch\data.win" "$($PatchDirs.Win)\chapter${ch}_$hash.xdelta"
             $hash = (Get-FileHash -Path "data_win\old-$_\ch$ch\game.ios" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()

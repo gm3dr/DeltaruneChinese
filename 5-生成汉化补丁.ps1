@@ -6,7 +6,7 @@ Set-StrictMode -Version Latest
 
 # ---------- 时间 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
-$date      = "Beta1"
+$date      = Get-Date -Format "yyMMdd"
 $ts        = Get-Date $fixedTime
 
 Write-Host "Build time : $fixedTime"
@@ -111,14 +111,16 @@ Copy-Item "workspace\result\demo\*.json" "$($PatchDirs.MacDemo)/lang" -Force
 Make-XDelta "data_win\current\main\data.win" "workspace\result\main\data.win" "$($PatchDirs.Win)\main.xdelta"
 Make-XDelta "data_win\current\main\game.ios" "workspace\result\main\data.win" "$($PatchDirs.Mac)\main.xdelta"
 1..$OldPatchCount | ForEach-Object {
-    $hash = (Get-FileHash -Path "data_win\old-$_\main\data.win" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
-    Make-XDelta "data_win\old-$_\main\data.win" "workspace\result\main\data.win" "$($PatchDirs.Win)\main_$hash.xdelta"
-    $hash = (Get-FileHash -Path "data_win\old-$_\main\game.ios" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
-    Make-XDelta "data_win\old-$_\main\game.ios" "workspace\result\main\data.win" "$($PatchDirs.Mac)\main_$hash.xdelta"
+    if (Test-Path "data_win\old-$_\main") {
+        $hash = (Get-FileHash -Path "data_win\old-$_\main\data.win" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
+        Make-XDelta "data_win\old-$_\main\data.win" "workspace\result\main\data.win" "$($PatchDirs.Win)\main_$hash.xdelta"
+        $hash = (Get-FileHash -Path "data_win\old-$_\main\game.ios" -Algorithm SHA256).Hash.Substring(0, 8).ToLower()
+        Make-XDelta "data_win\old-$_\main\game.ios" "workspace\result\main\data.win" "$($PatchDirs.Mac)\main_$hash.xdelta"
+    }
 }
 
-Make-XDelta "data_win\demo\data.win" "workspace\result\demo\data.win" "$($PatchDirs.WinDemo)\main.xdelta"
-Make-XDelta "data_win\demo\game.ios" "workspace\result\demo\data.win" "$($PatchDirs.MacDemo)\main.xdelta"
+Make-XDelta "data_win\current\demo\data.win" "workspace\result\demo\data.win" "$($PatchDirs.WinDemo)\main.xdelta"
+Make-XDelta "data_win\current\demo\game.ios" "workspace\result\demo\data.win" "$($PatchDirs.MacDemo)\main.xdelta"
 
 # ---------- 时间归一化 ----------
 Normalize-Timestamp $TempDir

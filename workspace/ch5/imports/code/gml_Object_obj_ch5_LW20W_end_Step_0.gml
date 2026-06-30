@@ -25,19 +25,19 @@ if (con == 1)
     // var rate2 = 1.4;
     // var wordbreak = 15;
     // var wordcount = 22;
-    var rate = 0.917;
+    var rate = 0.7;
     var sidebpause = 4;
-    var rate2 = 1.937;
+    var rate2 = 1.4;
     var wordbreak = 7;
     var wordcount = 9;
-    
+
     for (var i = 0; i < (wordbreak + 1); i++)
     {
         if (timer == gettimer((i + 1) * rate))
             index++;
     }
     
-    for (var i = wordbreak; i < wordcount; i++)
+    for (var i = wordbreak; i < wordcount + 1; i++)
     {
         if (timer == gettimer((i * rate * rate2) + sidebpause))
             index++;
@@ -47,16 +47,16 @@ if (con == 1)
     
     if (scr_debug())
     {
-        if (timer == gettimer((21 * rate * rate2) + sidebpause + endpause))
+        if (timer == gettimer((wordcount * rate * rate2) + sidebpause + endpause))
             scr_debug_print("ten seconds left");
     }
     
-    if (timer >= gettimer((21 * rate * rate2) + sidebpause + endpause))
+    if (timer >= gettimer((wordcount * rate * rate2) + sidebpause + endpause))
     {
         if (button1_h() || button2_h() || button3_h())
             doend();
     }
     
-    if (timer >= gettimer((21 * rate * rate2) + sidebpause + endpause + 10))
+    if (timer >= gettimer((wordcount * rate * rate2) + sidebpause + endpause + 10))
         doend();
 }

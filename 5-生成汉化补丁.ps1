@@ -6,7 +6,7 @@ Set-StrictMode -Version Latest
 
 # ---------- 时间 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
-$date      = "Qin2Emperor"
+$date      = "Alpha3"
 $ts        = Get-Date $fixedTime
 
 Write-Host "Build time : $fixedTime"

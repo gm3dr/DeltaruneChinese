@@ -290,16 +290,31 @@ function _matchGlob(name, pattern) {
  * 返回 MANIFEST.md 中的 depot 下载指令文本（供用户参考）。
  */
 export function getSteamDownloadInstructions() {
-  return [
-    '在 Steam 控制台 (steam://open/console) 中输入以下命令：',
-    '',
-    '  download_depot 1671210 1671212 8959018571141829552',
-    '  download_depot 1671210 1671213 3999280457396813366',
-    '  download_depot 1690940 1690941 7280478300334929399',
-    '  download_depot 1690940 1690942 1337622988459417429',
-    '',
-    '更新日志见 MANIFEST.md（项目根目录）',
-  ].join('\n');
+  const manifestPath = wsPath('MANIFEST.md');
+  try {
+    const content = readFileSync(manifestPath, 'utf-8');
+    // 提取 "使用方法" 下方代码块中的 download_depot 命令
+    const lines = content.split('\n');
+    let inBlock = false;
+    const cmds = [];
+    for (const line of lines) {
+      if (line.trim().startsWith('```')) {
+        inBlock = !inBlock;
+        continue;
+      }
+      if (inBlock && line.trim().startsWith('download_depot')) cmds.push(line.trim());
+    }
+    if (cmds.length === 0) throw new Error('MANIFEST.md 中未找到 download_depot 命令');
+    return [
+      '在 Steam 控制台 (steam://open/console) 中输入以下命令：',
+      '',
+      ...cmds.map(c => `  ${c}`),
+      '',
+      `更新日志见 MANIFEST.md（项目根目录）`,
+    ].join('\n');
+  } catch (err) {
+    return `无法读取 MANIFEST.md: ${err.message}\n请查看仓库中的 MANIFEST.md 获取 Steam download_depot 命令。`;
+  }
 }
 
 // ── 项目根目录 ─────────────────────────────────────────────────────

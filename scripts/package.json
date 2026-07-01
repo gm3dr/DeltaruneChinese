@@ -5,12 +5,12 @@
   "type": "module",
   "description": "DELTARUNE Chinese localization build scripts (cross-platform, Node.js)",
   "scripts": {
-    "copy-datawin": "node 1-copy-datawin.js",
-    "download-text": "node 2-download-text.js",
-    "generate-atlas": "node 3-generate-atlas.js",
-    "pack-resources": "node 4-pack-resources.js",
-    "generate-patch": "node 5-generate-patch.js",
-    "build-all": "node build-all.js"
+    "build": "node build.js",
+    "copy-datawin": "node lib/1-copy-datawin.js",
+    "download-text": "node lib/2-download-text.js",
+    "generate-atlas": "node lib/3-generate-atlas.js",
+    "pack-resources": "node lib/4-pack-resources.js",
+    "generate-patch": "node lib/5-generate-patch.js"
   },
   "dependencies": {
     "@clack/prompts": "^1.6.0"

@@ -90,9 +90,60 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 > [!IMPORTANT]
 > 在生成像素字体时需要调用 `bmfont64.exe` 程序，**必须保证文件路径没有任何汉字或特殊字符**。否则可能会因路径编码不匹配而报错。
 
+## 跨平台构建 (Node.js 脚本)
+
+> 跨平台 Node.js 构建脚本位于 `scripts/` 目录，支持 Windows / macOS / Linux。
+> 原有的 PowerShell 脚本仍保留在根目录可继续使用，见下方章节。
+
+### 使用方式
+
+```bash
+cd scripts
+npm install              # 首次运行前安装依赖
+
+node build.js            # 交互式多选菜单，选择要执行的步骤
+node build.js --verbose  # 显示外部工具详细输出
+
+# 或直接运行单个步骤：
+node lib/1-copy-datawin.js
+node lib/2-download-text.js
+node lib/3-generate-atlas.js
+node lib/4-pack-resources.js
+node lib/5-generate-patch.js
+```
+
+### 前置要求
+
+- **Node.js 18+**（推荐 22+）
+- **.NET 10.0 SDK**（编译 C# 打包工具）
+- **Steam 客户端**（拥有 DELTARUNE，用于下载游戏文件：见下方 PS1 章节的说明）
+- **xdelta3** 和 **7z**（系统 PATH 中可用，或放在 `tool/` 目录下）
+
+### Linux / macOS 额外说明
+
+- 字体生成依赖 **bmfont64.exe**（Windows PE 程序），非 Windows 系统通过 **Wine** 运行：
+  ```bash
+  # 安装 Wine（Arch Linux）
+  sudo pacman -S wine
+
+  # 安装 Wine（Ubuntu / Debian）
+  sudo apt install wine
+
+  # 安装 Wine（macOS，使用 Homebrew）
+  brew install --cask wine-stable
+  ```
+- 首次运行 Wine 时会自动配置，无需额外设置
+- Steam 游戏路径自动检测：
+  - Linux：`~/.local/share/Steam/steamapps/common/DELTARUNE`
+  - macOS：`~/Library/Application Support/Steam/steamapps/common/DELTARUNE/DELTARUNE.app/Contents/Resources`
+- 补丁文件与 Windows 通用（Steam 使用 Proton 运行 Windows 版）
+
+---
+
 ## 工作流简介 (Powershell 脚本)
 
-所有打包过程已整合成 PS1 脚本，存放在根目录。直接按顺序运行即可：
+> 原有的 PowerShell 工作流脚本仍然可用，位于仓库根目录，按编号顺序运行即可。
+> 但对非 Windows 平台推荐使用上方的跨平台 Node.js 构建脚本。
 
 ### 1. `复制datawin.ps1` (下载游戏)
 自动识别操作系统（Windows/macOS/Linux），并前往对应的 Steam 安装目录抓取所需文件。

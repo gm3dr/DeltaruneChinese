@@ -150,10 +150,7 @@ node lib/5-generate-patch.js
 
 > [!IMPORTANT]
 > **运行此脚本前，请在系统浏览器输入 `steam://open/console` 打开 Steam 控制台，并逐行输入以下命令，下载指定版本的游戏：**
-> - `download_depot 1671210 1671212 5291565625263756968`
-> - `download_depot 1671210 1671213 667983367427050155`
-> - `download_depot 1690940 1690941 7280478300334929399`
-> - `download_depot 1690940 1690942 1337622988459417429`
+> 各 Depot 对应的最新 Manifest ID 请查看 [MANIFEST.md](MANIFEST.md)
 
 ### 2. `下载文本.ps1` (拉取远端翻译，可选)
 通过 API 全自动下载第 1~5 章最新的中英文 `en.json` 与 `cn.json`。

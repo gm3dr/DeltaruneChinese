@@ -77,7 +77,7 @@ function Process-Chapter($ch) {
     }
 }
 
-function Build-Patch($dir, $tag) {
+function Build-Patch($dir, $tag, $type) {
     $PureName   = "patch_chs_${tag}_$date.7z"
     tool/7z a -t7z -mx=9 -ms=on -mmt=on $PureName ".\$dir\*"
 }
@@ -123,12 +123,12 @@ Normalize-Timestamp $TempDir
 
 # ---------- 打包补丁 ----------
 $Tasks = @(
-    @{ Dir=$PatchDirs.Win;     Tag="windowslinux" },
-    @{ Dir=$PatchDirs.Mac;     Tag="macos" },
-    @{ Dir=$PatchDirs.WinDemo; Tag="windowslinux_demo" },
-    @{ Dir=$PatchDirs.MacDemo; Tag="macos_demo" }
+    @{ Dir=$PatchDirs.Win;     Tag="windowslinux";      Type="Win" },
+    @{ Dir=$PatchDirs.Mac;     Tag="macos";             Type="Mac" },
+    @{ Dir=$PatchDirs.WinDemo; Tag="windowslinux_demo"; Type="Win" },
+    @{ Dir=$PatchDirs.MacDemo; Tag="macos_demo";        Type="Mac" }
 )
-foreach ($t in $Tasks) { Build-Patch $t.Dir $t.Tag }
+foreach ($t in $Tasks) { Build-Patch $t.Dir $t.Tag $t.Type }
 
 # ---------- 平台安装包 ----------
 foreach ($p in @("linux", "win")) {

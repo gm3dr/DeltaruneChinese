@@ -39,8 +39,9 @@ async function main() {
     process.exit(0);
   }
 
-  for (const key of selected) {
-    const step = STEPS[key];
+  const selectedSet = new Set(selected);
+  for (const [key, step] of Object.entries(STEPS)) {
+    if (!selectedSet.has(key)) continue;
     try {
       const mod = await import(step.file);
       if (mod.main) await mod.main();

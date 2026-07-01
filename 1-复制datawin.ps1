@@ -1,11 +1,7 @@
 ﻿$ErrorActionPreference = "Stop"
-# 首先需要运行 steam://open/console打开控制台
-# 运行下列指令下载depot（更新时间：2026-07-01）
-# 【注意】游戏更新后请到 SteamDB 查找最新manifest数值
-# download_depot 1671210 1671212 8959018571141829552
-# download_depot 1671210 1671213 3999280457396813366
-# download_depot 1690940 1690941 7280478300334929399
-# download_depot 1690940 1690942 1337622988459417429
+# 首先需要运行 steam://open/console 打开控制台
+# 运行 MANIFEST.md 中的指令下载 depot
+# 【注意】游戏更新后请到 SteamDB 查找最新 manifest 数值并更新 MANIFEST.md
 
 # 1. 自动识别操作系统并设置 Steam 根目录
 $gameVer = "current"
@@ -46,7 +42,7 @@ function Copy-File($src, $dest) {
 
 Write-Host "Starting file extraction..." -ForegroundColor Cyan
 
-# 4. 批量处理 Chapters 1-4 (合并循环逻辑)
+# 4. 批量处理 Chapters 1-5 (合并循环逻辑)
 1..5 | ForEach-Object {
     $ch = $_
     if ($IsMacOS) { Copy-File (Join-Path $DirInst "chapter$ch`_mac/game.ios") "workspace/ch$ch/data.win" }

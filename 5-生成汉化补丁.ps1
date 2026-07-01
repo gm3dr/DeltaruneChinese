@@ -66,27 +66,18 @@ function Process-Chapter($ch) {
         }
     }
 
-    # Chapter 3 videos
-    if ($ch -eq 3) {
+    # Chapter 3 & 5 视频文件
+    if ($ch -eq 3 -or $ch -eq 5) {
         foreach ($p in @("Win","Mac")) {
             $plower = if ($p -eq "Win") { "windows" } else { "mac" }
-            $vidDir = Join-Path $PatchDirs[$p] "chapter3_${plower}\vid"
+            $vidDir = Join-Path $PatchDirs[$p] "chapter${ch}_${plower}\vid"
             New-Item -ItemType Directory -Path $vidDir -Force | Out-Null
-            Copy-Item "workspace\ch3\vid\*" $vidDir -Recurse -Force
-        }
-    }
-    # Chapter 5 videos
-    if ($ch -eq 5) {
-        foreach ($p in @("Win","Mac")) {
-            $plower = if ($p -eq "Win") { "windows" } else { "mac" }
-            $vidDir = Join-Path $PatchDirs[$p] "chapter5_${plower}\vid"
-            New-Item -ItemType Directory -Path $vidDir -Force | Out-Null
-            Copy-Item "workspace\ch5\vid\*" $vidDir -Recurse -Force
+            Copy-Item "workspace\ch${ch}\vid\*" $vidDir -Recurse -Force
         }
     }
 }
 
-function Build-Patch($dir, $tag, $type) {
+function Build-Patch($dir, $tag) {
     $PureName   = "patch_chs_${tag}_$date.7z"
     tool/7z a -t7z -mx=9 -ms=on -mmt=on $PureName ".\$dir\*"
 }
@@ -132,12 +123,12 @@ Normalize-Timestamp $TempDir
 
 # ---------- 打包补丁 ----------
 $Tasks = @(
-    @{ Dir=$PatchDirs.Win;     Tag="windowslinux";      Type="Win" },
-    @{ Dir=$PatchDirs.Mac;     Tag="macos";             Type="Mac" },
-    @{ Dir=$PatchDirs.WinDemo; Tag="windowslinux_demo"; Type="Win" },
-    @{ Dir=$PatchDirs.MacDemo; Tag="macos_demo";        Type="Mac" }
+    @{ Dir=$PatchDirs.Win;     Tag="windowslinux" },
+    @{ Dir=$PatchDirs.Mac;     Tag="macos" },
+    @{ Dir=$PatchDirs.WinDemo; Tag="windowslinux_demo" },
+    @{ Dir=$PatchDirs.MacDemo; Tag="macos_demo" }
 )
-foreach ($t in $Tasks) { Build-Patch $t.Dir $t.Tag $t.Type }
+foreach ($t in $Tasks) { Build-Patch $t.Dir $t.Tag }
 
 # ---------- 平台安装包 ----------
 foreach ($p in @("linux", "win")) {
@@ -170,7 +161,7 @@ foreach ($p in @("linux", "win")) {
         tool/7z a -t7z -mx=9 -ms=on -mmt=on "$file_name.7z" "$file_name.exe"
         Remove-Item "$file_name.exe"
     }
-    elseif ($p -eq "linux") { 
+    else {  # linux
         Copy-Item "cn_installer\linux\*" $PlatformDir -Recurse -Force
         Copy-Item "patch_chs_windowslinux_$date.7z" $PlatformDir
         Copy-Item "patch_chs_windowslinux_demo_$date.7z" $PlatformDir

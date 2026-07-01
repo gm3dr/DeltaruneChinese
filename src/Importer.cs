@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using NReco.Text;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.InteropServices;
 using System.Text;
 using System.Text.RegularExpressions;
 using UndertaleModLib;
@@ -415,21 +416,18 @@ namespace deltarunePacker
             Directory.CreateDirectory(dumpPath);
 
             // dic.txt需要是UTF-16的
-            Task writeDict = Task.WhenAll(dictContents).ContinueWith(task =>
+            char[] allChars = [.. (await Task.WhenAll(dictContents)).SelectMany(x => x).Distinct()];
+            File.WriteAllBytes(dictPath, Encoding.Unicode.GetBytes(allChars));
+            foreach (var config in new DirectoryInfo(Path.Combine(workspace, "imports/font/font")).GetFiles())
             {
-                char[] set = [.. task.Result.SelectMany(x => x).Distinct()];
-                File.WriteAllBytes(dictPath, Encoding.Unicode.GetBytes(set));
-            });
-            Task copyFiles = Task.Run(() =>
+                File.Copy(config.ToString(), Path.Combine(dumpPath, config.Name));
+            }
+
+            // 提前生成所有字体配置（含 icon 行）
+            var fontConfigs = new List<(string font_name, string configPath, string outputBase, string bmfcContent)>();
+            foreach (var config in new DirectoryInfo(Path.Combine(workspace, "imports/font/bmfc")).GetFiles())
             {
-                foreach (var config in new DirectoryInfo(Path.Combine(workspace, "imports/font/font")).GetFiles())
-                {
-                    File.Copy(config.ToString(), Path.Combine(dumpPath, config.Name));
-                }
-            });
-            await Task.WhenAll(new DirectoryInfo(Path.Combine(workspace, "imports/font/bmfc")).GetFiles().Select(async config =>
-            {
-                Task<string> bmfc = File.ReadAllTextAsync(config.FullName, Encoding.UTF8);
+                string bmfcContent = File.ReadAllText(config.FullName, Encoding.UTF8);
                 string font_name = Path.GetFileNameWithoutExtension(config.Name);
                 IEnumerable<string> segments = new DirectoryInfo(Path.Combine(workspace, "imports/font/pics", font_name)).GetFiles()
                     .Select(img =>
@@ -438,36 +436,39 @@ namespace deltarunePacker
                         ReadOnlySpan<char> imgName = Path.GetFileNameWithoutExtension(img.FullName.AsSpan());
                         imgName.Split(tokens, ',');
                         return $"icon=\"{img.FullName}\",{imgName[tokens[0]]},{imgName[tokens[2]]},{0},{imgName[tokens[1]]}\n";
-                        //参考格式: icon=".../imports/font/pics/fnt_main/id,xadv,xoff.png",id,xoff,yoff,xadv
                     });
-                // 回写完整的配置文件
                 string configPath = Path.Combine(dumpPath, config.Name);
-                Task writeCfg = File.WriteAllTextAsync(configPath, string.Concat(segments.Prepend(await bmfc)), Encoding.UTF8);
-                string outputPath = Path.Combine(dumpPath, $"{font_name}.fnt");
+                File.WriteAllText(configPath, string.Concat(segments.Prepend(bmfcContent)), Encoding.UTF8);
+                fontConfigs.Add((font_name, configPath, Path.Combine(dumpPath, font_name), bmfcContent));
+            }
+
+            await Task.WhenAll(fontConfigs.Select(async fc =>
+            {
                 Process bmfont = new()
                 {
                     StartInfo = new ProcessStartInfo()
                     {
-                        FileName = "tool/bmfont64.exe",
                         CreateNoWindow = true,
                         RedirectStandardOutput = true,
-                        ArgumentList = {
-                            "-c", configPath,
-                            "-o", outputPath,
-                            "-t", dictPath
-                        }
                     }
                 };
-                // 这里是关键路径 一点都不能耽搁
-                await writeDict;
-                await copyFiles;
-                await writeCfg;
+                string[] bmArgs = ["-c", fc.configPath, "-o", fc.outputBase, "-t", dictPath];
+                if (OperatingSystem.IsWindows())
+                {
+                    bmfont.StartInfo.FileName = "tool/bmfont64.exe";
+                }
+                else
+                {
+                    bmfont.StartInfo.FileName = "wine";
+                    bmArgs = ["tool/bmfont64.exe", .. bmArgs];
+                }
+                foreach (var arg in bmArgs) bmfont.StartInfo.ArgumentList.Add(arg);
                 bmfont.Start();
-                Info($"[ImportFonts]{font_name} started!");
+                Info($"[ImportFonts]{fc.font_name} started!");
                 await bmfont!.WaitForExitAsync();
-                Info($"[ImportFonts]{font_name} finished!");
-                await ImportFontData(datawinTask, font_name, outputPath, bmfc.Result);
-                Info($"[ImportFonts]{font_name} imported!");
+                Info($"[ImportFonts]{fc.font_name} finished!");
+                await ImportFontData(datawinTask, fc.font_name, fc.outputBase + ".fnt", fc.bmfcContent);
+                Info($"[ImportFonts]{fc.font_name} imported!");
             }));
         }
         #endregion
@@ -513,7 +514,6 @@ namespace deltarunePacker
             Task<string> en = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/en.json"), Encoding.UTF8);
             Task importTexts = ImportTexts(await cn, await en, await fmt, await re_cnname, await re_recruit);
 
-            // using UndertaleData datawin = await datawinTask;// 如果对CPU很有信心的可以把上面那行await挪到这里
             Task importCodes = ImportCodes(datawin, taskBag, ImportSprites(datawin));
             await Task.WhenAll(importFonts, importCodes);
 

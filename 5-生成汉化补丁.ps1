@@ -11,7 +11,7 @@ Set-StrictMode -Version Latest
 
 # ---------- 时间 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
-$date      = Get-Date -Format "yyMMdd"
+$date      = "Beta2"
 $ts        = Get-Date $fixedTime
 
 Write-Host "Build time : $fixedTime"
@@ -19,7 +19,7 @@ Write-Host "Build date : $date"
 
 # ---------- 工具 & 路径 ----------
 $TempDir     = "temp"
-$OldPatchCount = 3
+$OldPatchCount = 4
 
 $PatchDirs = @{
     "Win"   = "$TempDir\patch"
@@ -105,7 +105,7 @@ foreach ($d in $PatchDirs.Values) { New-CleanDir $d }
 Remove-Item *.7z,*.tar.gz,*.dmg,*.exe,*.zip -Force -ErrorAction SilentlyContinue
 
 # ---------- Chapters ----------
-1..5 | ForEach-Object { Process-Chapter $_ }
+1..4 | ForEach-Object { Process-Chapter $_ }
 
 New-Item -ItemType Directory -Path "$($PatchDirs.WinDemo)/lang" -Force | Out-Null
 New-Item -ItemType Directory -Path "$($PatchDirs.MacDemo)/lang" -Force | Out-Null
@@ -140,7 +140,7 @@ $Tasks = @(
 foreach ($t in $Tasks) { Build-Patch $t.Dir $t.Tag $t.Type }
 
 # ---------- 平台安装包 ----------
-foreach ($p in @("linux", "win", "winold")) {
+foreach ($p in @("linux", "win")) {
     Write-Host "Packaging installer for $p..."
     $PlatformDir = "$TempDir\$p"
     New-Item -ItemType Directory -Path $PlatformDir -Force | Out-Null
@@ -155,15 +155,20 @@ foreach ($p in @("linux", "win", "winold")) {
         Copy-Item "patch_chs_windowslinux_demo_$date.7z" $PlatformDir
         Normalize-Timestamp $PlatformDir
         tool/7z a -t7z -mx=9 -ms=on -mmt=on "temp\win.7z" ".\$PlatformDir" 
-        Build-SfxInstaller "【Win10+】三角符文汉化补丁-V$date.exe" $p
-
+        $file_name = "【Win10+（推荐）】三角符文汉化补丁-V$date"
+        Build-SfxInstaller "$file_name.exe" $p
+        tool/7z a -t7z -mx=9 -ms=on -mmt=on "$file_name.7z" "$file_name.exe"
+        Remove-Item "$file_name.exe"
     }
     elseif ($p -eq "winold") { 
         Copy-Item "patch_chs_windowslinux_$date.7z" $PlatformDir
         Copy-Item "patch_chs_windowslinux_demo_$date.7z" $PlatformDir
         Normalize-Timestamp $PlatformDir
         tool/7z a -t7z -mx=9 -ms=on -mmt=on "temp\winold.7z" ".\$PlatformDir" 
-        Build-SfxInstaller "【Win7-】三角符文汉化补丁-V$date.exe" $p
+        $file_name = "【Win7-】三角符文汉化补丁-V$date"
+        Build-SfxInstaller "$file_name.exe" $p
+        tool/7z a -t7z -mx=9 -ms=on -mmt=on "$file_name.7z" "$file_name.exe"
+        Remove-Item "$file_name.exe"
     }
     elseif ($p -eq "linux") { 
         Copy-Item "cn_installer\linux\*" $PlatformDir -Recurse -Force

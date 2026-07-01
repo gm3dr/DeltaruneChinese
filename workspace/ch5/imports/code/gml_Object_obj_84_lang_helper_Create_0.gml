@@ -13,15 +13,7 @@ for (var __i = 0; __i < __numlayers; __i++)
     {
         var __lang = string_copy(__name, __pos + 6, 2);
         
-        // if (__lang != global.lang)
         if (__lang != global.lang && room_get_name(room) != "room_torielclass")
-        {
-            layer_set_visible(__layer_id, false);
-            continue;
-        }
-        
-        if (room_get_name(room) == "room_torielclass" && global.names < 2)
-        // 
         {
             layer_set_visible(__layer_id, false);
             continue;
@@ -40,34 +32,35 @@ for (var __i = 0; __i < __numlayers; __i++)
         {
             var __spr = layer_sprite_get_sprite(__id);
             __name = sprite_get_name(__spr);
+            show_debug_message("  sprite: " + string(__j) + ": " + __name);
             __pos = string_pos("_lang_", __name);
             
             if (__pos > 0 && string_length(__name) > (__pos + 8))
             {
                 var __lang = string_copy(__name, __pos + 6, 2);
                 
-                // if (__lang != global.lang)
                 if (__lang != global.lang && room_get_name(room) != "room_torielclass")
-                    layer_sprite_destroy(__id);
-                
-                if (room_get_name(room) == "room_torielclass" && global.names < 2)
                     layer_sprite_destroy(__id);
             }
         }
         else if (__eltype == 1)
         {
+            show_debug_message("  background: " + string(__j));
         }
         else if (__eltype == 5)
         {
+            show_debug_message("  tilemap: " + string(__j));
         }
         else if (__eltype == 6)
         {
+            show_debug_message("  particlesystem: " + string(__j));
         }
         else if (__eltype == 7)
         {
         }
         else
         {
+            show_debug_message("  unknown: " + string(__j));
         }
     }
 }

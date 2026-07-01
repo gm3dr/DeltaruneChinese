@@ -1,8 +1,9 @@
 ﻿$ErrorActionPreference = "Stop"
-# 首先运行：
-# steam://open/console
-# download_depot 1671210 1671212 5291565625263756968
-# download_depot 1671210 1671213 667983367427050155
+# 首先需要运行 steam://open/console打开控制台
+# 运行下列指令下载depot（更新时间：2026-07-01）
+# 【注意】游戏更新后请到 SteamDB 查找最新manifest数值
+# download_depot 1671210 1671212 1619878865915573883
+# download_depot 1671210 1671213 7538999295194808919
 # download_depot 1690940 1690941 7280478300334929399
 # download_depot 1690940 1690942 1337622988459417429
 

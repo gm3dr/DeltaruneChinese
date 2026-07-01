@@ -1,6 +1,11 @@
 ﻿# ===============================
 # 三角符文汉化补丁 构建脚本
 # ===============================
+
+# 【注意】
+# 运行前需要先手动创建好 patcher 文件夹
+# 并从 github.com/gm3dr/DeltaruneChinesePatcher 的 Release
+# 下载 Win/Mac/Linux/WinOld 安装器，并放到文件夹
 $ErrorActionPreference = "Stop"
 Set-StrictMode -Version Latest
 

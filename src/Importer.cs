@@ -183,7 +183,7 @@ namespace deltarunePacker
         [GeneratedRegex(@"(?<!\^[0-9])([：？！，。]*)([：？！，。])(?=\s*[\w&])")] private static partial Regex RestoreCN();
 
         [GeneratedRegex(@"^[a-zA-Z0-9]")] private static partial Regex ReplacerSuffix();
-        [GeneratedRegex(@"(?<!\\[a-zA-Z0-9]*)[a-zA-Z0-9]$")] private static partial Regex ReplacerPrefix();
+        [GeneratedRegex(@"(?<![\\^~][a-zA-Z0-9]*)[a-zA-Z0-9]$")] private static partial Regex ReplacerPrefix();
         private string RestoreItem(string key, string item, string fmt)
         {
             bool hasNumberTag = !string.IsNullOrEmpty(fmt) && Regex.IsMatch(fmt, @"\^[0-9]");
@@ -232,41 +232,11 @@ namespace deltarunePacker
             foreach (var hit in replacer.ParseText(rawText).OrderByDescending(x => x.End).ThenBy(x => x.Begin))
             {
                 if (curPos < hit.End) continue;
-                var suffix = rawText.AsMemory(hit.End..curPos);
-                var prefix = rawText.AsMemory(..hit.Begin);
-                var suffixSpan = suffix.Span;
-                bool suffixTrimmed;
-                do
-                {
-                    suffixTrimmed = false;
-                    if (suffixSpan.Length > 1 && suffixSpan[0] == '~')
-                    {
-                        int i = 1;
-                        while (i < suffixSpan.Length && char.IsDigit(suffixSpan[i])) i++;
-                        if (i > 1) // '~' 后面跟了至少一个数字
-                        {
-                            suffixSpan = suffixSpan[i..];
-                            suffixTrimmed = true;
-                        }
-                    }
-                } while (suffixTrimmed);
-                var prefixSpan = prefix.Span;
-                bool prefixTrimmed;
-                int trimLen = 0;
-                do
-                {
-                    prefixTrimmed = false;
-                    trimLen = 0;
-                    while (prefixSpan.Length > trimLen && char.IsDigit(prefixSpan[^(trimLen + 1)])) trimLen++;
-                    if (trimLen > 0 && prefixSpan.Length > trimLen && prefixSpan[^(trimLen + 1)] == '~')
-                    {
-                        prefixSpan = prefixSpan[..^(trimLen + 1)]; // 切掉末尾的控制符
-                        prefixTrimmed = true;
-                    }
-                } while (prefixTrimmed);
+                var suffixSpan = rawText.AsSpan(hit.End, curPos - hit.End);
+                var prefixSpan = rawText.AsSpan(0, hit.Begin);
                 if (!suffixSpan.IsEmpty && ReplacerSuffix().IsMatch(suffixSpan)) continue;
                 if (!prefixSpan.IsEmpty && ReplacerPrefix().IsMatch(prefixSpan)) continue;
-                result.Push(suffix);
+                result.Push(rawText.AsMemory(hit.End..curPos));
                 result.Push(hit.Value.AsMemory());
                 curPos = hit.Begin;
             }

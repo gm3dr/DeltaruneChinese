@@ -1,6 +1,3 @@
-/**
- * 1-copy-datawin.js — 从 Steam 复制游戏文件
- */
 
 import { join } from 'node:path';
 import { log, progress } from '@clack/prompts';

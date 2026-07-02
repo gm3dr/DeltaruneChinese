@@ -1,9 +1,3 @@
-/**
- * 汉化补丁构建 — 共享工具函数
- *
- * 纯基础设施层，不含 UI/spinner 逻辑。
- * Spinner 和交互式提示在各主脚本中自行管理。
- */
 
 import { readFileSync, copyFileSync, mkdirSync, rmSync, readdirSync, statSync, utimesSync } from 'node:fs';
 import { join, dirname, basename, resolve } from 'node:path';
@@ -12,7 +6,7 @@ import { createHash } from 'node:crypto';
 import { homedir, platform } from 'node:os';
 import { fileURLToPath } from 'node:url';
 
-// ── 命令行选项 ──────────────────────────────────────────────────────
+// 命令行选项
 const ARGV = process.argv.slice(2);
 const VERBOSE = ARGV.includes('--verbose') || ARGV.includes('-v');
 
@@ -20,17 +14,17 @@ export function isVerbose() {
   return VERBOSE;
 }
 
-// ── 当前文件目录（ESM） ─────────────────────────────────────────────
+// 当前文件目录
 const __dirname = dirname(fileURLToPath(import.meta.url));
 
-// ── 操作系统检测 ────────────────────────────────────────────────────
+// 操作系统检测
 export function getPlatform() {
   const p = platform();
   if (p === 'win32' || p === 'darwin' || p === 'linux') return p;
   throw new Error(`不支持的操作系统: ${p}`);
 }
 
-// ── Steam 路径（等效于 1-复制datawin.ps1） ──────────────────────────
+// Steam 路径
 export function getSteamPaths() {
   const plat = getPlatform();
   const home = homedir();
@@ -59,7 +53,7 @@ export function getSteamPaths() {
   };
 }
 
-// ── 文件和目录操作 ───────────────────────────────────────────────────
+// 文件和目录操作
 export function ensureDir(dir) {
   mkdirSync(dir, { recursive: true });
 }
@@ -178,13 +172,13 @@ export function execAsync(bin, args = [], opts = {}) {
   });
 }
 
-// ── SHA256（取前 8 位 hex，匹配 PS1 逻辑） ──────────────────────────
+// SHA256（取前 8 位 hex）
 export function sha256File(filePath) {
   const data = readFileSync(filePath);
   return createHash('sha256').update(data).digest('hex').slice(0, 8);
 }
 
-// ── 时间戳归一化 ─────────────────────────────────────────────────────
+// 时间戳归一化
 export function normalizeTimestamps(dir) {
   const now = new Date();
   _recurseTimestamps(dir, now);
@@ -208,7 +202,7 @@ function _recurseTimestamps(dir, time) {
   }
 }
 
-// ── 读取 secrets.ps1（简易 KEY=VALUE 解析器） ──────────────────────
+// 读取 secrets.ps1
 export function readEnvFile(filePath) {
   try {
     const content = readFileSync(filePath, 'utf-8');
@@ -227,7 +221,7 @@ export function readEnvFile(filePath) {
   }
 }
 
-// ── 工具定位器 ──────────────────────────────────────────────────────
+// 工具定位器
 /**
  * 查找可执行工具。查找顺序：
  *   1. tool/<name>.exe（Windows）或 tool/<name>（其他平台）
@@ -236,23 +230,18 @@ export function readEnvFile(filePath) {
  */
 export function findTool(name) {
   const plat = getPlatform();
-// utils.js 位于 scripts/lib/，tool/ 在项目根目录
   const toolDir = join(PROJECT_ROOT, 'tool');
 
-  // 1. 检查 tool/ 目录
   const toolPath = plat === 'win32'
     ? join(toolDir, `${name}.exe`)
     : join(toolDir, name);
 
-  if (pathExists(toolPath)) return toolPath;
-
-  // Windows 下额外尝试 .exe 后缀
+  if (pathExists(toolPath)) return toolPat
   if (plat === 'win32' && !name.endsWith('.exe')) {
     const withExe = join(toolDir, `${name}.exe`);
     if (pathExists(withExe)) return withExe;
   }
 
-  // 2. 检查 PATH
   const result = spawnSync(
     plat === 'win32' ? 'where' : 'which',
     [name],
@@ -265,7 +254,7 @@ export function findTool(name) {
   return null;
 }
 
-// ── 简易通配符删除 ──────────────────────────────────────────────────
+// 简易通配符删除
 export function removeFiles(pattern) {
   const entries = readdirSync(PROJECT_ROOT, { withFileTypes: true });
   for (const entry of entries) {
@@ -279,7 +268,6 @@ export function removeFiles(pattern) {
 }
 
 function _matchGlob(name, pattern) {
-  // 支持: *.7z, *.tar.gz, *.exe, *.zip, *.dmg
   if (pattern.startsWith('*.')) {
     return name.endsWith(pattern.slice(1));
   }
@@ -317,7 +305,7 @@ export function getSteamDownloadInstructions() {
   }
 }
 
-// ── 项目根目录 ─────────────────────────────────────────────────────
+// 项目根目录
 // utils.js 位于 scripts/lib/，向上两层到达项目根目录
 export const PROJECT_ROOT = resolve(__dirname, '..', '..');
 

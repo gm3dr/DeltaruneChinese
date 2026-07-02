@@ -1,6 +1,3 @@
-/**
- * 3-generate-atlas.js — 生成纹理图集
- */
 
 import { spinner, log } from '@clack/prompts';
 import { execAsync, pathExists, wsPath, isVerbose } from './utils.js';

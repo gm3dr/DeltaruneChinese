@@ -1,10 +1,4 @@
 #!/usr/bin/env node
-/**
- * build.js — 汉化补丁构建入口
- *
- * 显示多选菜单，用户选择要执行的步骤后依次运行。
- * 支持 --verbose（-v）参数显示外部工具输出。
- */
 
 import { intro, outro, log, note, multiselect, isCancel } from '@clack/prompts';
 

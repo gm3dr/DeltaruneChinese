@@ -1,6 +1,3 @@
-/**
- * 2-download-text.js — 从 Weblate 拉取翻译文本（可选步骤）
- */
 
 import { spinner, log, password, text, isCancel } from '@clack/prompts';
 import { writeFileSync } from 'node:fs';

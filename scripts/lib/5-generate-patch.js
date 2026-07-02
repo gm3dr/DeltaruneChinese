@@ -1,6 +1,4 @@
-/**
- * 5-generate-patch.js — 生成 xdelta 差分补丁并打包为 7z
- */
+
 
 import { join } from "node:path";
 import { readFileSync, readdirSync, writeFileSync, rmSync } from "node:fs";

@@ -76,7 +76,7 @@ function Process-Chapter($ch) {
         }
     }
     # Chapter 5 videos
-    if ($ch -eq 3) {
+    if ($ch -eq 5) {
         foreach ($p in @("Win","Mac")) {
             $plower = if ($p -eq "Win") { "windows" } else { "mac" }
             $vidDir = Join-Path $PatchDirs[$p] "chapter5_${plower}\vid"

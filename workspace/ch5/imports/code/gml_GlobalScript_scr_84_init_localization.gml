@@ -192,6 +192,10 @@ function scr_84_init_localization()
             ds_map_add(sndm, "snd_jarona_orange1", snd_jarona_orange1_ja);
             ds_map_add(sndm, "snd_jarona_orange2", snd_jarona_orange1_ja);
             ds_map_add(sndm, "snd_ja_kidding", snd_ja_kidding_ja);
+            //
+            ds_map_add(sm, "spr_green_sign_big", spr_green_sign_big_jp);
+            ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_battleblcon_v_thanks_green_ja_susie);
+            //
         }
         else
         {
@@ -214,6 +218,11 @@ function scr_84_init_localization()
                 ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
                 ds_map_add(sm, "spr_dw_castle_welcome_sign", spr_dw_castle_welcome_sign);
                 ds_map_add(sm, "spr_face_susie_queen", spr_face_susie_queen);
+                ds_map_add(sm, "spr_green_sign_welcome_pink", spr_green_sign_welcome_pink);
+                //
+                ds_map_add(sm, "spr_green_sign_big", spr_green_sign_big);
+                ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_battleblcon_v_thanks_green);
+                //
             }
             else
             {
@@ -223,6 +232,11 @@ function scr_84_init_localization()
                 ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
                 ds_map_add(sm, "spr_dw_castle_welcome_sign", spr_zhname_dw_castle_welcome_sign);
                 ds_map_add(sm, "spr_face_susie_queen", spr_zhname_face_susie_queen);
+                ds_map_add(sm, "spr_green_sign_welcome_pink", spr_zhname_green_sign_welcome_pink);
+                //
+                ds_map_add(sm, "spr_green_sign_big", spr_zhname_green_sign_big);
+                ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_zhname_battleblcon_v_thanks_green);
+                //
             }
             //
             ds_map_add(sm, "spr_battlemsg", spr_battlemsg);
@@ -251,7 +265,6 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_green_sign", spr_green_sign);
             ds_map_add(sm, "spr_green_sign_owe_money", spr_green_sign_owe_money);
             ds_map_add(sm, "spr_green_sign_owe_money_left", spr_green_sign_owe_money_left);
-            ds_map_add(sm, "spr_green_sign_welcome_pink", spr_green_sign_welcome_pink);
             ds_map_add(sm, "spr_pink_mewers_live", spr_pink_mewers_live);
             ds_map_add(sm, "spr_pink_mewers_live_dim", spr_pink_mewers_live_dim);
             ds_map_add(sm, "spr_thrashfit_header", spr_thrashfit_header);

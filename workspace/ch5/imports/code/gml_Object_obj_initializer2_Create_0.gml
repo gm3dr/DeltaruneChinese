@@ -60,12 +60,12 @@ global.savedata_async_id = -1;
 global.savedata_async_load = false;
 global.savedata_error = false;
 global.savedata_debuginfo = "";
-global.versionno = "v0.0.243";
+global.versionno = "v0.0.244";
 
 if (scr_is_switch_os())
-    global.versionno = "v0.0.243";
+    global.versionno = "v0.0.244";
 else if (os_type == os_ps4 || os_type == os_ps5)
-    global.versionno = "v0.0.243";
+    global.versionno = "v0.0.244";
 
 global.pause_plat = false;
 global.game_won = false;

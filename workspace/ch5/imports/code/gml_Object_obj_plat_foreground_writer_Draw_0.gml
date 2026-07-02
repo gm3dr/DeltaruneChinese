@@ -119,8 +119,8 @@ if (instance_exists(obj_plat_player) && obj_plat_player.targetmode)
                 // if (global.lang == "ja")
                 //     _len = 28 * (string_length(targets[target]) + 1);
                 // else
-                var _cjk_cnt = (string_byte_length(name) - string_length(name)) / 2;
-                var _en_cnt = string_length(name) - _cjk_cnt;
+                var _cjk_cnt = (string_byte_length(targets[target]) - string_length(targets[target])) / 2;
+                var _en_cnt = string_length(targets[target]) - _cjk_cnt;
                 _len = 28 * _cjk_cnt + 16 * (_en_cnt + 1);
                 
                 draw_text(_camerax + xoffset + _len, _cameray + yoffset + 10 + ss + (_yoffset * side), "-->  " + obj_plat_player.hlit_name);

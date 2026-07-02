@@ -11,7 +11,7 @@ Set-StrictMode -Version Latest
 
 # ---------- 时间 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
-$date      = "Beta3"
+$date      = "Beta4"
 $ts        = Get-Date $fixedTime
 
 Write-Host "Build time : $fixedTime"

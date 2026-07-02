@@ -199,7 +199,8 @@ if (formatted == 0)
             
             if (charpos >= charline)
             {
-                if (remspace > 2)
+                // if (remspace > 2)
+                if (remspace > 2 && string_char_at(mystring, remspace - 1) != "*")
                 {
                     mystring = string_delete(mystring, remspace, 1);
                     mystring = string_insert("&", mystring, remspace);

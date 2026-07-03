@@ -52,21 +52,14 @@ alpha = 0;
 blocks = [];
 array_push(blocks, 
 {
-    x: 40, // 请
+    x: 40, // 插
     y: 0,
     w: 16,
     h: 14
 });
 array_push(blocks, 
 {
-    x: 56, // 插
-    y: 0,
-    w: 16,
-    h: 14
-});
-array_push(blocks, 
-{
-    x: 72, // 入
+    x: 56, // 入
     y: 0,
     w: 16,
     h: 14
@@ -80,23 +73,23 @@ array_push(blocks,
 });
 array_push(blocks, 
 {
-    x: 104, // 第
+    x: 88, // 第
     y: 0,
     w: 16,
     h: 14
 });
 array_push(blocks, 
 {
-    x: 120, // 7
+    x: 104, // 7
     y: 0,
     w: 16,
     h: 14
 });
 array_push(blocks, 
 {
-    x: 136, // 章
+    x: 120, // 章
     y: 0,
-    w: 14,
+    w: 16,
     h: 14
 });
 array_push(blocks, 

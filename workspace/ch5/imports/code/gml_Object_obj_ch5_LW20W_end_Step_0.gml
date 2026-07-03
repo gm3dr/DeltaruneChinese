@@ -28,8 +28,8 @@ if (con == 1)
     var rate = 0.7;
     var sidebpause = 4;
     var rate2 = 1.4;
-    var wordbreak = 7;
-    var wordcount = 9;
+    var wordbreak = 6;
+    var wordcount = 8;
 
     for (var i = 0; i < (wordbreak + 1); i++)
     {

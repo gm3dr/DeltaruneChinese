@@ -219,6 +219,7 @@ function scr_84_init_localization()
                 ds_map_add(sm, "spr_dw_castle_welcome_sign", spr_dw_castle_welcome_sign);
                 ds_map_add(sm, "spr_face_susie_queen", spr_face_susie_queen);
                 ds_map_add(sm, "spr_green_sign_welcome_pink", spr_green_sign_welcome_pink);
+                ds_map_add(sm, "spr_green_sign", spr_green_sign);
                 //
                 ds_map_add(sm, "spr_green_sign_big", spr_green_sign_big);
                 ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_battleblcon_v_thanks_green);
@@ -233,6 +234,7 @@ function scr_84_init_localization()
                 ds_map_add(sm, "spr_dw_castle_welcome_sign", spr_zhname_dw_castle_welcome_sign);
                 ds_map_add(sm, "spr_face_susie_queen", spr_zhname_face_susie_queen);
                 ds_map_add(sm, "spr_green_sign_welcome_pink", spr_zhname_green_sign_welcome_pink);
+                ds_map_add(sm, "spr_green_sign", spr_zhname_green_sign);
                 //
                 ds_map_add(sm, "spr_green_sign_big", spr_zhname_green_sign_big);
                 ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_zhname_battleblcon_v_thanks_green);
@@ -262,7 +264,6 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_dw_scarecrow_not_enemy_sign", spr_dw_scarecrow_not_enemy_sign);
             ds_map_add(sm, "spr_fcastle_jail_chute", spr_fcastle_jail_chute);
             ds_map_add(sm, "spr_gardenmuslogo", spr_gardenmuslogo);
-            ds_map_add(sm, "spr_green_sign", spr_green_sign);
             ds_map_add(sm, "spr_green_sign_owe_money", spr_green_sign_owe_money);
             ds_map_add(sm, "spr_green_sign_owe_money_left", spr_green_sign_owe_money_left);
             ds_map_add(sm, "spr_pink_mewers_live", spr_pink_mewers_live);

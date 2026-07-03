@@ -1,4 +1,6 @@
 ﻿【三角符文汉化补丁 说明文档】
+* 汉化补丁反馈群：1033065757（主群）
+  1034587794（备用答疑群）
 * 构建时间：$(CURRENT_TIME)
 * 补丁版本：$(CURRENT_DATE)
 * 适配游戏：Steam 正版 DELTARUNE 一至五章 最新版
@@ -6,6 +8,18 @@
 * 这不是 UNDERTALE / 传说之下 汉化补丁
 ---
 【更新日志】
+2026-07-04 Build 260704 【第五章汉化发布】
+* Deltarune 第五章 人工汉化补丁
+  正式发布！（By. 好人汉化组）
+* 本次汉化补丁包含 一至五章完整汉化，
+  人名不翻译/仅翻译招揽/人名翻译
+  三档自由切换
+* 如果有任何问题，或无法安装补丁
+  请来汉化答疑群
+* 祝大家玩得开心！
+* 译名调整 千兆沙拉 -> 巨大沙拉
+* 前四章文本润色及微调
+
 2026-07-01 Build 260701 (b)
 * 新增 一张第3章汉画贴图
 * 调整 “未击中”翻译改为“未命中”
@@ -203,10 +217,17 @@ Uni，瓦斯霓特•洋芋，米粒(enderesting)，w1n1n1t351，
 夕葵，鼠球，Mercurypie，^1瓶洋酒[Unsub]，Cupcake~，
 Lucas•曹•CKC，CoCo水君(Toast)，凝雨白沙，JH，
 黎小明，Neubulae[Almona]，旋风SELF，无辣味wdw
+-- 第5章翻译&校对 --
+鸥皇不欧，Uni，鼠球，winnt351 as BUZZ CUTZ，单衫_石宇砖，
+^1粒米(enderesting)，瓦斯霓特^1洋芋，Felixeffery.，JH，
+OceanBear，黎小明，就是菜刀，FH^CY，Neubulae[Almona]，
+yzdnn，onomi，夕葵，A^X暗星233，ORLIGHTO，凝雨白沙，
+^1瓶洋酒[Unsub]，CoCo水君(Toast)，旋风~2SELF，Cupcake～
+丢丢hamburger
 -- 美工 --
 yzdnn，晨忆风谷，玖颜332(teniver)，单衫_石宇砖，
 米粒(enderesting)，凝雨白沙，便利贴不翘边，夕葵，
-YiTang，Buttons，晓晓_Akatsuki，JH，闻笛，空闲
+YiTang，Buttons，晓晓_Akatsuki，JH，闻笛
 -- 测试 --
 Orlighto，Ralsei，西乡小男孩，云凝沙，Mr_H2T，
-ALoss，Shine晓光
+ALoss，braing，xuan_w

@@ -195,6 +195,7 @@ function scr_84_init_localization()
             //
             ds_map_add(sm, "spr_green_sign_big", spr_green_sign_big_jp);
             ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_battleblcon_v_thanks_green_ja_susie);
+            ds_map_add(sm, "spr_bnameflowery", spr_ja_bnameflowery);
             //
         }
         else
@@ -221,6 +222,7 @@ function scr_84_init_localization()
                 ds_map_add(sm, "spr_green_sign_welcome_pink", spr_green_sign_welcome_pink);
                 ds_map_add(sm, "spr_green_sign", spr_green_sign);
                 //
+                ds_map_add(sm, "spr_bnameflowery", spr_bnameflowery);
                 ds_map_add(sm, "spr_green_sign_big", spr_green_sign_big);
                 ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_battleblcon_v_thanks_green);
                 //
@@ -236,6 +238,7 @@ function scr_84_init_localization()
                 ds_map_add(sm, "spr_green_sign_welcome_pink", spr_zhname_green_sign_welcome_pink);
                 ds_map_add(sm, "spr_green_sign", spr_zhname_green_sign);
                 //
+                ds_map_add(sm, "spr_bnameflowery", spr_zhname_bnameflowery);
                 ds_map_add(sm, "spr_green_sign_big", spr_zhname_green_sign_big);
                 ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_zhname_battleblcon_v_thanks_green);
                 //

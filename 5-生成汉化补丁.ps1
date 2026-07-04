@@ -11,7 +11,7 @@ Set-StrictMode -Version Latest
 
 # ---------- 时间 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
-$date      = "RC-2"
+$date      = (Get-Date -Format "yyMMdd") + "-ch5"
 $ts        = Get-Date $fixedTime
 
 Write-Host "Build time : $fixedTime"

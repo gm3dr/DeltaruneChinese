@@ -377,18 +377,7 @@ if (MENU_NO >= 0)
         CHSELECTTEXT = stringsetloc("Chapter Select", "DEVICE_MENU_slash_Draw_0_gml_284_0");
         QUITTEXT = stringsetloc("End Program", "DEVICE_MENU_slash_Draw_0_gml_285_0");
         // LANGUAGETEXT = (global.lang == "en") ? stringset("日本語") : stringset("English");
-		switch (global.names)
-		{
-			case 0:
-				LANGUAGETEXT = "保留人名";
-				break;
-			case 1:
-				LANGUAGETEXT = "翻译招揽";
-				break;
-			case 2:
-				LANGUAGETEXT = "翻译人名";
-				break;
-		}
+        LANGUAGETEXT = "人名译法";
         //
         if (TYPE == 1)
         {
@@ -447,25 +436,17 @@ if (MENU_NO >= 0)
     }
     
     draw_set_font(fnt_main);
-    //
-    if (names_countdown > 0)
-    {
-        draw_set_alpha(0.4);
-        draw_set_color(c_white);
-        
-		switch (global.names)
-		{
-			case 0:
-            	draw_text_transformed(5, 230, "从现在起所有角色名称都将保留原文不翻译。", 0.5, 0.5, 0);
-        		break
-			case 1:
-				draw_text_transformed(5, 230, "从现在起可招揽的角色名称将会被翻译。", 0.5, 0.5, 0);
-				break
-			case 2:
-				draw_text_transformed(5, 230, "从现在起所有角色名称都会被翻译。", 0.5, 0.5, 0);
-				break
-		}
-    }
+	//
+    draw_set_halign(fa_right);
+    draw_set_alpha(0.8);
+    draw_set_color(c_white);
+    draw_text_transformed((room_width / 2) - 5, 5, "可使用菜单下方【人名译法】按钮切换", 0.5, 0.5, 0);
+    var color_name = (global.names == 0) ? c_yellow : c_white;
+    draw_text_transformed_colour((room_width / 2) - 5, 12.5, "保留所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
+    color_name = (global.names == 1) ? c_yellow : c_white;
+    draw_text_transformed_colour((room_width / 2) - 5, 20, "翻译所有可招揽角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
+    color_name = (global.names == 2) ? c_yellow : c_white;
+    draw_text_transformed_colour((room_width / 2) - 5, 27.5, "翻译所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
     //
     if (TYPE == 1)
     {

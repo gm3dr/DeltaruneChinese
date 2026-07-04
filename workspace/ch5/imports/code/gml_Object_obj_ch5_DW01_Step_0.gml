@@ -296,7 +296,7 @@ if (con == 10)
     }
     else
     {
-        c_msgset(0, "\\E0\\VH* ..^1. 也是他最好的朋友。/");
+        c_msgset(0, "\\E0\\VH* ..^1.也是他最好的朋友。/");
     }
     
     c_facenext("susie", "E");

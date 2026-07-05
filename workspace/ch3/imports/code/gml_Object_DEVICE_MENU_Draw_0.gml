@@ -443,12 +443,13 @@ if (MENU_NO >= 0)
     draw_set_alpha(0.8);
     draw_set_color(c_white);
     draw_text_transformed((room_width / 2) - 5, 5, "可使用菜单下方【人名译法】按钮切换", 0.5, 0.5, 0);
-    var color_name = (global.names == 0) ? c_yellow : c_white;
+    var color_name = (global.names == 0) ? c_yellow : c_ltgray;
     draw_text_transformed_colour((room_width / 2) - 5, 12.5, "保留所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
-    color_name = (global.names == 1) ? c_yellow : c_white;
+    color_name = (global.names == 1) ? c_yellow : c_ltgray;
     draw_text_transformed_colour((room_width / 2) - 5, 20, "翻译所有可招揽角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
-    color_name = (global.names == 2) ? c_yellow : c_white;
+    color_name = (global.names == 2) ? c_yellow : c_ltgray;
     draw_text_transformed_colour((room_width / 2) - 5, 27.5, "翻译所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
+    draw_set_halign(fa_left);
     //
     if (TYPE == 1)
     {

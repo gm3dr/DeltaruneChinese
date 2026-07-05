@@ -238,6 +238,6 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>
 https://1813524098.share.123pan.cn/123pan/KPMSVv-ydDjv
 - `ch5_intro_en` 第五章的 Flowery 出场动画
-- `ch5宣传片` [B站官号发布的 1-5 章汉化发布宣传片]()<br>
+- `ch5宣传片` [B站官号发布的 1-5 章汉化发布宣传片](https://www.bilibili.com/video/BV1PEMA6TEqj)<br>
 为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>
 https://1813524098.share.123pan.cn/123pan/KPMSVv-phcdd

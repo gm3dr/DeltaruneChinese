@@ -216,8 +216,8 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 5. 改动了 `obj_ch5_LW20W_end` 来修正 Weird Route 结尾的显示效果
 6. 改动了 `obj_date_controller` 来修复 Pink 战约会阶段的何意味强制换行问题<br>以及帮忙修复了 Pink 战某些文本描边显示异常的问题
 7. 改动了 `obj_battlecontroller` 来修正 Netskie 战的查看文本显示
-8.  改动了 `obj_green_enemy` 来实现 Green 战斗的人名翻译切换
-9.  改动了 `obj_yellow_enemy` 来实现 Yellow 战斗的人名翻译切换
+8.  改动了 `obj_green_enemy` 来实现 Green 战斗中 Green 牌子的人名翻译切换
+9.  改动了 `obj_yellow_enemy` 来实现 Yellow 战斗中 Green 牌子的人名翻译切换
 10. 帮忙修复了 `obj_terracota_enemy` 的错误结束回合问题
 11. 改动了 `obj_yellow_trial_manager` 来修正审判介面手柄按钮偏移的问题
 12. 改动了 `obj_town_mid_conbini` 来实现 Sans 店名的人名翻译切换

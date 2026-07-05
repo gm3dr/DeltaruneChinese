@@ -140,7 +140,7 @@ $Tasks = @(
 foreach ($t in $Tasks) { Build-Patch $t.Dir $t.Tag $t.Type }
 
 # ---------- 平台安装包 ----------
-foreach ($p in @("linux", "win")) {
+foreach ($p in @("linux", "win", "winold")) {
     Write-Host "Packaging installer for $p..."
     $PlatformDir = "$TempDir\$p"
     New-Item -ItemType Directory -Path $PlatformDir -Force | Out-Null

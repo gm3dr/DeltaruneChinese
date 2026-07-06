@@ -208,6 +208,22 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 1. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
 2. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
 3. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+#### 第五章
+1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+2. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+3. 改动了 `scr_rhythmgame_lyrics` 使得音游小游戏强制使用日文方式显示字间隙
+4. 改动了 `obj_ch5_DWCR01` 来修复泡泡对话不会正常结束消失的问题
+5. 改动了 `obj_ch5_LW20W_end` 来修正 Weird Route 结尾的显示效果
+6. 改动了 `obj_date_controller` 来修复 Pink 战约会阶段的何意味强制换行问题<br>以及帮忙修复了 Pink 战某些文本描边显示异常的问题
+7. 改动了 `obj_battlecontroller` 来修正 Netskie 战的查看文本显示
+8.  改动了 `obj_green_enemy` 来实现 Green 战斗中 Green 牌子的人名翻译切换
+9.  改动了 `obj_yellow_enemy` 来实现 Yellow 战斗中 Green 牌子的人名翻译切换
+10. 帮忙修复了 `obj_terracota_enemy` 的错误结束回合问题
+11. 改动了 `obj_yellow_trial_manager` 来修正审判介面手柄按钮偏移的问题
+12. 改动了 `obj_town_mid_conbini` 来实现 Sans 店名的人名翻译切换
+13. 改动了 `obj_dw_cliff_climbrefresher` 来修复自动换行导致的显示异常
+14. 改动了 `obj_plat_foreground_writer` 来修复横版跳跃状态下互动文本错位的问题
+15. 改动了 `obj_84_lang_helper` 与 `obj_room_torielclass` 来实现 Toriel 黑板的人名翻译切换
 ### 补字用字体（workspace/ch\*/imports/font/font）
 - `normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、全角逗号句号、双层直角引号）
 - `battle.ttf` SimSun 16x（中易宋体 内嵌点阵 16）
@@ -222,6 +238,6 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>
 https://1813524098.share.123pan.cn/123pan/KPMSVv-ydDjv
 - `ch5_intro_en` 第五章的 Flowery 出场动画
-- `ch5宣传片` [B站官号发布的 1-5 章汉化发布宣传片]()<br>
+- `ch5宣传片` [B站官号发布的 1-5 章汉化发布宣传片](https://www.bilibili.com/video/BV1PEMA6TEqj)<br>
 为了控制文件大小，去除了宣传片使用的所有视频素材，请在下方网盘下载后全部放置到文件夹内<br>
 https://1813524098.share.123pan.cn/123pan/KPMSVv-phcdd

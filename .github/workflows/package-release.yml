@@ -14,28 +14,28 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download Patch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir patches
-          gh release download --latest --pattern "patch_chs_*.7z" --dir patches
+          gh release download --pattern "patch_chs_windowslinux_*.7z" --dir patches
 
       - name: Download Patcher
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
-          gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*Windows*.7z" --latest
+          gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*Windows*.7z" 
 
       - name: Build Windows Installers
         run: |
           $date = Get-Date -Format "yyMMdd"
           
           $targets = @(
-              @{ FilePattern="*Windows_v*.7z";          Prefix="【Win10+（推荐）】"; Output="Win10";  Folder="win" },
-              @{ FilePattern="*Windows_Outdated_v*.7z"; Prefix="【Win7-】";          Output="WinOld"; Folder="winold" }
+              @{ FilePattern="*Windows_v*.7z";          Prefix="[Win10+]"; Output="Win10";  Folder="win" },
+              @{ FilePattern="*Windows_Outdated_v*.7z"; Prefix="[Win7-]";          Output="WinOld"; Folder="winold" }
           )
 
           foreach ($target in $targets) {
@@ -49,39 +49,38 @@ jobs:
               $temp7z = "packed_$($target.Output).7z"
               7z a -t7z -mx=9 -ms=on -mmt=on $temp7z ".\$extractDir\*"
               
-              $exeName = "$($target.Prefix)三角符文汉化补丁-V$date.exe"
+              $exeName = "$($target.Prefix)-V$date.exe"
               $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$($target.Folder)\config.txt`"+`"$temp7z`" `"$exeName`""
               cmd.exe /d /c $cmdLine
               
-              $zipName = "$($target.Prefix)三角符文汉化补丁-V$date.zip"
+              $zipName = "$($target.Prefix)-V$date.zip"
               Compress-Archive -Path $exeName -DestinationPath $zipName
           }
 
       - name: Upload Windows Installers
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          $TAG = gh release view --latest --json tagName --jq .tagName
-          gh release upload $TAG (Get-ChildItem "*.zip").FullName --clobber
+        uses: actions/upload-artifact@v6
+        with:
+          name: Final_Installers_Windows
+          path: "*.zip"
 
   # Linux
   build-linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download Patch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir patches
-          gh release download --latest --pattern "patch_chs_*.7z" --dir patches
+          gh release download --pattern "patch_chs_windowslinux_*.7z" --dir patches
 
       - name: Download Patcher
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*Linux*.tar.gz" --latest
+        run: gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*Linux*.tar.gz"
 
       - name: Build Linux Installer
         run: |
@@ -91,37 +90,36 @@ jobs:
           
           tar -xzf DeltaruneChinesePatcher_Linux_v*.tar.gz -C $EXTRACT_DIR
           cp patches/patch_chs_windowslinux_*.7z $EXTRACT_DIR/
-          cp "cn_installer/linux/*" $EXTRACT_DIR/
+          cp -r cn_installer/linux/. $EXTRACT_DIR/
           find $EXTRACT_DIR -type f \( -name "*.sh" -o -name "*.x86_64" \) -exec chmod a+x {} +
           
-          OUTPUT_NAME="【Linux】三角符文汉化补丁-V${DATE}.tar.gz"
+          OUTPUT_NAME="[Linux]Patch-V${DATE}.tar.gz"
           tar -czf "$OUTPUT_NAME" -C $EXTRACT_DIR .
 
-      - name: Upload Linux Installer
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG=$(gh release view --latest --json tagName --jq .tagName)
-          gh release upload "$TAG" 【Linux】*.tar.gz --clobber
+      - name: Upload Linux Installers
+        uses: actions/upload-artifact@v6
+        with:
+          name: Final_Installers_Linux
+          path: "*.tar.gz"
 
   # macOS
   build-macos:
     runs-on: macos-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v6
 
       - name: Download Patch
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir patches
-          gh release download --latest --pattern "patch_chs_*.7z" --dir patches
+          gh release download --pattern "patch_chs_macos_*.7z" --dir patches
 
       - name: Download Patcher
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*macOS*.dmg" --latest
+        run: gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*macOS*.dmg"
 
       - name: Build macOS Installer
         run: |
@@ -138,14 +136,13 @@ jobs:
           
           mkdir dmg_root
           mv "DELTARUNE Chinese Patcher.app" dmg_root/
-          cp "cn_installer/mac/*" dmg_root/
+          cp -r cn_installer/mac/. dmg_root/
           
-          OUTPUT_NAME="【macOS】三角符文汉化补丁-V${DATE}.dmg"
+          OUTPUT_NAME="[macOS]Patch-V${DATE}.dmg"
           hdiutil create -volname "Deltarune Patcher" -srcfolder dmg_root -ov -format UDZO "$OUTPUT_NAME"
 
-      - name: Upload macOS Installer
-        env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG=$(gh release view --latest --json tagName --jq .tagName)
-          gh release upload "$TAG" 【macOS】*.dmg --clobber
+      - name: Upload macOS Installers
+        uses: actions/upload-artifact@v6
+        with:
+          name: Final_Installers_macOS
+          path: "*.dmg"

@@ -15,5 +15,6 @@ secrets.*
 .DS_Store
 **/Media Cache/
 /patcher/
+/patches/
 log.txt
 export_result/

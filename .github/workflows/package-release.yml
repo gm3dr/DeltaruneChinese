@@ -34,26 +34,26 @@ jobs:
           $date = Get-Date -Format "yyMMdd"
           
           $targets = @(
-              @{ FilePattern="*Windows_v*.7z";          Prefix="[Win10+]"; Output="Win10";  Folder="win" },
-              @{ FilePattern="*Windows_Outdated_v*.7z"; Prefix="[Win7-]";          Output="WinOld"; Folder="winold" }
+              @{ FilePattern="*Windows_v*.7z";          Prefix="Win10+（推荐）";  Folder="win" },
+              @{ FilePattern="*Windows_Outdated_v*.7z"; Prefix="Win7-";   Folder="winold" }
           )
 
           foreach ($target in $targets) {
-              Write-Host "Processing $($target.Output)..."
-              $extractDir = "temp_$($target.Output)"
+              Write-Host "Processing $($target.Folder)..."
+              $extractDir = "temp_$($target.Folder)"
               
               $patcherArchive = Get-ChildItem $target.FilePattern | Select-Object -First 1
               7z x $patcherArchive.FullName -o"$extractDir" -y
               Copy-Item "patches\patch_chs_windowslinux_*.7z" -Destination "$extractDir\" -Force
               
-              $temp7z = "packed_$($target.Output).7z"
+              $temp7z = "packed_$($target.Folder).7z"
               7z a -t7z -mx=9 -ms=on -mmt=on $temp7z ".\$extractDir\*"
               
-              $exeName = "$($target.Prefix)-V$date.exe"
+              $exeName = "【$($target.Prefix)】三角符文汉化补丁-V$date.exe"
               $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$($target.Folder)\config.txt`"+`"$temp7z`" `"$exeName`""
               cmd.exe /d /c $cmdLine
               
-              $zipName = "$($target.Prefix)-V$date.zip"
+              $zipName = "【$($target.Prefix)】三角符文汉化补丁-V$date.zip"
               Compress-Archive -Path $exeName -DestinationPath $zipName
           }
 
@@ -61,7 +61,7 @@ jobs:
         uses: actions/upload-artifact@v6
         with:
           name: Final_Installers_Windows
-          path: "*.zip"
+          path: "*Win*三角符文汉化补丁*.zip"
 
   # Linux
   build-linux:
@@ -93,14 +93,14 @@ jobs:
           cp -r cn_installer/linux/. $EXTRACT_DIR/
           find $EXTRACT_DIR -type f \( -name "*.sh" -o -name "*.x86_64" \) -exec chmod a+x {} +
           
-          OUTPUT_NAME="[Linux]Patch-V${DATE}.tar.gz"
+          OUTPUT_NAME="【Linux】三角符文汉化补丁-V${DATE}.tar.gz"
           tar -czf "$OUTPUT_NAME" -C $EXTRACT_DIR .
 
       - name: Upload Linux Installers
         uses: actions/upload-artifact@v6
         with:
           name: Final_Installers_Linux
-          path: "*.tar.gz"
+          path: "【Linux】三角符文汉化补丁*.tar.gz"
 
   # macOS
   build-macos:
@@ -138,11 +138,11 @@ jobs:
           mv "DELTARUNE Chinese Patcher.app" dmg_root/
           cp -r cn_installer/mac/. dmg_root/
           
-          OUTPUT_NAME="[macOS]Patch-V${DATE}.dmg"
+          OUTPUT_NAME="【macOS】三角符文汉化补丁-V${DATE}.dmg"
           hdiutil create -volname "Deltarune Patcher" -srcfolder dmg_root -ov -format UDZO "$OUTPUT_NAME"
 
       - name: Upload macOS Installers
         uses: actions/upload-artifact@v6
         with:
           name: Final_Installers_macOS
-          path: "*.dmg"
+          path: "【macOS】三角符文汉化补丁*.dmg"

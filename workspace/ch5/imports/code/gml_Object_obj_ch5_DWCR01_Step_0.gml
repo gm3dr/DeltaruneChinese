@@ -175,6 +175,8 @@ if (con == 1)
     c_wait_talk();
     c_customfunc(function()
     {
+        interjection = -1;
+        
         with (roomcontroller)
         {
             with (orange_bubble)
@@ -189,6 +191,8 @@ if (con == 1)
     c_wait_talk();
     c_customfunc(function()
     {
+        interjection = -1;
+        
         with (roomcontroller)
         {
             with (orange_bubble)

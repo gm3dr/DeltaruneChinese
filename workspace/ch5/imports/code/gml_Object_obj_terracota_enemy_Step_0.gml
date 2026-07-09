@@ -67,13 +67,13 @@ if (global.monster[myself] == 1)
                     scr_turntimer(190);
                 
                 if (global.flag[1462] == 1)
-                    scr_turntimer(270);
+                    scr_turntimer(275);
                 
                 if (global.flag[1462] == 2)
-                    scr_turntimer(240);
+                    scr_turntimer(245);
                 
                 if (global.flag[1462] == 3)
-                    scr_turntimer(360);
+                    scr_turntimer(365);
                 
                 global.flag[1462]++;
                 

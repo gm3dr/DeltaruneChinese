@@ -1,5 +1,4 @@
 {
-  "date": "1741857742229",
   "DEVICE_CONTACT_slash_Step_0_gml_5_0": "^9 ^8 %",
   "DEVICE_CONTACT_slash_Step_0_gml_6_0": "你^6\n听得到吗^6？\\M1^6 %",
   "DEVICE_CONTACT_slash_Step_0_gml_7_0": "^6 \\M0我^6们\n 连接上了吗^6？\\M1 ^6 ^6 %%",
@@ -4735,7 +4734,7 @@
   "obj_ch2_scene23d_slash_Step_0_gml_300_0": "\\E4* 我的确为那个感到抱歉^1，\n但是。/%",
   "obj_ch2_scene23d_slash_Step_0_gml_307_0": "\\E5* 我也要为另一件事而道歉。/%",
   "obj_ch2_scene23d_slash_Step_0_gml_314_0": "\\EG* 我不应该骗你的。/",
-  "obj_ch2_scene23d_slash_Step_0_gml_316_0": "\\EG * .../",
+  "obj_ch2_scene23d_slash_Step_0_gml_316_0": "\\EG /",
   "obj_ch2_scene23d_slash_Step_0_gml_318_0": "\\E8* 我知道你一直帮助我都是因为^1，\n那个.../%",
   "obj_ch2_scene23d_slash_Step_0_gml_327_0": "\\EH* 你迷恋上我了，所以.../%",
   "obj_ch2_scene23d_slash_Step_0_gml_338_0": "\\EI* 什么？/%",

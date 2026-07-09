@@ -479,7 +479,7 @@ namespace deltarunePacker
 
             UndertaleData datawin = await datawinTask; // 卡一下后面的任务 腾出CPU让bmfont早点执行完
             Task<string> re_recruit = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_recruit.json"), Encoding.UTF8);
-            Task<string> fmt = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/raw.json"), Encoding.UTF8);
+            Task<string> fmt = File.ReadAllTextAsync(Path.Combine(workspace, "lang_ja.json"), Encoding.UTF8);
             Task<string> en = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/en.json"), Encoding.UTF8);
             Task importTexts = ImportTexts(await cn, await en, await fmt, await re_cnname, await re_recruit);
 

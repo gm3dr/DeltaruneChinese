@@ -130,6 +130,7 @@ jobs:
           hdiutil detach /Volumes/PatcherMount
           
           cp patches/patch_chs_macos_*.7z "DELTARUNE Chinese Patcher.app/Contents/MacOS/"
+          find "DELTARUNE Chinese Patcher.app/Contents/MacOS/externals" -type f -exec chmod a-x {} +
           
           xattr -cr "DELTARUNE Chinese Patcher.app"
           codesign --force --deep --sign - "DELTARUNE Chinese Patcher.app"

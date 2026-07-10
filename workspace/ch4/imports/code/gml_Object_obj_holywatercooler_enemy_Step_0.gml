@@ -193,7 +193,7 @@ if (global.monster[myself] == 1)
             if (rr == 1)
                 msgsetloc(0, "Buble", "obj_holywatercooler_enemy_slash_Step_0_gml_145_0");
             else
-                msgsetsubloc(0, "~1", random_vowel, "obj_watercooler_enemy_slash_Step_0_gml_38_0");
+                msgsetsub(0, "~1", random_vowel);
             
             global.msg[0] += "/%";
             scr_enemyblcon(x, global.monstery[myself] - 20, 10);

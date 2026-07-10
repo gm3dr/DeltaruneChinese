@@ -40,7 +40,7 @@ if (global.monster[myself] == 1)
             if (rr == 1)
                 msgsetloc(0, "Buble", "obj_watercooler_enemy_slash_Step_0_gml_37_0");
             else
-                msgsetsubloc(0, "~1", random_vowel, "obj_watercooler_enemy_slash_Step_0_gml_38_0");
+                msgsetsub(0, "~1", random_vowel);
         }
         else if (rr == 1)
         {

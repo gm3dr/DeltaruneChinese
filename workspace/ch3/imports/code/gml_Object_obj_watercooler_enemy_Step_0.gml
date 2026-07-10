@@ -33,14 +33,14 @@ if (global.monster[myself] == 1)
         
         if (amimoonwarmer == false)
         {
-            var random_vowel = choose("叭", "哔", "卟", "呗", "啵"); // var random_vowel = choose("a", "e", "i", "o", "u", "u", "oo");
+            var random_vowel = choose("叭", "哔", "卟", "呗", "啵", "啵啵"); // var random_vowel = choose("a", "e", "i", "o", "u", "u", "oo");
             if (global.lang == "ja")
                 random_vowel = choose("パ", "ピ", "プ", "ぺ");
             
             if (rr == 1)
                 msgsetloc(0, "Buble", "obj_watercooler_enemy_slash_Step_0_gml_37_0");
             else
-                msgsetsubloc(0, "B~1b~2e", random_vowel, choose(/*"i", "l"*/"卟", "啵"), "obj_watercooler_enemy_slash_Step_0_gml_38_0");
+                msgsetsubloc(0, "~1", random_vowel, "obj_watercooler_enemy_slash_Step_0_gml_38_0");
         }
         else if (rr == 1)
         {

@@ -12,10 +12,10 @@ namespace deltarunePacker
 			}
             DateTime begin = DateTime.Now;
             // await Task.WhenAll(
-            //     new Exporter(Path.Combine(workspace, "export_result/ch5"), Path.Combine(workspace, "ch5/data.win")).Run()
-                // new Exporter(Path.Combine(workspace, "export_result/ch4"), Path.Combine(workspace, "ch4/data.win")).Run()
-                // new Exporter(Path.Combine(workspace, "export_result/ch3"), Path.Combine(workspace, "ch3/data.win")).Run(),
-                // new Exporter(Path.Combine(workspace, "export_result/ch2"), Path.Combine(workspace, "ch2/data.win")).Run()
+            //     new Exporter(Path.Combine(workspace, "export_result/ch5"), Path.Combine(workspace, "ch5/data.win")).Run(),
+            //     new Exporter(Path.Combine(workspace, "export_result/ch4"), Path.Combine(workspace, "ch4/data.win")).Run(),
+            //     new Exporter(Path.Combine(workspace, "export_result/ch3"), Path.Combine(workspace, "ch3/data.win")).Run(),
+            //     new Exporter(Path.Combine(workspace, "export_result/ch2"), Path.Combine(workspace, "ch2/data.win")).Run()
             // );
             await Task.WhenAll(
                 new Importer(Path.Combine(workspace, "ch5"), Path.Combine(workspace, "result/ch5"), Path.Combine(workspace, "ch5/data.win")).Run(),

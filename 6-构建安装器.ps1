@@ -67,7 +67,7 @@ foreach ($p in @("linux", "win", "winold")) {
         $file_name = "${prefix}三角符文汉化补丁-V$date"
         
         Build-SfxInstaller "$file_name.exe" $p
-        .\tool\7z a -t7z -mx=9 -ms=on -mmt=on "$file_name.7z" "$file_name.exe"
+        Compress-Archive -DestinationPath "$file_name.zip" -Path "$file_name.exe"
         Remove-Item "$file_name.exe"
     }
     # Linux 逻辑

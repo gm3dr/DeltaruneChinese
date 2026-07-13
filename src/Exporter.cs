@@ -65,6 +65,8 @@ namespace deltarunePacker
         ];
         private static string Unescape(string text)
         {
+            // Fork You JIS
+            text = text.Replace("〜", "～");
             // from UndertaleModTool
             return text.Replace("\\r", "\r").Replace("\\t", "\t").Replace("\\n", "\n").Replace("\\\"", "\"").Replace("\\\\", "\\");
         }

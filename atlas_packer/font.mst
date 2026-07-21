@@ -1,0 +1,3 @@
+{{#rects}}
+{{{name}}},{{frame.x}},{{frame.y}},{{sourceSize.w}},{{sourceSize.h}}{{^last}}
+{{/last}}{{/rects}}

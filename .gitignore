@@ -18,3 +18,4 @@ secrets.*
 /patches/
 log.txt
 export_result/
+workspace/**/atlas/

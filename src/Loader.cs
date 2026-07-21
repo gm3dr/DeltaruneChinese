@@ -20,35 +20,35 @@ namespace deltarunePacker{
             m_logger.Dispose();
             GC.SuppressFinalize(this);
         }
-        protected void Verbose(string msg) { if (logLevel <= LogLevel.All) Console.WriteLine("[V]" + msg); }
-        protected void Info(string msg) { if (logLevel <= LogLevel.Info) Console.WriteLine("[I]" + msg); }
-        protected void Warning(string msg) {
+        protected void Verbose(ReadOnlySpan<char> msg) { if (logLevel <= LogLevel.All) Console.WriteLine($"[V]{msg}"); }
+        protected void Info(ReadOnlySpan<char> msg) { if (logLevel <= LogLevel.Info) Console.WriteLine($"[I]{msg}"); }
+        protected void Warning(ReadOnlySpan<char> msg) {
             if (logLevel <= LogLevel.Warning) {
-                string full = "[W]" + msg;
+                string full = $"[W]{msg}";
                 m_logger.WriteLine(full);
                 Console.WriteLine(full);
             }
         }
-        protected void Error(string msg) {
+        protected void Error(ReadOnlySpan<char> msg) {
             if (logLevel <= LogLevel.Error) {
                 string full = $"[E]{msg}\n{new StackTrace()}";
                 m_logger.Write(full);
                 Console.Error.Write(full);
             }
         }
-        protected void Assert(string msg) {
+        protected void Assert(ReadOnlySpan<char> msg) {
             if (logLevel <= LogLevel.Assert) {
                 string full = $"[A]{msg}\n{new StackTrace()}";
                 m_logger.Write(full);
                 Console.Error.Write(full);
             }
-            throw new Exception(msg);
+            throw new Exception($"{msg}");
         }
         protected UndertaleData LoadData() {
             UndertaleData result = UndertaleIO.Read(
                 new FileStream(datawinPath, FileMode.Open, FileAccess.Read),
                 (warning, isImportant) => Warning($"[LoadData]warning: {warning}"),
-                Verbose
+                log => Verbose(log)
             );
             Info($"{datawinPath} loaded!");
             return result;

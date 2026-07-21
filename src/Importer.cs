@@ -294,159 +294,76 @@ namespace deltarunePacker
         }
         #endregion
         #region ImportFonts
-        [GeneratedRegex(@"char id=(\d+)\s+x=(\d+)\s+y=(\d+)\s+width=(\d+)\s+height=(\d+)\s+xoffset=(-?\d+)\s+yoffset=(-?\d+)\s+xadvance=(\d+)", RegexOptions.Compiled)] private static partial Regex Pattern();
-        [GeneratedRegex(@"# xoffset=(-?\d+)")] private static partial Regex XOffset();
-        [GeneratedRegex(@"# yoffset=(-?\d+)")] private static partial Regex YOffset();
-        [GeneratedRegex(@"# cnShift=(-?\d+)")] private static partial Regex CNShift();
-        private readonly string dumpPath = Path.Combine(resultPath, "dump");
-        private readonly string dictPath = Path.Combine(resultPath, "dump/dict.txt");
-        private async Task ImportFontData(Task<UndertaleData> datawinTask, string font_name, string outputPath, string bmfc)
-        {
-            string pngPath = Path.Combine(dumpPath, $"{font_name}_0.png");
-            // 检查后置 出错了直接把任务崩掉就行
-            // 这里可能还有救 说不定等一会还能刷出来
-            while (!File.Exists(outputPath) || !File.Exists(pngPath)) Info($"[ImportFonts]{font_name} bmfont output not found!");
-            var readFnt = File.ReadAllTextAsync(outputPath, Encoding.UTF8).ContinueWith(fnt =>
-            {
-                Int16 xoffset = Int16.Parse(XOffset().Match(bmfc).Groups[1].Value);
-                Int16 yoffset = Int16.Parse(YOffset().Match(bmfc).Groups[1].Value);
-                Int16 cnShift = Int16.Parse(CNShift().Match(bmfc).Groups[1].Value);
-                UInt16 extraH = (UInt16)Math.Abs(yoffset);
-                var glyphs = Pattern().Matches(fnt.Result).Select(match =>
-                {
-                    UndertaleFont.Glyph glyph = new()
-                    {
-                        Character = UInt16.Parse(match.Groups[1].Value),
-                        SourceX = (UInt16)(int.Parse(match.Groups[2].Value) + 1),
-                        SourceY = (UInt16)(int.Parse(match.Groups[3].Value) + 1),
-                        SourceWidth = (UInt16)(int.Parse(match.Groups[4].Value) - 2),
-                        SourceHeight = (UInt16)(int.Parse(match.Groups[5].Value) - 2),
-                        Offset = (Int16)(int.Parse(match.Groups[6].Value) + 1),
-                        Shift = Int16.Parse(match.Groups[8].Value)
-                    };
-                    // 解决中英混排问题
-                    if (glyph.Character > 127)
-                    {
-                        glyph.Offset += xoffset;
-                        glyph.Shift += cnShift;
-                    }
-                    if ((yoffset > 0 && glyph.Character <= 127) ||
-                        (yoffset < 0 && glyph.Character > 127))
-                    {
-                        glyph.SourceY += extraH;
-                        glyph.SourceHeight -= extraH;
-                    }
-                    return glyph;
-                }).Aggregate(new UndertalePointerList<UndertaleFont.Glyph>(), (result, item) =>
-                {
-                    result.Add(item);
-                    return result;
-                });
-                return glyphs;
-            });
-            var readPng = File.ReadAllBytesAsync(pngPath).ContinueWith(png =>
-            {
-                GMImage img = GMImage.FromPng(png.Result);
-                return new UndertaleEmbeddedTexture()
-                {
-                    TextureWidth = img.Width,
-                    TextureHeight = img.Height,
-                    TextureData = new()
-                    {
-                        Image = img
-                    }
-                };
-            });
-            UndertaleData datawin = await datawinTask;
-            UndertaleFont font = datawin.Fonts.ByName(font_name);
-            font.RangeStart = 1;
-            font.RangeEnd = 65535;
-            UndertaleTexturePageItem pageItem = font.Texture;
-            pageItem.SourceX = 0;
-            pageItem.SourceY = 0;
-            pageItem.TargetX = 0;
-            pageItem.TargetY = 0;
-            UndertaleEmbeddedTexture texture = await readPng;
-            pageItem.TexturePage = texture;
-            pageItem.SourceWidth = (ushort)texture.TextureWidth;
-            pageItem.TargetWidth = (ushort)texture.TextureWidth;
-            pageItem.SourceHeight = (ushort)texture.TextureHeight;
-            pageItem.TargetHeight = (ushort)texture.TextureHeight;
-            pageItem.BoundingWidth = (ushort)texture.TextureWidth;
-            pageItem.BoundingHeight = (ushort)texture.TextureHeight;
-            lock (datawin.EmbeddedTextures) datawin.EmbeddedTextures.Add(texture);
-            font.Glyphs = await readFnt;
-            if (File.Exists(Path.Combine(dumpPath, $"{font_name}_1.png"))) Warning($"[ImportFonts]{font_name} exceed font texture size!");
-        }
-        public async Task ImportFonts(Task<UndertaleData> datawinTask, IEnumerable<Task<string>> dictContents)
-        {
-            // 清一下上次的dump 防止出错
-            if (Directory.Exists(dumpPath)) Directory.Delete(dumpPath, true);
-            Directory.CreateDirectory(dumpPath);
 
-            // dic.txt需要是UTF-16的
-            Task writeDict = Task.WhenAll(dictContents).ContinueWith(task =>
+        private async Task ImportFonts(UndertaleData datawin)
+        {
+            Range[] segment = new Range[8];
+            foreach (var file in new DirectoryInfo(Path.Combine(workspace, "imports/font/atlas")).GetFiles("*.cfg"))
             {
-                char[] set = [.. task.Result.SelectMany(x => x).Distinct()];
-                File.WriteAllBytes(dictPath, Encoding.Unicode.GetBytes(set));
-            });
-            Task copyFiles = Task.Run(() =>
-            {
-                foreach (var config in new DirectoryInfo(Path.Combine(workspace, "imports/font/font")).GetFiles())
-                {
-                    File.Copy(config.ToString(), Path.Combine(dumpPath, config.Name));
-                }
-            });
-            await Task.WhenAll(new DirectoryInfo(Path.Combine(workspace, "imports/font/bmfc")).GetFiles().Select(async config =>
-            {
-                Task<string> bmfc = File.ReadAllTextAsync(config.FullName, Encoding.UTF8);
-                string font_name = Path.GetFileNameWithoutExtension(config.Name);
-                IEnumerable<string> segments = new DirectoryInfo(Path.Combine(workspace, "imports/font/pics", font_name)).GetFiles()
-                    .Select(img =>
-                    {
-                        Span<Range> tokens = stackalloc Range[3];
-                        ReadOnlySpan<char> imgName = Path.GetFileNameWithoutExtension(img.FullName.AsSpan());
-                        imgName.Split(tokens, ',');
-                        return $"icon=\"{img.FullName}\",{imgName[tokens[0]]},{imgName[tokens[2]]},{0},{imgName[tokens[1]]}\n";
-                        //参考格式: icon=".../imports/font/pics/fnt_main/id,xadv,xoff.png",id,xoff,yoff,xadv
+                string font_name = Path.GetFileNameWithoutExtension(file.Name);
+                if(font_name.StartsWith("all_in_one")) continue;
+                if(font_name.EndsWith("-0.cfg")) Warning($"[ImportFonts]{font_name} exceed font texture size!");
+                UndertaleFont font = datawin.Fonts.ByName(font_name);
+                font.RangeStart = 1;
+                font.RangeEnd = 65535;
+                Task<string[]> lines = File.ReadAllLinesAsync(file.FullName, Encoding.UTF8);
+                Task replaceTexture = File.ReadAllBytesAsync(file.FullName.Replace(".cfg",".png"))
+                    .ContinueWith(png => {
+                        GMImage img = GMImage.FromPng(png.Result);
+                        UndertaleEmbeddedTexture texture = new() {
+                            TextureWidth = img.Width,
+                            TextureHeight = img.Height,
+                            TextureData = new(){ Image = img }
+                        };
+                        UndertaleTexturePageItem pageItem = font.Texture;
+                        pageItem.SourceX = 0;
+                        pageItem.SourceY = 0;
+                        pageItem.TargetX = 0;
+                        pageItem.TargetY = 0;
+                        pageItem.TexturePage = texture;
+                        pageItem.SourceWidth = (ushort)texture.TextureWidth;
+                        pageItem.TargetWidth = (ushort)texture.TextureWidth;
+                        pageItem.SourceHeight = (ushort)texture.TextureHeight;
+                        pageItem.TargetHeight = (ushort)texture.TextureHeight;
+                        pageItem.BoundingWidth = (ushort)texture.TextureWidth;
+                        pageItem.BoundingHeight = (ushort)texture.TextureHeight;
+                        lock (datawin.EmbeddedTextures) datawin.EmbeddedTextures.Add(texture);
                     });
-                // 回写完整的配置文件
-                string configPath = Path.Combine(dumpPath, config.Name);
-                Task writeCfg = File.WriteAllTextAsync(configPath, string.Concat(segments.Prepend(await bmfc)), Encoding.UTF8);
-                string outputPath = Path.Combine(dumpPath, $"{font_name}.fnt");
-                Process bmfont = new()
-                {
-                    StartInfo = new ProcessStartInfo()
+                font.Glyphs = [..(await lines).Select(line => {
+                    ReadOnlySpan<char> lineSpan = line.AsSpan();
+                    if (lineSpan.Split(segment, ',') != 8 ||
+                        !ushort.TryParse(lineSpan[segment[1]], out ushort id) ||
+                        !short.TryParse(lineSpan[segment[2]], out short shift) ||
+                        !short.TryParse(lineSpan[segment[3]], out short offset) ||
+                        !ushort.TryParse(lineSpan[segment[4]], out ushort x) ||
+                        !ushort.TryParse(lineSpan[segment[5]], out ushort y) ||
+                        !ushort.TryParse(lineSpan[segment[6]], out ushort w) ||
+                        !ushort.TryParse(lineSpan[segment[7]], out ushort h) )
                     {
-                        FileName = "tool/bmfont64.exe",
-                        CreateNoWindow = true,
-                        RedirectStandardOutput = true,
-                        ArgumentList = {
-                            "-c", configPath,
-                            "-o", outputPath,
-                            "-t", dictPath
-                        }
+                        Warning($"[ImportFonts]{file.Name}: invalid param! {line}");
+                        return null!;
                     }
-                };
-                // 这里是关键路径 一点都不能耽搁
-                await writeDict;
-                await copyFiles;
-                await writeCfg;
-                bmfont.Start();
-                Info($"[ImportFonts]{font_name} started!");
-                await bmfont!.WaitForExitAsync();
-                Info($"[ImportFonts]{font_name} finished!");
-                await ImportFontData(datawinTask, font_name, outputPath, bmfc.Result);
-                Info($"[ImportFonts]{font_name} imported!");
-            }));
+                    return new UndertaleFont.Glyph {
+                        Character = id,
+                        SourceX = x,
+                        SourceY = y,
+                        SourceWidth = w,
+                        SourceHeight = h,
+                        Offset = offset,
+                        Shift = shift,
+                    };
+                }).Where(glyph => glyph != null)
+                .OrderBy(glyph => glyph.Character)];
+            }
         }
         #endregion
         #region ImportCodes
-        public async Task ImportCodes(UndertaleData datawin, IEnumerable<(string, Task<string>)> taskBag, Task previousTask)
+        public async Task ImportCodes(UndertaleData datawin, Task previousTask)
         {
             CodeImportGroup importGroup = new(datawin);
-            foreach (var (fileName, content) in taskBag)
-            {
+            foreach (var file in new DirectoryInfo(Path.Combine(workspace, "imports/code")).GetFiles()){
+                string fileName = Path.GetFileNameWithoutExtension(file.Name);
+                Task<string> content = File.ReadAllTextAsync(file.FullName, Encoding.UTF8);
                 if (datawin.Code.ByName(fileName) == null)
                 {
                     Warning($"[ImportCodes]code not exist within data.win: {fileName}");
@@ -469,22 +386,17 @@ namespace deltarunePacker
         #endregion
         public async Task Run()
         {
-            IEnumerable<(string fileName, Task<string> content)> taskBag = [.. new DirectoryInfo(Path.Combine(workspace, "imports/code")).GetFiles()
-                .Select(file => (Path.GetFileNameWithoutExtension(file.Name), File.ReadAllTextAsync(file.FullName, Encoding.UTF8))
-            ).ToArray()];
-            Task<string> re_cnname = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_cnname.json"), Encoding.UTF8);
-            Task<string> cn = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/cn.json"), Encoding.UTF8);
             Task<UndertaleData> datawinTask = Task.Run(LoadData);
-            Task importFonts = ImportFonts(datawinTask, taskBag.Select(x => x.content).Append(re_cnname).Append(cn));
-
-            UndertaleData datawin = await datawinTask; // 卡一下后面的任务 腾出CPU让bmfont早点执行完
-            Task<string> re_recruit = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_recruit.json"), Encoding.UTF8);
-            Task<string> fmt = File.ReadAllTextAsync(Path.Combine(workspace, "lang_ja.json"), Encoding.UTF8);
+            Task<string> cn = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/cn.json"), Encoding.UTF8);
             Task<string> en = File.ReadAllTextAsync(Path.Combine(workspace, "imports/text_src/en.json"), Encoding.UTF8);
+            Task<string> fmt = File.ReadAllTextAsync(Path.Combine(workspace, "lang_ja.json"), Encoding.UTF8);
+            Task<string> re_cnname = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_cnname.json"), Encoding.UTF8);
+            Task<string> re_recruit = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_recruit.json"), Encoding.UTF8);
             Task importTexts = ImportTexts(await cn, await en, await fmt, await re_cnname, await re_recruit);
 
-            // using UndertaleData datawin = await datawinTask;// 如果对CPU很有信心的可以把上面那行await挪到这里
-            Task importCodes = ImportCodes(datawin, taskBag, ImportSprites(datawin));
+            using UndertaleData datawin = await datawinTask;
+            Task importCodes = ImportCodes(datawin, ImportSprites(datawin));
+            Task importFonts = ImportFonts(datawin);
             await Task.WhenAll(importFonts, importCodes);
 
             using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);
@@ -499,17 +411,9 @@ namespace deltarunePacker
         */
         public async Task RunMain()
         {
-            IEnumerable<(string fileName, Task<string> content)> taskBag = [.. new DirectoryInfo(Path.Combine(workspace, "imports/code")).GetFiles()
-                .Select(file => (Path.GetFileNameWithoutExtension(file.Name), File.ReadAllTextAsync(file.FullName, Encoding.UTF8))
-            ).ToArray()];
-            Task<UndertaleData> datawinTask = Task.Run(LoadData);
-            // ⭐ 字体：只用 code 的字符集
-            Task importFonts = ImportFonts(datawinTask, taskBag.Select(x => x.content));
-
-            UndertaleData datawin = await datawinTask;
-
-            // code 本身还是照常导入
-            Task importCodes = ImportCodes(datawin, taskBag, Task.CompletedTask);
+            UndertaleData datawin = LoadData();
+            Task importCodes = ImportCodes(datawin, Task.CompletedTask);
+            Task importFonts = ImportFonts(datawin);
             await Task.WhenAll(importFonts, importCodes);
 
             using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);
@@ -524,20 +428,9 @@ namespace deltarunePacker
         **/
         public async Task RunDemo()
         {
-            IEnumerable<(string fileName, Task<string> content)> taskBag = [.. new DirectoryInfo(Path.Combine(workspace, "imports/code")).GetFiles()
-                .Select(file => (Path.GetFileNameWithoutExtension(file.Name), File.ReadAllTextAsync(file.FullName, Encoding.UTF8))
-            ).ToArray()];
-            Task<UndertaleData> datawinTask = Task.Run(LoadData);
-            // 生成字体
-            Task<string> re_cnname = File.ReadAllTextAsync(Path.Combine(workspace, "../global/re_cnname.json"), Encoding.UTF8);
-            Task<string> ch1_cn = File.ReadAllTextAsync(Path.Combine(workspace, "../ch1/imports/text_src/cn.json"), Encoding.UTF8);
-            Task<string> ch2_cn = File.ReadAllTextAsync(Path.Combine(workspace, "../ch2/imports/text_src/cn.json"), Encoding.UTF8);
-            Task importFonts = ImportFonts(datawinTask, taskBag.Select(x => x.content).Append(re_cnname).Append(ch1_cn).Append(ch2_cn));
-
-            UndertaleData datawin = await datawinTask;
-
-            // code 本身还是照常导入
-            Task importCodes = ImportCodes(datawin, taskBag, ImportSprites(datawin));
+            UndertaleData datawin = LoadData();
+            Task importCodes = ImportCodes(datawin, ImportSprites(datawin));
+            Task importFonts = ImportFonts(datawin);
             await Task.WhenAll(importFonts, importCodes);
 
             using FileStream output = new(Path.Combine(ResultPath, "data.win"), FileMode.Create, FileAccess.Write);

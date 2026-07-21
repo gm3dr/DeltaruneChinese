@@ -143,13 +143,13 @@ namespace deltarunePacker
         public async Task ExportFont(UndertaleFont font) {            
             string font_name = font.Name.Content;
             if (font_name.Contains("_ja")) return;
-            string subpath = Path.Combine(ResultPath, $"font/pics/{font_name}");
+            string subpath = Path.Combine(ResultPath, $"font/{font_name}");
             Directory.CreateDirectory(subpath);
             
             IMagickImage<byte> texture = worker.GetTextureFor(font.Texture, font_name, true);
             await Task.WhenAll(font.Glyphs.Where(glyph => glyph.SourceWidth != 0 && glyph.SourceHeight != 0).Select(glyph => texture
                     .CloneArea(glyph.SourceX, glyph.SourceY, glyph.SourceWidth, glyph.SourceHeight)
-                    .WriteAsync(Path.Combine(subpath, $"{glyph.Character},{glyph.Shift - glyph.SourceWidth},{glyph.Offset}.png"), MagickFormat.Png32)
+                    .WriteAsync(Path.Combine(subpath, $"{glyph.Character},{glyph.Shift},{glyph.Offset}.png"), MagickFormat.Png32)
                 )
             );
         }

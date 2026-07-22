@@ -14,7 +14,7 @@ jobs:
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Download Patches
         env:
@@ -22,7 +22,6 @@ jobs:
         run: |
           mkdir patches
           gh release download --pattern "patch_chs_windowslinux_*.7z" --dir patches
-          gh release download --pattern "patch_chs_windowslinux_demo_*.7z" --dir patches || echo "未找到 Demo 补丁，跳过"
 
       - name: Download Patcher (Base Installers)
         env:
@@ -71,7 +70,7 @@ jobs:
           }
 
       - name: Upload Windows Installers
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Final_Installers_Windows
           path: "*Win*三角符文汉化补丁*.zip"
@@ -81,7 +80,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Download Patches
         env:
@@ -89,7 +88,6 @@ jobs:
         run: |
           mkdir patches
           gh release download --pattern "patch_chs_windowslinux_*.7z" --dir patches
-          gh release download --pattern "patch_chs_windowslinux_demo_*.7z" --dir patches || true
 
       - name: Download Patcher (Base Installers)
         env:
@@ -119,7 +117,7 @@ jobs:
           tar -czf "$OUTPUT_NAME" -C $EXTRACT_DIR .
 
       - name: Upload Linux Installers
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Final_Installers_Linux
           path: "【Linux】三角符文汉化补丁*.tar.gz"
@@ -129,7 +127,7 @@ jobs:
     runs-on: macos-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v4
+        uses: actions/checkout@v7
 
       - name: Download Patches
         env:
@@ -137,7 +135,6 @@ jobs:
         run: |
           mkdir patches
           gh release download --pattern "patch_chs_macos_*.7z" --dir patches
-          gh release download --pattern "patch_chs_macos_demo_*.7z" --dir patches || true
 
       - name: Download Patcher (Base Installers)
         env:
@@ -179,7 +176,7 @@ jobs:
             "dmg_root/"
 
       - name: Upload macOS Installers
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@v7
         with:
           name: Final_Installers_macOS
           path: "【macOS】三角符文汉化补丁*.dmg"

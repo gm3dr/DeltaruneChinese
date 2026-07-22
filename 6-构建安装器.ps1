@@ -66,7 +66,6 @@ foreach ($p in @("linux", "win", "winold", "mac")) {
     if ($p -in @("win", "winold")) { 
         # 通配符匹配补丁文件，提升兼容性
         Copy-Item "patch_chs_windowslinux_*.7z" $TargetDataDir
-        Copy-Item "patch_chs_windowslinux_demo_*.7z" $TargetDataDir
         
         Normalize-Timestamp $PlatformDir
         .\tool\7z a -t7z -mx=9 -ms=on -mmt=on "temp\$p.7z" ".\$PlatformDir" 
@@ -82,7 +81,6 @@ foreach ($p in @("linux", "win", "winold", "mac")) {
     elseif ($p -eq "linux") { 
         Copy-Item "cn_installer\linux\*" $TargetDataDir -Recurse -Force
         Copy-Item "patch_chs_windowslinux_*.7z" $TargetDataDir
-        Copy-Item "patch_chs_windowslinux_demo_*.7z" $TargetDataDir
         
         Normalize-Timestamp $PlatformDir
         tar -czf "【Linux】三角符文汉化补丁-V$date.tar.gz" -C $PlatformDir . 
@@ -90,7 +88,6 @@ foreach ($p in @("linux", "win", "winold", "mac")) {
     # Mac 逻辑
     elseif ($p -eq "mac") {
         Copy-Item "patch_chs_macos_*.7z" $TargetDataDir
-        Copy-Item "patch_chs_macos_demo_*.7z" $TargetDataDir
         # $AppPath = "$PlatformDir\DELTARUNE Chinese Patcher.app"
         # xattr -cr "$AppPath"
         # codesign --force --deep --sign - "$AppPath"

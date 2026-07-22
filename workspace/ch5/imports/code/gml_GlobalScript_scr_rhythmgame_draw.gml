@@ -24,21 +24,21 @@ function scr_rhythmgame_draw_border(arg0, arg1 = false)
         
         if (instrument == 0)
         {
-            _icon = 4138;
+            _icon = 4139;
             // _name = _jp ? spr_ja_bnamekris : spr_bnamekris;
             _name = scr_84_get_sprite("spr_bnamekris");
             _hoff = 21;
         }
         else if (instrument == 1)
         {
-            _icon = 4145;
+            _icon = 4146;
             // _name = _jp ? spr_ja_bnamesusie : spr_bnamesusie;
             _name = scr_84_get_sprite("spr_bnamesusie");
             _hoff = 24;
         }
         else if (instrument == 2)
         {
-            _icon = 4140;
+            _icon = 4141;
             // _name = _jp ? spr_ja_bnameralsei : spr_bnameralsei;
             // _hoff = 30;
             _name = scr_84_get_sprite("spr_bnameralsei");

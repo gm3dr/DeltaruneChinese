@@ -1,8 +1,8 @@
 var propblue = 16764994;
 var liteblue = 16777215;
 image_blend = propblue;
-var tilespr = 4065;
-var tiletex = 1523;
+var tilespr = 4066;
+var tiletex = 1524;
 
 if (alwaysactive)
     active = true;
@@ -75,13 +75,13 @@ if (onscreen)
     if (icon_sprite == -4)
     {
         if (musickind == 3)
-            icon_sprite = 4529;
+            icon_sprite = 4530;
         
         if (prophecy_icon.custom_sprite != -4)
             icon_sprite = prophecy_icon.custom_sprite;
         
         if (extflag == "angel")
-            icon_sprite = 1022;
+            icon_sprite = 1023;
     }
     else
     {

@@ -119,7 +119,7 @@ if (con == 1 || con == 2)
     {
         pinkindex += portrait1_talkspeed;
     }
-    else if (pinkportrait != 5571 && pinkportrait != 2588 && pinkportrait != 1086)
+    else if (pinkportrait != 5572 && pinkportrait != 2588 && pinkportrait != 1086)
     {
         pinkindex = 0;
         portrait1_talkspeed = 0.16666666666666666;
@@ -160,16 +160,16 @@ if (i_ex(obj_pink_enemy) && obj_pink_enemy.datecount != 1)
     portrait_offset_x = 10;
     var portrait_offset_y = 0;
     
-    if (pinkportrait2 == 3985)
+    if (pinkportrait2 == 3986)
         portrait_offset_x += 25;
     
-    if (portrait2visibility == true && (pinkportrait2 == 7504 || pinkportrait2 == 4851 || pinkportrait2 == 2077))
+    if (portrait2visibility == true && (pinkportrait2 == 7505 || pinkportrait2 == 4852 || pinkportrait2 == 2077))
         portrait_offset_x += 4;
     
-    if (pinkportrait2 == 5407)
+    if (pinkportrait2 == 5408)
         portrait_offset_y -= 20;
     
-    if (pinkportrait2 == 2485 || pinkportrait2 == 7274)
+    if (pinkportrait2 == 2485 || pinkportrait2 == 7275)
     {
         if (portrait2_xscale == 2)
             draw_sprite_ext(spr_pinkghost_tail, tailindex2, xx + pinkportrait2_x, yy + 21 + portrait_offset_y, 2, 2, 0, c_white, pinkportraitalpha2 * 0.7);
@@ -214,7 +214,7 @@ if (i_ex(obj_pink_enemy))
         portrait_offset_x = 0;
         var portrait_offset_y = 0;
         
-        if (portraitvisibility == true && (pinkportrait == 6742 || pinkportrait == 677 || pinkportrait == 5428 || pinkportrait == 2036))
+        if (portraitvisibility == true && (pinkportrait == 6743 || pinkportrait == 677 || pinkportrait == 5429 || pinkportrait == 2036))
             portrait_offset_x = 4;
         
         var _scale = 1;
@@ -228,7 +228,7 @@ if (i_ex(obj_pink_enemy))
         if (pinkportrait == 2588 || pinkportrait == 1086)
             pinkindex += 0.16666666666666666;
         
-        if (pinkportrait == 5218 || pinkportrait == 7353 || pinkportrait == 6552 || pinkportrait == 200)
+        if (pinkportrait == 5219 || pinkportrait == 7354 || pinkportrait == 6552 || pinkportrait == 200)
             draw_sprite_ext(spr_pinkspeaker_tail, tailindex, xx + pinkportrait_x + portrait_offset_x, yy + 21 + portrait_offset_y, portrait_xscale * _scale, 2, 0, c_white, pinkportraitalpha);
         
         draw_sprite_ext(pinkportrait, pinkindex, xx + pinkportrait_x + portrait_offset_x, yy + pinkportrait_y + portrait_offset_y, portrait_xscale * _scale, 2, 0, c_white, pinkportraitalpha);
@@ -1095,15 +1095,15 @@ if (show_intro_outro_surfaces == true && con == 0)
     tailindex += 0.16666666666666666;
     portrait_offset_x = 0;
     
-    if (pinkportrait == 5428)
+    if (pinkportrait == 5429)
         portrait_offset_x = 5;
     
-    if (pinkportrait == 6742 || pinkportrait == 677)
+    if (pinkportrait == 6743 || pinkportrait == 677)
         pinkportrait = 2036;
     
     portrait_offset_x = 4;
     
-    if (pinkportrait == 5218)
+    if (pinkportrait == 5219)
         draw_sprite_ext(spr_pinkspeaker_tail, tailindex, xx + pinkportrait_x, yy + 21, portrait_xscale, 2, 0, c_white, pinkportraitalpha);
     
     draw_sprite_ext(pinkportrait, pinkindex, xx + pinkportrait_x + portrait_offset_x, yy + pinkportrait_y, portrait_xscale, 2, 0, c_white, pinkportraitalpha);

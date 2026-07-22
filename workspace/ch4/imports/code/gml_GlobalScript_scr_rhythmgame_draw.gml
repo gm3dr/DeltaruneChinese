@@ -68,7 +68,7 @@ function scr_rhythmgame_draw_backing(arg0, arg1, arg2 = false, arg3 = 0)
     {
         draw_set_blend_mode(bm_add);
         var _flashCol = merge_color(c_black, c_red, _flash * fade * brightness);
-        ossafe_fill_rectangle_color(arg1 - 40, bottomy - 200, arg1 + 40, bottomy + 50, 0, 0, _flashCol, _flashCol, false);
+        ossafe_fill_rectangle_color(arg1 - 40, bottomy - 200, arg1 + 40, bottomy + 50, c_black, c_black, _flashCol, _flashCol, false);
         draw_set_blend_mode(bm_normal);
     }
     
@@ -87,27 +87,38 @@ function scr_rhythmgame_draw_border(arg0, arg1 = false)
     if (!arg1 && !demo_mode)
     {
         var _jp = global.lang == "ja";
-        var _name, _hoff;
+        var _icon, _hoff, _name;
         
         if (instrument == 0)
         {
+            _icon = 3171;
             _name = scr_84_get_sprite("spr_bnamekris");
             _hoff = 21;
         }
         else if (instrument == 1)
         {
+            _icon = 3173;
             _name = scr_84_get_sprite("spr_bnamesusie");
             _hoff = 24;
         }
         else if (instrument == 2)
         {
+            _icon = 3172;
             _name = scr_84_get_sprite("spr_bnameralsei");
             _hoff = global.names >= 2 ? 27 : 30;
         }
         
-        draw_sprite_ext(_name, 0, arg0 - _hoff, bottomy - 230, 1, 1, 0, draw_get_color(), 1);
+        var _hurt = invc > 50 || scr_rhythmgame_damage_flash() > 0;
+        draw_sprite_ext(_icon, _hurt ? 5 : 0, arg0 - _hoff - 20, bottomy - 234, 1, 1, 0, merge_color(c_black, c_white, brightness), 1);
+        draw_sprite_ext(_name, 0, (arg0 - _hoff) + 20, bottomy - 228, 1, 1, 0, draw_get_color(), 1);
     }
     
+    draw_set_color(c_black);
+    draw_set_alpha(0.5);
+    ossafe_fill_rectangle((arg0 - 40) + 2, (bottomy - 200) + 2, arg0 + 40 + 2, bottomy + 50 + 2, true);
+    ossafe_fill_rectangle((arg0 - 41) + 2, (bottomy - 201) + 2, arg0 + 41 + 2, bottomy + 51 + 2, true);
+    draw_set_alpha(1);
+    draw_set_color(merge_color(c_black, _bordercolor, brightness));
     ossafe_fill_rectangle(arg0 - 40, bottomy - 200, arg0 + 40, bottomy + 50, true);
     ossafe_fill_rectangle(arg0 - 41, bottomy - 201, arg0 + 41, bottomy + 51, true);
     

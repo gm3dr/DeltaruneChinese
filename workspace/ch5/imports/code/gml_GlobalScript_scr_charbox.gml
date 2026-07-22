@@ -170,10 +170,10 @@ function scr_charbox()
             {
                 if (soloflowery)
                 {
-                    // var bname = 4058;
+                    // var bname = 4059;
                     
                     // if (global.lang == "ja")
-                    //     bname = 5501;
+                    //     bname = 5502;
                     bname = scr_84_get_sprite("spr_bnameflowery");
                     
                     draw_sprite(spr_headflowery, global.faceaction[charpos[c]], xx + 13 + xchunk, (bpoff + b_offset + mmy[c]) - 11);
@@ -196,10 +196,10 @@ function scr_charbox()
             {
                 if (haveflowery)
                 {
-                    // var bname = 4058;
+                    // var bname = 4059;
                     
                     // if (global.lang == "ja")
-                    //     bname = 5501;
+                    //     bname = 5502;
                     bname = scr_84_get_sprite("spr_bnameflowery");
                     
                     draw_sprite(bname, 0, flx + 41, fly + 12);

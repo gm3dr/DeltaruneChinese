@@ -35,30 +35,38 @@ function Build-SfxInstaller([string]$OutputFile, [string]$Platform) {
 
 # ---------- 清理并初始化 ----------
 Remove-Item $TempDir -Recurse -Force -ErrorAction SilentlyContinue
+Remove-Item 【* -Force -ErrorAction SilentlyContinue
 
 # ---------- 构建各平台安装包 ----------
-foreach ($p in @("linux", "win", "winold")) {
+foreach ($p in @("linux", "win", "winold", "mac")) {
+    if (-not (Test-Path "patcher\$p")) {
+        continue
+    }
     Write-Host "Packaging installer for $p..."
     $PlatformDir = "$TempDir\$p"
     New-Item -ItemType Directory -Path $PlatformDir -Force | Out-Null
     
     # 复制 patcher 基础文件
     Copy-Item "patcher\$p\*" $PlatformDir -Recurse -Force
+    $TargetDataDir = if ($p -eq "mac") { "$PlatformDir\DELTARUNE Chinese Patcher.app\Contents\MacOS" } else { $PlatformDir }
+    if ($p -eq "mac") {
+        New-Item -ItemType Directory -Path $TargetDataDir -Force | Out-Null
+    }
     
     # 生成 readme
-    $ReadmePath = "$PlatformDir\汉化更新日志-readme-$date.txt"
+    $ReadmePath = "$TargetDataDir\汉化更新日志-readme-$date.txt"
     Copy-Item "cn_installer\readme.txt" $ReadmePath
     (Get-Content -Raw $ReadmePath) -replace '\$\(CURRENT_TIME\)', $fixedTime -replace '\$\(CURRENT_DATE\)', $date | 
         Set-Content -Encoding UTF8 $ReadmePath
     
     # 答疑图
-    Copy-Item "cn_installer\汉化答疑QQ群1033065757-可以来此求助.jpg" $PlatformDir
+    Copy-Item "cn_installer\汉化答疑QQ群1033065757-可以来此求助.jpg" $TargetDataDir
 
     # Windows / WinOld 逻辑合并
     if ($p -in @("win", "winold")) { 
         # 通配符匹配补丁文件，提升兼容性
-        Copy-Item "patch_chs_windowslinux_2*.7z" $PlatformDir
-        Copy-Item "patch_chs_windowslinux_demo_2*.7z" $PlatformDir
+        Copy-Item "patch_chs_windowslinux_*.7z" $TargetDataDir
+        Copy-Item "patch_chs_windowslinux_demo_*.7z" $TargetDataDir
         
         Normalize-Timestamp $PlatformDir
         .\tool\7z a -t7z -mx=9 -ms=on -mmt=on "temp\$p.7z" ".\$PlatformDir" 
@@ -72,12 +80,22 @@ foreach ($p in @("linux", "win", "winold")) {
     }
     # Linux 逻辑
     elseif ($p -eq "linux") { 
-        Copy-Item "cn_installer\linux\*" $PlatformDir -Recurse -Force
-        Copy-Item "patch_chs_windowslinux_2*.7z" $PlatformDir
-        Copy-Item "patch_chs_windowslinux_demo_2*.7z" $PlatformDir
+        Copy-Item "cn_installer\linux\*" $TargetDataDir -Recurse -Force
+        Copy-Item "patch_chs_windowslinux_*.7z" $TargetDataDir
+        Copy-Item "patch_chs_windowslinux_demo_*.7z" $TargetDataDir
         
         Normalize-Timestamp $PlatformDir
         tar -czf "【Linux】三角符文汉化补丁-V$date.tar.gz" -C $PlatformDir . 
+    }
+    # Mac 逻辑
+    elseif ($p -eq "mac") {
+        Copy-Item "patch_chs_macos_*.7z" $TargetDataDir
+        Copy-Item "patch_chs_macos_demo_*.7z" $TargetDataDir
+        # $AppPath = "$PlatformDir\DELTARUNE Chinese Patcher.app"
+        # xattr -cr "$AppPath"
+        # codesign --force --deep --sign - "$AppPath"
+        Normalize-Timestamp $PlatformDir
+        tar -czf "【macOS】三角符文汉化补丁-V$date.tar.gz" -C $PlatformDir . 
     }
 }
 

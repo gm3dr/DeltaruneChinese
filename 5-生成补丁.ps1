@@ -13,7 +13,7 @@ Write-Host "Build time : $fixedTime"
 Write-Host "Build date : $date"
 
 $TempDir       = "temp"
-$OldPatchCount = 5
+$OldPatchCount = 6
 
 $PatchDirs = @{
     "Win"     = "$TempDir\patch"

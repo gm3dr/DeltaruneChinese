@@ -20,9 +20,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.14.0" />
-    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.14.0" />
-    <PackageReference Include="Magick.NET.Core" Version="14.14.0" />
+    <PackageReference Include="Magick.NET-Q16-AnyCPU" Version="14.15.0" />
+    <PackageReference Include="Magick.NET-Q8-AnyCPU" Version="14.15.0" />
+    <PackageReference Include="Magick.NET.Core" Version="14.15.0" />
     <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
     <PackageReference Include="NReco.Text.AhoCorasickDoubleArrayTrie" Version="1.1.1" />
     <PackageReference Include="SharpZipLib" Version="1.4.2" />

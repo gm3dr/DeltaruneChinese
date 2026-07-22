@@ -1,51 +1,64 @@
 name: Build Final Patches and Release
 
 on:
-    workflow_dispatch:
-    release:
-        types: [published]
+  workflow_dispatch:
+  release:
+    types: [published]
 
 permissions:
   contents: write
 
 jobs:
-  # Win + WinOld
+  # 1. Windows 环境打包 (Win10+ & Win7-)
   build-windows:
     runs-on: windows-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Download Patch
+      - name: Download Patches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir patches
           gh release download --pattern "patch_chs_windowslinux_*.7z" --dir patches
+          gh release download --pattern "patch_chs_windowslinux_demo_*.7z" --dir patches || echo "未找到 Demo 补丁，跳过"
 
-      - name: Download Patcher
+      - name: Download Patcher (Base Installers)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*Windows*.7z" 
+        run: gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*Windows*.7z" 
 
       - name: Build Windows Installers
         run: |
+          $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
           $date = Get-Date -Format "yyMMdd"
           
           $targets = @(
-              @{ FilePattern="*Windows_v*.7z";          Prefix="Win10+（推荐）";  Folder="win" },
+              @{ FilePattern="*Windows_v*.7z";         Prefix="Win10+（推荐）";  Folder="win" },
               @{ FilePattern="*Windows_Outdated_v*.7z"; Prefix="Win7-";   Folder="winold" }
           )
 
           foreach ($target in $targets) {
-              Write-Host "Processing $($target.Folder)..."
+              Write-Host "正在处理 $($target.Folder)..."
               $extractDir = "temp_$($target.Folder)"
+              New-Item -ItemType Directory -Path $extractDir -Force | Out-Null
               
               $patcherArchive = Get-ChildItem $target.FilePattern | Select-Object -First 1
+              if (-not $patcherArchive) {
+                  Write-Warning "未找到 $($target.Folder) 对应的 Patcher 包，跳过。"
+                  continue
+              }
               7z x $patcherArchive.FullName -o"$extractDir" -y
-              Copy-Item "patches\patch_chs_windowslinux_*.7z" -Destination "$extractDir\" -Force
-              
+              Copy-Item "patches\*.7z" -Destination "$extractDir\" -Force
+              if (Test-Path "cn_installer\$($target.Folder)") {
+                  Copy-Item "cn_installer\$($target.Folder)\*" "$extractDir\" -Recurse -Force
+              }
+              $ReadmePath = "$extractDir\汉化更新日志-readme-$date.txt"
+              Copy-Item "cn_installer\readme.txt" $ReadmePath -Force
+              (Get-Content -Raw $ReadmePath) -replace '\$\(CURRENT_TIME\)', $fixedTime -replace '\$\(CURRENT_DATE\)', $date | Set-Content -Encoding UTF8 $ReadmePath
+              Copy-Item "cn_installer\汉化答疑QQ群1033065757-可以来此求助.jpg" "$extractDir\" -Force
+
               $temp7z = "packed_$($target.Folder).7z"
               7z a -t7z -mx=9 -ms=on -mmt=on $temp7z ".\$extractDir\*"
               
@@ -58,26 +71,27 @@ jobs:
           }
 
       - name: Upload Windows Installers
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Final_Installers_Windows
           path: "*Win*三角符文汉化补丁*.zip"
 
-  # Linux
+  # 2. Linux 环境打包
   build-linux:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Download Patch
+      - name: Download Patches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir patches
           gh release download --pattern "patch_chs_windowslinux_*.7z" --dir patches
+          gh release download --pattern "patch_chs_windowslinux_demo_*.7z" --dir patches || true
 
-      - name: Download Patcher
+      - name: Download Patcher (Base Installers)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*Linux*.tar.gz"
@@ -85,38 +99,47 @@ jobs:
       - name: Build Linux Installer
         run: |
           DATE=$(date +"%y%m%d")
+          TIME=$(date +"%Y-%m-%d %H:%M")
           EXTRACT_DIR="temp_linux"
           mkdir -p $EXTRACT_DIR
           
           tar -xzf DeltaruneChinesePatcher_Linux_v*.tar.gz -C $EXTRACT_DIR
-          cp patches/patch_chs_windowslinux_*.7z $EXTRACT_DIR/
-          cp -r cn_installer/linux/. $EXTRACT_DIR/
+          
+          cp patches/*.7z $EXTRACT_DIR/ 2>/dev/null || true
+          if [ -d "cn_installer/linux" ]; then
+              cp -r cn_installer/linux/* $EXTRACT_DIR/
+          fi
+          
+          sed -e "s/\$(CURRENT_TIME)/$TIME/g" -e "s/\$(CURRENT_DATE)/$DATE/g" cn_installer/readme.txt > "$EXTRACT_DIR/汉化更新日志-readme-$DATE.txt"
+          cp cn_installer/汉化答疑QQ群1033065757-可以来此求助.jpg $EXTRACT_DIR/ || true
+          
           find $EXTRACT_DIR -type f \( -name "*.sh" -o -name "*.x86_64" \) -exec chmod a+x {} +
           
           OUTPUT_NAME="【Linux】三角符文汉化补丁-V${DATE}.tar.gz"
           tar -czf "$OUTPUT_NAME" -C $EXTRACT_DIR .
 
       - name: Upload Linux Installers
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Final_Installers_Linux
           path: "【Linux】三角符文汉化补丁*.tar.gz"
 
-  # macOS
+  # 3. macOS 环境打包
   build-macos:
     runs-on: macos-latest
     steps:
       - name: Checkout Repository
-        uses: actions/checkout@v6
+        uses: actions/checkout@v4
 
-      - name: Download Patch
+      - name: Download Patches
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: |
           mkdir patches
           gh release download --pattern "patch_chs_macos_*.7z" --dir patches
+          gh release download --pattern "patch_chs_macos_demo_*.7z" --dir patches || true
 
-      - name: Download Patcher
+      - name: Download Patcher (Base Installers)
         env:
           GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
         run: gh release download --repo gm3dr/DeltaruneChinesePatcher --pattern "*macOS*.dmg"
@@ -124,26 +147,39 @@ jobs:
       - name: Build macOS Installer
         run: |
           DATE=$(date +"%y%m%d")
+          TIME=$(date +"%Y-%m-%d %H:%M")
           
           hdiutil attach DeltaruneChinesePatcher_macOS_v*.dmg -mountpoint /Volumes/PatcherMount -nobrowse
           cp -R "/Volumes/PatcherMount/DELTARUNE Chinese Patcher.app" ./
           hdiutil detach /Volumes/PatcherMount
           
-          cp patches/patch_chs_macos_*.7z "DELTARUNE Chinese Patcher.app/Contents/MacOS/"
-          find "DELTARUNE Chinese Patcher.app/Contents/MacOS/externals" -type f -exec chmod a-x {} +
+          TARGET_DIR="DELTARUNE Chinese Patcher.app/Contents/MacOS"
+          cp patches/*.7z "$TARGET_DIR/" 2>/dev/null || true
+          
+          sed -e "s/\$(CURRENT_TIME)/$TIME/g" -e "s/\$(CURRENT_DATE)/$DATE/g" cn_installer/readme.txt > "$TARGET_DIR/汉化更新日志-readme-$DATE.txt"
+          cp cn_installer/汉化答疑QQ群1033065757-可以来此求助.jpg "$TARGET_DIR/" || true
           
           xattr -cr "DELTARUNE Chinese Patcher.app"
           codesign --force --deep --sign - "DELTARUNE Chinese Patcher.app"
           
           mkdir dmg_root
           mv "DELTARUNE Chinese Patcher.app" dmg_root/
-          cp -r cn_installer/mac/. dmg_root/
+          brew install create-dmg
           
           OUTPUT_NAME="【macOS】三角符文汉化补丁-V${DATE}.dmg"
-          hdiutil create -volname "Deltarune Patcher" -srcfolder dmg_root -ov -format UDZO "$OUTPUT_NAME"
+          create-dmg \
+            --volname "Deltarune Patcher" \
+            --background "cn_installer/arrow.png" \
+            --window-size 600 300 \
+            --icon-size 80 \
+            --icon "DELTARUNE Chinese Patcher.app" 180 130 \
+            --hide-extension "DELTARUNE Chinese Patcher.app" \
+            --app-drop-link 450 130 \
+            "$OUTPUT_NAME" \
+            "dmg_root/"
 
       - name: Upload macOS Installers
-        uses: actions/upload-artifact@v6
+        uses: actions/upload-artifact@v4
         with:
           name: Final_Installers_macOS
           path: "【macOS】三角符文汉化补丁*.dmg"

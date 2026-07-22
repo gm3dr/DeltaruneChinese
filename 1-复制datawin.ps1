@@ -48,8 +48,15 @@ Write-Host "Starting file extraction..." -ForegroundColor Cyan
 # 4. 批量处理 Chapters 1-4 (合并循环逻辑)
 1..5 | ForEach-Object {
     $ch = $_
-    if ($IsMacOS) { Copy-File (Join-Path $DirInst "chapter$ch`_mac/game.ios") "workspace/ch$ch/data.win" }
-    else { Copy-File (Join-Path $DirInst "chapter$ch`_windows/data.win") "workspace/ch$ch/data.win" }
+    if ($ch -eq 1) {$file = "lang_en"} else { $file = "lang_ja" }
+    if ($IsMacOS) { 
+        Copy-File (Join-Path $DirInst "chapter$ch`_mac/game.ios") "workspace/ch$ch/data.win"
+        Copy-File (Join-Path $DirInst "chapter$ch`_mac/lang/$file.json") "workspace/ch$ch/lang_ja.json"
+    }
+    else {
+        Copy-File (Join-Path $DirInst "chapter$ch`_windows/data.win") "workspace/ch$ch/data.win"
+        Copy-File (Join-Path $DirInst "chapter$ch`_windows/lang/$file.json") "workspace/ch$ch/lang_ja.json"
+    }
     Copy-File (Join-Path $DirWin "chapter$ch`_windows/data.win")  "data_win/$gameVer/ch$ch/data.win"
     Copy-File (Join-Path $DirMac "chapter$ch`_mac/game.ios")       "data_win/$gameVer/ch$ch/game.ios"
 }

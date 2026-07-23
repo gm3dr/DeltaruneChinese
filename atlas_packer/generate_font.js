@@ -1,6 +1,6 @@
 import { packAsync } from 'free-tex-packer-core';
 import freetype from 'freetype2';
-import sharp from 'sharp';
+import { Jimp } from 'jimp';
 import { promises as fs } from 'fs';
 import { Worker, isMainThread } from 'worker_threads';
 
@@ -43,12 +43,16 @@ function PreProcessBitmap(bitmap, top_align) {
     if (top_align < 0) {
         top_align = 0;
     }
-    const result = Buffer.alloc(bitmap.width * (bitmap.height + top_align));
+    const result = Buffer.alloc(4 * bitmap.width * (bitmap.height + top_align));
     for(let y = 0; y < bitmap.height; y++) {
         for(let x = 0; x < bitmap.width; x++) {
             const bitMask = 128 >> (x % 8);
-            const val = bitmap.buffer[y * bitmap.pitch + (x >> 3)] & bitMask;
-            result[(y + top_align) * bitmap.width + x] = val > 0 ? 255 : 0;
+            const val = (bitmap.buffer[y * bitmap.pitch + (x >> 3)] & bitMask) > 0 ? 255 : 0;
+            const offset = (y + top_align) * bitmap.width + x;
+            result[4 * offset + 0] = val;
+            result[4 * offset + 1] = val;
+            result[4 * offset + 2] = val;
+            result[4 * offset + 3] = val;
         }
     }
     return result;
@@ -81,27 +85,20 @@ async function BitmapGenerator(cfg) {
                 render: true,
                 monochrome: true,
             });
-            if (glyph.bitmap === null || glyph.bitmap.width === 0 || glyph.bitmap.height === 0){
+            if (glyph.bitmap === null || glyph.bitmap.width === 0 || glyph.bitmap.height === 0) {
                 return null;
             }
             const top_align = (cfg.char_size - glyph.bitmapTop) + (code < 128 ? cfg.offset_en.y : cfg.offset_cn.y);
             const width = glyph.bitmap.width;
             const height = glyph.bitmap.height + top_align;
-            const img = sharp({create: {
-                width,
-                height,
-                channels: 3,
-                background: {r:255, g:255, b:255}
-            }}).joinChannel(
-                PreProcessBitmap(glyph.bitmap, top_align),
-                { raw: {width, height, channels: 1}}
-            );
+            const img = new Jimp({ width, height, color: '#ffffff' });
+            img.bitmap.data = PreProcessBitmap(glyph.bitmap, top_align);
             // 这里的shift+2 offset+1是历史遗留问题
             const shift = 2 + glyph.metrics.horiAdvance / 64;
             const offset = 1 + glyph.bitmapLeft + (code < 128 ? cfg.offset_en.x : cfg.offset_cn.x);
             
             const path = `${cfg.name},${code},${shift},${offset}.png`
-            const contents = await img.png().toBuffer();
+            const contents = await img.getBuffer('image/png');
             return {path, contents};
         }
         generators.set(key, ch => {
@@ -152,6 +149,17 @@ async function BuildDic(directory){
     }
 }
 
+// 顶部补透明边：用 jimp 的 composite 把原图贴在 (0, top_align) 处
+async function extendTopPng(pngBuffer, top_align) {
+    const src = await Jimp.fromBuffer(pngBuffer);
+    const out = new Jimp({ 
+        width: src.bitmap.width,
+        height: src.bitmap.height + top_align,
+        color: '#00000000'
+    }); // 全透明
+    out.composite(src, 0, top_align);
+    return await out.getBuffer('image/png');
+}
 
 const chapters = ['ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'main', 'demo'];
 await Promise.all(chapters.map(async chapter => {
@@ -174,18 +182,15 @@ await Promise.all(chapters.map(async chapter => {
             const top_align = (char < 128 ? cfg.offset_en.y : cfg.offset_cn.y);
             const path = `${cfg.name},${char},${shift},${offset}.png`;
             if(top_align <= 0) {
-                return { path, contents: 
-                    await fs.readFile(directory + filename),
+                return {
+                    path,
+                    contents: await fs.readFile(directory + filename),
                 };
             }
-            return { path, contents: 
-                await sharp(directory + filename).extend({
-                    background: {r:0, g:0, b:0, alpha:0},
-                    top: top_align,
-                    left: 0,
-                }).toBuffer(),
+            return {
+                path,
+                contents: await extendTopPng(await fs.readFile(directory + filename), top_align),
             };
-            
         }
         const images_pic = await fs.readdir(directory).then(fileList => Promise.all(fileList.map(LoadFile)));
         const images_fnt = (await Promise.all(Array.from(dict).map(await BitmapGenerator(cfg)))).filter(x => x != null);

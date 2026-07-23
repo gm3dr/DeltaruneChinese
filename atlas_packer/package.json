@@ -2,7 +2,7 @@
   "dependencies": {
     "free-tex-packer-core": "^0.3.5",
     "freetype2": "^2.1.0",
-    "sharp": "^0.35.3"
+    "jimp": "^1.6.1"
   },
   "type": "module"
 }

@@ -9,7 +9,7 @@ draw_set_font(fnt_mainbig);
 draw_set_halign(fa_left);
 var _xx = 448;
 var _yy = 392;
-draw_text(_xx, _yy + 24, "SCORE: " + string_replace_all(string_format(points, 4, 0), " ", "0"));
+draw_text(_xx, _yy + 24, "分数: " + string_replace_all(string_format(points, 4, 0), " ", "0"));
 var _time = 0;
 
 switch (state)
@@ -28,7 +28,7 @@ switch (state)
         break;
 }
 
-draw_text(_xx, _yy + 50, "TIME LEFT: " + string_replace_all(string_format(_time, 2, 0), " ", "0") + "s");
+draw_text(_xx, _yy + 50, "剩余时间: " + string_replace_all(string_format(_time, 2, 0), " ", "0") + "秒");
 
 if (state == "wave_intro")
 {

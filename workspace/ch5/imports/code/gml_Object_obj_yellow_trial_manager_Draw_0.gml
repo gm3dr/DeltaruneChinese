@@ -33,7 +33,7 @@ if (current_perp != -1 && (can_control || flowery_mode))
             
             if (global.is_console || obj_gamecontroller.gamepad_active)
             {
-                draw_sprite_ext(scr_getbuttonsprite(global.input_g[4]), 0, (xstart - 72) + (20 * _ja), (ystart - 12) + 64, 2, 2, 0, c_white, 1);
+                draw_sprite_ext(scr_getbuttonsprite(global.input_g[4]), 0, (xstart - 72) + (20 * _ja)  + 30 , (ystart - 12) + 64, 2, 2, 0, c_white, 1);
                 draw_text_transformed(xstart - (20 * _ja), ystart + 64, string_replace(string(stringsetloc("{0} to accuse.", "obj_yellow_trial_manager_slash_Draw_0_gml_33_0"), scr_get_input_name(4)), "\\*Z", "    "), 2, 2, 0);
             }
             else

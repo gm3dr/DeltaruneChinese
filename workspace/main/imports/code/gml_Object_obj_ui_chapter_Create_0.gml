@@ -25,15 +25,15 @@ init = function(arg0, arg1)
     _parent = arg0;
     _chapter = arg1;
     _chapter_title = get_chapter_title(_chapter);
-    var chapter_text = "Chapter " + string(_chapter);
+    var chapter_text = "第" + string(_chapter) + "章";
     _chapter_choice = instance_create(x + 20, y + 26, obj_ui_choice);
     _chapter_choice.init(id, chapter_text, UnknownEnum.Value_0);
     _chapter_choice.y -= 40;
     _chapter_choice.disable();
     _chapter_choice.set_font(2);
     _chapter_choice.set_alpha(0);
-    var play_text = (global.lang == "en") ? "Play" : "プレイする";
-    var cancel_text = (global.lang == "en") ? "Do Not" : "もどる";
+    var play_text = (global.lang == "en") ? "游玩" : "プレイする";
+    var cancel_text = (global.lang == "en") ? "返回" : "もどる";
     var confirm_choice = instance_create(x + 220, y + 26, obj_ui_choice);
     confirm_choice.init(id, play_text, UnknownEnum.Value_2);
     confirm_choice.y -= 40;

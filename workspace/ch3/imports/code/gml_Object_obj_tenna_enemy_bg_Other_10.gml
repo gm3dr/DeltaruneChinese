@@ -46,7 +46,7 @@ draw_set_alpha(0.2 + (sin(siner / 6) * 0.04));
 ossafe_fill_rectangle(xx + 125, yy + 35, xx + 125 + ((myscore / maxscore) * 390) + (sin(siner / 4) * 1), yy + 125);
 draw_set_alpha(1);
 draw_text_transformed_outline(camerax() + 320, cameray() + 80, myscore, 2 + (sin(siner / 4) * 0.3), 1.5, 16711680);
-draw_text_transformed_outline(camerax() + 320, cameray() + 50, "SCORE", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
+draw_text_transformed_outline(camerax() + 320, cameray() + 50, "分数", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
 
 if (addscore > 0)
     draw_text_transformed_outline(camerax() + 320 + 100, cameray() + 80, "+" + string(addscore), 2 + (sin(siner / 4) * 0.3), 1.5, 16711680);

@@ -90,7 +90,9 @@ if (instance_exists(obj_plat_player) && obj_plat_player.targetmode)
         var name = stringsetloc("Kris", "obj_plat_foreground_writer_slash_Draw_0_gml_17_0");
         draw_text(_camerax + xoffset + 20, _cameray + yoffset + 10 + ss, name);
         draw_set_color(image_blend);
-        draw_text(_camerax + xoffset + (16 * (string_length(name) + 1)), _cameray + yoffset + 10 + ss, "-->  " + stringsetloc("OMEGA FLATTER", "obj_plat_foreground_writer_slash_Draw_0_gml_20_0"));
+        var _cjk_cnt = (string_byte_length(name) - string_length(name)) / 2;
+        var _en_cnt = string_length(name) - _cjk_cnt;
+        draw_text(_camerax + xoffset + (28 * _cjk_cnt + 16 * (_en_cnt + 1)), _cameray + yoffset + 10 + ss, "-->  " + stringsetloc("OMEGA FLATTER", "obj_plat_foreground_writer_slash_Draw_0_gml_20_0"));
         draw_text(_camerax + xoffset + 20, _cameray + yoffset + 40 + ss, stringsetloc("Disable ACTs.", "obj_plat_foreground_writer_slash_Draw_0_gml_22_0"));
         draw_set_alpha(1);
     }
@@ -112,11 +114,9 @@ if (instance_exists(obj_plat_player) && obj_plat_player.targetmode)
             if (target >= 1)
             {
                 var _len = 0;
-                
-                if (global.lang == "ja")
-                    _len = 28 * (string_length(targets[target]) + 1);
-                else
-                    _len = 16 * (string_length(targets[target]) + 1);
+                var _cjk_cnt = (string_byte_length(targets[target]) - string_length(targets[target])) / 2;
+                var _en_cnt = string_length(targets[target]) - _cjk_cnt;
+                _len = 28 * _cjk_cnt + 16 * (_en_cnt + 1);
                 
                 draw_text(_camerax + xoffset + _len, _cameray + yoffset + 10 + ss + (_yoffset * side), "-->  " + obj_plat_player.hlit_name);
             }

@@ -96,17 +96,18 @@ if (timer == 526)
 if (timer == 573)
 {
     creditalpha = 1;
-    line[0] = "Localization Producers";
-    line[1] = "John Ricciardi";
-    line[2] = "Graeme Howard";
+    line[0] = "汉化校对[2025]";
+    line[1] = "鲟鱼子，旋风SELF，单衫_石宇砖，鸥皇不欧，FH丶CY，yzdnn，JH";
+    line[2] = "丢丢hamburger，ax暗星233，鼠球，杜若(santizhizi)，CoCo水君(Toast)";
     linecolor[0] = c_ltgray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;
-    linecolor[3] = c_ltgray;
-    linecolor[4] = c_white;
-    line[3] = "Additional Programming";
-    line[4] = "Gregg Tavares (PC)";
-    line[5] = "Sarah O'Donnell (Console)";
+    linecolor[3] = c_white;
+    linecolor[4] = c_ltgray;
+    linecolor[5] = c_white;
+    line[3] = "Cupcake～，w1n1n1t351，onomi";
+    line[4] = "汉化美工";
+    line[5] = "JH，米粒，闻笛，yzdnn";
     
     if (global.lang == "ja")
     {

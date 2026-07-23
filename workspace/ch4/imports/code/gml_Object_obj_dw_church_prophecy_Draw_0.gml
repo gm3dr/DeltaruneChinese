@@ -340,6 +340,7 @@ if (onscreen)
         
         if (extflag == "angel")
         {
+            textyoffset = -40;
         }
         
         if (extflag == "heavenandhell1")

@@ -16,14 +16,14 @@ confirming = false;
 visit_shop = false;
 selected = false;
 buffer = 0;
-played_text_en = "This program is intended for players#who are already familiar with UNDERTALE.";
+played_text_en = "此游戏是为已经熟悉《UNDERTALE》的玩家准备的。";
 played_text_ja_1 = "このプログラムは、";
 played_text_ja_2 = "すでに「UNDERTALE」をプレイした方向けです。";
-check_text_en = "Would you like to check out UNDERTALE first?";
+check_text_en = "是否想先玩一下《UNDERTALE》？";
 check_text_ja_1 = "まだプレイしたことのない方は、";
 check_text_ja_2 = "まずは「UNDERTALE」をチェックしてみませんか？";
-shop_options = (global.lang == "en") ? ["Yes", "No"] : ["はい", "いいえ"];
-shop_text = (global.lang == "en") ? "Nintendo eShop" : "ニンテンドーeショップ";
+shop_options = (global.lang == "en") ? ["是", "否"] : ["はい", "いいえ"];
+shop_text = (global.lang == "en") ? "任天堂eShop" : "ニンテンドーeショップ";
 commerce_dialog_open = false;
 
 if (os_type == os_ps4)
@@ -32,8 +32,8 @@ if (os_type == os_ps4)
     psn_load_modules();
 }
 
-check_undertale = (global.lang == "en") ? "Check Out UNDERTALE" : "「UNDERTALE」をチェック";
-start_dr = (global.lang == "en") ? "Start DELTARUNE" : "「DELTARUNE」をプレイ";
+check_undertale = (global.lang == "en") ? "游玩《UNDERTALE》" : "「UNDERTALE」をチェック";
+start_dr = (global.lang == "en") ? "启动《DELTARUNE》" : "「DELTARUNE」をプレイ";
 global.currentroom = room;
 
 enum e__VW

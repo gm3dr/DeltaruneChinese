@@ -30,7 +30,7 @@ ramb_npc.sprite_index = spr_npc_ramb_clean;
 with (ramb_npc)
     scr_depth();
 
-var bar_front = scr_dark_marker(550, 40, spr_dw_green_room_bar_front);
+var bar_front = scr_dark_marker(550, 40, global.names >= 2 ? spr_zhname_dw_green_room_bar_front : spr_dw_green_room_bar_front);
 bar_front.depth = ramb_npc.depth - 10;
 lancer_npc = instance_create(92, 118, obj_npc_room_animated);
 

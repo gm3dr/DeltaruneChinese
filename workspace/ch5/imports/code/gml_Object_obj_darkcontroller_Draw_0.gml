@@ -756,7 +756,7 @@ if (global.menuno == 4)
             if (!showstat)
             {
                 draw_set_color(c_dkgray);
-                draw_text(xx + 100, ch_y[4], "???");
+                draw_text(xx + 100, ch_y[4], "？？？");
                 draw_set_color(-1);
             }
             else
@@ -794,10 +794,6 @@ if (global.menuno == 4)
             if (haveflowery)
                 char_desc = stringsetloc("LV99 Roommate#Your dad's his#best friend.", "obj_darkcontroller_slash_Draw_0_gml_770_0");
         }
-        
-        var __scale = 0.8;
-        
-        if (global.lang == "ja")
             __scale = 1;
         
         draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Fluffiness", "obj_darkcontroller_slash_Draw_0_gml_286_0")), __scale, 1, 0);

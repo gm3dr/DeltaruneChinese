@@ -61,7 +61,7 @@ if (minigametimecon == 0)
     draw_text_transformed_outline(camerax() + 320, cameray() + 80, myscore, 2 + (sin(siner / 4) * 0.3), 1.5, 16711680);
 
 if (minigametimecon == 0)
-    draw_text_transformed_outline(camerax() + 320, cameray() + 50, "SCORE", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
+    draw_text_transformed_outline(camerax() + 320, cameray() + 50, "分数", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
 
 if (alarm[0] < 1)
 {
@@ -88,13 +88,13 @@ if (alarm[0] < 1)
 
 if (addscore > 0)
 {
-    draw_text_transformed_outline(camerax() + 320 + 114, cameray() + 50, "bonus", 0.7 + (sin(siner / 6) * 0.2), 1.5, 16711680);
+    draw_text_transformed_outline(camerax() + 320 + 114, cameray() + 50, "加成", 0.7 + (sin(siner / 6) * 0.2), 1.5, 16711680);
     draw_text_transformed_outline(camerax() + 320 + 110, cameray() + 80, "+" + string(addscore), 1 + (sin(siner / 6) * 0.2), 1.5, 16711680);
 }
 
 if (addscore < 0)
 {
-    draw_text_transformed_outline(camerax() + 320 + 110, cameray() + 50, "bet", 1 + (sin(siner / 6) * 0.2), 1.5, 255);
+    draw_text_transformed_outline(camerax() + 320 + 110, cameray() + 50, "赌注", 1 + (sin(siner / 6) * 0.2), 1.5, 255);
     draw_text_transformed_outline(camerax() + 320 + 110, cameray() + 80, string(addscore), 1 + (sin(siner / 6) * 0.2), 1.5, 255);
 }
 
@@ -185,7 +185,7 @@ else if (addscore > 0)
 }
 else if (minigametimecon > 1)
 {
-    draw_text_transformed_outline(camerax() + 330, cameray() + 66, "GAME TIME!", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
+    draw_text_transformed_outline(camerax() + 330, cameray() + 66, "游戏时间！", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
 }
 
 draw_set_halign(fa_left);

@@ -109,16 +109,18 @@ if (timer == 700)
 
 if (timer == 800)
 {
-    line[0] = stringsetloc("Japanese Localization", "obj_credits_slash_Step_0_gml_95_0");
-    line[1] = stringsetloc("8-4 Ltd.", "obj_credits_slash_Step_0_gml_96_0");
-    line[2] = stringset(" ");
-    line[3] = stringsetloc("Translator", "obj_credits_slash_Step_0_gml_98_0");
-    line[4] = stringsetloc("Keiko Fukuichi", "obj_credits_slash_Step_0_gml_99_0");
-    line[5] = stringset(" ");
+    line[0] = "汉化校对[2025]";
+    line[1] = "鲟鱼子，旋风SELF，单衫_石宇砖，鸥皇不欧，FH丶CY，yzdnn，JH";
+    line[2] = "丢丢hamburger，ax暗星233，鼠球，杜若(santizhizi)，CoCo水君(Toast)";
+    line[3] = "Cupcake～，w1n1n1t351，onomi";
+    line[4] = "汉化美工";
+    line[5] = "JH，米粒，闻笛，yzdnn";
     linecolor[0] = c_ltgray;
     linecolor[1] = c_white;
-    linecolor[3] = c_ltgray;
-    linecolor[4] = c_white;
+    linecolor[2] = c_white;
+    linecolor[3] = c_white;
+    linecolor[4] = c_ltgray;
+    linecolor[5] = c_white;
 }
 
 if (timer == 900)

@@ -135,16 +135,20 @@ else
     {
         if (bright)
             str += stringsetloc(" TOO", "obj_takingtoolong_slash_Draw_0_gml_69_0");
-        else if (tutu < 2)
+        else if (tutu == 1)
             str += stringsetloc(" TAKING", "obj_takingtoolong_slash_Draw_0_gml_71_0");
-        else
+        else if (tutu == 2)
             str += stringsetloc("       ", "obj_takingtoolong_slash_Draw_0_gml_73_0");
+        else
+            str += stringsetloc("TAKING", "obj_takingtoolong_slash_Draw_0_gml_93_0");
     }
     
     if (timer > (26 + (bright ? 13 : 0)))
     {
         if (bright)
             str += stringsetloc(" BRIGHT", "obj_takingtoolong_slash_Draw_0_gml_78_0");
+        else if (tutu)
+            str += stringsetloc(" TOO", "obj_takingtoolong_slash_Draw_0_gml_85_0");
         else
             str += stringsetloc(" TOO", "obj_takingtoolong_slash_Draw_0_gml_80_0");
     }
@@ -187,7 +191,7 @@ if (polite == 2)
             str2 += stringsetloc(" LONG", "obj_takingtoolong_slash_Draw_0_gml_101_0");
     }
     
-    if (timer > 94)
+    if (timer > 94 && jp)
         str2 += "ぎ";
 }
 
@@ -224,11 +228,11 @@ if (polite == 2 && timer > 49)
 
 if (polite == 2 && timer > 53)
 {
-    var pos = 1 + (4 * !jp);
+    var pos = 0 + (4 * !jp);
     
     while (pos <= string_length(str2))
     {
-        draw_text(x + (15 * pos * (1 + jp)), y + 60, string_char_at(str2, pos));
+        draw_text(x + (15 * pos), y + 60, string_char_at(str2, pos));
         pos++;
     }
 }

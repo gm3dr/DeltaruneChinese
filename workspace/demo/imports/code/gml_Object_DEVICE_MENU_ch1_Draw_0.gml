@@ -233,25 +233,25 @@ if (MENU_NO >= 0)
         
         if (MENUCOORD[MENU_NO] == 3)
         {
-            HEARTX = 40;
+            HEARTX = 44;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 4)
         {
-            HEARTX = 125;
+            HEARTX = 124;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 5)
         {
-            HEARTX = 190;
+            HEARTX = 194;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 6)
         {
-            HEARTX = 125;
+            HEARTX = 124;
             HEARTY = 215;
         }
     }
@@ -275,24 +275,8 @@ if (MENU_NO >= 0)
     {
         COPYTEXT = scr_84_get_lang_string_ch1("DEVICE_MENU_slash_Draw_0_gml_199_0");
         ERASETEXT = scr_84_get_lang_string_ch1("DEVICE_MENU_slash_Draw_0_gml_200_0");
-        CHSELECTTEXT = (TYPE == 1) ? "Chapter Select" : "CHAPTER SELECT";
-        
-        if (global.lang == "ja")
-        {
-            CHSELECTTEXT = "チャプター選択";
-            LANGUAGETEXT = "ENGLISH";
-            
-            if (TYPE == 1)
-                LANGUAGETEXT = "English";
-        }
-        else
-        {
-            LANGUAGETEXT = "日本語";
-            
-            if (TYPE == 1)
-                LANGUAGETEXT = "日本語";
-        }
-        
+        CHSELECTTEXT = "选择章节";
+        LANGUAGETEXT = "人名译法";
         if (TYPE == 1)
         {
             COPYTEXT = scr_84_get_lang_string_ch1("DEVICE_MENU_slash_Draw_0_gml_201_0");
@@ -324,22 +308,24 @@ if (MENU_NO >= 0)
         
         var lang_offset = 0;
         
-        if (global.lang == "en")
-        {
-            lang_offset -= 2;
-            draw_set_font(fnt_ja_main);
-        }
-        else
-        {
             draw_set_font(fnt_main);
-        }
         
-        draw_text_shadow_ch1(140 + lang_offset, 210, LANGUAGETEXT);
+        draw_text_shadow_ch1(135 + lang_offset, 210, LANGUAGETEXT);
         scr_84_set_draw_font_ch1("main");
     }
     
     draw_set_font(fnt_main);
-    
+    draw_set_halign(fa_right);
+    draw_set_alpha(0.8);
+    draw_set_color(c_white);
+    draw_text_transformed((room_width / 2) - 5, 5, "可使用菜单下方【人名译法】按钮切换", 0.5, 0.5, 0);
+    var color_name = (global.names == 0) ? c_yellow : c_ltgray;
+    draw_text_transformed_colour((room_width / 2) - 5, 12.5, "保留所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
+    color_name = (global.names == 1) ? c_yellow : c_ltgray;
+    draw_text_transformed_colour((room_width / 2) - 5, 20, "翻译所有可招揽角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
+    color_name = (global.names == 2) ? c_yellow : c_ltgray;
+    draw_text_transformed_colour((room_width / 2) - 5, 27.5, "翻译所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
+    draw_set_halign(fa_left);
     if (TYPE == 1)
     {
         draw_set_alpha(0.4);
@@ -416,7 +402,7 @@ else
     draw_set_color(COL_A);
 
 draw_set_font(fnt_main);
-draw_text_shadow_ch1(__view_get(e__VW.XView, 0) + 8, __view_get(e__VW.YView, 0) + 4, "CHAPTER 1");
+draw_text_shadow_ch1(__view_get(e__VW.XView, 0) + 8, __view_get(e__VW.YView, 0) + 4, "第1章");
 draw_set_color(c_white);
 scr_84_set_draw_font_ch1("main");
 

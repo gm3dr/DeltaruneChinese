@@ -20,7 +20,7 @@ if (type == 1 && init == 1)
     if (global.lang == "ja")
         draw_text_transformed(((camerax() + 640) - 110) + 20 + 40, 346, string((floor(menuScrollCurrent[0]) / 2) + 1) + " / " + string(ceil(menuMaximumID[0] / 2)), 0.5, 1, 0);
     else
-        draw_text_transformed(((camerax() + 640) - 110) + 20 + 40, 346, stringsetloc("Page ", "obj_fusionmenu_slash_Draw_0_gml_171_0") + string((floor(menuScrollCurrent[0]) / 2) + 1) + " / " + string(ceil(menuMaximumID[0] / 2)), 0.5, 1, 0);
+        draw_text_transformed(((camerax() + 640) - 110) + 20 + 40, 346, stringsetloc("Page ", "obj_fusionmenu_slash_Draw_0_gml_171_0") + string((floor(menuScrollCurrent[0]) / 2) + 1) + " / " + string(ceil(menuMaximumID[0] / 2)), 1, 1, 0);
     
     draw_set_halign(fa_left);
 }
@@ -73,7 +73,7 @@ if (type == 3 && init == 1)
         draw_set_halign(fa_center);
         draw_text(xx + 473, yy + 240, recruitName[menuCoord[0]]);
         draw_set_halign(fa_left);
-        draw_text_transformed(xx + 368, yy + 280, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_47_0") + string(recruitChapter[menuCoord[0]]), 1, 1, 0);
+        draw_text_transformed(xx + 368, yy + 280, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_47_0") + string(recruitChapter[menuCoord[0]]) + "章", 1, 1, 0);
         draw_set_halign(fa_right);
         draw_text_transformed(xx + 576, yy + 280, stringsetloc("LV ", "obj_fusionmenu_slash_Draw_0_gml_48_0") + string(recruitLevel[menuCoord[0]]), 1, 1, 0);
         draw_set_halign(fa_left);
@@ -150,7 +150,7 @@ if (type == 3 && init == 1)
         draw_set_halign(fa_right);
         draw_text_transformed(xx + 590, yy + 30, string(menuCoord[menu] + 1) + "/" + string(menuMaximumID[menu] + 1), squished, 1, 0);
         draw_set_halign(fa_left);
-        draw_text_transformed(xx + 300, yy + 30, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_84_0") + string(recruitChapter[menuCoord[1]]), squished, 1, 0);
+        draw_text_transformed(xx + 300, yy + 30, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_84_0") + string(recruitChapter[menuCoord[1]]) + "章", squished, 1, 0);
         var ymod = 120;
         
         if (jp)
@@ -254,7 +254,7 @@ if (type == 3 && init == 1)
         }
         else if (global.is_console || obj_gamecontroller.gamepad_active)
         {
-            var button_x = (global.lang == "en") ? (xx + 165) : (xx + 84);
+            var button_x = (global.lang == "en") ? (xx + 120) : (xx + 84);
             draw_sprite_ext(scr_getbuttonsprite(global.input_g[5], false), 0, button_x, yy + 402, 2, 2, 0, c_white, 1);
             var x_offset = (global.lang == "en") ? 0 : 38;
             draw_text(xx + 80 + x_offset, yy + 400, string_hash_to_newline(stringsetloc("Press         to Return", "obj_fusionmenu_slash_Draw_0_gml_199_0")));
@@ -285,7 +285,7 @@ if (type == 4 && init == 1)
     else
     {
         draw_set_font(scr_84_get_font("dotumche"));
-        draw_text_transformed(xx + 60, yy + 140, stringset("POCKET"), 1, 1, 0);
+        draw_text_transformed(xx + 60, yy + 140, stringset("口袋"), 1, 1, 0);
     }
     
     if (menu == 1)
@@ -303,7 +303,7 @@ if (type == 4 && init == 1)
     }
     else
     {
-        draw_text_transformed(xx + 60, yy + 290, "STORAGE", 1, 1, 0);
+        draw_text_transformed(xx + 60, yy + 290, "库存", 1, 1, 0);
     }
     
     if (jp)

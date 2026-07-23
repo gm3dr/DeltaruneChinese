@@ -58,8 +58,7 @@ if (controller_active)
     draw_set_halign(fa_left);
     draw_set_color(#003A52);
     draw_text(_xx + 14 + 60, ((_yy + 480) - 70) + 2 + (tutprog * 80), "/");
-    var kern = (global.lang == "ja") ? 28 : 16;
-    
+    var kern = 28;
     for (i = 1; i <= string_length(strchange); i += 1)
     {
         var ch = string_char_at(strchange, i);
@@ -120,7 +119,7 @@ else
 {
     draw_set_halign(fa_left);
     draw_set_color(#003A52);
-    var kern = (global.lang == "ja") ? 28 : 16;
+    var kern = 28;
     var command_text = strup + "/" + strdown + ": ";
     
     for (i = 1; i <= string_length(command_text); i += 1)

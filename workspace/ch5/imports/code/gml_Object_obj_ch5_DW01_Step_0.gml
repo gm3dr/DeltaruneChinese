@@ -269,7 +269,7 @@ if (con == 10)
     }
     else
     {
-        c_msgset(0, "\\E2\\VO* Ah^1, sorry^1, m'lady./%");
+        c_msgset(0, "\\E2\\VO* 啊^1，抱歉^1，我的大小姐。/%");
     }
     
     c_talk_wait();
@@ -296,7 +296,7 @@ if (con == 10)
     }
     else
     {
-        c_msgset(0, "\\E0\\VH* ..^1. and best friend./");
+        c_msgset(0, "\\E0\\VH* ..^1.也是他最好的朋友。/");
     }
     
     c_facenext("susie", "E");
@@ -431,7 +431,7 @@ if (con == 10)
     if (global.lang == "ja")
         c_msgnext("\\E0\\VO＊ へへっ^1。\n　 お待たせしちゃって\n　 ゴメンゴメン。/");
     else
-        c_msgnext("\\E0\\V1* Heh^1. Sorry to keep you waiting^1, old pal./");
+        c_msgnext("\\E0\\V1* 呵^1。抱歉久等了^1，\n老伙计。/");
     
     c_facenext("asgore", "5");
     c_msgnextloc("\\E5* Oh^1, it's no trouble at all!/", "obj_ch5_DW01_slash_Step_0_gml_515_0");

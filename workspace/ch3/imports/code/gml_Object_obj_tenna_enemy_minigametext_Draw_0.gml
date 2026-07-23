@@ -10,7 +10,7 @@ repeat (timerspeed)
         scale = 0;
         scr_lerpvar("scale", 0, 2, 40, -2, "out");
         scale = 2;
-        scr_lerpvar("hspace", 0, 32, 45, -2, "out");
+        scr_lerpvar("hspace", 0, 56, 45, -2, "out");
     }
     
     if (timer == 26)

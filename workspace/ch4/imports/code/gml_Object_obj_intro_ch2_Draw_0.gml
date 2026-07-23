@@ -77,7 +77,7 @@ else
         {
             draw_set_font(fnt_mainbig);
             draw_set_color(c_white);
-            draw_text_ext(105, 120, "CHAPTER 2", 10, 900);
+            draw_text_ext(130, 120, "第2章", 10, 900);
             scr_84_set_draw_font("mainbig");
         }
         

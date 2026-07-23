@@ -13,11 +13,17 @@ for (var __i = 0; __i < __numlayers; __i++)
     {
         var __lang = string_copy(__name, __pos + 6, 2);
         
-        if (__lang != global.lang)
+        if (__lang != global.lang && room_get_name(room) != "room_torielclass")
         {
             layer_set_visible(__layer_id, false);
             continue;
         }
+
+		if (room_get_name(room) == "room_torielclass" && global.names < 2)
+		{
+            layer_set_visible(__layer_id, false);
+            continue;
+		}
     }
     
     for (var __j = 0; __j < __numels; __j++)
@@ -38,7 +44,9 @@ for (var __i = 0; __i < __numlayers; __i++)
             {
                 var __lang = string_copy(__name, __pos + 6, 2);
                 
-                if (__lang != global.lang)
+				if (__lang != global.lang && room_get_name(room) != "room_torielclass")
+                    layer_sprite_destroy(__id);
+				if (room_get_name(room) == "room_torielclass" && global.names < 2)
                     layer_sprite_destroy(__id);
             }
         }

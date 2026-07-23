@@ -1,5 +1,5 @@
-choice_text[0] = (global.lang == "en") ? "Continue to Chapter 2" : "Chapter 2へ進む";
-choice_text[1] = (global.lang == "en") ? "Keep Playing Chapter 1" : "このままChapter 1をプレイ";
+choice_text[0] = (global.lang == "en") ? "前往第2章" : "Chapter 2へ進む";
+choice_text[1] = (global.lang == "en") ? "留在第1章" : "このままChapter 1をプレイ";
 choice_index = 0;
 confirmed_selection = false;
 text_alpha = 0;

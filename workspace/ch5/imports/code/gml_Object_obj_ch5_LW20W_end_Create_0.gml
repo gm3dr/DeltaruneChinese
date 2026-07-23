@@ -52,38 +52,17 @@ alpha = 0;
 blocks = [];
 array_push(blocks, 
 {
-    x: 12,
-    y: 3,
-    w: 11,
-    h: 10
-});
-array_push(blocks, 
-{
-    x: 24,
-    y: 3,
-    w: 11,
-    h: 10
-});
-array_push(blocks, 
-{
-    x: 35,
-    y: 3,
-    w: 11,
-    h: 10
-});
-array_push(blocks, 
-{
-    x: 47,
-    y: 3,
-    w: 11,
-    h: 10
-});
-array_push(blocks, 
-{
-    x: 61,
+    x: 40,
     y: 0,
-    w: 7,
-    h: 13
+    w: 16,
+    h: 14
+});
+array_push(blocks, 
+{
+    x: 56,
+    y: 0,
+    w: 16,
+    h: 14
 });
 array_push(blocks, 
 {
@@ -94,107 +73,37 @@ array_push(blocks,
 });
 array_push(blocks, 
 {
-    x: 83,
+    x: 88,
     y: 0,
-    w: 11,
-    h: 13
+    w: 16,
+    h: 14
 });
 array_push(blocks, 
 {
-    x: 95,
+    x: 104,
     y: 0,
-    w: 11,
-    h: 13
+    w: 16,
+    h: 14
 });
 array_push(blocks, 
 {
-    x: 107,
-    y: 2,
-    w: 11,
-    h: 11
-});
-array_push(blocks, 
-{
-    x: 119,
-    y: 2,
-    w: 11,
-    h: 11
-});
-array_push(blocks, 
-{
-    x: 133,
+    x: 120,
     y: 0,
-    w: 7,
-    h: 13
+    w: 16,
+    h: 14
 });
 array_push(blocks, 
 {
-    x: 143,
-    y: 3,
-    w: 11,
-    h: 10
+    x: 40,
+    y: 18,
+    w: 16,
+    h: 14
 });
 array_push(blocks, 
 {
-    x: 155,
-    y: 3,
-    w: 11,
-    h: 10
-});
-array_push(blocks, 
-{
-    x: -40,
-    y: -40,
-    w: 0,
-    h: 0
-});
-array_push(blocks, 
-{
-    x: 179,
-    y: 0,
-    w: 11,
-    h: 13
-});
-array_push(blocks, 
-{
-    x: 0,
-    y: 19,
-    w: 11,
-    h: 13
-});
-array_push(blocks, 
-{
-    x: 14,
-    y: 20,
-    w: 7,
-    h: 12
-});
-array_push(blocks, 
-{
-    x: 24,
-    y: 19,
-    w: 11,
-    h: 13
-});
-array_push(blocks, 
-{
-    x: 36,
-    y: 22,
-    w: 11,
-    h: 10
-});
-array_push(blocks, 
-{
-    x: -40,
-    y: -40,
-    w: 0,
-    h: 0
-});
-array_push(blocks, 
-{
-    x: 60,
-    y: 19,
-    w: 11,
-    h: 13
+    x: 56,
+    y: 18,
+    w: 16,
+    h: 14
 });
 blocksLength = array_length(blocks);

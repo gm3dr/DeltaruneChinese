@@ -21,7 +21,7 @@ if (os_type == os_ps4)
 init_loaded = false;
 chapter_is_loading = false;
 reload_textures = true;
-window_set_caption("DELTARUNE Chapter 1&2");
+window_set_caption("DELTARUNE 第一章+第二章");
 
 if (instance_exists(obj_time_ch1))
 {
@@ -100,8 +100,8 @@ file_found = false;
 highestUncompletedChapter = 0;
 highestCompletedChapter = 0;
 stringset = "0";
-yes = "Yes";
-no = "No";
+yes = "是";
+no = "否";
 mpos = 0;
 chapterselectinit = 0;
 timer = 0;
@@ -115,8 +115,8 @@ chaptertoload_temp = 0;
 console = os_type == os_switch || os_type == os_ps4;
 latestAvailableChapter = 2;
 chapname[0] = " - - ";
-chapname[1] = "The Beginning";
-chapname[2] = "A Cyber's World";
+chapname[1] = "开端";
+chapname[2] = "赛博世界";
 chapname[3] = " - - ";
 chapname[4] = " - - ";
 chapname[5] = " - - ";
@@ -171,10 +171,10 @@ else
     }
     
     text_font = (global.lang == "en") ? 3 : 10;
-    yes = (global.lang == "en") ? "Yes" : "はい";
-    no = (global.lang == "en") ? "No" : "いいえ";
-    chapname[1] = (global.lang == "en") ? "The Beginning" : "はじまり";
-    chapname[2] = (global.lang == "en") ? "A Cyber's World" : "サイバーワールド";
+    yes = (global.lang == "en") ? "是" : "はい";
+    no = (global.lang == "en") ? "否" : "いいえ";
+    chapname[1] = (global.lang == "en") ? "开端" : "はじまり";
+    chapname[2] = (global.lang == "en") ? "赛博世界" : "サイバーワールド";
     scr_controls_default();
     audio_group_load(1);
     init_loaded = true;

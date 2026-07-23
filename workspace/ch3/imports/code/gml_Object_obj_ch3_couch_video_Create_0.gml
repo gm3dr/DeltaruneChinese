@@ -12,7 +12,7 @@ if (global.lang == "ja")
 
 text_index = 0;
 house_index = (global.lang == "ja") ? 3 : 2;
-var file_name = (global.lang == "ja") ? "tennaIntroJPf1_compressed_28" : "tennaIntroF1_compressed_28";
+var file_name = (global.names == 2) ? "tennaIntroF1_zhname_compressed_28" : "tennaIntroF1_compressed_28";
 video_open("vid/" + file_name + ".mp4");
 video_enable_loop(false);
 video_set_volume(global.flag[17]);

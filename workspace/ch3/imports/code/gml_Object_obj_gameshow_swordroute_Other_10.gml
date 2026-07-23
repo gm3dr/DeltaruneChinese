@@ -7,7 +7,7 @@ if (drawui)
     if (i_ex(lilkris))
     {
         draw_set_font(fnt_8bit);
-        draw_text(132, 48, "HP");
+        draw_text(132, 46, "HP");
         var hp = lilkris.myhealth;
         var maxhp = lilkris.maxhealth;
         hp = clamp(hp, 0, maxhp);
@@ -38,13 +38,13 @@ if (drawui)
             
             if (_level < 4)
             {
-                draw_text(280, 48, "L");
-                draw_text(294, 48, "V");
-                draw_text(310, 48, string(_level));
+                draw_text(280, 46, "L");
+                draw_text(294, 46, "V");
+                draw_text(310, 46, string(_level));
             }
             else
             {
-                draw_text(278, 48, "MAX");
+                draw_text(278, 46, "MAX");
                 barsize = maxbarsize;
             }
             

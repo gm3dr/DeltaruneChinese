@@ -78,8 +78,8 @@ with (caught)
     {
         global.interact = 1;
         myinteract = 4;
-        var str1 = "* (Thar she blows...)/%";
-        var str2 = "* (It's going off to live a better life now...)/%";
+        var str1 = "* （哪里走...！）/%";
+        var str2 = "* （它去迎接更美好的生活了...）/%";
         
         if (global.lang == "ja")
         {

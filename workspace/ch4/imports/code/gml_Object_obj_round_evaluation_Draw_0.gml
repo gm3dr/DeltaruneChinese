@@ -1786,7 +1786,7 @@ if (con >= 1)
         if (rtimer > 126)
         {
             sp_draw_text(midx, yy + (mspace * 7), roundcompletetext1);
-            sp_draw_text(midx, yy + (mspace * 7) + 18, stringsetloc("YOU GOT", "obj_round_evaluation_slash_Draw_0_gml_1457_0"));
+            sp_draw_text(midx, yy + (mspace * 7) + 20, stringsetloc("YOU GOT", "obj_round_evaluation_slash_Draw_0_gml_1457_0"));
         }
         
         if (rtimer > 140 && musicstarted == false)
@@ -1808,11 +1808,11 @@ if (con >= 1)
             draw_set_halign(fa_center);
             draw_set_color(shadcolor);
             draw_set_alpha(shadalph);
-            draw_text_transformed(midx + shadoff, yy + (mspace * 7) + 36 + shadoff, rankstring + "!!", 2, 2, 0);
+            draw_text_transformed(midx + shadoff, yy + (mspace * 7) + 40 + shadoff, rankstring + "!!", 2, 2, 0);
             draw_set_color(c_white);
             draw_set_alpha(1);
             var col = 65535;
-            draw_text_transformed_color(midx, yy + (mspace * 7) + 36, rankstring + "!!", 2, 2, 0, col, col, c_white, c_white, 1);
+            draw_text_transformed_color(midx, yy + (mspace * 7) + 40, rankstring + "!!", 2, 2, 0, col, col, c_white, c_white, 1);
             draw_set_color(c_white);
         }
         

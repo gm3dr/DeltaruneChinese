@@ -185,7 +185,7 @@ if (global.monster[myself] == 1)
         }
         else if (amimissmizzle == false && acttalked == false)
         {
-            var random_vowel = choose("a", "e", "i", "o", "u", "u", "oo");
+            var random_vowel = choose("叭", "哔", "卟", "呗", "啵", "啵啵");
             
             if (global.lang == "ja")
                 random_vowel = choose("パ", "ピ", "プ", "ぺ");
@@ -193,7 +193,7 @@ if (global.monster[myself] == 1)
             if (rr == 1)
                 msgsetloc(0, "Buble", "obj_holywatercooler_enemy_slash_Step_0_gml_145_0");
             else
-                msgsetsubloc(0, "B~1b~2e", random_vowel, choose("i", "l"), "obj_holywatercooler_enemy_slash_Step_0_gml_146_0");
+                msgsetsub(0, "~1", random_vowel);
             
             global.msg[0] += "/%";
             scr_enemyblcon(x, global.monstery[myself] - 20, 10);

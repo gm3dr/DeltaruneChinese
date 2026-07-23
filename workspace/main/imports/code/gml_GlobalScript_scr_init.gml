@@ -43,23 +43,23 @@ function get_chapter_title(arg0)
     switch (arg0)
     {
         case UnknownEnum.Value_1:
-            return (global.lang == "en") ? "The Beginning" : "はじまり";
+            return (global.lang == "en") ? "开端" : "はじまり";
             break;
         
         case UnknownEnum.Value_2:
-            return (global.lang == "en") ? "A Cyber's World" : "サイバーワールド";
+            return (global.lang == "en") ? "赛博世界" : "サイバーワールド";
             break;
         
         case UnknownEnum.Value_3:
-            return (global.lang == "en") ? "Late Night" : "レイトナイト";
+            return (global.lang == "en") ? "深夜" : "レイトナイト";
             break;
         
         case UnknownEnum.Value_4:
-            return (global.lang == "en") ? "Prophecy" : "予言";
+            return (global.lang == "en") ? "预言" : "予言";
             break;
         
         case UnknownEnum.Value_5:
-            return (global.lang == "en") ? "Festival Day" : "お祭り";
+            return (global.lang == "en") ? "庆典日" : "お祭り";
             break;
         
         default:

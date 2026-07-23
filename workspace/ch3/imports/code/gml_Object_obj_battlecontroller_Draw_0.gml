@@ -1220,7 +1220,7 @@ if (global.bmenuno == 9 && global.myfight == 0)
     {
         var xstring = stringsetloc("X", "obj_battlecontroller_slash_Draw_0_gml_819_0");
         draw_set_color(c_red);
-        var offset = 0;
+        var offset = -14;
         
         if (global.lang == "ja")
             offset = 14;

@@ -57,7 +57,11 @@ if (formatted == 0)
     {
         skip = 0;
         thischar = string_char_at(mystring, i);
-        
+        if (thischar == "`")
+        {
+            i++;
+        }
+        else {
         if (thischar == "/" || thischar == "%")
         {
             if (charpos > -1)
@@ -186,7 +190,7 @@ if (formatted == 0)
                 textalignment = nextchar2;
         }
         
-        if (thischar == "&")
+        if (thischar == "&"|| thischar == "\n")
         {
             if (charpos > stringmax)
                 stringmax = charpos;
@@ -204,6 +208,7 @@ if (formatted == 0)
                 mystring = string_insert(scr_84_get_lang_string("obj_writer_slash_Draw_0_gml_147_0"), mystring, i + 1);
                 i += 2;
             }
+        }
         }
         
         if (skip == 0)
@@ -249,7 +254,10 @@ if (formatted == 0)
             }
             else
             {
-                charpos += 1;
+                if (ord(thischar) > 505 || ord(thischar) == 183)
+                    charpos += 1.75;
+                else
+                    charpos += 1;
             }
         }
     }
@@ -287,8 +295,13 @@ for (n = 1; n < pos; n += 1)
 {
     accept = 1;
     mychar = string_char_at(mystring, n);
-    
-    if (mychar == "&")
+    if (mychar == "`")
+    {
+        n++;
+        mychar = string_char_at(mystring, n);
+    }
+    else {
+    if (mychar == "&" || mychar == "\n")
     {
         accept = 0;
         wx = writingx;
@@ -728,6 +741,7 @@ for (n = 1; n < pos; n += 1)
         accept = 0;
         n += 2;
     }
+    }
     
     if (accept == 1)
     {
@@ -803,8 +817,10 @@ for (n = 1; n < pos; n += 1)
                 draw_set_alpha(1);
             }
         }
-        
-        wx += hspace;
+        if (ord(mychar) > 505 || ord(mychar) == 183)
+            wx += ((hspace * 7) div 4);
+        else
+            wx += hspace;
         
         if (global.lang == "ja")
         {

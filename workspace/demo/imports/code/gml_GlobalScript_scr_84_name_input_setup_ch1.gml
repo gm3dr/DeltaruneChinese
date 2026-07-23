@@ -85,8 +85,8 @@ function scr_84_name_input_setup_ch1()
     
     if (LANGSUBTYPE == 0)
     {
-        NAME[6][2] = "(B)BACK";
-        NAME[8][2] = "(E)END";
+        NAME[6][2] = "(B)退格";
+        NAME[8][2] = "(E)决定";
     }
     else if (LANGSUBTYPE == 1 || LANGSUBTYPE == 2)
     {

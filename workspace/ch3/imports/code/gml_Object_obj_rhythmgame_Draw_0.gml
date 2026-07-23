@@ -3,7 +3,7 @@ if (freeplay < 0)
     var _textspacing = 16;
     draw_set_color(c_white);
     _ystart = 80;
-    draw_text(230, _ystart - _textspacing, "TRACK SELECT");
+    draw_text(230, _ystart - _textspacing, "曲目选择");
     var _difficulty = "";
     
     for (i = 0; i < array_length(tracklist); i++)
@@ -13,7 +13,7 @@ if (freeplay < 0)
             draw_set_color(hardmode ? c_orange : c_yellow);
             
             if (hardmode)
-                _difficulty = " (Hard)";
+                _difficulty = "（困难）";
         }
         
         draw_text(210, _ystart + (_textspacing * i), string_format_zero(i, 2, 0) + " - " + tracklist[i] + _difficulty);

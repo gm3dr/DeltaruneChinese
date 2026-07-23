@@ -232,7 +232,7 @@ if (init)
         {
             draw_text(xxloc, 198, bonusstring);
             var _width = 80;
-            draw_sprite_ext(spr_whitepx, 0, xxloc - (_width / 2), 214, _width - 2, 2, 0, c_white, 1);
+            draw_sprite_ext(spr_whitepx, 0, xxloc - (_width / 2), 217, _width - 2, 2, 0, c_white, 1);
         }
         
         if (timer == (resultsdelay + (resultsrate * 0)))

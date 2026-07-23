@@ -306,11 +306,11 @@ if (con == 10 && customcon == 1 && !d_ex())
     camerax_set(0);
     cameray_set(0);
     global.choice = -1;
-    global.choicemsg[0] = (global.lang == "ja") ? "#VTRを#スキップ" : "#Skip the#video";
-    global.choicemsg[1] = (global.lang == "ja") ? "#それでも#まだ見る" : "#Try and#watch anyway";
+    global.choicemsg[0] = (global.lang == "ja") ? "#VTRを#スキップ" : "#跳过#视频";
+    global.choicemsg[1] = (global.lang == "ja") ? "#それでも#まだ見る" : "#再次尝试#播放";
     global.choicemsg[2] = stringset("");
     global.choicemsg[3] = stringset("");
-    var prompt_text = (global.lang == "ja") ? "＊ おーっとぉ！&　 VTRの様子がおかしいぞ！/" : "* W-Wait^1! The VHS isn't working!/";
+    var prompt_text = (global.lang == "ja") ? "＊ おーっとぉ！&　 VTRの様子がおかしいぞ！/" : "* 等等^1! 录像带播放不了!/";
     scr_speaker("tenna");
     msgset(0, prompt_text);
     msgnext("\\C2 ");

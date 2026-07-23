@@ -60,10 +60,10 @@ if (ds_map_find_value(async_load, "id") == global.savedata_async_id)
         }
         
         text_font = (global.lang == "en") ? 3 : 10;
-        yes = (global.lang == "en") ? "Yes" : "はい";
-        no = (global.lang == "en") ? "No" : "いいえ";
-        chapname[1] = (global.lang == "en") ? "The Beginning" : "はじまり";
-        chapname[2] = (global.lang == "en") ? "A Cyber's World" : "サイバーワールド";
+        yes = (global.lang == "en") ? "是" : "はい";
+        no = (global.lang == "en") ? "否" : "いいえ";
+        chapname[1] = (global.lang == "en") ? "开端" : "はじまり";
+        chapname[2] = (global.lang == "en") ? "赛博世界" : "サイバーワールド";
         
         if (ossafe_file_exists("dr.ini"))
             first_time = false;

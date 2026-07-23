@@ -366,7 +366,7 @@ if (global.monster[myself] == 1)
                 if (global.hp[3] < 1)
                     _str = stringsetloc("Ralsei", "obj_initializer_slash_Create_0_gml_50_0");
                 
-                var _andstr = " and ";
+                var _andstr = "和";
                 
                 if (global.lang == "ja")
                     _andstr = " と ";

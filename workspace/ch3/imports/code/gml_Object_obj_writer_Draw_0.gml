@@ -791,8 +791,10 @@ if (view_current == 0)
                     draw_text(wx + random(shake), wy + random(shake), mychar);
                 }
             }
-            
-            wx += hspace;
+            if (ord(mychar) > 505 || ord(mychar) == 183)
+                wx += ((hspace * 7) div 4);
+            else
+                wx += hspace;
             
             if (global.lang == "ja")
             {

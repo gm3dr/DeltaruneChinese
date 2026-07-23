@@ -65,18 +65,18 @@ with (npc2)
     {
         global.interact = 1;
         var texts = [];
-        array_push(texts, "where ");
-        array_push(texts, "the ");
-        array_push(texts, "tail. ");
-        array_push(texts, "pointed ");
-        array_push(texts, "the ");
-        array_push(texts, "children ");
-        array_push(texts, "would ");
-        array_push(texts, "grow,");
-        array_push(texts, "the ");
-        array_push(texts, "Lost ");
-        array_push(texts, "forest ");
-        array_push(texts, "followed ");
+        array_push(texts, stringsetloc("where", "obj_dw_churchb_bookshelf_slash_Step_0_gml_90_0"));
+        array_push(texts, stringsetloc("the ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_91_0"));
+        array_push(texts, stringsetloc("tail. ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_92_0"));
+        array_push(texts, stringsetloc("pointed ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_93_0"));
+        array_push(texts, stringsetloc("the ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_94_0"));
+        array_push(texts, stringsetloc("children ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_95_0"));
+        array_push(texts, stringsetloc("would ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_96_0"));
+        array_push(texts, stringsetloc("grow,", "obj_dw_churchb_bookshelf_slash_Step_0_gml_97_0"));
+        array_push(texts, stringsetloc("the ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_98_0"));
+        array_push(texts, stringsetloc("Lost ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_99_0"));
+        array_push(texts, stringsetloc("forest ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_100_0"));
+        array_push(texts, stringsetloc("followed ", "obj_dw_churchb_bookshelf_slash_Step_0_gml_101_0"));
         
         if (global.lang == "ja")
         {

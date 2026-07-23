@@ -2689,7 +2689,7 @@ if (type == 130)
                 if (global.lang == "ja")
                     scr_enemyblcon(x - 60, global.monstery[myself] + 70, 12.2);
                 else
-                    scr_enemyblcon(x - 5, global.monstery[myself] + 70, 12.3);
+                    scr_enemyblcon(x - 60, global.monstery[myself] + 70, 12.2);
                 
                 myblcon.depth = other.depth - 100;
             }

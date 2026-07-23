@@ -95,7 +95,7 @@ if (con == "nofile")
     fadescaled = fade * scale;
     drawcolor = merge_color(c_white, c_black, fade / fademax);
     draw_set_color(drawcolor);
-    my_stringset = (global.lang == "en") ? "Would you like to start from Chapter 1?" : "Chapter 1から始めますか？";
+    my_stringset = (global.lang == "en") ? "你想从第1章开始玩吗？" : "Chapter 1から始めますか？";
     draw_set_font(text_font);
     draw_set_halign(fa_center);
     draw_text_transformed(xx, yy - fadescaled, my_stringset, scale, scale, 0);
@@ -183,8 +183,8 @@ if (con == "startNextChapter")
     fadescaled = fade * scale;
     drawcolor = merge_color(c_white, c_black, fade / fademax);
     draw_set_color(drawcolor);
-    my_stringset = "Chapter " + string(highestCompletedChapter) + " was completed.";
-    stringset2 = "Play Chapter " + string(highestCompletedChapter + 1);
+    my_stringset = "已通关第" + string(highestCompletedChapter) + "章。";
+    stringset2 = "游玩第" + string(highestCompletedChapter + 1) + "章";
     
     if (global.lang == "ja")
     {
@@ -208,7 +208,7 @@ if (con == "startNextChapter")
     else
         draw_set_color(c_white);
     
-    var select_text = (global.lang == "en") ? "Chapter Select" : "チャプター選択";
+    var select_text = (global.lang == "en") ? "选择章节" : "チャプター選択";
     draw_text_transformed(xx, (yy - fadescaled) + (mspace * 2), select_text, scale, scale, 0);
     
     if (mpos == 0)
@@ -270,7 +270,7 @@ if (con == "continueChapter")
     fadescaled = fade * scale;
     drawcolor = merge_color(c_white, c_black, fade / fademax);
     draw_set_color(drawcolor);
-    my_stringset = "Continue from Chapter " + string(highestUncompletedChapter) + "?";
+    my_stringset = "从第" + string(highestUncompletedChapter) + "章继续？";
     
     if (global.lang == "ja")
         my_stringset = "Chapter " + string(highestUncompletedChapter) + "から続けますか？";
@@ -336,8 +336,8 @@ if (con == "continueChapter")
 
 if (con == "chapterselect")
 {
-    quit = (global.lang == "en") ? "Quit" : "とじる";
-    chapterstring = "Chapter";
+    quit = (global.lang == "en") ? "退出" : "とじる";
+    chapterstring = "第";
     
     if (chapterselectinit == 0)
     {
@@ -404,7 +404,7 @@ if (con == "chapterselect")
         draw_set_color(mycolor);
         draw_set_halign(fa_left);
         draw_set_font(fnt_main);
-        draw_text_transformed(xx, -fadescaled + yy + (mspace * i) + (3 * scale), chapterstring + " " + string(i + 1), scale, scale, 0);
+        draw_text_transformed(xx, -fadescaled + yy + (mspace * i) + (3 * scale), chapterstring + string(i + 1) + "章", scale, scale, 0);
         draw_set_font(text_font);
         draw_set_halign(fa_center);
         draw_text_transformed(176 * scale, -fadescaled + yy + (mspace * i) + (3 * scale), chapname[i + 1], scale, scale, 0);
@@ -456,8 +456,8 @@ if (con == "chapterselect")
 }
 else if (con == "gameloadConfirm")
 {
-    stringPlay = (global.lang == "en") ? "Play" : "プレイする";
-    stringDoNot = (global.lang == "en") ? "Do Not" : "しない";
+    stringPlay = (global.lang == "en") ? "游玩" : "プレイする";
+    stringDoNot = (global.lang == "en") ? "返回" : "しない";
     space = 30 * scale;
     
     for (var i = 0; i < 6; i++)
@@ -510,7 +510,7 @@ else if (con == "gameloadConfirm")
         draw_set_color(mycolor);
         draw_set_halign(fa_left);
         draw_set_font(fnt_main);
-        draw_text_transformed(xx, -fade + yy + (mspace * i) + (3 * scale), chapterstring + " " + string(i + 1), scale, scale, 0);
+        draw_text_transformed(xx, -fade + yy + (mspace * i) + (3 * scale), chapterstring + string(i + 1) + "章", scale, scale, 0);
         draw_set_font(text_font);
         draw_set_halign(fa_center);
         

@@ -100,13 +100,14 @@ if (neostyle == 1)
         
         for (var i = 0; i < 4; i++)
         {
-            if (string_char_at(global.choicemsg[i], 0) == "#")
+            var firstChar = string_char_at(global.choicemsg[i], 0);
+            if (firstChar == "#" || firstChar == "\n")
                 global.choicemsg[i] = string_copy(global.choicemsg[i], 2, string_length(global.choicemsg[i]));
             
             textposx[i] = xx + (textposx[i] * scale);
             textposy[i] = yy + ((textposy[i] + d_add + textyoff) * scale);
             var biggest = 0;
-            var arraySplit = string_split(global.choicemsg[i], "#", true, 20);
+            var arraySplit = string_split_ext(global.choicemsg[i], ["#", "\n"], true, 20);
             neolinecount[i] = array_length(arraySplit);
             
             for (var w = 0; w < neolinecount[i]; w++)

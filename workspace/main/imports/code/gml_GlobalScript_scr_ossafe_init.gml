@@ -77,14 +77,14 @@ function scr_get_app_title(arg0)
         {
             if (arg0.app_id == "n/a")
             {
-                product_title = "DELTARUNE Chapter 1&2\n";
+                product_title = "DELTARUNE 第一章+第二章\n";
                 
                 if (global.lang == "ja")
                     product_title = "『DELTARUNE Chapter 1&2』の\n";
             }
             else if (arg0.app_id == "n/a")
             {
-                product_title = "DELTARUNE Chapter 1&2 Demo\n";
+                product_title = "DELTARUNE 第一章+第二章 试玩版\n";
                 
                 if (global.lang == "ja")
                     product_title = "『DELTARUNE Chapter 1&2 体験版』の\n";
@@ -92,7 +92,7 @@ function scr_get_app_title(arg0)
         }
         else
         {
-            product_title = "DELTARUNE Chapter 1&2 [Demo]\n";
+            product_title = "DELTARUNE 第一章+第二章 试玩版\n";
             
             if (global.lang == "ja")
                 product_title = "体験版『DELTARUNE Chapter 1&2』の\n";
@@ -102,14 +102,14 @@ function scr_get_app_title(arg0)
     {
         if (scr_is_switch_os())
         {
-            product_title = "DELTARUNE [Nintendo Switch]\n";
+            product_title = "DELTARUNE 任天堂Switch版\n";
             
             if (global.lang == "ja")
                 product_title = "Nintendo Switch版『DELTARUNE』の\n";
         }
         else
         {
-            product_title = "DELTARUNE [PlayStation~4]#";
+            product_title = "DELTARUNE PlayStation-4版#";
             
             if (global.lang == "ja")
                 product_title = "PlayStation~4版『DELTARUNE』の#";
@@ -129,14 +129,14 @@ function scr_get_app_title_choice_text(arg0)
         {
             if (arg0.app_id == "n/a")
             {
-                product_title = "DELTARUNE Chapter 1&2 [2021 demo]";
+                product_title = "DELTARUNE 第一章+第二章 试玩版（2021）"
                 
                 if (global.lang == "ja")
                     product_title = "『DELTARUNE Chapter 1&2』（2021年）";
             }
             else if (arg0.app_id == "n/a")
             {
-                product_title = "DELTARUNE Chapter 1&2 Demo [2025 demo]";
+                product_title = "DELTARUNE 第一章+第二章 试玩版（2025）";
                 
                 if (global.lang == "ja")
                     product_title = "『DELTARUNE Chapter 1&2 体験版』（2025年）";
@@ -144,7 +144,7 @@ function scr_get_app_title_choice_text(arg0)
         }
         else
         {
-            product_title = "DELTARUNE Chapter 1&2 [Demo]";
+            product_title = "DELTARUNE 第一章+第二章 试玩版";
             
             if (global.lang == "ja")
                 product_title = "体験版『DELTARUNE Chapter 1&2』";
@@ -154,14 +154,14 @@ function scr_get_app_title_choice_text(arg0)
     {
         if (scr_is_switch_os())
         {
-            product_title = "DELTARUNE [Nintendo Switch]";
+            product_title = "DELTARUNE 任天堂Switch版";
             
             if (global.lang == "ja")
                 product_title = "『DELTARUNE』（Nintendo Switch版）";
         }
         else
         {
-            product_title = "DELTARUNE [PlayStation~4]";
+            product_title = "DELTARUNE PlayStation~4版";
             
             if (global.lang == "ja")
                 product_title = "PlayStation~4版『DELTARUNE』";

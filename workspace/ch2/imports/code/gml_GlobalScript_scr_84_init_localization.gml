@@ -14,14 +14,14 @@ function scr_84_init_localization()
     {
         ossafe_ini_open("true_config.ini");
         global.lang = ini_read_string("LANG", "LANG", _lang);
+        global.names = ini_read_real("L10N_ZH", "NAMES", 0);
         ossafe_ini_close();
     }
+    global.lang = "en";
     
     if (!variable_global_exists("lang_loaded"))
         global.lang_loaded = "";
     
-    if (global.lang_loaded != global.lang)
-    {
         global.lang_loaded = global.lang;
         
         if (variable_global_exists("lang_map"))
@@ -91,9 +91,20 @@ function scr_84_init_localization()
             ds_map_add(fm, "comicsans", fnt_comicsans);
             ds_map_add(fm, "small", fnt_small);
             var sm = global.chemg_sprite_map;
+            if (global.names < 2)
+            {
             ds_map_add(sm, "spr_bnamekris", spr_bnamekris);
             ds_map_add(sm, "spr_bnameralsei", spr_bnameralsei);
             ds_map_add(sm, "spr_bnamesusie", spr_bnamesusie);
+            ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
+            }
+            else
+            {
+            ds_map_add(sm, "spr_bnamekris", spr_zhname_bnamekris);
+            ds_map_add(sm, "spr_bnameralsei", spr_zhname_bnameralsei);
+            ds_map_add(sm, "spr_bnamesusie", spr_zhname_bnamesusie);
+            ds_map_add(sm, "spr_bnamenoelle", spr_zhname_bnamenoelle);
+            }
             ds_map_add(sm, "spr_btact", spr_btact);
             ds_map_add(sm, "spr_btdefend", spr_btdefend);
             ds_map_add(sm, "spr_btfight", spr_btfight);
@@ -111,7 +122,6 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_city_mice_sign_01", spr_city_mice_sign_01);
             ds_map_add(sm, "spr_city_mice_sign_02", spr_city_mice_sign_02);
             ds_map_add(sm, "spr_city_mice_sign_03", spr_city_mice_sign_03);
-            ds_map_add(sm, "spr_bnamenoelle", spr_bnamenoelle);
             ds_map_add(sm, "spr_bnamethrash", spr_bnamethrash);
             ds_map_add(sm, "spr_cutscene_27_tender_goodbye", spr_cutscene_27_tender_goodbye);
             ds_map_add(sm, "spr_ch2_cityscreen", spr_ch2_cityscreen);
@@ -120,6 +130,5 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_acrade_retire", spr_acrade_retire);
             ds_map_add(sm, "spr_sneo_playback", spr_sneo_playback);
             var sndm = global.chemg_sound_map;
-        }
     }
 }

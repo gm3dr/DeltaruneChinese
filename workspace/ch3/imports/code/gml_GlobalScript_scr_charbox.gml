@@ -191,11 +191,7 @@ function scr_charbox()
                 
                 if (obj_battlecontroller.oopsallacts == 1 && (i_ex(obj_rouxls_ch3_enemy) || i_ex(obj_tenna_board4_enemy)))
                 {
-                    var _rouxls_sprite = spr_btrouxls;
-                    
-                    if (global.lang == "ja")
-                        _rouxls_sprite = spr_ja_btrouxls;
-                    
+                    var _rouxls_sprite = scr_84_get_sprite("spr_btrouxls");
                     var _spadesprite = scr_84_get_sprite("spr_btspade");
                     var _heartsprite = spr_btheart;
                     var _actsprite = scr_84_get_sprite("spr_btact");
@@ -217,22 +213,11 @@ function scr_charbox()
                     {
                         rouxlstelegraphtimer++;
                         
-                        if (global.lang == "ja")
-                        {
                             if (rouxlstelegraphtimer >= 1 && rouxlstelegraphtimer <= 4)
-                                _rouxls_sprite = spr_ja_btrouxls_select1;
+                                _rouxls_sprite = scr_84_get_sprite("spr_btrouxls_select1");
                             
                             if (rouxlstelegraphtimer >= 5 && rouxlstelegraphtimer <= 8)
-                                _rouxls_sprite = spr_ja_btrouxls_select2;
-                        }
-                        else
-                        {
-                            if (rouxlstelegraphtimer >= 1 && rouxlstelegraphtimer <= 4)
-                                _rouxls_sprite = spr_btrouxls_select1;
-                            
-                            if (rouxlstelegraphtimer >= 5 && rouxlstelegraphtimer <= 8)
-                                _rouxls_sprite = spr_btrouxls_select2;
-                        }
+                                _rouxls_sprite = scr_84_get_sprite("spr_btrouxls_select2");
                         
                         if (rouxlstelegraphtimer == 8)
                             rouxlstelegraphtimer = 0;

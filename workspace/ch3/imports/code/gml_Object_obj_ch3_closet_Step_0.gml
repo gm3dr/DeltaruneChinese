@@ -315,7 +315,7 @@ if (con == 20 && customcon == 1)
     {
         var funnystring = "* ";
         
-        repeat (2 + floor(random(6)))
+        repeat (4 + 2 * floor(random(6)))
             funnystring += mystring[floor(random(9))];
         
         funnystring += "%";
@@ -351,7 +351,7 @@ if (con == 20 && customcon == 1)
     {
         var funnystring = "* ";
         
-        repeat (2 + floor(random(6)))
+        repeat (4 + 2 * floor(random(6)))
             funnystring += mystring[floor(random(9))];
         
         funnystring += "%";
@@ -365,7 +365,7 @@ if (con == 20 && customcon == 1)
     {
         var funnystring = "* ";
         
-        repeat (2 + floor(random(6)))
+        repeat (4 + 2 * floor(random(6)))
             funnystring += mystring[floor(random(9))];
         
         funnystring += "%";

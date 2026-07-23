@@ -27,8 +27,8 @@ function Pack(images, savePath, textureName) {
         trimMode: 'trim',
         alphaThreshold: '0',
         detectIdentical: true,
-        packer: 'MaxRectsBin',
-        packerMethod: 'BestLongSideFit',
+        packer: 'MaxRectsPacker', // 千万不要学隔壁用OptimalPacker，这里图太多了
+        packerMethod: 'Smart',
         savePath,
         exporter: {
             fileExt: 'cfg',
@@ -39,63 +39,84 @@ function Pack(images, savePath, textureName) {
         workerData: { images, savePath, cfg }
     });
 }
-function PreProcessBitmap(bitmap) {
-    const result = Buffer.alloc(bitmap.width * bitmap.height);
+function PreProcessBitmap(bitmap, top_align) {
+    if (top_align < 0) {
+        top_align = 0;
+    }
+    const result = Buffer.alloc(bitmap.width * (bitmap.height + top_align));
     for(let y = 0; y < bitmap.height; y++) {
         for(let x = 0; x < bitmap.width; x++) {
             const bitMask = 128 >> (x % 8);
             const val = bitmap.buffer[y * bitmap.pitch + (x >> 3)] & bitMask;
-            result[y * bitmap.width + x] = val > 0 ? 255 : 0;
+            result[(y + top_align) * bitmap.width + x] = val > 0 ? 255 : 0;
         }
     }
     return result;
 }
 // cfg format: {
 // 	"name": "fnt_main",
-// 	"file": fs.readFile(".../normal.ttf"),
+// 	"path": ".../normal.ttf",
 // 	"char_size": 12,
 // 	"offset_en": {"x": 1, "y": 2},
 // 	"offset_cn": {"x": 2, "y": 0}
 // }
-async function CreateFnt(dict, cfg, out){
-    const face = freetype.NewMemoryFace(await cfg.file);
-    face.setCharSize(0, cfg.char_size, 0, 0);
-    for(const ch of dict){
-        const code = ch.charCodeAt(0);
-        if (code < 32) {
-            continue;
+const generators = new Map();
+const font_files = new Map();
+async function BitmapGenerator(cfg) {
+    //注意这里的cache策略会复用name和char_size相同的图
+    const key = cfg.name + cfg.char_size;
+    if(!generators.has(key)) {
+        if (!font_files.has(cfg.path)) {
+            font_files.set(cfg.path, fs.readFile(`workspace/global/${cfg.path}`));
         }
-        const glyph = face.loadChar(code, {
-            render: true,
-            monochrome: true,
+        const face = freetype.NewMemoryFace(await font_files.get(cfg.path));
+        face.setCharSize(0, cfg.char_size, 0, 0);
+        const cache = new Map();
+        async function GetBitmap(ch){
+            const code = ch.charCodeAt(0);
+            if (code < 32) {
+                return null;
+            }
+            const glyph = face.loadChar(code, {
+                render: true,
+                monochrome: true,
+            });
+            if (glyph.bitmap === null || glyph.bitmap.width === 0 || glyph.bitmap.height === 0){
+                return null;
+            }
+            const top_align = (cfg.char_size - glyph.bitmapTop) + (code < 128 ? cfg.offset_en.y : cfg.offset_cn.y);
+            const width = glyph.bitmap.width;
+            const height = glyph.bitmap.height + top_align;
+            const img = sharp({create: {
+                width,
+                height,
+                channels: 3,
+                background: {r:255, g:255, b:255}
+            }}).joinChannel(
+                PreProcessBitmap(glyph.bitmap, top_align),
+                { raw: {width, height, channels: 1}}
+            );
+            // 这里的shift+2 offset+1是历史遗留问题
+            const shift = 2 + glyph.metrics.horiAdvance / 64;
+            const offset = 1 + glyph.bitmapLeft + (code < 128 ? cfg.offset_en.x : cfg.offset_cn.x);
+            
+            const path = `${cfg.name},${code},${shift},${offset}.png`
+            const contents = await img.png().toBuffer();
+            return {path, contents};
+        }
+        generators.set(key, ch => {
+            if(cache.has(ch)) {
+                return cache.get(ch);
+            }
+            const promise = GetBitmap(ch);
+            cache.set(ch, promise);
+            return promise;
         });
-        if (glyph.bitmap === null || glyph.bitmap.width === 0 || glyph.bitmap.height === 0){
-            continue;   
-        }
-        const width = glyph.bitmap.width;
-        const height = glyph.bitmap.height;
-        const img = sharp({create: {
-            width,
-            height,
-            channels: 3,
-            background: {r:255, g:255, b:255}
-        }}).joinChannel(
-            PreProcessBitmap(glyph.bitmap),
-            { raw: {width, height, channels: 1}}
-        );
-        const top_align = (cfg.char_size - glyph.bitmapTop) + (code < 128 ? cfg.offset_en.y : cfg.offset_cn.y);
-        if(top_align > 0) {
-            img.extend({
-                background: {r:0, g:0, b:0, alpha:0},
-                top: top_align,
-                left: 0,
-            })
-        }
-        // 这里的shift+2 offset+1是历史遗留问题
-        const shift = 2 + glyph.metrics.horiAdvance / 64;
-        const offset = 1 + glyph.bitmapLeft + (code < 128 ? cfg.offset_en.x : cfg.offset_cn.x);
-        out.push({path: `${cfg.name},${code},${shift},${offset}.png`, contents: await img.png().toBuffer()});
-    };
+    }
+    return generators.get(key);
+    //如果后续有单独改的需求 这里需要重写一下
+
+
 }
 async function BuildDic(directory){
     const codePath = `${directory}/imports/code`;
@@ -130,19 +151,17 @@ async function BuildDic(directory){
         return result.join('');
     }
 }
-const font_files = {};
+
+
 const chapters = ['ch1', 'ch2', 'ch3', 'ch4', 'ch5', 'main', 'demo'];
 await Promise.all(chapters.map(async chapter => {
+    
     const dict_p = BuildDic(`workspace/${chapter}`);
     const configs = await fs.readFile(`workspace/${chapter}/imports/font/fonts.cfg`);
     const pathOut = `workspace/${chapter}/imports/font/atlas/`;
     await fs.rm(pathOut, { recursive: true, force: true });
     await fs.mkdir(pathOut, { recursive: true });
     const images_all = await Promise.all(JSON.parse(configs).map(async cfg => {
-        cfg.file = font_files[cfg.path];
-        if (!cfg.file) {
-            font_files[cfg.path] = cfg.file = fs.readFile(`workspace/global/${cfg.path}`);
-        }
         const directory = `workspace/${chapter}/imports/font/${cfg.name}/`;
         const dict = new Set(await dict_p);
         async function LoadFile(filename) {
@@ -153,27 +172,24 @@ await Promise.all(chapters.map(async chapter => {
             const offset = parseInt(segments[2]) + (char < 128 ? cfg.offset_en.x : cfg.offset_cn.x);
             dict.delete(String.fromCharCode(char));
             const top_align = (char < 128 ? cfg.offset_en.y : cfg.offset_cn.y);
-            if(top_align > 0) {
-                const contents_p = new sharp(directory + filename).extend({
+            const path = `${cfg.name},${char},${shift},${offset}.png`;
+            if(top_align <= 0) {
+                return { path, contents: 
+                    await fs.readFile(directory + filename),
+                };
+            }
+            return { path, contents: 
+                await sharp(directory + filename).extend({
                     background: {r:0, g:0, b:0, alpha:0},
                     top: top_align,
                     left: 0,
-                }).toBuffer();
-                return {
-                    path: `${cfg.name},${char},${shift},${offset}.png`,
-                    contents: await contents_p,
-                };
-            } else {
-                return {
-                    path: `${cfg.name},${char},${shift},${offset}.png`,
-                    contents: await fs.readFile(directory + filename),
-                };
-            }
+                }).toBuffer(),
+            };
             
         }
-        const fileList = await fs.readdir(directory);
-        const images = await Promise.all(fileList.map(LoadFile));
-        await CreateFnt(dict, cfg, images);
+        const images_pic = await fs.readdir(directory).then(fileList => Promise.all(fileList.map(LoadFile)));
+        const images_fnt = (await Promise.all(Array.from(dict).map(await BitmapGenerator(cfg)))).filter(x => x != null);
+        const images = [images_pic, images_fnt].flat();
         Pack(images, pathOut, cfg.name);
         return images;
     }));

@@ -124,7 +124,7 @@ if (formatted == 0)
                 {
                     var nextchar2var = real(nextchar2);
                     
-                    if (global.writerobj[nextchar2var] == 1532)
+                    if (global.writerobj[nextchar2var] == obj_funnytext)
                         charpos += ceil(sprite_get_width(global.writerimg[nextchar2var]) / hspace);
                 }
             }
@@ -192,16 +192,7 @@ if (formatted == 0)
             }
             else
             {
-                // charpos += 1;
-                if (ord(thischar) > 505 || ord(thischar) == 183)
-                {
-                    charpos += 1.75;
-                }
-                else
-                {
-                    charpos += 1;
-                }
-                //
+                charpos += 1;
             }
         }
     }

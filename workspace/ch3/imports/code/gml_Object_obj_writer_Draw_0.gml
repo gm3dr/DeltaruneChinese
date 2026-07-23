@@ -672,7 +672,7 @@ if (view_current == 0)
                 
                 if (object_made[nextchar2var] == 1)
                 {
-                    if (global.writerobj[nextchar2var] == 1532)
+                    if (global.writerobj[nextchar2var] == obj_funnytext)
                         wx += sprite_get_width(global.writerimg[nextchar2var]);
                 }
             }
@@ -791,12 +791,9 @@ if (view_current == 0)
                     draw_text(wx + random(shake), wy + random(shake), mychar);
                 }
             }
-            // wx += hspace;
-            if (ord(mychar) > 505 || ord(mychar) == 183)
-                wx += ((hspace * 7) div 4);
-            else
-                wx += hspace;
-            //
+            
+            wx += hspace;
+            
             if (global.lang == "ja")
             {
                 if (ord(mychar) < 256 || (ord(mychar) >= 65377 && ord(mychar) <= 65439))

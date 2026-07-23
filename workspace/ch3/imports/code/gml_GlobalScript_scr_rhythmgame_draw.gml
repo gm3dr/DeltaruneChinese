@@ -68,7 +68,7 @@ function scr_rhythmgame_draw_backing(arg0, arg1, arg2 = false, arg3 = 0)
     {
         draw_set_blend_mode(bm_add);
         var _flashCol = merge_color(c_black, c_red, _flash * fade * brightness);
-        ossafe_fill_rectangle_color(arg1 - 40, bottomy - 200, arg1 + 40, bottomy + 50, 0, 0, _flashCol, _flashCol, false);
+        ossafe_fill_rectangle_color(arg1 - 40, bottomy - 200, arg1 + 40, bottomy + 50, c_black, c_black, _flashCol, _flashCol, false);
         draw_set_blend_mode(bm_normal);
     }
     
@@ -91,20 +91,20 @@ function scr_rhythmgame_draw_border(arg0, arg1 = false)
         
         if (instrument == 0)
         {
-            _name = scr_84_get_sprite("spr_bnamekris");
+            _name = _jp ? spr_ja_bnamekris : spr_bnamekris;
             _hoff = 21;
         }
         else if (instrument == 1)
         {
-            _name = scr_84_get_sprite("spr_bnamesusie");
+            _name = _jp ? spr_ja_bnamesusie : spr_bnamesusie;
             _hoff = 24;
         }
         else if (instrument == 2)
         {
-            _name = scr_84_get_sprite("spr_bnameralsei");
-            _hoff = global.names >= 2 ? 27 : 30;
+            _name = _jp ? spr_ja_bnameralsei : spr_bnameralsei;
+            _hoff = 30;
         }
-
+        
         draw_sprite_ext(_name, 0, arg0 - _hoff, bottomy - 230, 1, 1, 0, draw_get_color(), 1);
     }
     

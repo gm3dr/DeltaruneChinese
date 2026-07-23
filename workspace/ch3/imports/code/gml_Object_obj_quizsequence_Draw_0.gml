@@ -47,13 +47,13 @@ if (init)
             yloc = 242;
             
             if (!i_ex(hurtmarker_su))
-                hurtmarker_su = scr_board_marker(xloc + 0, yloc, 486, 0, depth - 5, 2);
+                hurtmarker_su = scr_board_marker(xloc + 0, yloc, spr_board_susie_walk_down, 0, depth - 5, 2);
             
             if (!i_ex(hurtmarker_kr))
-                hurtmarker_kr = scr_board_marker(xloc + 48, yloc, 4778, 0, depth - 5, 2);
+                hurtmarker_kr = scr_board_marker(xloc + 48, yloc, spr_board_kris_walk_down, 0, depth - 5, 2);
             
             if (!i_ex(hurtmarker_ra))
-                hurtmarker_ra = scr_board_marker(xloc + 96, yloc, 2318, 0, depth - 5, 2);
+                hurtmarker_ra = scr_board_marker(xloc + 96, yloc, spr_board_ralsei_walk_down, 0, depth - 5, 2);
             
             mus_fade(global.currentsong[1], 60);
             instance_destroy(questionwriter);
@@ -232,7 +232,7 @@ if (init)
         {
             draw_text(xxloc, 198, bonusstring);
             var _width = 80;
-            draw_sprite_ext(spr_whitepx, 0, xxloc - (_width / 2), /*214*/217, _width - 2, 2, 0, c_white, 1);
+            draw_sprite_ext(spr_whitepx, 0, xxloc - (_width / 2), 214, _width - 2, 2, 0, c_white, 1);
         }
         
         if (timer == (resultsdelay + (resultsrate * 0)))
@@ -255,7 +255,7 @@ if (init)
         {
             if (hurt_su == true)
             {
-                scr_board_marker(xloc + 0 + 16, (yloc + 32) - 4, 1811, 1, depth - 4, 2, 1);
+                scr_board_marker(xloc + 0 + 16, (yloc + 32) - 4, spr_quiz_lightning, 1, depth - 4, 2, 1);
                 scr_shakeobj(hurtmarker_su);
                 hurtmarker_su.sprite_index = spr_board_susie_hurt;
                 snd_play(snd_board_playerhurt);
@@ -291,7 +291,7 @@ if (init)
         {
             if (hurt_kr == true)
             {
-                scr_board_marker(xloc + 48 + 16, (yloc + 32) - 4, 1811, 1, depth - 4, 2, 1);
+                scr_board_marker(xloc + 48 + 16, (yloc + 32) - 4, spr_quiz_lightning, 1, depth - 4, 2, 1);
                 scr_shakeobj(hurtmarker_kr);
                 hurtmarker_kr.sprite_index = spr_board_kris_hurt;
                 snd_play(snd_board_playerhurt);
@@ -327,7 +327,7 @@ if (init)
         {
             if (hurt_ra == true)
             {
-                scr_board_marker(xloc + 96 + 16, (yloc + 32) - 4, 1811, 1, depth - 4, 2, 1);
+                scr_board_marker(xloc + 96 + 16, (yloc + 32) - 4, spr_quiz_lightning, 1, depth - 4, 2, 1);
                 scr_shakeobj(hurtmarker_ra);
                 hurtmarker_ra.sprite_index = spr_board_ralsei_hurt;
                 snd_play(snd_board_playerhurt);

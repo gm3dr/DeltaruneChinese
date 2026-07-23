@@ -185,7 +185,7 @@ if (global.monster[myself] == 1)
         }
         else if (amimissmizzle == false && acttalked == false)
         {
-            var random_vowel = choose("叭", "哔", "卟", "呗", "啵", "啵啵"); // var random_vowel = choose("a", "e", "i", "o", "u", "u", "oo");
+            var random_vowel = choose("a", "e", "i", "o", "u", "u", "oo");
             
             if (global.lang == "ja")
                 random_vowel = choose("パ", "ピ", "プ", "ぺ");
@@ -193,7 +193,7 @@ if (global.monster[myself] == 1)
             if (rr == 1)
                 msgsetloc(0, "Buble", "obj_holywatercooler_enemy_slash_Step_0_gml_145_0");
             else
-                msgsetsub(0, "~1", random_vowel);
+                msgsetsubloc(0, "B~1b~2e", random_vowel, choose("i", "l"), "obj_holywatercooler_enemy_slash_Step_0_gml_146_0");
             
             global.msg[0] += "/%";
             scr_enemyblcon(x, global.monstery[myself] - 20, 10);
@@ -607,7 +607,7 @@ if (global.myfight == 3)
             timer++;
             
             if (timer == 1)
-                scr_battle_sprite_set("kris", 1493, 1, 1);
+                scr_battle_sprite_set("kris", spr_krisb_act, 1, 1);
             
             if (timer == 1)
                 snd_play_x(snd_bell_bounce_short, 1, 1);
@@ -637,7 +637,7 @@ if (global.myfight == 3)
         {
             msgsetloc(0, "* Susie EMBEZZLED an item!/%", "obj_holywatercooler_enemy_slash_Step_0_gml_490_0");
             scr_battletext_default();
-            scr_battle_sprite_set("susie", 738, 1, 1);
+            scr_battle_sprite_set("susie", spr_susie_jump_back, 1, 1);
             obj_herosusie.vspeed = -40;
             snd_play(snd_jump);
             acting = 3.1;
@@ -660,7 +660,7 @@ if (global.myfight == 3)
                 obj_herosusie.y = y - 10;
                 obj_herosusie.vspeed = 0;
                 snd_play(snd_bump);
-                scr_battle_sprite_set("susie", 1210, 0, 1);
+                scr_battle_sprite_set("susie", spr_susie_kneel_heal_alt_right, 0, 1);
                 scr_shakeobj();
                 
                 with (obj_herosusie)
@@ -710,7 +710,7 @@ if (global.myfight == 3)
             if (timer == 20)
             {
                 obj_herosusie.vspeed = -30;
-                scr_battle_sprite_set("susie", 738, 1, 1);
+                scr_battle_sprite_set("susie", spr_susie_jump_back, 1, 1);
                 snd_stop(snd_jump);
                 snd_play(snd_jump);
             }
@@ -765,7 +765,7 @@ if (global.myfight == 3)
                 obj_heroralsei.x = x - 40;
                 obj_heroralsei.y = y + 20;
                 obj_heroralsei.depth = depth - 1;
-                scr_battle_sprite_set("ralsei", 49, 2, 1);
+                scr_battle_sprite_set("ralsei", spr_ralsei_nuzzle3, 2, 1);
                 snd_play_x(snd_magicmarker, 1, 1);
             }
             
@@ -816,7 +816,7 @@ if (global.myfight == 3)
                 with (obj_heroralsei)
                     x += 8;
                 
-                scr_battle_sprite_set("ralsei", 3261, 0.16666666666666666, 1);
+                scr_battle_sprite_set("ralsei", spr_ralsei_sing, 0.16666666666666666, 1);
                 snd_play(snd_ralseising1);
             }
             
@@ -828,13 +828,13 @@ if (global.myfight == 3)
                     y -= 12;
                 }
                 
-                scr_battle_sprite_set("susie", 1092, 1, 1);
+                scr_battle_sprite_set("susie", spr_susie_sing, 1, 1);
                 snd_play(snd_suslaugh);
             }
             
             if (timer == 75)
             {
-                scr_battle_sprite_set("ralsei", 2675, 1, 1);
+                scr_battle_sprite_set("ralsei", spr_ralsei_shocked_right, 1, 1);
                 snd_stop(snd_ralseising1);
                 
                 with (obj_heroralsei)

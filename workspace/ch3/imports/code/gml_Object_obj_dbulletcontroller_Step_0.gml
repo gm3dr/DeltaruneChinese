@@ -621,7 +621,7 @@ if (type == 63)
     {
         if (i_ex(obj_growtangle))
         {
-            var ball = scr_fire_bullet(obj_growtangle.x + irandom_range(-40, 40), obj_growtangle.y - 120, 145, 270, 4, 3588);
+            var ball = scr_fire_bullet(obj_growtangle.x + irandom_range(-40, 40), obj_growtangle.y - 120, obj_bullet_thunderball, 270, 4, spr_shutta_ball);
             scr_bullet_inherit(ball);
         }
         
@@ -2585,7 +2585,7 @@ if (type == 128 || type == 129)
         var ydist = lengthdir_y(maindist, dir) + lengthdir_y(sidedist, dir + 90);
         var firedir = 142 + dir + (11 * (btimer == 103));
         
-        with (scr_fire_bullet(obj_growtangle.x + xdist, obj_growtangle.y + ydist, 289, firedir, 6))
+        with (scr_fire_bullet(obj_growtangle.x + xdist, obj_growtangle.y + ydist, obj_tenna_rimshot_star, firedir, 6))
         {
             damage = other.damage;
             target = other.target;
@@ -2689,7 +2689,7 @@ if (type == 130)
                 if (global.lang == "ja")
                     scr_enemyblcon(x - 60, global.monstery[myself] + 70, 12.2);
                 else
-                    scr_enemyblcon(x - 60, global.monstery[myself] + 70, 12.2);
+                    scr_enemyblcon(x - 5, global.monstery[myself] + 70, 12.3);
                 
                 myblcon.depth = other.depth - 100;
             }

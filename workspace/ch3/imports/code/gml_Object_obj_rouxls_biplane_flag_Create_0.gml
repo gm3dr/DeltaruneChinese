@@ -8,7 +8,5 @@ image_xscale = 0;
 visible = true;
 depth = obj_heart.depth - 1;
 
-// if (global.lang == "ja")
-//     sprite_index = spr_rouxls_biplane_flag_ja;
-if (global.names >= 2)
-    sprite_index = spr_zhname_rouxls_biplane_flag
+if (global.lang == "ja")
+    sprite_index = spr_rouxls_biplane_flag_ja;

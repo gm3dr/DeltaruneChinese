@@ -16,14 +16,14 @@ show_loading_screen = function(arg0, arg1)
 
 get_text = function(arg0)
 {
-    var _text = "正在加载\n第" + string(arg0) + "章";
+    var _text = "INITIALIZING\nCHAPTER " + string(arg0);
     
     if (global.lang == "ja")
         _text = "CHAPTER " + string(arg0) + "を\nはじめます";
     
     if (arg0 == 0)
     {
-        _text = "正在加载\n章节\n选择器";
+        _text = "LOADING\nCHAPTER\nSELECT";
         
         if (global.lang == "ja")
             _text = "チャプター\n選択画面\nよみこみ中";

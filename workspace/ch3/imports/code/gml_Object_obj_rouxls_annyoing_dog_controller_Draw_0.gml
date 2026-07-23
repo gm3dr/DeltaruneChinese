@@ -19,9 +19,8 @@ if (con == 3 && timer > 60)
     var angle = 10 - (textoffset / 3 / 10);
     var textposx = cx + 432 + (angle / 10);
     var textposy = cy + 172 + (angle / 10);
-
-    //这里用日文版的处理方式
-    if (global.lang /*!=*/== "ja")
+    
+    if (global.lang != "ja")
     {
         var memalign = [draw_get_halign(), draw_get_valign()];
         draw_set_halign(fa_center);

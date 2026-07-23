@@ -391,16 +391,16 @@ if (global.menuno == 4)
         draw_text(xx + 100, ch_y[3], string_hash_to_newline(scr_84_get_lang_string("obj_darkcontroller_slash_Draw_0_gml_251_0")));
         draw_item_icon(xx + 74, ch_y[3] + 6, 13);
         
-        // if (global.lang == "ja")
-        // {
+        if (global.lang == "ja")
+        {
             draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(scr_84_get_lang_string("obj_darkcontroller_slash_Draw_0_gml_252_0")), 1, 1, 0);
             draw_item_icon(xx + 74, ch_y[4] + 6, 13);
-        // }
-        // else
-        // {
-        //     draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(scr_84_get_lang_string("obj_darkcontroller_slash_Draw_0_gml_252_0")), 0.8, 1, 0);
-        //     draw_item_icon(xx + 74, ch_y[4] + 6, 13);
-        // }
+        }
+        else
+        {
+            draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(scr_84_get_lang_string("obj_darkcontroller_slash_Draw_0_gml_252_0")), 0.8, 1, 0);
+            draw_item_icon(xx + 74, ch_y[4] + 6, 13);
+        }
         
         draw_text(xx + 230, ch_y[3], string_hash_to_newline(rude_amount));
         draw_text(xx + 230, ch_y[4], string_hash_to_newline(crude_amount));
@@ -439,9 +439,9 @@ if (global.menuno == 4)
         draw_text(xx + 100, ch_y[3], string_hash_to_newline(kind_text));
         draw_item_icon(xx + 74, ch_y[3] + 6, kind_icon);
         draw_text(xx + 230, ch_y[3], string_hash_to_newline(kindness_amount));
-        // fluff_xscale = 0.8;
+        fluff_xscale = 0.8;
         
-        // if (global.lang == "ja")
+        if (global.lang == "ja")
             fluff_xscale = 1;
         
         draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(scr_84_get_lang_string("obj_darkcontroller_slash_Draw_0_gml_286_0")), fluff_xscale, 1, 0);

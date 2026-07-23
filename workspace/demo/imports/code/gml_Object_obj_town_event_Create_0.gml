@@ -25,14 +25,7 @@ if (room == room_town_mid)
         donut_guy.sprite_index = spr_npc_donutcar;
         var scarflady = instance_create(1155, 85, obj_npc_room);
         scarflady.sprite_index = spr_npc_scarflady;
-		if (global.names >= 2)
-		{
-        	var conbini = scr_marker_animated(940, -50, spr_zhname_lw_conbini_open, 0.05);
-		}
-		else
-		{
-        	var conbini = scr_marker_animated(940, -50, spr_lw_conbini_open, 0.05);
-		}
+        var conbini = scr_marker_animated(940, -50, spr_lw_conbini_open, 0.05);
         conbini.depth = 980000;
     }
 }

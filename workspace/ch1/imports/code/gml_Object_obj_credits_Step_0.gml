@@ -96,22 +96,19 @@ if (timer == 526)
 if (timer == 573)
 {
     creditalpha = 1;
-    line[0] = "汉化校对[2025]";
-    line[1] = "鲟鱼子，旋风SELF，单衫_石宇砖";
-    line[2] = "鸥皇不欧，FH丶CY，yzdnn，JH";
-    line[3] = "丢丢hamburger，ax暗星233，鼠球";
-    line[4] = "杜若(santizhizi)，CoCo水君(Toast)";
-    line[5] = "Cupcake～，w1n1n1t351，onomi";
-    line[6] = "汉化美工";
-    line[7] = "JH，米粒，闻笛，yzdnn";
+    line[0] = "Localization Producers";
+    line[1] = "John Ricciardi";
+    line[2] = "Graeme Howard";
     linecolor[0] = c_ltgray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;
-    linecolor[3] = c_white;
+    linecolor[3] = c_ltgray;
     linecolor[4] = c_white;
-    linecolor[5] = c_white;
-    linecolor[6] = c_ltgray;
-    linecolor[7] = c_white;
+    line[3] = "Additional Programming";
+    line[4] = "Gregg Tavares (PC)";
+    line[5] = "Sarah O'Donnell (Console)";
+    line[6] = "Fred Wood";
+    line[7] = "Enjl";
     
     if (global.lang == "ja")
     {
@@ -137,7 +134,7 @@ if (timer == 668)
     line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_119_0");
     line[1] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_120_0");
     line[2] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_121_0");
-    line[3] = "Snowdrake & Monster Kid 设计";
+    line[3] = "Snowdrake & Monster Kid Design";
     line[4] = "Magnolia Porter";
     line[5] = "";
     line[6] = "";
@@ -161,11 +158,11 @@ if (timer == 735)
 if (timer == 765)
 {
     line[0] = scr_84_get_lang_string("obj_credits_slash_Step_0_gml_152_0");
-    line[1] = "Gigi DG (服饰＆配色协助)";
-    line[2] = "Betty Kwong (Temmie设计)";
-    line[3] = "256graph (日语本地化绘图)";
-    line[4] = "Ryan Alyea (网站)";
-    line[5] = "Brian Coia (网站)";
+    line[1] = "Gigi DG (Outfit & Color Assist)";
+    line[2] = "Betty Kwong (Temmie Design)";
+    line[3] = "256graph (JP Graphics)";
+    line[4] = "Ryan Alyea (Website)";
+    line[5] = "Brian Coia (Website)";
     linecolor[0] = c_ltgray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;
@@ -193,7 +190,7 @@ if (timer == 870)
     line[2] = "Fontworks Inc.";
     line[3] = "Yutaka Sato (Happy Ruika)";
     line[4] = "Hiroko Minamoto";
-    line[5] = "8-4 & Fangamer全体员工";
+    line[5] = "All 8-4 & Fangamer Staff";
     linecolor[1] = c_white;
 }
 

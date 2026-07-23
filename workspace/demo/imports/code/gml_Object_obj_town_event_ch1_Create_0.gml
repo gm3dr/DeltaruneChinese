@@ -14,11 +14,6 @@ if (room == room_town_mid_ch1)
         bnpc = instance_create_ch1(x + 7, y + 4, obj_npc_room_ch1);
         bnpc.sprite_index = spr_npc_burgerpants_ch1;
     }
-	if (global.names >= 2)
-	{
-		var conbini = scr_marker(940, -50, bg_zhname_building_store_ch1);
-		conbini.depth = 980000;
-    }
 }
 
 if (room == room_town_south_ch1)

@@ -32,7 +32,7 @@ if (con == 1)
     {
         draw_set_font(fnt_mainbig);
         draw_set_color(c_white);
-        draw_text_ext(camerax() + /*105*/130, cameray() + 120, /*"CHAPTER 3"*/"第3章", 10, 900);
+        draw_text_ext(camerax() + 105, cameray() + 120, "CHAPTER 3", 10, 900);
         scr_84_set_draw_font("mainbig");
     }
     

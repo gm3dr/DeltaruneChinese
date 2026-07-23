@@ -885,9 +885,7 @@ if (scr_debug())
 
 if (global.chapter == 5 && i_ex(obj_netskie_enemy) && obj_netskie_enemy.draw_kitsune_tail == true && i_ex(obj_writer) && obj_writer.reachedend == true)
 {
-    draw_sprite_ext(spr_kitsune_tail_check2, obj_netskie_enemy.draw_kitsune_index, 
-        // camerax() + 552, cameray() + 368, 2, 2, 0, c_white, 1);
-        camerax() + 452, cameray() + 368, 2, 2, 0, c_white, 1);
+    draw_sprite_ext(spr_kitsune_tail_check2, obj_netskie_enemy.draw_kitsune_index, camerax() + 552, cameray() + 368, 2, 2, 0, c_white, 1);
     
     with (obj_netskie_enemy)
         draw_kitsune_index += (1/3);

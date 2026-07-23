@@ -16,20 +16,20 @@ confirming = false;
 visit_shop = false;
 selected = false;
 buffer = 0;
-played_text_en = /*"This program is intended for players#who are already familiar with UNDERTALE."*/"本程序专为熟悉UNDERTALE的玩家提供。";
+played_text_en = "This program is intended for players#who are already familiar with UNDERTALE.";
 played_text_ja_1 = "このプログラムは、";
 played_text_ja_2 = "すでに「UNDERTALE」をプレイした方向けです。";
-check_text_en = /*"Would you like to check out UNDERTALE first?"*/"你愿意先了解UNDERTALE吗？";
+check_text_en = "Would you like to check out UNDERTALE first?";
 check_text_ja_1 = "まだプレイしたことのない方は、";
 check_text_ja_2 = "まずは「UNDERTALE」をチェックしてみませんか？";
-shop_options = (global.lang == "en") ? /*["Yes", "No"]*/["是", "否"] : ["はい", "いいえ"];
+shop_options = (global.lang == "en") ? ["Yes", "No"] : ["はい", "いいえ"];
 shop_text = (global.lang == "en") ? "Nintendo eShop" : "ニンテンドーeショップ";
 
 if (os_type == os_ps4 || os_type == os_ps5)
     shop_text = (global.lang == "en") ? "Playstation Store" : "Playstation Store";
 
-check_undertale = (global.lang == "en") ? /*"Check Out UNDERTALE"*/"了解UNDERTALE" : "「UNDERTALE」をチェック";
-start_dr = (global.lang == "en") ? /*"Start DELTARUNE"*/"开始DELTARUNE" : "「DELTARUNE」をプレイ";
+check_undertale = (global.lang == "en") ? "Check Out UNDERTALE" : "「UNDERTALE」をチェック";
+start_dr = (global.lang == "en") ? "Start DELTARUNE" : "「DELTARUNE」をプレイ";
 global.currentroom = scr_get_id_by_room_index(room);
 
 enum e__VW

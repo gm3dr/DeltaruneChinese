@@ -1,4 +1,4 @@
 function is_english()
 {
-    return false;
+    return !variable_global_exists("lang") || global.lang == "en";
 }

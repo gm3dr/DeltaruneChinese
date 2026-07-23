@@ -10,9 +10,9 @@ if (init == 1)
     draw_set_color(image_blend);
     draw_set_font(fnt_8bit);
     draw_set_halign(fa_right);
-    draw_text(x + 94, y + /*8*/6, string(global.flag[1044]));
+    draw_text(x + 94, y + 8, string(global.flag[1044]));
     draw_set_halign(fa_left);
-    draw_text(x + 9, y + /*8*/6, "P");
+    draw_text(x + 9, y + 8, "P");
 }
 
 draw_set_color(c_white);

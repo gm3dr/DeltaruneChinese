@@ -199,19 +199,19 @@ draw_sprite_ext(spr_whitepixel, 0, camerax() + blackbg2_x, cameray() + blackbg2_
 
 if (minigametype == "cooking" && (minigamedifficulty == 1 || minigamedifficulty == 3))
 {
-    draw_text_transformed(camerax() + score_x + 140, ((cameray() + bar_y) - 5) + 70, /*"ENEMY"*/"敌人", 3, 2, 0);
+    draw_text_transformed(camerax() + score_x + 140, ((cameray() + bar_y) - 5) + 70, "ENEMY", 3, 2, 0);
     draw_sprite_ext(spr_whitepixel, 0, camerax() + bar_x + 116 + 190, cameray() + bar_y + 4 + 70, 60, 14, 0, c_red, 1);
     draw_sprite_ext(spr_whitepixel, 0, camerax() + bar_x + 116 + 190, cameray() + bar_y + 4 + 70, barsize, 14, 0, c_white, 1);
 }
 else if (minigametype == "battle" && minigamedifficulty == 3)
 {
-    draw_text_transformed(camerax() + score_x + 140, ((cameray() + bar_y) - 5) + 70, /*"ENEMY"*/"敌人", 3, 2, 0);
+    draw_text_transformed(camerax() + score_x + 140, ((cameray() + bar_y) - 5) + 70, "ENEMY", 3, 2, 0);
     draw_sprite_ext(spr_whitepixel, 0, camerax() + bar_x + 116 + 190, cameray() + bar_y + 4 + 70, 150, 14, 0, c_red, 1);
     draw_sprite_ext(spr_whitepixel, 0, camerax() + bar_x + 116 + 190, cameray() + bar_y + 4 + 70, barsize, 14, 0, c_white, 1);
 }
 else if (minigametype == "susiezilla" && (minigamedifficulty == 3 || minigamedifficulty == 4))
 {
-    draw_text_transformed(camerax() + score_x, (cameray() + bar_y) - 5, /*"ENEMY"*/"敌人", 3, 2, 0);
+    draw_text_transformed(camerax() + score_x, (cameray() + bar_y) - 5, "ENEMY", 3, 2, 0);
     draw_sprite_ext(spr_whitepixel, 0, camerax() + bar_x + 116, cameray() + bar_y + 4, 60, 14, 0, c_red, 1);
     draw_sprite_ext(spr_whitepixel, 0, camerax() + bar_x + 116, cameray() + bar_y + 4, barsize, 14, 0, c_white, 1);
 }
@@ -225,7 +225,7 @@ else
 if (minigametype == "battle" && minigamedifficulty == 3)
     exit;
 
-draw_text_transformed(camerax() + score_x, cameray() + score_y, /*"SCORE"*/"得分", 3, 2, 0);
+draw_text_transformed(camerax() + score_x, cameray() + score_y, "SCORE", 3, 2, 0);
 draw_set_halign(fa_right);
 
 if (myscore < 10)
@@ -256,7 +256,7 @@ var blend3 = 16777215;
 if (obj_tenna_enemy.minigamefailcount >= 3)
     blend3 = 255;
 
-draw_text_transformed_color((camerax() + box_x) - 93, cameray() + box_y + 18, /*"MISS"*/"失误", 3, 2, 0, blend1, blend1, blend1, blend1, 1);
+draw_text_transformed_color((camerax() + box_x) - 93, cameray() + box_y + 18, "MISS", 3, 2, 0, blend1, blend1, blend1, blend1, 1);
 draw_sprite_ext(spr_tenna_minigame_ui, 1, camerax() + box_x, cameray() + box_y, scale, scale, 0, blend1, 1);
 draw_sprite_ext(spr_tenna_minigame_ui, 1, camerax() + box_x + 52, cameray() + box_y, scale, scale, 0, blend2, 1);
 draw_sprite_ext(spr_tenna_minigame_ui, 1, camerax() + box_x + 104, cameray() + box_y, scale, scale, 0, blend3, 1);

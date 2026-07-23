@@ -182,41 +182,41 @@ if (timer == 805)
 
 if (timer == 906)
 {
-    line[0] = "汉化校对[2025]";
-    line[1] = "鲟鱼子，旋风SELF，单衫_石宇砖";
-    line[2] = "鸥皇不欧，FH丶CY，yzdnn，JH";
-    line[3] = "丢丢hamburger，ax暗星233，鼠球";
-    line[4] = "杜若(santizhizi)，CoCo水君(Toast)";
-    line[5] = "Cupcake～，w1n1n1t351，onomi";
-    line[6] = "汉化美工";
-    line[7] = "JH，米粒，闻笛，yzdnn";
-    linecolor[0] = c_ltgray;
+    line[0] = stringsetloc("-Japanese Localization-", "obj_credits_2_slash_Step_0_gml_191_0");
+    line[1] = stringsetloc("8-4 Ltd.", "obj_credits_2_slash_Step_0_gml_192_0");
+    line[2] = stringset(" ");
+    line[3] = stringsetloc("-Translator-", "obj_credits_2_slash_Step_0_gml_194_0");
+    line[4] = stringset("Keiko Fukuichi");
+    line[5] = stringset(" ");
+    line[6] = stringset(" ");
+    line[7] = stringset(" ");
+    linecolor[0] = menugray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;
-    linecolor[3] = c_white;
+    linecolor[3] = menugray;
     linecolor[4] = c_white;
     linecolor[5] = c_white;
-    linecolor[6] = c_ltgray;
+    linecolor[6] = c_white;
     linecolor[7] = c_white;
 }
 
 if (timer == 1007)
 {
-    line[0] = "汉化校对[2025]";
-    line[1] = "鲟鱼子，旋风SELF，单衫_石宇砖";
-    line[2] = "鸥皇不欧，FH丶CY，yzdnn，JH";
-    line[3] = "丢丢hamburger，ax暗星233，鼠球";
-    line[4] = "杜若(santizhizi)，CoCo水君(Toast)";
-    line[5] = "Cupcake～，w1n1n1t351，onomi";
-    line[6] = "汉化美工";
-    line[7] = "JH，米粒，闻笛，yzdnn";
-    linecolor[0] = c_ltgray;
+    line[0] = stringsetloc("-Localization Producers-", "obj_credits_2_slash_Step_0_gml_211_0");
+    line[1] = stringset("Graeme Howard");
+    line[2] = stringset("John Ricciardi");
+    line[3] = stringset(" ");
+    line[4] = stringsetloc("-Localization Support-", "obj_credits_2_slash_Step_0_gml_215_0");
+    line[5] = stringset("Tina Carter");
+    line[6] = stringset("Yutaka Ohbuchi");
+    line[7] = stringset("Sami Ragone");
+    linecolor[0] = menugray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;
     linecolor[3] = c_white;
-    linecolor[4] = c_white;
+    linecolor[4] = menugray;
     linecolor[5] = c_white;
-    linecolor[6] = c_ltgray;
+    linecolor[6] = c_white;
     linecolor[7] = c_white;
 }
 

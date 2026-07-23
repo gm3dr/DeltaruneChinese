@@ -47,7 +47,7 @@ with (obj_gerson_cane_bullet)
         else if (hit == 1)
         {
             vspeed = -3;
-            snd_play(201, 0.5);
+            snd_play(snd_wing, 0.5);
             hit = 2;
         }
         
@@ -78,8 +78,8 @@ with (caught)
     {
         global.interact = 1;
         myinteract = 4;
-        var str1 = "* （哪里走...！）/%";
-        var str2 = "* （它去迎接更美好的生活了...）/%";
+        var str1 = "* (Thar she blows...)/%";
+        var str2 = "* (It's going off to live a better life now...)/%";
         
         if (global.lang == "ja")
         {

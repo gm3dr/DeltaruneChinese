@@ -186,11 +186,10 @@ if (timer == 906)
     line[1] = stringsetloc("8-4 Ltd.", "obj_credits_2_slash_Step_0_gml_192_0");
     line[2] = stringset(" ");
     line[3] = stringsetloc("-Translator-", "obj_credits_2_slash_Step_0_gml_194_0");
-    line[4] = stringset("夕葵，米粒(enderesting)，单衫_石宇砖");
-    line[5] = stringset("无辣味wdw，Neubulae[Almona]，JH");
-    line[6] = stringset("鲟鱼子，瑶玲，^1瓶洋酒[Unsub]");
-    line[7] = stringset("以太[EtherKo]，Coco，Buttons");
-    line[8] = stringset("TNN_Endymion，wiike，田澄，iNTb");
+    line[4] = stringset("Keiko Fukuichi");
+    line[5] = stringset(" ");
+    line[6] = stringset(" ");
+    line[7] = stringset(" ");
     linecolor[0] = menugray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;
@@ -199,25 +198,24 @@ if (timer == 906)
     linecolor[5] = c_white;
     linecolor[6] = c_white;
     linecolor[7] = c_white;
-    linecolor[8] = c_white;
 }
 
 if (timer == 1007)
 {
     line[0] = stringsetloc("-Localization Producers-", "obj_credits_2_slash_Step_0_gml_211_0");
-    line[1] = stringset("旋风SELF，FH丶CY，单衫_石宇砖");
-    line[2] = stringset("Uni，Cupcake～，鼠球，鸥皇不欧，JH");
-    line[3] = stringset("w1n1n1t351，丢丢hamburger，onomi");
-    line[4] = stringset("Neubulae[Almona]，凝雨白沙，黎小明");
-    line[5] = stringsetloc("-Localization Support-", "obj_credits_2_slash_Step_0_gml_215_0");
-    line[6] = stringset("夕葵，JH，瑶玲，米粒(enderesting)");
-    line[7] = stringset("Buttons，空闲，单衫_石宇砖");
+    line[1] = stringset("Graeme Howard");
+    line[2] = stringset("John Ricciardi");
+    line[3] = stringset(" ");
+    line[4] = stringsetloc("-Localization Support-", "obj_credits_2_slash_Step_0_gml_215_0");
+    line[5] = stringset("Tina Carter");
+    line[6] = stringset("Yutaka Ohbuchi");
+    line[7] = stringset("Sami Ragone");
     linecolor[0] = menugray;
     linecolor[1] = c_white;
     linecolor[2] = c_white;
     linecolor[3] = c_white;
-    linecolor[4] = c_white;
-    linecolor[5] = menugray;
+    linecolor[4] = menugray;
+    linecolor[5] = c_white;
     linecolor[6] = c_white;
     linecolor[7] = c_white;
 }

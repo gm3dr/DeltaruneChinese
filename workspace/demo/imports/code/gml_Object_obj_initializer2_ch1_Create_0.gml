@@ -17,7 +17,6 @@ if (global.is_console)
 }
 else
 {
-    global.names = 0;
     scr_84_init_localization_ch1();
     scr_84_load_ini_ch1();
     scr_gamestart_ch1();

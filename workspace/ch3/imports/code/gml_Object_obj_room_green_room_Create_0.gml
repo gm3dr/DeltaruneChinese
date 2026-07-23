@@ -30,7 +30,7 @@ ramb_npc.sprite_index = spr_npc_ramb_clean;
 with (ramb_npc)
     scr_depth();
 
-var bar_front = scr_dark_marker(550, 40, global.names >= 2 ? spr_zhname_dw_green_room_bar_front : spr_dw_green_room_bar_front);
+var bar_front = scr_dark_marker(550, 40, spr_dw_green_room_bar_front);
 bar_front.depth = ramb_npc.depth - 10;
 lancer_npc = instance_create(92, 118, obj_npc_room_animated);
 
@@ -167,7 +167,7 @@ if (global.plot < 150)
         }
         
         with (obj_border_controller)
-            set_border(195);
+            set_border(border_dw_green_room);
     }
     
     if (scr_flag_get(1068) == 1)
@@ -309,7 +309,7 @@ else if (global.plot >= 280)
     }
     
     with (obj_border_controller)
-        set_border(3035);
+        set_border(border_dw_blue_light);
 }
 else
 {
@@ -320,7 +320,7 @@ else
         blackall.visible = 1;
         
         with (obj_border_controller)
-            hide_border(1, 16777215);
+            hide_border(1, c_white);
     }
     else
     {
@@ -330,7 +330,7 @@ else
             scr_delay_var("visible", 0, 6);
         
         with (obj_border_controller)
-            set_border(195);
+            set_border(border_dw_green_room);
     }
     
     if (scr_flag_get(1055) >= 2 && scr_flag_get(1186) == 0)
@@ -394,7 +394,7 @@ cliptrig = -4;
 
 if (global.plot >= 280)
 {
-    clip = scr_marker_ext(1250, 90, 571, 2, 2);
+    clip = scr_marker_ext(1250, 90, spr_dw_teevie_clipboard, 2, 2);
     
     with (clip)
         scr_depth();
@@ -419,7 +419,7 @@ if (global.entrance == 8)
     with (obj_readable_room1)
         instance_destroy();
     
-    scr_marker_ext(694, 54, 412, 92, 60, undefined, undefined, 0, 16777215);
+    scr_marker_ext(694, 54, spr_pxwhite, 92, 60, undefined, undefined, c_black, 16777215);
     
     with (instance_create(574, 72, obj_solidblocksized))
     {
@@ -454,15 +454,15 @@ if (global.entrance == 8)
     with (instance_create(694, 62, obj_doorAny))
     {
         scr_size(2.3, 1);
-        doorRoom = 244;
+        doorRoom = room_dw_inbetweenhall;
         doorEntrance = 8;
         doorFadeMusic = 1;
     }
     
     bar_front.depth = 98100;
     scr_setparty(0, 0, 0);
-    scr_marker_ext(530, 240, 2706, 2, 2, 0.05, 1);
-    scr_marker_ext(582, 236, 4679, 2, 2, 1/30, 0);
+    scr_marker_ext(530, 240, spr_ralsei_racing_play, 2, 2, 0.05, 1);
+    scr_marker_ext(582, 236, spr_susie_racing_play, 2, 2, 1/30, 0);
 }
 
 if (global.flag[1067] == 0 && global.flag[1055] >= 6 && global.plot >= 280)

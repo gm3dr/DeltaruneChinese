@@ -1,7 +1,7 @@
 var chapter = string(global.chapter);
 var next_chapter = string(global.chapter + 1);
-choice_text[0] = (global.lang == "en") ? stringsetsub(/*"Continue to Chapter ~1"*/"前往第~1章", next_chapter) : stringsetsub("Chapter ~1へ進む", next_chapter);
-choice_text[1] = (global.lang == "en") ? stringsetsub(/*"Keep Playing Chapter ~1"*/"留在第~1章", chapter) : stringsetsub("このままChapter ~1をプレイ", chapter);
+choice_text[0] = (global.lang == "en") ? stringsetsub("Continue to Chapter ~1", next_chapter) : stringsetsub("Chapter ~1へ進む", next_chapter);
+choice_text[1] = (global.lang == "en") ? stringsetsub("Keep Playing Chapter ~1", chapter) : stringsetsub("このままChapter ~1をプレイ", chapter);
 choice_index = 0;
 confirmed_selection = false;
 text_alpha = 0;

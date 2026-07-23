@@ -148,7 +148,7 @@ if (con == 2)
     c_imageindex(2);
     c_wait(1);
     c_imageindex(3);
-    c_sound_play(164);
+    c_sound_play(snd_grab);
     c_sel(ra);
     c_visible(0);
     c_wait(1);
@@ -187,7 +187,7 @@ if (con == 2)
     c_wait_box(3);
     c_var_instance(susie_hand_marker, "visible", 0);
     c_sel(su);
-    c_sound_play(155);
+    c_sound_play(snd_wing);
     c_sprite(spr_susie_ralsei_shake);
     c_setxy(2138, 850);
     c_animate(0, 1, 0.25);
@@ -204,7 +204,7 @@ if (con == 2)
     c_wait_box(10);
     c_var_instance(susie_hand_marker, "visible", 0);
     c_sel(su);
-    c_sound_play(216);
+    c_sound_play(snd_bump);
     c_sprite(spr_susie_ralsei_grab_look_away_01_shake);
     c_animate(0, 1, 0.25);
     c_wait(6);
@@ -306,11 +306,11 @@ if (con == 10 && customcon == 1 && !d_ex())
     camerax_set(0);
     cameray_set(0);
     global.choice = -1;
-    global.choicemsg[0] = (global.lang == "ja") ? "#VTRを#スキップ" : /*"#Skip the#video"*/"#跳过#视频";
-    global.choicemsg[1] = (global.lang == "ja") ? "#それでも#まだ見る" : /*"#Try and#watch anyway"*/"#再次尝试#播放";
+    global.choicemsg[0] = (global.lang == "ja") ? "#VTRを#スキップ" : "#Skip the#video";
+    global.choicemsg[1] = (global.lang == "ja") ? "#それでも#まだ見る" : "#Try and#watch anyway";
     global.choicemsg[2] = stringset("");
     global.choicemsg[3] = stringset("");
-    var prompt_text = (global.lang == "ja") ? "＊ おーっとぉ！&　 VTRの様子がおかしいぞ！/" : /*"* W-Wait^1! The VHS isn't working!/"*/"* 等等^1! 录像带播放不了!/";
+    var prompt_text = (global.lang == "ja") ? "＊ おーっとぉ！&　 VTRの様子がおかしいぞ！/" : "* W-Wait^1! The VHS isn't working!/";
     scr_speaker("tenna");
     msgset(0, prompt_text);
     msgnext("\\C2 ");

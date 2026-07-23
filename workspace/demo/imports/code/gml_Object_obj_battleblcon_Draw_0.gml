@@ -28,7 +28,7 @@ if (i_ex(mywriter))
             hspace = mywriter.hspace;
             vspace = mywriter.vspace;
             linecount = mywriter.linecount;
-            balloonwidth = (((stringmax * 9) / 5) * hspace) + 10;
+            balloonwidth = (stringmax * hspace) + 10;
             balloonheight = ((linecount + 1) * vspace) + 5;
             
             if (global.lang == "ja")

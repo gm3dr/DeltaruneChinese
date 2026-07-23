@@ -27,8 +27,7 @@ init_song = function(arg0)
     _highscore_hard = string(arg0[3]);
     _track_name = string(arg0[4]);
     _song_id = string(arg0[5]);
-    // scrolling_text = "! " + _track_name + " ! " + "High Score (Normal) - " + _highscore + " ! " + "High Score (Hard) - " + _highscore_hard + " ! ";
-    scrolling_text = "! " + _track_name + " ! " + "最高得分（普通）- " + _highscore + " ! " + "最高得分（困难） - " + _highscore_hard + " ! ";
+    scrolling_text = "! " + _track_name + " ! " + "High Score (Normal) - " + _highscore + " ! " + "High Score (Hard) - " + _highscore_hard + " ! ";
     _string_width = string_width(scrolling_text);
     init = true;
 };

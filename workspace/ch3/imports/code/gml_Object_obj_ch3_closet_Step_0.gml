@@ -82,7 +82,7 @@ if (con == 2)
     c_walkdirect_speed_wait(258, 164, 6);
     c_facing("u");
     c_wait(15);
-    c_sound_play(168);
+    c_sound_play(snd_noise);
     c_var_instance(drawer, "image_index", 1);
     c_shakeobj_instance(drawer);
     c_wait(5);
@@ -136,7 +136,7 @@ if (con == 2)
     c_autowalk(1);
     c_walkdirect_speed_wait(-70, 220, 15);
     c_wait(30);
-    c_sound_play(155);
+    c_sound_play(snd_wing);
     c_var_lerp_instance(te_actor, "x", camerax() + view_wport[0] + 420, camerax() + 435, 15, -1, "out");
     c_wait(30);
     c_waitcustom();
@@ -159,10 +159,10 @@ if (con == 10 && customcon == 1)
     c_msgsetloc(0, "* I..^1. I don't know what this is!!!/%", "obj_ch3_closet_slash_Step_0_gml_185_0");
     c_talk_wait();
     c_tenna_preset(0);
-    c_tenna_sprite(3963);
+    c_tenna_sprite(spr_tenna_grasp_e);
     c_tenna_preset(8);
     c_var_instance(id, "rabble_start", true);
-    c_sound_play(39);
+    c_sound_play(snd_crowd_gasp);
     c_wait(30);
     c_speaker("no_name");
     c_msgsetloc(0, "* Tenna^1, is that..^1. yours...?/", "obj_ch3_closet_slash_Step_0_gml_201_0");
@@ -172,7 +172,7 @@ if (con == 10 && customcon == 1)
     c_wait(30);
     c_tenna_preset(0);
     c_wait(30);
-    c_tenna_sprite(1991);
+    c_tenna_sprite(spr_tenna_tie_adjust_a);
     c_wait(30);
     c_var_instance(id, "rabble_start", false);
     c_speaker("tenna");
@@ -229,12 +229,12 @@ if (con == 20 && customcon == 1)
     c_msgsetloc(0, "* What the-- how did THIS get out here!?/%", "obj_ch3_closet_slash_Step_0_gml_326_0");
     c_talk_wait();
     c_tenna_preset(0);
-    c_tenna_sprite(3963);
+    c_tenna_sprite(spr_tenna_grasp_e);
     c_tenna_preset(8);
     c_speaker("tenna");
     c_msgsetloc(0, "* My secret...^1! No^1! Everyone..^1. Everyone's gonna know I.../%", "obj_ch3_closet_slash_Step_0_gml_336_0");
     c_talk_wait();
-    c_snd_play(168);
+    c_snd_play(snd_noise);
     c_tenna_preset(0);
     c_wait(1);
     c_sel(te);
@@ -256,7 +256,7 @@ if (con == 20 && customcon == 1)
     c_imageindex(3);
     c_shakeobj();
     c_wait_box(3);
-    c_snd_play(494);
+    c_snd_play(snd_sparkle_gem);
     c_wait_talk();
     c_var_instance(item_marker, "x", camerax() - 40);
     c_var_instance(item_marker, "y", cameray() + 220);
@@ -274,7 +274,7 @@ if (con == 20 && customcon == 1)
     c_sprite(spr_spamton_idle);
     c_addxy(-24, -30);
     c_flip("x");
-    c_snd_play(216);
+    c_snd_play(snd_bump);
     c_var_lerp_to_instance(sp_actor, "y", 205, 2);
     c_wait(2);
     c_shakeobj();
@@ -284,7 +284,7 @@ if (con == 20 && customcon == 1)
     c_speaker("spamton");
     c_msgsetloc(0, "* [Trash heap]!!^1! YOU KEPT IT!!^1! YOU REALLY DO CARE!!!/%", "obj_ch3_closet_slash_Step_0_gml_410_0");
     c_talk_wait();
-    c_snd_play(155);
+    c_snd_play(snd_wing);
     c_sel(te);
     c_imageindex(4);
     c_emote("!", 30, 10, -150);
@@ -315,7 +315,7 @@ if (con == 20 && customcon == 1)
     {
         var funnystring = "* ";
         
-        repeat (4 + 2 * floor(random(6))) // repeat (2 + floor(random(6)))
+        repeat (2 + floor(random(6)))
             funnystring += mystring[floor(random(9))];
         
         funnystring += "%";
@@ -328,8 +328,8 @@ if (con == 20 && customcon == 1)
     c_wait(1);
     c_tenna_preset(-1);
     c_wait(1);
-    c_sound_play(155);
-    c_tenna_sprite(3839);
+    c_sound_play(snd_wing);
+    c_tenna_sprite(spr_tenna_pose_podium_evil);
     c_imageindex(1);
     c_flip("x");
     c_addxy(80, 0);
@@ -351,7 +351,7 @@ if (con == 20 && customcon == 1)
     {
         var funnystring = "* ";
         
-        repeat (4 + 2 * floor(random(6))) // repeat (2 + floor(random(6)))
+        repeat (2 + floor(random(6)))
             funnystring += mystring[floor(random(9))];
         
         funnystring += "%";
@@ -365,7 +365,7 @@ if (con == 20 && customcon == 1)
     {
         var funnystring = "* ";
         
-        repeat (4 + 2 * floor(random(6))) // repeat (2 + floor(random(6)))
+        repeat (2 + floor(random(6)))
             funnystring += mystring[floor(random(9))];
         
         funnystring += "%";
@@ -389,16 +389,16 @@ if (con == 20 && customcon == 1)
     c_var_lerp_to_instance(sp_actor, "x", 254, 20, 3, "out");
     c_wait(15);
     c_waittalk();
-    c_sndplay(155);
+    c_sndplay(snd_wing);
     c_speaker("tenna");
-    c_tenna_sprite(105);
+    c_tenna_sprite(spr_tenna_kick);
     c_sel(te);
     c_imageindex(0);
     c_msgsetloc(0, "* STAY AWAY FROM HER^1, you FIEND!!!/%", "obj_ch3_closet_slash_Step_0_gml_549_0");
     c_talkwait();
-    c_tenna_sprite(1216);
+    c_tenna_sprite(spr_tenna_spray);
     c_setxy(540, 228);
-    c_snd_play(155);
+    c_snd_play(snd_wing);
     c_var_lerp_to_instance(te_actor, "x", 409, 20, 3, "out");
     c_wait(21);
     c_script_instance(id, snd_play_x, 15, 348, 1, 2);
@@ -417,7 +417,7 @@ if (con == 20 && customcon == 1)
     c_wait_if(id, "spray_event", "=", false);
     c_script_instance_stop(id, snd_play_x);
     c_wait(60);
-    c_snd_play(164);
+    c_snd_play(snd_grab);
     c_var_instance(pipis_marker, "visible", 0);
     c_sel(te);
     c_sprite(spr_tenna_hooray);
@@ -441,7 +441,7 @@ if (con == 20 && customcon == 1)
     c_speaker("tenna");
     c_msgsetloc(0, "* Don't worry^1! You're gonna go someplace SAFE!!!/%", "obj_ch3_closet_slash_Step_0_gml_627_0");
     c_talk_wait();
-    c_snd_play(155);
+    c_snd_play(snd_wing);
     c_var_lerp_to_instance(te_actor, "x", camerax() + view_wport[0] + 300, 30, 3, "in");
     c_wait(90);
     c_sel(kr);

@@ -21,7 +21,7 @@ if (init == 0)
         else
         {
             minigametext = instance_create(x, y - 150, obj_tenna_enemy_minigametext);
-            minigametext.mystring = /*"GAME CLEAR!"*/"游戏通关！";
+            minigametext.mystring = "GAME CLEAR!";
             snd_play(snd_crowd_cheer_single);
         }
     }
@@ -284,7 +284,7 @@ if (quitcon == 1)
     if (os_type == os_macosx)
     {
         if (quittimer >= (timetoquit - 2))
-            scr_marker_ext(0, 0, 412, room_width, room_height, undefined, undefined, 0, -99999);
+            scr_marker_ext(0, 0, spr_pxwhite, room_width, room_height, undefined, undefined, c_black, -99999);
     }
     
     if (quittimer == timetoquit)

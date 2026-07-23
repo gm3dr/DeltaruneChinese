@@ -105,19 +105,15 @@ if (is_logo_active(current_screen_state))
     screen_anim += screen_anim_speed;
     draw_sprite_ext(spr_gameshow_screen_logo, screen_anim, camerax() + 160, cameray() + 64, 2, 2, 0, merge_color(c_white, c_blue, 0.5), 0.5);
 }
-//
-var mspace = 20;
-//
+
 if (screen_state == "round_complete")
 {
-    var shadcolor = 3934982;
+    var shadcolor = #060B3C;
     var shadalph = 0.65;
     var shadoff = 2;
     draw_set_font(fnt_8bit);
     draw_set_halign(fa_left);
-    // var _offset = (global.lang == "ja") ? 30 : 0;
-    var _offset = 30;
-    //
+    var _offset = (global.lang == "ja") ? 30 : 0;
     var _base_x_pos = camerax() + (view_wport[0] / 2);
     var _base_y_pos = (cameray() + (view_hport[0] / 2)) - 140;
     var xx = (_base_x_pos - 80 - 48) + _offset;
@@ -143,27 +139,27 @@ if (screen_state == "round_complete")
     
     if (screen_sub_state == "next_board_2")
     {
-        // var mspace = 18;
+        var mspace = 18;
         var complete_offset_x = 0;
         var complete_offset_y = 0;
         draw_text_transformed_color(xx + 72 + shadoff + complete_offset_x, yy + (mspace * 1) + shadoff + complete_offset_y, text_next, 1, 1, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
         draw_set_color(c_white);
         draw_text(xx + 72 + complete_offset_x, yy + (mspace * 1) + complete_offset_y, text_next);
         var _xloc = xx;
-        var _yloc = yy + /*36*/mspace * 2;
+        var _yloc = yy + 36;
         draw_text_transformed_color(_xloc + shadoff, _yloc + shadoff, text_round + " 2", 2, 2, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
         draw_text_transformed_color(_xloc, _yloc, text_round + " 2", 2, 2, 0, _col2, _col, _col2, _col, 1);
     }
     else
     {
-        // var mspace = 18;
+        var mspace = 18;
         var complete_offset_x = 0;
         var complete_offset_y = 0;
         draw_text_transformed_color(xx + 72 + shadoff + complete_offset_x, yy + (mspace * 1) + shadoff + complete_offset_y, roundcompletetext15, 1, 1, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
         draw_set_color(c_white);
         draw_text(xx + 72 + complete_offset_x, yy + (mspace * 1) + complete_offset_y, roundcompletetext15);
         var _xloc = xx;
-        var _yloc = yy + /*36*/mspace * 2;
+        var _yloc = yy + 36;
         draw_text_transformed_color(_xloc + shadoff, _yloc + shadoff, rank_text + "!!", 2, 2, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
         draw_text_transformed_color(_xloc, _yloc, rank_text + "!!", 2, 2, 0, c_yellow, c_yellow, c_white, c_white, 1);
     }
@@ -193,22 +189,22 @@ if (screen_state == "round_complete_2")
     var _base_y_pos = (cameray() + (view_hport[0] / 2)) - 140;
     var xx = _base_x_pos;
     var yy = _base_y_pos + 4;
-    var shadcolor = 3934982;
+    var shadcolor = #060B3C;
     var shadalph = 0.65;
     var shadoff = 2;
     var roundcompletetext1 = stringsetloc("ROUND COMPLETE!!", "obj_dw_gameshow_screen_slash_Draw_0_gml_238_0");
     var roundcompletetext15 = stringsetloc("YOU GOT", "obj_dw_gameshow_screen_slash_Draw_0_gml_239_0");
     draw_text_transformed_color(xx + shadoff, yy + shadoff, roundcompletetext1, 1, 1, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
-    draw_text_transformed_color(xx + shadoff, yy + shadoff + /*18*/mspace, roundcompletetext15, 1, 1, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
+    draw_text_transformed_color(xx + shadoff, yy + shadoff + 18, roundcompletetext15, 1, 1, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
     draw_set_color(c_white);
     draw_text(xx, yy, roundcompletetext1);
-    draw_text(xx, yy +  /*18*/mspace, roundcompletetext15);
+    draw_text(xx, yy + 18, roundcompletetext15);
     draw_set_color(c_white);
     
     if (screen_sub_state == "bonus_board")
     {
         draw_set_halign(fa_center);
-        draw_text_transformed_color(xx + shadoff, yy + /*36*/mspace * 2 + shadoff, text_bonus_round, 1, 1, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
+        draw_text_transformed_color(xx + shadoff, yy + 36 + shadoff, text_bonus_round, 1, 1, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
         
         if (!sprite_exists(bonus_sprite))
         {
@@ -219,7 +215,7 @@ if (screen_state == "round_complete_2")
             draw_set_color(c_white);
             draw_set_halign(fa_left);
             draw_set_valign(fa_top);
-            draw_text_transformed(xx, yy + /*36*/mspace * 2, text_bonus_round, 1, 1, 0);
+            draw_text_transformed(xx, yy + 36, text_bonus_round, 1, 1, 0);
             surface_reset_target();
             bonus_sprite = sprite_create_from_surface(bg_surface, x, y, x + 180, y + 54, false, true, 0, 0);
             surface_free(bg_surface);
@@ -235,7 +231,7 @@ if (screen_state == "round_complete_2")
             shader_set_uniform_f(_uniUV, uv[0], uv[2]);
             shader_set_uniform_f(_uniSpeed, _speed);
             shader_set_uniform_f(_uniTime, _time);
-            draw_text_transformed(xx, yy + /*36*/mspace * 2, text_bonus_round, 1, 1, 0);
+            draw_text_transformed(xx, yy + 36, text_bonus_round, 1, 1, 0);
             shader_reset();
         }
         
@@ -243,8 +239,8 @@ if (screen_state == "round_complete_2")
         var coltime = 15;
         var _col = merge_color(c_white, c_yellow, abs(sin(custom_text_timer / coltime)));
         var _col2 = merge_color(c_yellow, c_white, abs(sin((custom_text_timer + (coltime / 2)) / coltime)));
-        draw_text_transformed_color(xx + shadoff, yy + /*54*/mspace * 3 + shadoff, text_round + " 3", 2, 2, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
-        draw_text_transformed_color(xx, yy + /*54*/mspace * 3, text_round + " 3", 2, 2, 0, _col2, _col, _col2, _col, 1);
+        draw_text_transformed_color(xx + shadoff, yy + 54 + shadoff, text_round + " 3", 2, 2, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
+        draw_text_transformed_color(xx, yy + 54, text_round + " 3", 2, 2, 0, _col2, _col, _col2, _col, 1);
         
         if (cancelled)
             draw_sprite_ext(scr_84_get_sprite("spr_dw_tv_cancelled"), 0, xx, yy + 60, 1, 1, 0, c_white, 1);
@@ -252,8 +248,8 @@ if (screen_state == "round_complete_2")
     else
     {
         draw_set_halign(fa_center);
-        draw_text_transformed_color(xx + shadoff, yy + /*36*/mspace * 2 + shadoff, rank_text + " !!", 2, 2, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
-        draw_text_transformed_color(xx, yy + /*36*/mspace * 2, rank_text + " !!", 2, 2, 0, c_yellow, c_yellow, c_white, c_white, 1);
+        draw_text_transformed_color(xx + shadoff, ((yy + 40) - 4) + shadoff, rank_text + "!!", 2, 2, 0, shadcolor, shadcolor, shadcolor, shadcolor, shadalph);
+        draw_text_transformed_color(xx, (yy + 40) - 4, rank_text + "!!", 2, 2, 0, c_yellow, c_yellow, c_white, c_white, 1);
         draw_set_halign(fa_left);
     }
     
@@ -307,8 +303,8 @@ if (screen_state == "board_bonus_bonus")
         draw_set_halign(fa_center);
         draw_set_valign(fa_top);
         draw_text_transformed(x, y, text_bonus, 1.6, 1.3, 0);
-        draw_text_transformed(x, y + /*18*/mspace, text_bonus_round, 1.6, 1.3, 0);
-        draw_text_transformed(x, y + /*36*/mspace * 2, text_confirmed, 1.6, 1.3, 0);
+        draw_text_transformed(x, y + 18, text_bonus_round, 1.6, 1.3, 0);
+        draw_text_transformed(x, y + 18 + 18, text_confirmed, 1.6, 1.3, 0);
         
         for (var i = 0; i < 7; i++)
             draw_sprite_ext(spr_board_battle_results_exclamation, 0, (x - 44) + (14 * i), y + 40 + 8 + 10.1, 2, 2, 0, c_white, 1);

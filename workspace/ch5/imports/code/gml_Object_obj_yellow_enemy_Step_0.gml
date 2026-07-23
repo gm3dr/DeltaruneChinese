@@ -334,11 +334,10 @@ if (global.myfight == 3)
                         {
                             if (sprite_index == spr_enemy_green_walk)
                             {
-                                // sprite_index = spr_green_sign_big;
+                                sprite_index = spr_green_sign_big;
                                 
-                                // if (global.lang == "ja")
-                                //     sprite_index = spr_green_sign_big_jp;
-                                sprite_index = scr_84_get_sprite("spr_green_sign_big");
+                                if (global.lang == "ja")
+                                    sprite_index = spr_green_sign_big_jp;
                                 
                                 image_index = 0;
                                 image_speed = 0;

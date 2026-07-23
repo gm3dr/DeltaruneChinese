@@ -48,9 +48,7 @@ strnext = stringsetloc("Next Letter", "obj_gameshow_nameentry_slash_Draw_0_gml_4
 strprev = stringsetloc("Previous Letter", "obj_gameshow_nameentry_slash_Draw_0_gml_43_0");
 var _xx = camerax();
 var _yy = cameray();
-//
-    var kern = 28;
-//
+
 if (controller_active)
 {
     draw_sprite_ext(scr_getbuttonsprite(global.input_g[2], false), 0, _xx + 32, ((_yy + 480) - 70) + 1 + (tutprog * 80), 2, 2, 0, c_white, 1);
@@ -60,7 +58,8 @@ if (controller_active)
     draw_set_halign(fa_left);
     draw_set_color(#003A52);
     draw_text(_xx + 14 + 60, ((_yy + 480) - 70) + 2 + (tutprog * 80), "/");
-    //var kern = (global.lang == "ja") ? 28 : 16;
+    var kern = (global.lang == "ja") ? 28 : 16;
+    
     for (i = 1; i <= string_length(strchange); i += 1)
     {
         var ch = string_char_at(strchange, i);
@@ -121,7 +120,7 @@ else
 {
     draw_set_halign(fa_left);
     draw_set_color(#003A52);
-    var kern = 28; //var kern = (global.lang == "ja") ? 28 : 16;
+    var kern = (global.lang == "ja") ? 28 : 16;
     var command_text = strup + "/" + strdown + ": ";
     
     for (i = 1; i <= string_length(command_text); i += 1)

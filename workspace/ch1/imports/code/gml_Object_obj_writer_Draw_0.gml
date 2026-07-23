@@ -57,25 +57,20 @@ if (formatted == 0)
     {
         skip = 0;
         thischar = string_char_at(mystring, i);
-        //
-        if (thischar == "`")
-        {
-            i++;
-        }
-        //
-        else/**/if (thischar == "/" || thischar == "%")
+        
+        if (thischar == "/" || thischar == "%")
         {
             if (charpos > -1)
                 charpos -= 1;
         }
         
-        else/**/if (thischar == "^")
+        if (thischar == "^")
         {
             if (charpos > -1)
                 charpos -= 2;
         }
         
-        else/**/if (thischar == "\\")
+        if (thischar == "\\")
         {
             if (charpos > -1)
                 charpos -= 3;
@@ -191,7 +186,7 @@ if (formatted == 0)
                 textalignment = nextchar2;
         }
         
-        else/**/if (thischar == "&"|| thischar == "\n") // if (thischar == "&")
+        if (thischar == "&")
         {
             if (charpos > stringmax)
                 stringmax = charpos;
@@ -254,12 +249,7 @@ if (formatted == 0)
             }
             else
             {
-                //charpos += 1;
-                if (ord(thischar) > 505 || ord(thischar) == 183)
-                    charpos += 1.75;
-                else
-                    charpos += 1;
-                //
+                charpos += 1;
             }
         }
     }
@@ -297,14 +287,8 @@ for (n = 1; n < pos; n += 1)
 {
     accept = 1;
     mychar = string_char_at(mystring, n);
-    //
-    if (mychar == "`")
-    {
-        n++;
-        mychar = string_char_at(mystring, n);
-    }
-    //
-    else/**/ if (mychar == "&" || mychar == "\n")// if (mychar == "&")
+    
+    if (mychar == "&")
     {
         accept = 0;
         wx = writingx;
@@ -314,17 +298,20 @@ for (n = 1; n < pos; n += 1)
         
         wy += vspace;
     }
-    else/**/ if (mychar == "|")
+    
+    if (mychar == "|")
     {
         accept = 0;
         wx += hspace;
     }
-    else/**/ if (mychar == "^")
+    
+    if (mychar == "^")
     {
         accept = 0;
         n += 1;
     }
-    else/**/ if (mychar == "/")
+    
+    if (mychar == "/")
     {
         halt = 1;
         
@@ -333,7 +320,8 @@ for (n = 1; n < pos; n += 1)
         
         accept = 0;
     }
-    else/**/ if (mychar == "%")
+    
+    if (mychar == "%")
     {
         accept = 0;
         
@@ -345,7 +333,8 @@ for (n = 1; n < pos; n += 1)
         else if (halt != 2)
             scr_nextmsg();
     }
-    else/**/ if (mychar == "\\")
+    
+    if (mychar == "\\")
     {
         nextchar = string_char_at(mystring, n + 1);
         nextchar2 = string_char_at(mystring, n + 2);
@@ -814,12 +803,9 @@ for (n = 1; n < pos; n += 1)
                 draw_set_alpha(1);
             }
         }
-        // wx += hspace;
-        if (ord(mychar) > 505 || ord(mychar) == 183)
-            wx += ((hspace * 7) div 4);
-        else
-            wx += hspace;
-        //
+        
+        wx += hspace;
+        
         if (global.lang == "ja")
         {
             if (ord(mychar) < 256 || (ord(mychar) >= 65377 && ord(mychar) <= 65439))

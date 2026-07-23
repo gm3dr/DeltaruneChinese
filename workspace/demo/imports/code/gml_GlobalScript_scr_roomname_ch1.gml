@@ -62,7 +62,7 @@ function scr_roomname_ch1(arg0)
     if (arg0 == 337)
     {
         if (global.lang == "en")
-            roomname = "平原 - 死亡迷宫";
+            roomname = "Field - Maze of Death";
         
         if (global.lang == "ja")
             roomname = "平原 - 死の迷路";

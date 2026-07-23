@@ -417,7 +417,7 @@ if (global.menuno == 4)
             if (global.flag[214] == 1)
                 crude_amount = 101;
             
-            draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Crudeness ", "obj_darkcontroller_slash_Draw_0_gml_252_0")), /*langopt(0.8, */1/*)*/, 1, 0);
+            draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Crudeness ", "obj_darkcontroller_slash_Draw_0_gml_252_0")), langopt(0.8, 1), 1, 0);
             draw_item_icon(xx + 74, ch_y[4] + 6, 13);
             draw_text(xx + 230, ch_y[4], string_hash_to_newline(crude_amount));
             char_desc = stringsetloc("LV1 Mean Girl#Won't do anything#but fight.", "obj_darkcontroller_slash_Draw_0_gml_255_0");
@@ -428,7 +428,7 @@ if (global.menuno == 4)
         
         if (global.chapter == 2)
         {
-            draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Purple ", "obj_darkcontroller_slash_Draw_0_gml_311_0")), /*langopt(0.8, */1/*)*/, 1, 0);
+            draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Purple ", "obj_darkcontroller_slash_Draw_0_gml_311_0")), langopt(0.8, 1), 1, 0);
             draw_item_icon(xx + 74, ch_y[4] + 6, 13);
             draw_text(xx + 230, ch_y[4], string_hash_to_newline(stringsetloc("Yes", "obj_darkcontroller_slash_Draw_0_gml_312_0")));
             char_desc = stringsetsubloc("LV~1 Dark Knight#Does damage using#dark energy.", falselv, "obj_darkcontroller_slash_Draw_0_gml_314_0");
@@ -505,9 +505,9 @@ if (global.menuno == 4)
             }
         }
         
-        //var __scale = 0.8;
+        var __scale = 0.8;
         
-        //if (global.lang == "ja")
+        if (global.lang == "ja")
             __scale = 1;
         
         draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Fluffiness", "obj_darkcontroller_slash_Draw_0_gml_286_0")), __scale, 1, 0);

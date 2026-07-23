@@ -136,9 +136,7 @@ function scr_draw_text_monospace(arg0, arg1, arg2, arg3 = 8, arg4 = 18, arg5 = -
     var _linebreak = string_pos("#", arg2);
     var _chiisai = "ゃょゅャュョぁぃぅぇぉァィゥェォゎヮ";
     var _timesyntax = "-<>+~＜＞＋～";
-    // var _ja = global.lang == "ja";
-    var _ja = true;
-    //
+    var _ja = global.lang == "ja";
     var _syllables = 0;
     var _single = false;
     var _kanji_substring = false;
@@ -266,9 +264,9 @@ function scr_draw_text_monospace(arg0, arg1, arg2, arg3 = 8, arg4 = 18, arg5 = -
                 if (_kanji_substring)
                     _single = false;
                 
-                // if (!_kanji_substring && _syllables == 0)
-                //     _syllables += 2;
-                // else
+                if (!_kanji_substring && _syllables == 0)
+                    _syllables += 2;
+                else
                     _syllables++;
             }
             

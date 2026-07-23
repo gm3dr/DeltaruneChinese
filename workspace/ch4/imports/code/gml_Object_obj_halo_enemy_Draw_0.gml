@@ -105,7 +105,7 @@ if (talked == 1 && scr_isphase("enemytalk"))
         repeat (textlength)
         {
             draw_text_transformed(x + lengthdir_x(radius, angle_diff + angle), (y - 90) + (surface_h / 2) + lengthdir_y(radius, angle_diff + angle), string_char_at(text, letter_count), 1, 1, angle_diff + 270 + angle);
-            var dist = /*-8*/-14;
+            var dist = -8;
             
             if (global.lang == "ja")
             {

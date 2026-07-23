@@ -62,13 +62,13 @@ global.savedata_async_id = -1;
 global.savedata_async_load = false;
 global.savedata_error = false;
 global.savedata_debuginfo = "";
-global.version = "1.41";
+global.version = "1.49";
 
 if (scr_is_switch_os())
-    global.version = "1.29";
+    global.version = "1.37";
 
 if (os_type == os_ps4 || os_type == os_ps5)
-    global.version = "1.29";
+    global.version = "1.37";
 
 global.game_won = false;
 global.chapter = 2;
@@ -84,7 +84,6 @@ if (global.is_console)
 }
 else
 {
-    global.names = 0;
     scr_84_init_localization();
     pal_swap_init_system(1);
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);

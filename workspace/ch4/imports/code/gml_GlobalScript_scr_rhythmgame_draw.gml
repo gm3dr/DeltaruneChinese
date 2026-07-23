@@ -92,20 +92,20 @@ function scr_rhythmgame_draw_border(arg0, arg1 = false)
         if (instrument == 0)
         {
             _icon = 3171;
-            _name = scr_84_get_sprite("spr_bnamekris");
+            _name = _jp ? spr_ja_bnamekris : spr_bnamekris;
             _hoff = 21;
         }
         else if (instrument == 1)
         {
             _icon = 3173;
-            _name = scr_84_get_sprite("spr_bnamesusie");
+            _name = _jp ? spr_ja_bnamesusie : spr_bnamesusie;
             _hoff = 24;
         }
         else if (instrument == 2)
         {
             _icon = 3172;
-            _name = scr_84_get_sprite("spr_bnameralsei");
-            _hoff = global.names >= 2 ? 27 : 30;
+            _name = _jp ? spr_ja_bnameralsei : spr_bnameralsei;
+            _hoff = 30;
         }
         
         var _hurt = invc > 50 || scr_rhythmgame_damage_flash() > 0;
@@ -127,7 +127,7 @@ function scr_rhythmgame_draw_border(arg0, arg1 = false)
         draw_set_halign(fa_center);
         draw_set_valign(fa_middle);
         draw_set_font(fnt_mainbig);
-        draw_text_outline(arg0 + 2, bottomy - 100, /*"DEMO"*/"演示", 2, 2, 0);
+        draw_text_outline(arg0 + 2, bottomy - 100, "DEMO", 2, 2, 0);
         draw_set_halign(fa_left);
         draw_set_valign(fa_top);
     }

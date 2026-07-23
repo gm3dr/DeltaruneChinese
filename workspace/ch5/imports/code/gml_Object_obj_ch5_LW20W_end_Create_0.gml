@@ -52,58 +52,149 @@ alpha = 0;
 blocks = [];
 array_push(blocks, 
 {
-    x: 40, // 插
-    y: 0,
-    w: 16,
-    h: 14
+    x: 12,
+    y: 3,
+    w: 11,
+    h: 10
 });
 array_push(blocks, 
 {
-    x: 56, // 入
-    y: 0,
-    w: 16,
-    h: 14
+    x: 24,
+    y: 3,
+    w: 11,
+    h: 10
 });
 array_push(blocks, 
 {
-    x: -40, // 
+    x: 35,
+    y: 3,
+    w: 11,
+    h: 10
+});
+array_push(blocks, 
+{
+    x: 47,
+    y: 3,
+    w: 11,
+    h: 10
+});
+array_push(blocks, 
+{
+    x: 61,
+    y: 0,
+    w: 7,
+    h: 13
+});
+array_push(blocks, 
+{
+    x: -40,
     y: -40,
     w: 0,
     h: 0
 });
 array_push(blocks, 
 {
-    x: 88, // 第
+    x: 83,
     y: 0,
-    w: 16,
-    h: 14
+    w: 11,
+    h: 13
 });
 array_push(blocks, 
 {
-    x: 104, // 7
+    x: 95,
     y: 0,
-    w: 16,
-    h: 14
+    w: 11,
+    h: 13
 });
 array_push(blocks, 
 {
-    x: 120, // 章
+    x: 107,
+    y: 2,
+    w: 11,
+    h: 11
+});
+array_push(blocks, 
+{
+    x: 119,
+    y: 2,
+    w: 11,
+    h: 11
+});
+array_push(blocks, 
+{
+    x: 133,
     y: 0,
-    w: 16,
-    h: 14
+    w: 7,
+    h: 13
 });
 array_push(blocks, 
 {
-    x: 40, // B
-    y: 18,
-    w: 16,
-    h: 14
+    x: 143,
+    y: 3,
+    w: 11,
+    h: 10
 });
 array_push(blocks, 
 {
-    x: 56, // 面
-    y: 18,
-    w: 16,
-    h: 14
+    x: 155,
+    y: 3,
+    w: 11,
+    h: 10
+});
+array_push(blocks, 
+{
+    x: -40,
+    y: -40,
+    w: 0,
+    h: 0
+});
+array_push(blocks, 
+{
+    x: 179,
+    y: 0,
+    w: 11,
+    h: 13
+});
+array_push(blocks, 
+{
+    x: 0,
+    y: 19,
+    w: 11,
+    h: 13
+});
+array_push(blocks, 
+{
+    x: 14,
+    y: 20,
+    w: 7,
+    h: 12
+});
+array_push(blocks, 
+{
+    x: 24,
+    y: 19,
+    w: 11,
+    h: 13
+});
+array_push(blocks, 
+{
+    x: 36,
+    y: 22,
+    w: 11,
+    h: 10
+});
+array_push(blocks, 
+{
+    x: -40,
+    y: -40,
+    w: 0,
+    h: 0
+});
+array_push(blocks, 
+{
+    x: 60,
+    y: 19,
+    w: 11,
+    h: 13
 });
 blocksLength = array_length(blocks);

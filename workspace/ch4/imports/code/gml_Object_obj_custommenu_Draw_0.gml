@@ -53,14 +53,14 @@ for (m = 0; m < menuMax; m++)
             textxscale = 1;
             textyscale = 1;
             
-            // if (menuHeaderWidth[m][j] > 0)
-            //     textxscale = menuHeaderWidth[m][j];
+            if (menuHeaderWidth[m][j] > 0)
+                textxscale = menuHeaderWidth[m][j];
             
-            // if (menuHeaderWidth[m][j] >= 5)
-            //     textxscale = clamp(menuHeaderWidth[m] / string_width(string_hash_to_newline(menuHeaderText[m][j])), 0.5, 1);
+            if (menuHeaderWidth[m][j] >= 5)
+                textxscale = clamp(menuHeaderWidth[m] / string_width(string_hash_to_newline(menuHeaderText[m][j])), 0.5, 1);
             
-            // if (menuHeaderHeight[m][j] > 0)
-            //     textyscale = menuHeaderHeight[m][j];
+            if (menuHeaderHeight[m][j] > 0)
+                textyscale = menuHeaderHeight[m][j];
             
             draw_text_transformed(xx + menuHeaderX[m][j], yy + menuHeaderY[m][j], string_hash_to_newline(menuHeaderText[m][j]), textxscale, textyscale, 0);
         }
@@ -122,14 +122,14 @@ for (m = 0; m < menuMax; m++)
             textxscale = 1;
             textyscale = 1;
             
-            // if (menuTextXScale[m] > 0)
-            //     textxscale = menuTextXScale[m];
+            if (menuTextXScale[m] > 0)
+                textxscale = menuTextXScale[m];
             
-            // if (menuTextXScale[m] >= 5)
-            //     textxscale = clamp(menuTextXScale[m] / string_width(string_hash_to_newline(optionText[m][j])), 0.5, 1);
+            if (menuTextXScale[m] >= 5)
+                textxscale = clamp(menuTextXScale[m] / string_width(string_hash_to_newline(optionText[m][j])), 0.5, 1);
             
-            // if (menuTextYScale[m] > 0)
-            //     textyscale = menuTextYScale[m];
+            if (menuTextYScale[m] > 0)
+                textyscale = menuTextYScale[m];
             
             draw_text_transformed(textx, texty, string_hash_to_newline(optionText[m][j]), textxscale, textyscale, 0);
             wrap++;
@@ -146,14 +146,14 @@ for (m = 0; m < menuMax; m++)
                 textxscale = 1;
                 textyscale = 1;
                 
-                // if (optionCommentAWidth[m][j] > 0)
-                //     textxscale = optionCommentAWidth[m][j];
+                if (optionCommentAWidth[m][j] > 0)
+                    textxscale = optionCommentAWidth[m][j];
                 
-                // if (optionCommentAWidth[m][j] >= 5)
-                //     textxscale = clamp(optionCommentAWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
+                if (optionCommentAWidth[m][j] >= 5)
+                    textxscale = clamp(optionCommentAWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
                 
-                // if (optionCommentAHeight[m][j] > 0)
-                //     textyscale = optionCommentAHeight[m][j];
+                if (optionCommentAHeight[m][j] > 0)
+                    textyscale = optionCommentAHeight[m][j];
                 
                 draw_text_transformed(textx + optionCommentAXOffset[m][j], texty + optionCommentAYOffset[m][j], string(optionCommentA[m][j]), textxscale, textyscale, 0);
             }
@@ -164,14 +164,14 @@ for (m = 0; m < menuMax; m++)
                 textxscale = 1;
                 textyscale = 1;
                 
-                // if (optionCommentBWidth[m][j] > 0)
-                //     textxscale = optionCommentBWidth[m][j];
+                if (optionCommentBWidth[m][j] > 0)
+                    textxscale = optionCommentBWidth[m][j];
                 
-                // if (optionCommentBWidth[m][j] >= 5)
-                //     textxscale = clamp(optionCommentBWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
+                if (optionCommentBWidth[m][j] >= 5)
+                    textxscale = clamp(optionCommentBWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
                 
-                // if (optionCommentBHeight[m][j] > 0)
-                //     textyscale = optionCommentBHeight[m][j];
+                if (optionCommentBHeight[m][j] > 0)
+                    textyscale = optionCommentBHeight[m][j];
                 
                 draw_text_transformed(textx + optionCommentBXOffset[m][j], texty + optionCommentBYOffset[m][j], string(optionCommentB[m][j]), textxscale, textyscale, 0);
             }
@@ -182,14 +182,14 @@ for (m = 0; m < menuMax; m++)
                 textxscale = 1;
                 textyscale = 1;
                 
-                // if (optionCommentCWidth[m][j] > 0)
-                //     textxscale = optionCommentCWidth[m][j];
+                if (optionCommentCWidth[m][j] > 0)
+                    textxscale = optionCommentCWidth[m][j];
                 
-                // if (optionCommentCWidth[m][j] >= 5)
-                //     textxscale = clamp(optionCommentCWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
+                if (optionCommentCWidth[m][j] >= 5)
+                    textxscale = clamp(optionCommentCWidth[m][j] / string_width(string(optionText[m][j])), 0.5, 1);
                 
-                // if (optionCommentCHeight[m][j] > 0)
-                //     textyscale = optionCommentCHeight[m][j];
+                if (optionCommentCHeight[m][j] > 0)
+                    textyscale = optionCommentCHeight[m][j];
                 
                 draw_text_transformed(textx + optionCommentCXOffset[m][j], texty + optionCommentCYOffset[m][j], string(optionCommentC[m][j]), textxscale, textyscale, 0);
             }

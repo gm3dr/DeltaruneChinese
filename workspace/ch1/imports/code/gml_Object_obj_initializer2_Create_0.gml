@@ -79,12 +79,11 @@ if (global.is_console)
 }
 else
 {
-    global.names = 0;
     scr_84_init_localization();
     scr_84_load_ini();
     scr_gamestart();
     global.damagefont = font_add_sprite_ext(spr_numbersfontbig, "0123456789", 20, 0);
-    global.hpfont = font_add_sprite_ext(spr_numbersfontsmall, scr_84_get_lang_string("obj_initializer2_slash_Create_0_gml_2_0"), 0, 2); // 0123456789-+
+    global.hpfont = font_add_sprite_ext(spr_numbersfontsmall, scr_84_get_lang_string("obj_initializer2_slash_Create_0_gml_2_0"), 0, 2);
     
     for (i = 0; i < 100; i += 1)
         global.tempflag[i] = 0;

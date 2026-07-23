@@ -33,14 +33,15 @@ if (global.monster[myself] == 1)
         
         if (amimoonwarmer == false)
         {
-            var random_vowel = choose("叭", "哔", "卟", "呗", "啵", "啵啵"); // var random_vowel = choose("a", "e", "i", "o", "u", "u", "oo");
+            var random_vowel = choose("a", "e", "i", "o", "u", "u", "oo");
+            
             if (global.lang == "ja")
                 random_vowel = choose("パ", "ピ", "プ", "ぺ");
             
             if (rr == 1)
                 msgsetloc(0, "Buble", "obj_watercooler_enemy_slash_Step_0_gml_37_0");
             else
-                msgsetsub(0, "~1", random_vowel);
+                msgsetsubloc(0, "B~1b~2e", random_vowel, choose("i", "l"), "obj_watercooler_enemy_slash_Step_0_gml_38_0");
         }
         else if (rr == 1)
         {
@@ -252,9 +253,9 @@ if (global.myfight == 3)
         obj_herosusie.y = y;
         obj_heroralsei.x = x - 80;
         obj_heroralsei.y = y + 50;
-        scr_battle_sprite_set("kris", 4371, 0, true);
-        scr_battle_sprite_set("susie", 4276, 0, true);
-        scr_battle_sprite_set("ralsei", 4829, 0, true);
+        scr_battle_sprite_set("kris", spr_kris_zoosuit_cup, 0, true);
+        scr_battle_sprite_set("susie", spr_susie_zoosuit_cup, 0, true);
+        scr_battle_sprite_set("ralsei", spr_ralsei_zoosuit_cup, 0, true);
         msgsetloc(0, "* Everyone chatted around the watercooler./%", "obj_watercooler_enemy_slash_Step_0_gml_226_0");
         scr_battletext_default();
         acting = 3.1;

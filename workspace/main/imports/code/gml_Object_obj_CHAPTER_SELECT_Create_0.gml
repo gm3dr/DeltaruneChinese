@@ -143,9 +143,9 @@ change_state = function(arg0, arg1)
 
 create_start_screen = function()
 {
-    var start_text = (global.lang == "en") ? "你想从第1章开始玩吗？" : "Chapter 1から始めますか？";
-    var yes_text = (global.lang == "en") ? "是" : "はい";
-    var no_text = (global.lang == "en") ? "否" : "いいえ";
+    var start_text = (global.lang == "en") ? "Would you like to start from Chapter 1?" : "Chapter 1から始めますか？";
+    var yes_text = (global.lang == "en") ? "Yes" : "はい";
+    var no_text = (global.lang == "en") ? "No" : "いいえ";
     var choices = [new create_choice(yes_text, UnknownEnum.Value_0), new create_choice(no_text, UnknownEnum.Value_1)];
     var choice_offset = (global.lang == "ja") ? -20 : 0;
     var start_screen = instance_create(0, 0, obj_screen_start);
@@ -155,13 +155,13 @@ create_start_screen = function()
 
 create_continue_screen = function()
 {
-    var continue_text = "你想继续玩第" + string(_chapter_in_progress) + "章吗？";
+    var continue_text = "Continue from Chapter " + string(_chapter_in_progress) + "?";
     
     if (global.lang == "ja")
         continue_text = "Chapter " + string(_chapter_in_progress) + "から続けますか？";
     
-    var yes_text = (global.lang == "en") ? "是" : "はい";
-    var no_text = (global.lang == "en") ? "否" : "いいえ";
+    var yes_text = (global.lang == "en") ? "Yes" : "はい";
+    var no_text = (global.lang == "en") ? "No" : "いいえ";
     var choices = [new create_choice(yes_text, UnknownEnum.Value_0), new create_choice(no_text, UnknownEnum.Value_1)];
     var choice_offset = (global.lang == "ja") ? -20 : 0;
     var start_screen = instance_create(0, 0, obj_screen_start);
@@ -171,17 +171,17 @@ create_continue_screen = function()
 
 create_start_next_screen = function()
 {
-    var continue_text = "已通关第" + string(_chapter_completed) + "章。";
+    var continue_text = "Chapter " + string(_chapter_completed) + " was completed.";
     
     if (global.lang == "ja")
         continue_text = "Chapter " + string(_chapter_completed) + "はクリア済みです。";
     
-    var play_next_text = "继续玩第" + string(_chapter_completed + 1) + "章";
+    var play_next_text = "Play Chapter " + string(_chapter_completed + 1);
     
     if (global.lang == "ja")
         play_next_text = "Chapter " + string(_chapter_completed + 1) + "をプレイ";
     
-    var chapter_select_text = (global.lang == "en") ? "选择章节" : "チャプター選択";
+    var chapter_select_text = (global.lang == "en") ? "Chapter Select" : "チャプター選択";
     var choices = [new create_choice(play_next_text, UnknownEnum.Value_0), new create_choice(chapter_select_text, UnknownEnum.Value_1)];
     var start_screen = instance_create(0, 0, obj_screen_start);
     var choice_offset = (global.lang == "en") ? -70 : -100;
@@ -198,13 +198,13 @@ create_select_screen = function()
 
 create_load_prompt_screen = function(arg0)
 {
-    var load_text = scr_get_app_title(arg0) + "已发现存档文件，是否导入游戏？\n（之后将不再询问）";
+    var load_text = scr_get_app_title(arg0) + "Save Data found.\nImport this Save Data?\n(This will only be asked once.)";
     
     if (global.lang == "ja")
         load_text = scr_get_app_title(arg0) + "セーブデータを検出しました。\nこのセーブデータを取り込みますか？\n（この確認は一度しか行いません）";
     
-    var yes_text = (global.lang == "en") ? "是" : "はい";
-    var no_text = (global.lang == "en") ? "否" : "いいえ";
+    var yes_text = (global.lang == "en") ? "Yes" : "はい";
+    var no_text = (global.lang == "en") ? "No" : "いいえ";
     var choices = [new create_choice(yes_text, UnknownEnum.Value_0), new create_choice(no_text, UnknownEnum.Value_1)];
     var choice_offset = (global.lang == "ja") ? -20 : 0;
     var start_screen = instance_create(0, 0, obj_screen_start);
@@ -214,7 +214,7 @@ create_load_prompt_screen = function(arg0)
 
 create_load_prompt_multiple_screen = function(arg0)
 {
-    var load_text = "发现多个DELTARUNE存档文件。\n你想选一个存档导入游戏吗？\n（以后不再询问）\n \n ";
+    var load_text = "Multiple DELTARUNE Save Files found.\nWould you like to import one of these?\n(This will only be asked once.)\n \n ";
     
     if (global.lang == "ja")
         load_text = "複数の『DELTARUNE』セーブデータが存在します。\nどれか1つを取り込みますか？\n（この確認は一度しか行いません）\n \n ";
@@ -229,7 +229,7 @@ create_load_prompt_multiple_screen = function(arg0)
         choices[array_length(choices)] = new_choice;
     }
     
-    var do_not_text = (global.lang == "en") ? "不导入" : "取り込まない";
+    var do_not_text = (global.lang == "en") ? "Do Not Import" : "取り込まない";
     choices[array_length(choices)] = new create_choice(do_not_text, UnknownEnum.Value_1);
     var start_screen = instance_create(0, 0, obj_screen_start);
     start_screen.init(id, load_text, choices, 0, -32);
@@ -238,9 +238,9 @@ create_load_prompt_multiple_screen = function(arg0)
 
 create_load_deny_confirm_screen = function()
 {
-    var deny_text = (global.lang == "en") ? "确定不导入存档，直接游玩吗？" : "取り込まずに進めますか？";
-    var yes_text = (global.lang == "en") ? "不导入" : "はい";
-    var no_text = (global.lang == "en") ? "导入" : "いいえ";
+    var deny_text = (global.lang == "en") ? "Proceed without importing?" : "取り込まずに進めますか？";
+    var yes_text = (global.lang == "en") ? "Yes" : "はい";
+    var no_text = (global.lang == "en") ? "No" : "いいえ";
     var choices = [new create_choice(yes_text, UnknownEnum.Value_0), new create_choice(no_text, UnknownEnum.Value_1)];
     var choice_offset = (global.lang == "ja") ? -20 : 0;
     var start_screen = instance_create(0, 0, obj_screen_start);

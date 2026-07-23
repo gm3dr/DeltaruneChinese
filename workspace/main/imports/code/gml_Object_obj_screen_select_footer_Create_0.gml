@@ -10,7 +10,7 @@ _fade_in = false;
 init = function(arg0)
 {
     _parent = arg0;
-    var language_text = (global.lang == "en") ? "日本語" : "简体中文";
+    var language_text = (global.lang == "en") ? "日本語" : "English";
     var language_choice = instance_create(x + 260, y + 24, obj_ui_choice);
     language_choice.init(id, language_text, UnknownEnum.Value_5);
     language_choice.set_alpha(0);
@@ -25,7 +25,7 @@ init = function(arg0)
     
     if (!global.is_console)
     {
-        var quit_text = (global.lang == "en") ? "退出" : "終了";
+        var quit_text = (global.lang == "en") ? "Quit" : "終了";
         var quit_choice = instance_create(x + 180, y + 24, obj_ui_choice);
         quit_choice.init(id, quit_text, UnknownEnum.Value_4);
         quit_choice.set_alpha(0);

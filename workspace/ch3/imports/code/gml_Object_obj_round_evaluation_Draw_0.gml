@@ -1,6 +1,6 @@
 if (shakeobj == 0 || !i_ex(shakeobj))
 {
-    shakeobj = scr_marker_ext(0, 0, 412);
+    shakeobj = scr_marker_ext(0, 0, spr_pxwhite);
     
     with (shakeobj)
         visible = 0;
@@ -45,7 +45,7 @@ var _alet = stringsetloc("A", "obj_round_evaluation_slash_Draw_0_gml_44_0");
 var _slet = stringsetloc("S", "obj_round_evaluation_slash_Draw_0_gml_45_0");
 var _tlet = stringsetloc("T", "obj_round_evaluation_slash_Draw_0_gml_46_0");
 lettergrade = _zlet;
-var shadcolor = 3934982;
+var shadcolor = #060B3C;
 var shadalph = 0.65;
 var shadoff = 2;
 var _y_extra = 0;
@@ -284,7 +284,7 @@ if (con >= 1)
             
             scr_delay_var("gradecon", 1, drumrolldelay);
             scr_delay_var("gradecon", 2, del);
-            snd_play_delay(90, del + 1, 1, 1);
+            snd_play_delay(snd_board_text_main_end, del + 1, 1, 1);
             snd_stop(snd_applause_single);
             snd_play(snd_drumroll);
             gradecon = 0.2;
@@ -568,7 +568,7 @@ if (con >= 1)
             
             scr_delay_var("gradecon", 1, drumrolldelay);
             scr_delay_var("gradecon", 2, del);
-            snd_play_delay(90, del + 1, 1, 1);
+            snd_play_delay(snd_board_text_main_end, del + 1, 1, 1);
             snd_stop(snd_applause_single);
             snd_play(snd_drumroll);
             gradecon = 0.2;
@@ -738,14 +738,14 @@ if (con >= 1)
             snd_play(snd_punchmed);
             
             if (tallestever)
-                snd_play_delay(453, 5, 1, 1);
+                snd_play_delay(snd_crowd_aah, 5, 1, 1);
         }
         
         if (rtimer > 14)
         {
             draw_set_halign(fa_left);
             draw_set_font(fnt_8bit);
-            sp_draw_text(leftx, yy + (mspace * 1), /*"TALLEST STACK"*/"最高的堆叠");
+            sp_draw_text(leftx, yy + (mspace * 1), "TALLEST STACK");
             draw_set_font(scr_84_get_font("8bit_mixed"));
             draw_set_halign(fa_right);
             sp_draw_text(rightx, yy + (mspace * 1), string(maxstack));
@@ -765,14 +765,14 @@ if (con >= 1)
             snd_play(snd_punchmed);
             
             if (foodwasted == 0)
-                snd_play_delay(453, 5, 1, 1);
+                snd_play_delay(snd_crowd_aah, 5, 1, 1);
         }
         
         if (rtimer > 28)
         {
             draw_set_halign(fa_left);
             draw_set_font(fnt_8bit);
-            sp_draw_text(leftx, yy + (mspace * 2), /*"FOODS WASTED"*/"浪费的食物");
+            sp_draw_text(leftx, yy + (mspace * 2), "FOODS WASTED");
             draw_set_font(scr_84_get_font("8bit_mixed"));
             draw_set_halign(fa_right);
             sp_draw_text(rightx, yy + (mspace * 2), string(foodwasted));
@@ -787,7 +787,7 @@ if (con >= 1)
         {
             draw_set_halign(fa_left);
             draw_set_font(fnt_8bit);
-            sp_draw_text(leftx, yy + (mspace * 3), /*"HAPPY CUSTOMERS"*/"满意的顾客");
+            sp_draw_text(leftx, yy + (mspace * 3), "HAPPY CUSTOMERS");
             draw_set_font(scr_84_get_font("8bit_mixed"));
             draw_set_halign(fa_right);
             sp_draw_text(rightx, yy + (mspace * 3), string(customersfed));
@@ -861,7 +861,7 @@ if (con >= 1)
             
             scr_delay_var("gradecon", 1, drumrolldelay);
             scr_delay_var("gradecon", 2, del);
-            snd_play_delay(90, del + 1, 1, 1);
+            snd_play_delay(snd_board_text_main_end, del + 1, 1, 1);
             snd_stop(snd_applause_single);
             snd_play(snd_drumroll);
             gradecon = 0.2;
@@ -1864,7 +1864,7 @@ if (con >= 1)
         {
             draw_set_font(fnt_8bit);
             sp_draw_text(midx, yy + (mspace * 7), roundcompletetext1);
-            sp_draw_text(midx, yy + (mspace * 7) + /*18*/20, stringsetloc("YOU GOT", "obj_round_evaluation_slash_Draw_0_gml_1457_0"));
+            sp_draw_text(midx, yy + (mspace * 7) + 18, stringsetloc("YOU GOT", "obj_round_evaluation_slash_Draw_0_gml_1457_0"));
             draw_set_font(scr_84_get_font("8bit_mixed"));
         }
         
@@ -1888,11 +1888,11 @@ if (con >= 1)
             draw_set_halign(fa_center);
             draw_set_color(shadcolor);
             draw_set_alpha(shadalph);
-            draw_text_transformed(midx + shadoff, yy + (mspace * 7) + /*36*/40 + shadoff, rankstring + "!!", 2, 2, 0);
+            draw_text_transformed(midx + shadoff, yy + (mspace * 7) + 36 + shadoff, rankstring + "!!", 2, 2, 0);
             draw_set_color(c_white);
             draw_set_alpha(1);
             var col = 65535;
-            draw_text_transformed_color(midx, yy + (mspace * 7) + /*36*/40, rankstring + "!!", 2, 2, 0, col, col, c_white, c_white, 1);
+            draw_text_transformed_color(midx, yy + (mspace * 7) + 36, rankstring + "!!", 2, 2, 0, col, col, c_white, c_white, 1);
             draw_set_color(c_white);
             draw_set_font(scr_84_get_font("8bit_mixed"));
         }

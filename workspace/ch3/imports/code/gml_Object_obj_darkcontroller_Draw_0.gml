@@ -517,9 +517,9 @@ if (global.menuno == 4)
             }
         }
         
-        //var __scale = 0.8;
+        var __scale = 0.8;
         
-        //if (global.lang == "ja")
+        if (global.lang == "ja")
             __scale = 1;
         
         draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Fluffiness", "obj_darkcontroller_slash_Draw_0_gml_286_0")), __scale, 1, 0);
@@ -547,7 +547,7 @@ if (global.menuno == 4)
         draw_text(xx + 100, ch_y[3], string_hash_to_newline(stringsetloc("Coldness ", "obj_darkcontroller_slash_Draw_0_gml_388_0")));
         draw_item_icon(xx + 74, ch_y[3] + 6, 17);
         draw_text(xx + 230, ch_y[3], string_hash_to_newline(coldness_amount));
-        draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Boldness", "obj_darkcontroller_slash_Draw_0_gml_391_0")), /*langopt(0.8, */1/*)*/, 1, 0);
+        draw_text_transformed(xx + 100, ch_y[4], string_hash_to_newline(stringsetloc("Boldness", "obj_darkcontroller_slash_Draw_0_gml_391_0")), langopt(0.8, 1), 1, 0);
         draw_item_icon(xx + 74, ch_y[4] + 6, 16);
         var boldness_amount = min(-12 + ((global.plot - 70) * 3), 100);
         draw_text(xx + 230, ch_y[4], string_hash_to_newline(boldness_amount));

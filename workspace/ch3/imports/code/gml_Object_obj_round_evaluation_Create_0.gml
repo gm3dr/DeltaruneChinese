@@ -153,9 +153,9 @@ for (var i = 0; i < 20; i++)
 
 currenttotalpoints = 0;
 currentphyspoints = 0;
-currentbattlegrade = /*"?-RANK"*/"?级";
-currenttotalgrade = /*"?-RANK"*/"?级";
-currentphysgrade = /*"?-RANK"*/"?级";
+currentbattlegrade = "?-RANK";
+currenttotalgrade = "?-RANK";
+currentphysgrade = "?-RANK";
 c_pink = make_color_rgb(248, 173, 227);
 missednotes = 0;
 normalnotes = 0;
@@ -172,7 +172,7 @@ dtype = 0;
 
 function sp_draw_text(arg0, arg1, arg2)
 {
-    var shadcolor = 3934982;
+    var shadcolor = #060B3C;
     var shadalph = 0.65;
     var shadoff = 2;
     var memcol = draw_get_color();

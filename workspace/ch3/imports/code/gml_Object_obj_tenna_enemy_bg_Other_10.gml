@@ -46,7 +46,7 @@ draw_set_alpha(0.2 + (sin(siner / 6) * 0.04));
 ossafe_fill_rectangle(xx + 125, yy + 35, xx + 125 + ((myscore / maxscore) * 390) + (sin(siner / 4) * 1), yy + 125);
 draw_set_alpha(1);
 draw_text_transformed_outline(camerax() + 320, cameray() + 80, myscore, 2 + (sin(siner / 4) * 0.3), 1.5, 16711680);
-draw_text_transformed_outline(camerax() + 320, cameray() + 50, /*"SCORE"*/"分数", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
+draw_text_transformed_outline(camerax() + 320, cameray() + 50, "SCORE", 2 + (sin(siner / 4) * 0.05), 1.5 + (sin(siner / 4) * 0.1), 16711680);
 
 if (addscore > 0)
     draw_text_transformed_outline(camerax() + 320 + 100, cameray() + 80, "+" + string(addscore), 2 + (sin(siner / 4) * 0.3), 1.5, 16711680);
@@ -102,8 +102,8 @@ for (var i = -9; i < 9; i++)
 
 draw_set_alpha(alpha3);
 var bgcolor1 = make_color_hsv(110, 1800, 220);
-ossafe_fill_rectangle_color(xx, yy, xx + 120, yy + 130, 8388608, 8388608, bgcolor1, bgcolor1, false);
-ossafe_fill_rectangle_color(xx + 641, yy, xx + 520, yy + 130, 8388608, 8388608, bgcolor1, bgcolor1, false);
+ossafe_fill_rectangle_color(xx, yy, xx + 120, yy + 130, c_navy, c_navy, bgcolor1, bgcolor1, false);
+ossafe_fill_rectangle_color(xx + 641, yy, xx + 520, yy + 130, c_navy, c_navy, bgcolor1, bgcolor1, false);
 draw_set_alpha(1);
 
 if (slowdown == 1 && alpha3 < 1)

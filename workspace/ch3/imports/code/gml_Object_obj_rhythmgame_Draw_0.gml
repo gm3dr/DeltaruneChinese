@@ -3,7 +3,7 @@ if (freeplay < 0)
     var _textspacing = 16;
     draw_set_color(c_white);
     _ystart = 80;
-    draw_text(230, _ystart - _textspacing, /*"TRACK SELECT"*/"曲目选择");
+    draw_text(230, _ystart - _textspacing, "TRACK SELECT");
     var _difficulty = "";
     
     for (i = 0; i < array_length(tracklist); i++)
@@ -13,7 +13,7 @@ if (freeplay < 0)
             draw_set_color(hardmode ? c_orange : c_yellow);
             
             if (hardmode)
-                _difficulty = /*" (Hard)" */"（困难）";
+                _difficulty = " (Hard)";
         }
         
         draw_text(210, _ystart + (_textspacing * i), string_format_zero(i, 2, 0) + " - " + tracklist[i] + _difficulty);
@@ -50,7 +50,7 @@ bg_timer++;
 if (palette_active)
 {
     palette_pos = scr_movetowards(palette_pos, 1 - bg_con, 0.1);
-    pal_swap_set(4779, palette_pos, false);
+    pal_swap_set(spr_dw_rhythm_stage_palette, palette_pos, false);
     draw_sprite_ext(spr_rhythmgame_bg, 1, x, y + 100, image_xscale, image_yscale, image_angle, image_blend, image_alpha);
     pal_swap_reset();
     

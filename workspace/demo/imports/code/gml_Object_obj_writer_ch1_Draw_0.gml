@@ -186,7 +186,7 @@ if (formatted == 0)
                 textalignment = nextchar2;
         }
         
-        if (thischar == "&" || thischar == "\n")
+        if (thischar == "&")
         {
             if (charpos > stringmax)
                 stringmax = charpos;
@@ -249,10 +249,7 @@ if (formatted == 0)
             }
             else
             {
-                if (ord(thischar) > 505 || ord(thischar) == 183)
-                    charpos += 1.75;
-                else
-                    charpos += 1;
+                charpos += 1;
             }
         }
     }
@@ -290,12 +287,8 @@ for (n = 1; n < pos; n += 1)
 {
     accept = 1;
     mychar = string_char_at(mystring, n);
-    if (mychar == "`")
-    {
-        n++;
-        mychar = string_char_at(mystring, n);
-    }
-    else if (mychar == "&" || mychar == "\n")
+    
+    if (mychar == "&")
     {
         accept = 0;
         wx = writingx;
@@ -810,10 +803,8 @@ for (n = 1; n < pos; n += 1)
                 draw_set_alpha(1);
             }
         }
-        if (ord(mychar) > 505 || ord(mychar) == 183)
-            wx += ((hspace * 7) div 4);
-        else
-            wx += hspace;
+        
+        wx += hspace;
         
         if (global.lang == "ja")
         {

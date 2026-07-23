@@ -7,14 +7,8 @@ if (myself == 1)
         
         if (global.lang == "ja")
             lang = 1;
-
-		var pipis = spr_pipissign;
-		if (global.names >= 2)
-		{
-			pipis = spr_zhname_pipissign;
-		}
         
-        draw_sprite_ext(pipis, lang, (x - 4) + random_range(0, 1), y + (sprite_height / 2) + 12 + random_range(0, 1), 1, 1, 0, c_white, pipisSignAlpha);
+        draw_sprite_ext(spr_pipissign, lang, (x - 4) + random_range(0, 1), y + (sprite_height / 2) + 12 + random_range(0, 1), 1, 1, 0, c_white, pipisSignAlpha);
     }
 }
 

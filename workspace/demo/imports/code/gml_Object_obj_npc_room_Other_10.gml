@@ -1518,6 +1518,8 @@ if (room == room_dw_castle_area_2_transformed)
                     msgsetloc(0, "* Oho. Welcome home./", "obj_npc_room_slash_Other_10_gml_1509_0");
                     msgnextsubloc("* Things have changed again here in&~1Town!/%", global.truename, "obj_npc_room_slash_Other_10_gml_1510_0");
                 }
+                
+                jpspecial = 1;
             }
             else if (global.plot < 200)
             {

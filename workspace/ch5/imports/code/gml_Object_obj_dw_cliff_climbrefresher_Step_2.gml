@@ -3,10 +3,8 @@ if (instance_exists(obj_climb_kris))
     if (i_ex(monologue_writer))
     {
         scr_speaker(susie_monologue[last_monologue][1]);
-        // monologue_writer.originalcharline = 16;
-        // monologue_writer.charline = 16;
-        monologue_writer.originalcharline = 28;
-        monologue_writer.charline = 28;
+        monologue_writer.originalcharline = 16;
+        monologue_writer.charline = 16;
         monologue_writer.writingx = camerax() + 40;
         monologue_writer.writingy = cameray() + 200;
     }
@@ -18,10 +16,8 @@ else if (i_ex(monologue_writer))
     if (global.interact == 0 && !obj_mainchara.cutscene)
     {
         scr_speaker(susie_monologue[last_monologue][1]);
-        // monologue_writer.originalcharline = 16;
-        // monologue_writer.charline = 16;
-        monologue_writer.originalcharline = 28;
-        monologue_writer.charline = 28;
+        monologue_writer.originalcharline = 16;
+        monologue_writer.charline = 16;
         monologue_writer.writingy = min(room_height - 280, obj_mainchara.y - 2);
     }
     else if (!obj_mainchara.cutscene)

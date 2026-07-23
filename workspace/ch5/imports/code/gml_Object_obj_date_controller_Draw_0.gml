@@ -373,22 +373,8 @@ else
             
             draw_chr = string_char_at(write_string, ltr);
             
-            if (draw_chr == "\n")
+            if (draw_chr == "#")
             {
-                //
-                var remaining_string_length = string_length(write_string) - ltr;
-                var __writestring = string_copy(write_string, ltr, remaining_string_length);
-                
-                if (date3con == 1)
-                    _body_x = (camx + (camwidth / 2)) - (string_width(__writestring) / 2) - 8;
-                else if (date3con == 2)
-                    _body_x = (camx + (camwidth / 2)) - (string_width(__writestring) / 2) - 0;
-                else
-                    _body_x = (camx + (camwidth / 2)) - (string_width(__writestring) / 2) - 10;
-                
-                // _body_y += 30;
-                _body_y += 28;
-                //
             }
             else if (__l == 0)
             {
@@ -418,10 +404,8 @@ else
                 draw_text(_body_x + _w + _shakex, _body_y + _shakey, draw_chr);
                 draw_text(_body_x + _w + _shakex, _body_y + _w + _shakey, draw_chr);
                 draw_text(_body_x + _w + _shakex, (_body_y - _w) + _shakey, draw_chr);
-                // draw_text((_body_x - _w) + _shakex, _body_y + _w + _shakey, draw_chr);
-                // draw_text((_body_x - _w) + _shakex, (_body_y - _w) + _shakey, draw_chr);
-                draw_text(_body_x + _shakex, _body_y + _w + _shakey, draw_chr);
-                draw_text(_body_x + _shakex, (_body_y - _w) + _shakey, draw_chr);
+                draw_text((_body_x - _w) + _shakex, _body_y + _w + _shakey, draw_chr);
+                draw_text((_body_x - _w) + _shakex, (_body_y - _w) + _shakey, draw_chr);
                 draw_set_color(_colorpink);
                 
                 if (obj_pink_enemy.datecount == 3)
@@ -433,7 +417,7 @@ else
             
             _body_x += (string_width(draw_chr) + 1);
             
-            if (draw_chr == "\n" && global.lang == "ja")
+            if (draw_chr == "#" && global.lang == "ja")
             {
                 var remaining_string_length = string_length(write_string) - ltr;
                 var __writestring = string_copy(write_string, ltr, remaining_string_length);
@@ -448,7 +432,7 @@ else
                 _body_y += 30;
             }
             
-            /*if (ltr == 24 && date3con == 0 && global.lang != "ja")
+            if (ltr == 24 && date3con == 0 && global.lang != "ja")
             {
                 _body_x = camx + 200;
                 _body_y += 24;
@@ -464,7 +448,7 @@ else
             {
                 _body_x = camx + 230;
                 _body_y += 24;
-            }*/
+            }
         }
         
         draw_set_color(c_white);

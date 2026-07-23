@@ -199,8 +199,7 @@ if (formatted == 0)
             
             if (charpos >= charline)
             {
-                // if (remspace > 2)
-                if (remspace > 2 && string_char_at(mystring, remspace - 1) != "*")
+                if (remspace > 2)
                 {
                     mystring = string_delete(mystring, remspace, 1);
                     mystring = string_insert("&", mystring, remspace);
@@ -230,12 +229,7 @@ if (formatted == 0)
             }
             else
             {
-                // charpos += 1;
-                if (ord(thischar) > 505 || ord(thischar) == 183)
-                    charpos += 1.75;
-                else
-                    charpos += 1;
-                //
+                charpos += 1;
             }
         }
     }

@@ -14,10 +14,8 @@ if (monologuecon >= 0 && monologuecon < array_length(susie_monologue))
     
     monologue_writer = instance_create(x, y, obj_writer);
     monologue_writer.depth = 3000;
-    // monologue_writer.originalcharline = 16;
-    // monologue_writer.charline = 16;
-    monologue_writer.originalcharline = 28;
-    monologue_writer.charline = 28;
+    monologue_writer.originalcharline = 16;
+    monologue_writer.charline = 16;
     monologue_writer.skippable = false;
     monologue_writer.disablebutton1 = true;
 }

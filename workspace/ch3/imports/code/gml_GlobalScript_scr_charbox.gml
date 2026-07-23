@@ -191,33 +191,48 @@ function scr_charbox()
                 
                 if (obj_battlecontroller.oopsallacts == 1 && (i_ex(obj_rouxls_ch3_enemy) || i_ex(obj_tenna_board4_enemy)))
                 {
-                    var _rouxls_sprite = scr_84_get_sprite("spr_btrouxls");
+                    var _rouxls_sprite = spr_btrouxls;
+                    
+                    if (global.lang == "ja")
+                        _rouxls_sprite = spr_ja_btrouxls;
+                    
                     var _spadesprite = scr_84_get_sprite("spr_btspade");
-                    var _heartsprite = 3110;
+                    var _heartsprite = spr_btheart;
                     var _actsprite = scr_84_get_sprite("spr_btact");
                     
                     if (global.lang == "ja")
-                        _actsprite = 1245;
+                        _actsprite = spr_ja_btact_tenna;
                     
                     if (dogcon == 1)
-                        _spadesprite = 2836;
+                        _spadesprite = spr_btdog;
                     
                     if (dogcon == 2)
                     {
-                        _spadesprite = 2836;
-                        _heartsprite = 2836;
-                        _actsprite = 2836;
+                        _spadesprite = spr_btdog;
+                        _heartsprite = spr_btdog;
+                        _actsprite = spr_btdog;
                     }
                     
                     if (rouxlserrorcon == 1 && dogcon < 1)
                     {
                         rouxlstelegraphtimer++;
                         
-                        if (rouxlstelegraphtimer >= 1 && rouxlstelegraphtimer <= 4)
-                            _rouxls_sprite = scr_84_get_sprite("spr_btrouxls_select1");
-                        
-                        if (rouxlstelegraphtimer >= 5 && rouxlstelegraphtimer <= 8)
-                            _rouxls_sprite = scr_84_get_sprite("spr_btrouxls_select2");
+                        if (global.lang == "ja")
+                        {
+                            if (rouxlstelegraphtimer >= 1 && rouxlstelegraphtimer <= 4)
+                                _rouxls_sprite = spr_ja_btrouxls_select1;
+                            
+                            if (rouxlstelegraphtimer >= 5 && rouxlstelegraphtimer <= 8)
+                                _rouxls_sprite = spr_ja_btrouxls_select2;
+                        }
+                        else
+                        {
+                            if (rouxlstelegraphtimer >= 1 && rouxlstelegraphtimer <= 4)
+                                _rouxls_sprite = spr_btrouxls_select1;
+                            
+                            if (rouxlstelegraphtimer >= 5 && rouxlstelegraphtimer <= 8)
+                                _rouxls_sprite = spr_btrouxls_select2;
+                        }
                         
                         if (rouxlstelegraphtimer == 8)
                             rouxlstelegraphtimer = 0;
@@ -229,11 +244,12 @@ function scr_charbox()
                             snd_play(snd_bombfall);
                         
                         rouxlstelegraphtimer++;
+                        
                         if (rouxlstelegraphtimer >= 1 && rouxlstelegraphtimer <= 4)
-                            _rouxls_sprite = 4432;
+                            _rouxls_sprite = spr_btexclamation1;
                         
                         if (rouxlstelegraphtimer >= 5 && rouxlstelegraphtimer <= 8)
-                            _rouxls_sprite = 4054;
+                            _rouxls_sprite = spr_btexclamation2;
                         
                         if (rouxlstelegraphtimer == 8)
                             rouxlstelegraphtimer = 0;
@@ -244,10 +260,10 @@ function scr_charbox()
                         spadetelegraphtimer++;
                         
                         if (spadetelegraphtimer >= 1 && spadetelegraphtimer <= 4)
-                            _spadesprite = 4024;
+                            _spadesprite = spr_btexclamation1_spade;
                         
                         if (spadetelegraphtimer >= 5 && spadetelegraphtimer <= 8)
-                            _spadesprite = 4054;
+                            _spadesprite = spr_btexclamation2;
                         
                         if (spadetelegraphtimer == 8)
                             spadetelegraphtimer = 0;
@@ -261,25 +277,25 @@ function scr_charbox()
                         {
                             if (spadefail == true)
                             {
-                                _actsprite = 3939;
+                                _actsprite = spr_btact_fail1;
                                 
                                 if (global.lang == "ja")
-                                    _actsprite = 898;
+                                    _actsprite = spr_ja_btact_tenna_fail1;
                             }
                             else
                             {
-                                _spadesprite = 2247;
+                                _spadesprite = spr_btspade_success;
                                 
                                 if (dogcon == 1)
                                 {
-                                    _spadesprite = 2359;
-                                    _actsprite = 2359;
+                                    _spadesprite = spr_btdog_success;
+                                    _actsprite = spr_btdog_success;
                                 }
                                 
                                 if (dogcon == 2)
                                 {
-                                    _spadesprite = 2359;
-                                    _actsprite = 2359;
+                                    _spadesprite = spr_btdog_success;
+                                    _actsprite = spr_btdog_success;
                                 }
                             }
                         }
@@ -288,25 +304,25 @@ function scr_charbox()
                         {
                             if (spadefail == true)
                             {
-                                _actsprite = 1396;
+                                _actsprite = spr_btact_fail2;
                                 
                                 if (global.lang == "ja")
-                                    _actsprite = 1977;
+                                    _actsprite = spr_ja_btact_tenna_fail2;
                             }
                             else
                             {
-                                _spadesprite = 798;
+                                _spadesprite = spr_btspade_success2;
                                 
                                 if (dogcon == 1)
                                 {
-                                    _spadesprite = 4948;
-                                    _actsprite = 4948;
+                                    _spadesprite = spr_btdog_success2;
+                                    _actsprite = spr_btdog_success2;
                                 }
                                 
                                 if (dogcon == 2)
                                 {
-                                    _spadesprite = 4948;
-                                    _actsprite = 4948;
+                                    _spadesprite = spr_btdog_success2;
+                                    _actsprite = spr_btdog_success2;
                                 }
                             }
                         }
@@ -320,10 +336,10 @@ function scr_charbox()
                         heartsuccesstimer++;
                         
                         if (heartsuccesstimer >= 1 && heartsuccesstimer <= 4)
-                            _heartsprite = 4860;
+                            _heartsprite = spr_btheart_success1;
                         
                         if (heartsuccesstimer >= 5 && heartsuccesstimer <= 8)
-                            _heartsprite = 1671;
+                            _heartsprite = spr_btheart_success2;
                         
                         if (heartsuccesstimer == 8)
                             heartsuccesstimer = 0;
@@ -471,10 +487,10 @@ function scr_charbox()
                                     __y = 0;
                                 
                                 if (y_extra != 4 && rouxlsgridenabled == true)
-                                    _actsprite = 484;
+                                    _actsprite = spr_btact_ex;
                                 
                                 if (y_extra != 4 && rouxlsgridenabled == true && global.lang == "ja")
-                                    _actsprite = 3819;
+                                    _actsprite = spr_ja_btact_tenna_ex;
                                 
                                 if (rouxlsbuttoncount == (1 + (y_extra * 5)))
                                     draw_sprite(_rouxls_sprite, btc[0 + (y_extra * 5)], xx + xchunk + 15 + icon_offset, (485 - bp) + yy + __y);

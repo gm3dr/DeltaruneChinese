@@ -18,9 +18,9 @@ if (type == 1 && init == 1)
     draw_set_halign(fa_right);
     
     if (global.lang == "ja")
-        draw_text_transformed(((camerax() + 640) - 110) + 20 + 40, 346, string((floor(menuScrollCurrent[0]) / 2) + 1) + " / " + string(ceil(menuMaximumID[0] / 2)), 1, 1, 0);
+        draw_text_transformed(((camerax() + 640) - 110) + 20 + 40, 346, string((floor(menuScrollCurrent[0]) / 2) + 1) + " / " + string(ceil(menuMaximumID[0] / 2)), 0.5, 1, 0);
     else
-        draw_text_transformed(((camerax() + 640) - 110) + 20 + 40, 346, stringsetloc("Page ", "obj_fusionmenu_slash_Draw_0_gml_171_0") + string((floor(menuScrollCurrent[0]) / 2) + 1) + " / " + string(ceil(menuMaximumID[0] / 2)), /*0.5*/1, 1, 0);
+        draw_text_transformed(((camerax() + 640) - 110) + 20 + 40, 346, stringsetloc("Page ", "obj_fusionmenu_slash_Draw_0_gml_171_0") + string((floor(menuScrollCurrent[0]) / 2) + 1) + " / " + string(ceil(menuMaximumID[0] / 2)), 0.5, 1, 0);
     
     draw_set_halign(fa_left);
 }
@@ -67,7 +67,7 @@ if (type == 3 && init == 1)
         draw_set_halign(fa_center);
         draw_text(xx + 473, yy + 240, recruitName[menuCoord[0]]);
         draw_set_halign(fa_left);
-        draw_text_transformed(xx + 368, yy + 280, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_47_0") + string(recruitChapter[menuCoord[0]]) + "章", 1, 1, 0);
+        draw_text_transformed(xx + 368, yy + 280, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_47_0") + string(recruitChapter[menuCoord[0]]), 1, 1, 0);
         draw_set_halign(fa_right);
         draw_text_transformed(xx + 576, yy + 280, stringsetloc("LV ", "obj_fusionmenu_slash_Draw_0_gml_48_0") + string(recruitLevel[menuCoord[0]]), 1, 1, 0);
         draw_set_halign(fa_left);
@@ -138,7 +138,7 @@ if (type == 3 && init == 1)
         draw_set_halign(fa_right);
         draw_text_transformed(xx + 590, yy + 30, string(menuCoord[menu] + 1) + "/" + string(menuMaximumID[menu] + 1), squished, 1, 0);
         draw_set_halign(fa_left);
-        draw_text_transformed(xx + 300, yy + 30, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_84_0") + string(recruitChapter[menuCoord[1]]) + "章", squished, 1, 0);
+        draw_text_transformed(xx + 300, yy + 30, stringsetloc("CHAPTER ", "obj_fusionmenu_slash_Draw_0_gml_84_0") + string(recruitChapter[menuCoord[1]]), squished, 1, 0);
         var ymod = 120;
         
         if (jp)
@@ -273,7 +273,7 @@ if (type == 4 && init == 1)
     else
     {
         draw_set_font(scr_84_get_font("dotumche"));
-        draw_text_transformed(xx + 60, yy + 140, stringset("口袋"), 1, 1, 0);
+        draw_text_transformed(xx + 60, yy + 140, stringset("POCKET"), 1, 1, 0);
     }
     
     if (menu == 1)
@@ -291,7 +291,7 @@ if (type == 4 && init == 1)
     }
     else
     {
-        draw_text_transformed(xx + 60, yy + 290, "库存", 1, 1, 0);
+        draw_text_transformed(xx + 60, yy + 290, "STORAGE", 1, 1, 0);
     }
     
     if (jp)

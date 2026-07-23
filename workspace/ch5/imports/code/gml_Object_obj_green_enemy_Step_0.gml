@@ -136,22 +136,19 @@ if (global.myfight == 3)
                 if (global.hp[2] > 0)
                 {
                     thanks2_marker = instance_create(camerax() + 245, cameray() + 69, obj_marker);
-                    // thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green;
+                    thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green;
                     
-                    // if (global.lang == "ja")
-                    //     thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_susie;
-                    thanks2_marker.sprite_index = scr_84_get_sprite("spr_battleblcon_v_thanks_green");
-
+                    if (global.lang == "ja")
+                        thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_susie;
                 }
                 
                 if (global.hp[3] > 0)
                 {
                     thanks3_marker = instance_create(camerax() + 306, cameray() + 76, obj_marker);
-                    // thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green;
+                    thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green;
                     
-                    // if (global.lang == "ja")
-                    //     thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_ralsei;
-                    thanks2_marker.sprite_index = scr_84_get_sprite("spr_battleblcon_v_thanks_green");
+                    if (global.lang == "ja")
+                        thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_ralsei;
                 }
                 
                 table_marker.image_index = 1;
@@ -198,21 +195,19 @@ if (global.myfight == 3)
                 if (global.hp[2] > 0)
                 {
                     thanks2_marker = instance_create(camerax() + 245, cameray() + 69, obj_marker);
-                    // thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green;
+                    thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green;
                     
-                    // if (global.lang == "ja")
-                    //     thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_susie;
-                    thanks2_marker.sprite_index = scr_84_get_sprite("spr_battleblcon_v_thanks_green");
+                    if (global.lang == "ja")
+                        thanks2_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_susie;
                 }
                 
                 if (global.hp[3] > 0)
                 {
                     thanks3_marker = instance_create(camerax() + 306, cameray() + 76, obj_marker);
-                    // thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green;
+                    thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green;
                     
-                    // if (global.lang == "ja")
-                    //     thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_ralsei;
-                    thanks2_marker.sprite_index = scr_84_get_sprite("spr_battleblcon_v_thanks_green");
+                    if (global.lang == "ja")
+                        thanks3_marker.sprite_index = spr_battleblcon_v_thanks_green_ja_ralsei;
                 }
                 
                 table_marker.image_index = 2;

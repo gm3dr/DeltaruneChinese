@@ -308,37 +308,37 @@ if (MENU_NO >= 0)
         
         if (MENUCOORD[MENU_NO] == 3)
         {
-            HEARTX = /*40*/44 - jamod;
+            HEARTX = 40 - jamod;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 4)
         {
-            HEARTX = /*125*/124;
+            HEARTX = 125;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 5)
         {
-            HEARTX = /*40*/44 - jamod;
+            HEARTX = 40 - jamod;
             HEARTY = 215;
         }
         
         if (MENUCOORD[MENU_NO] == 6)
         {
-            HEARTX = /*125*/124;
+            HEARTX = 125;
             HEARTY = 215;
         }
         
         if (MENUCOORD[MENU_NO] == 7)
         {
-            HEARTX = /*190*/194;
+            HEARTX = 190;
             HEARTY = 195;
         }
         
         if (MENUCOORD[MENU_NO] == 8)
         {
-            HEARTX = /*190*/194;
+            HEARTX = 190;
             HEARTY = 215;
         }
     }
@@ -376,9 +376,8 @@ if (MENU_NO >= 0)
         CHFILETEXT = stringsetsubloc("Ch ~1 Files", string(global.chapter - 1), "DEVICE_MENU_slash_Draw_0_gml_305_0");
         CHSELECTTEXT = stringsetloc("Chapter Select", "DEVICE_MENU_slash_Draw_0_gml_284_0");
         QUITTEXT = stringsetloc("End Program", "DEVICE_MENU_slash_Draw_0_gml_285_0");
-        // LANGUAGETEXT = (global.lang == "en") ? stringset("日本語") : stringset("English");
-        LANGUAGETEXT = "人名译法";
-        //
+        LANGUAGETEXT = (global.lang == "en") ? stringset("日本語") : stringset("English");
+        
         if (TYPE == 1)
         {
             COPYTEXT = stringsetloc("Copy", "DEVICE_MENU_slash_Draw_0_gml_201_0");
@@ -396,7 +395,7 @@ if (MENU_NO >= 0)
         if (MENUCOORD[0] == 4)
             draw_set_color(COL_B);
         
-        draw_text_shadow(/*140*/135, 190, ERASETEXT);
+        draw_text_shadow(140, 190, ERASETEXT);
         draw_set_color(COL_A);
         
         if (MENUCOORD[0] == 5)
@@ -417,9 +416,9 @@ if (MENU_NO >= 0)
         if (CANQUIT)
             draw_text_shadow(204, 210, QUITTEXT);
         
-        // if (global.lang == "en")
-        //     draw_set_font(fnt_ja_main);
-        // else
+        if (global.lang == "en")
+            draw_set_font(fnt_ja_main);
+        else
             draw_set_font(fnt_main);
         
         draw_set_color(COL_A);
@@ -427,28 +426,17 @@ if (MENU_NO >= 0)
         if (MENUCOORD[0] == 6)
             draw_set_color(COL_B);
         
-        // var languagex = 140;
-        var languagex = 135;
-        // if (global.lang == "en")
-        //     languagex = 136;
+        var languagex = 140;
+        
+        if (global.lang == "en")
+            languagex = 136;
+        
         draw_text_shadow(languagex, 210, LANGUAGETEXT);
         scr_84_set_draw_font("main");
     }
     
     draw_set_font(fnt_main);
-	//
-    draw_set_halign(fa_right);
-    draw_set_alpha(0.8);
-    draw_set_color(c_white);
-    draw_text_transformed((room_width / 2) - 5, 5, "可使用菜单下方【人名译法】按钮切换", 0.5, 0.5, 0);
-    var color_name = (global.names == 0) ? c_yellow : c_ltgray;
-    draw_text_transformed_colour((room_width / 2) - 5, 12.5, "保留所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
-    color_name = (global.names == 1) ? c_yellow : c_ltgray;
-    draw_text_transformed_colour((room_width / 2) - 5, 20, "翻译所有可招揽角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
-    color_name = (global.names == 2) ? c_yellow : c_ltgray;
-    draw_text_transformed_colour((room_width / 2) - 5, 27.5, "翻译所有角色名", 0.5, 0.5, 0, color_name, color_name, color_name, color_name, 0.8);
-    draw_set_halign(fa_left);
-    //
+    
     if (TYPE == 1)
     {
         draw_set_alpha(0.4);
@@ -544,5 +532,5 @@ if (MENU_NO >= 0)
 
 draw_set_font(fnt_main);
 draw_set_color(c_white);
-draw_text_shadow(camerax() + 8, cameray() + 4, /**/"第" + string(global.chapter) + "章"/*"CHAPTER " + string(global.chapter)*/);
+draw_text_shadow(camerax() + 8, cameray() + 4, "CHAPTER " + string(global.chapter));
 scr_84_set_draw_font("main");

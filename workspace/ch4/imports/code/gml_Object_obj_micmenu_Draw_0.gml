@@ -89,8 +89,8 @@ if (act != 0)
         draw_set_font(scr_84_get_font("main"));
         var micstr = stringsetloc("* Current Microphone:  ", "obj_micmenu_slash_Draw_0_gml_53_0");
         draw_text(camerax() + mx + 48, (cameray() + mheight + my) - 48, micstr);
-        draw_set_font(fnt_ja_main);
-        draw_text((camerax() + mx + 48 + string_width(micstr)) - 16, (cameray() + mheight + my) - 48, string(_n));
+        draw_set_font(fnt_main)
+        draw_text((camerax() + mx + 48 + string_width(micstr)), (cameray() + mheight + my) - 48, string(_n));
         draw_set_font(scr_84_get_font("mainbig"));
         draw_set_colour(c_white);
     }
@@ -156,7 +156,7 @@ if (act == 0)
                     if (global.lang == "ja")
                         _str = " ";
                     else
-                        _str = " ";
+                        _str = "   ";
                     
                     draw_sprite(spr_sparestar, 0, camerax() + mx + 46, (cameray() + my + myy + 32 + (i * 30)) - (menu_y * 30));
                 }
@@ -172,7 +172,7 @@ if (act == 0)
                 if (global.lang == "ja")
                     _str = " ";
                 else
-                    _str = " ";
+                    _str = "   ";
                 
                 draw_sprite(spr_sparestar, 0, camerax() + mx + 46, (cameray() + my + myy + 32 + (i * 30)) - (menu_y * 30));
             }
@@ -183,7 +183,7 @@ if (act == 0)
                 if (global.lang == "ja")
                     _str = " ";
                 else
-                    _str = " ";
+                    _str = "   ";
                 
                 draw_sprite(spr_sparestar, 0, camerax() + mx + 46, (cameray() + my + myy + 32 + (i * 30)) - (menu_y * 30));
             }

@@ -3,6 +3,8 @@
 **从 [此处](https://github.com/gm3dr/DeltaruneChinese/releases/latest) 下载最新版汉化补丁**<br>
 本仓库源码滚动更新，如需下载特定时间戳的仓库快照，请到Release页面下载。
 
+（2026-07-23） **当前仓库 GML 反编译使用[UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool/releases) 0.9.1.2版**
+
 ## 补丁安装方法
 > [!NOTE]
 > 如果在安装过程中出现任何问题<br>

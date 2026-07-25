@@ -298,12 +298,13 @@ namespace deltarunePacker
         private async Task ImportFonts(UndertaleData datawin)
         {
             Range[] segment = new Range[8];
-            foreach (var file in new DirectoryInfo(Path.Combine(workspace, "imports/font/atlas")).GetFiles("*.cfg"))
+            foreach (var file in new DirectoryInfo(Path.Combine(workspace, "../global/font/atlas")).GetFiles("*.cfg"))
             {
                 string font_name = Path.GetFileNameWithoutExtension(file.Name);
                 if(font_name.StartsWith("all_in_one")) continue;
                 if(font_name.EndsWith("-0.cfg")) Warning($"[ImportFonts]{font_name} exceed font texture size!");
                 UndertaleFont font = datawin.Fonts.ByName(font_name);
+                if (font == null) continue;
                 font.RangeStart = 1;
                 font.RangeEnd = 65535;
                 Task<string[]> lines = File.ReadAllLinesAsync(file.FullName, Encoding.UTF8);

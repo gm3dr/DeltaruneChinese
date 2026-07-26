@@ -40,11 +40,9 @@ function Pack(images, savePath, textureName) {
     });
 }
 function PreProcessBitmap(bitmap, top_align) {
-    if (top_align < 0) {
-        top_align = 0;
-    }
     const result = Buffer.alloc(4 * bitmap.width * (bitmap.height + top_align));
     for(let y = 0; y < bitmap.height; y++) {
+        if(y + top_align < 0) continue;
         for(let x = 0; x < bitmap.width; x++) {
             const bitMask = 128 >> (x % 8);
             const val = (bitmap.buffer[y * bitmap.pitch + (x >> 3)] & bitMask) > 0 ? 255 : 0;
@@ -84,6 +82,9 @@ async function BitmapGenerator(cfg) {
             return null;
         }
         const top_align = (cfg.char_size - glyph.bitmapTop) + (code < 128 ? cfg.offset_en.y : cfg.offset_cn.y);
+        if(top_align < 0) {
+            console.log(`'${ch}' in ${cfg.name}: top_align = ${top_align}!`);
+        }
         // 这里的shift+2 offset+1是历史遗留问题
         const shift = 2 + glyph.metrics.horiAdvance / 64;
         const offset = 1 + glyph.bitmapLeft + (code < 128 ? cfg.offset_en.x : cfg.offset_cn.x);
@@ -99,7 +100,6 @@ async function BitmapGenerator(cfg) {
         }));
     }
 }
-function JoinWrapper(arr) { return arr.join(); }
 const chapters = ['ch1', 'ch2', 'ch3', 'ch4', 'ch5'];
 const dictWhole_p = Promise.all([
     fs.readFile('workspace/global/re_recruit.json', 'utf8'),
@@ -109,9 +109,8 @@ const dictWhole_p = Promise.all([
     ...[...chapters, 'main', 'demo'].map(chapter => fs.readdir(`workspace/${chapter}/imports/code`)
         .then(files => files.map(filename => fs.readFile(`workspace/${chapter}/imports/code/${filename}`, 'utf8')))
         .then(x => x.flat())
-        
     )
-]).then(JoinWrapper);
+]).then(x=>x.join());
 const pathOut = `workspace/global/font/atlas/`;
 await fs.rm(pathOut, { recursive: true, force: true });
 await fs.mkdir(pathOut, { recursive: true });

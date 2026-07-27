@@ -222,7 +222,7 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 9.  改动了 `obj_yellow_enemy` 来实现 Yellow 战斗中 Green 牌子的人名翻译切换
 10. 帮忙修复了 `obj_terracota_enemy` 的错误结束回合问题
 11. 改动了 `obj_yellow_trial_manager` 来修正审判介面手柄按钮偏移的问题
-12. 改动了 `obj_town_mid_conbini` 来实现 Sans 店名的人名翻译切换
+12. 改动了 `obj_town_mid_conbini` 与 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
 13. 改动了 `obj_dw_cliff_climbrefresher` 来修复自动换行导致的显示异常
 14. 改动了 `obj_plat_foreground_writer` 来修复横版跳跃状态下互动文本错位的问题
 15. 改动了 `obj_84_lang_helper` 与 `obj_room_torielclass` 来实现 Toriel 黑板的人名翻译切换

@@ -1,6 +1,6 @@
 con = -1;
 customcon = 0;
-var store_marker = scr_marker(940, -50, global.names >= 2 ? bg_building_store : bg_zhname_building_store);
+var store_marker = scr_marker(940, -50, global.names >= 2 ? bg_zhname_building_store : bg_building_store);
 store_marker.depth = 994000;
 _sign = scr_marker_animated(1004, 59, spr_lw_conbini_open_sign, 0.05);
 _sign.depth = 980000;

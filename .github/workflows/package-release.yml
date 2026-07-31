@@ -60,9 +60,6 @@ jobs:
 
               $zipName = "【$($target.Prefix)】三角符文汉化补丁-V$date.7z"
               7z a -t7z -mx=9 -ms=on -mmt=on $zipName ".\$extractDir\*"
-              
-              
-              Compress-Archive -Path $exeName -DestinationPath $zipName
           }
 
       - name: Upload Windows Installers

@@ -24,19 +24,19 @@ function scr_rhythmgame_draw_border(arg0, arg1 = false)
         
         if (instrument == 0)
         {
-            _icon = 4139;
+            _icon = 4149;
             _name = scr_84_get_sprite("spr_bnamekris");
             _hoff = 21;
         }
         else if (instrument == 1)
         {
-            _icon = 4146;
+            _icon = 4156;
             _name = scr_84_get_sprite("spr_bnamesusie");
             _hoff = 24;
         }
         else if (instrument == 2)
         {
-            _icon = 4141;
+            _icon = 4151;
             _name = scr_84_get_sprite("spr_bnameralsei");
             _hoff = global.names >= 2 ? 27 : 30;
         }

@@ -440,7 +440,20 @@ if (healingraincon == 1)
     msgsetloc(0, "* BLUE cast HEALING RAIN on YELLOW!/%", "obj_yellow_enemy_slash_Step_0_gml_445_0");
     scr_battletext_default();
     healingraincon = 2;
-    idlesprite = spr_yellow_looksup;
+    prehealx = x;
+    
+    if (global.monsterhp[myself] == 1)
+    {
+        idlesprite = spr_yellow_depressed;
+        siner = 3;
+        image_speed = 0;
+        x -= 40;
+    }
+    else
+    {
+        idlesprite = spr_yellow_looksup;
+    }
+    
     instance_create(obj_blue_enemy.x, obj_blue_enemy.y, obj_healing_rain);
 }
 
@@ -450,7 +463,9 @@ if (healingraincon == 2)
     
     if (!instance_exists(obj_writer) && !i_ex(obj_healing_rain))
     {
+        x = prehealx;
         idlesprite = spr_yellow_idle;
+        image_speed = 0.16666666666666666;
         healingraincon = 0;
         healingraintimer = 0;
         global.turntimer = 2;

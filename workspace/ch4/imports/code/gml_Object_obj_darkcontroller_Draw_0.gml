@@ -461,7 +461,7 @@ if (global.menuno == 4)
             var showstat = false;
             var healcount = (global.mag[1] * 5) + 15 + (2 * global.flag[1045]);
             
-            if (global.flag[1569] == 1)
+            if (global.flag[852] == 1)
                 healcount = (global.mag[1] * 10) + (2 * global.flag[1045]);
             
             var healing = stringsetloc("Healing", "obj_darkcontroller_slash_Draw_0_gml_615_0_b");

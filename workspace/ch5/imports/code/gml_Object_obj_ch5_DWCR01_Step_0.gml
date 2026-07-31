@@ -59,11 +59,11 @@ if (con == 1)
         add_reflection(other.seth_marker);
         add_reflection(other.asgore_marker);
         add_reflection(other.green_marker);
-        add_sprite_offset(2325, 2, 0);
+        add_sprite_offset(2327, 2, 0);
         add_sprite_offset(692, 11, 0);
-        add_sprite_offset(8022, -2, 0);
-        add_sprite_offset(3147, 1, 0);
-        add_sprite_offset(3873, 1, 0);
+        add_sprite_offset(8037, -2, 0);
+        add_sprite_offset(3152, 1, 0);
+        add_sprite_offset(3882, 1, 0);
         add_sprite_offset(scr_84_get_sprite("spr_green_sign"), 7, 0);
     }
     
@@ -159,9 +159,9 @@ if (con == 1)
     c_speaker("seth");
     c_msgsetsubloc(0, "~1* He..^1. only wanted to listen~2to a few pages.../", (global.lang == "ja") ? "\\m1\t\t\t" : "\\m1\t\t", (global.lang == "ja") ? "&\t\t\t\t" : "&\t\t", "obj_ch5_DWCR01_slash_Step_0_gml_145_0");
     c_msgnextsubloc("~1* Well^1, he has to concentrate~2on his research^1, right!?~2I..^1. I can relate^1! Ha!/", (global.lang == "ja") ? "\\m1\t\t\t" : "\\m1\t\t", (global.lang == "ja") ? "&\t\t\t\t" : "&\t\t", "obj_ch5_DWCR01_slash_Step_0_gml_146_0");
-    c_msgcmd("var", seth_marker, "sprite_index", 7305);
+    c_msgcmd("var", seth_marker, "sprite_index", 7319);
     c_msgnextsubloc("~1* .../%", (global.lang == "ja") ? "\\m1\t\t\t" : "\\m1\t\t", (global.lang == "ja") ? "&\t\t\t\t" : "&\t\t", "obj_ch5_DWCR01_slash_Step_0_gml_148_0");
-    c_msgcmd("var", seth_marker, "sprite_index", 2325);
+    c_msgcmd("var", seth_marker, "sprite_index", 2327);
     c_talk_wait();
     c_sel(kr);
     c_setxy(obj_krmarker.x + 200, obj_krmarker.y);
@@ -187,7 +187,7 @@ if (con == 1)
     c_msgnextloc("\\EK* Ummm^1, adventure..^1. things?/", "obj_ch5_DWCR01_slash_Step_0_gml_179_0");
     c_facenext("seth", 0);
     c_msgnextsubloc("~1* Didn't Orange stop you!?/%", (global.lang == "ja") ? "\\m1\t\t\t" : "\\m1\t\t", (global.lang == "ja") ? "&\t\t\t\t" : "&\t\t", "obj_ch5_DWCR01_slash_Step_0_gml_181_0");
-    c_msgcmd("var", seth_marker, "sprite_index", 6620);
+    c_msgcmd("var", seth_marker, "sprite_index", 6632);
     c_talk_wait();
     c_msgstay(6);
     c_speaker("susie");
@@ -235,8 +235,8 @@ if (con == 1)
     c_sel_spritenext(su, 416, 0, 0);
     c_sel_spritenext(ra, 605, 0, 0);
     c_msgnextsubloc("~1* With unbelievable powers!!!/%", (global.lang == "ja") ? "\\m1\t\t\t" : "\\m1\t\t", (global.lang == "ja") ? "&\t\t\t\t" : "&\t\t", "obj_ch5_DWCR01_slash_Step_0_gml_229_0");
-    c_msgcmd("var", seth_marker, "sprite_index", 6620);
-    c_sel_spritenext(ra, 1878, 0, 0);
+    c_msgcmd("var", seth_marker, "sprite_index", 6632);
+    c_sel_spritenext(ra, 1880, 0, 0);
     c_talk_wait();
     c_var_lerp_to_instance(green_marker, "x", green_marker.xstart, 65);
     c_wait(65);
@@ -333,7 +333,7 @@ if (con == 1)
     c_wait(10);
     c_sel_spriteimage(su, 416, 1);
     c_autowalk(false);
-    c_sel_spriteimage(ra, 7197, 1);
+    c_sel_spriteimage(ra, 7211, 1);
     c_var_instance(green_marker, "auto_depth", false);
     c_var_instance(green_marker, "depth", -100);
     c_var_lerp_instance(blackall, "image_alpha", 0, 0.4, 50);
@@ -380,9 +380,9 @@ if (con == 1)
     c_var_instance(green_marker, "sprite_index", spr_enemy_green_witharmandpan_right);
     c_var_add_instance(green_marker, "x", 12);
     c_var_instance(green_marker, "image_index", 0);
-    table_marker = scr_marker_centered(_pos_green_x + 108, _pos_green_y + 34, 4690, 1, 1, undefined, undefined, undefined, depth_anchor + 150);
-    plate_marker = scr_marker_centered(_pos_green_x + 108, _pos_green_y + 40, 3505, 2, 2, undefined, undefined, undefined, depth_anchor + 140);
-    cheese_marker = scr_marker_centered(_pos_green_x + 108, _pos_green_y + 34, 7713, 2, 2, undefined, undefined, undefined, depth_anchor);
+    table_marker = scr_marker_centered(_pos_green_x + 108, _pos_green_y + 34, 4700, 1, 1, undefined, undefined, undefined, depth_anchor + 150);
+    plate_marker = scr_marker_centered(_pos_green_x + 108, _pos_green_y + 40, 3511, 2, 2, undefined, undefined, undefined, depth_anchor + 140);
+    cheese_marker = scr_marker_centered(_pos_green_x + 108, _pos_green_y + 34, 7727, 2, 2, undefined, undefined, undefined, depth_anchor);
     table_marker.flipfinish = -1;
     plate_marker.flipfinish = -1;
     cheese_marker.flipfinish = -1;
@@ -510,11 +510,11 @@ if (con == 1)
     c_sel_facing(su, "d");
     c_wait_if(ra_actor, "fake_speed", "=", 0);
     c_sel_facing(ra, "r");
-    c_sel_spriteimage(ra, 7504, 0, 0.25);
+    c_sel_spriteimage(ra, 7518, 0, 0.25);
     c_autowalk(false);
     c_autodepth(false);
     c_depth(depth_anchor);
-    c_sel_spriteimage(su, 5595, 0, 0.25);
+    c_sel_spriteimage(su, 5607, 0, 0.25);
     c_autowalk(false);
     c_var_instance(green_marker, "sprite_index", spr_green_pleased);
     
@@ -668,9 +668,9 @@ if (con == 1)
     c_talk_wait();
     c_var_instance(green_marker, "sprite_index", spr_enemy_green_wave_right);
     c_var_instance(green_marker, "image_speed", 0.25);
-    c_sel_spriteimage(ra, 7919, 0, 0.25);
+    c_sel_spriteimage(ra, 7934, 0, 0.25);
     c_autowalk(false);
-    c_sel_spriteimage(su, 8208, 0, 0.25);
+    c_sel_spriteimage(su, 8223, 0, 0.25);
     c_autodepth(false);
     c_depth(96800);
     c_autowalk(false);

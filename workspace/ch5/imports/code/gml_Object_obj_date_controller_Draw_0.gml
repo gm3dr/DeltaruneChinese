@@ -119,7 +119,7 @@ if (con == 1 || con == 2)
     {
         pinkindex += portrait1_talkspeed;
     }
-    else if (pinkportrait != 5572 && pinkportrait != 2588 && pinkportrait != 1086)
+    else if (pinkportrait != 5584 && pinkportrait != 2590 && pinkportrait != 1087)
     {
         pinkindex = 0;
         portrait1_talkspeed = 0.16666666666666666;
@@ -160,16 +160,16 @@ if (i_ex(obj_pink_enemy) && obj_pink_enemy.datecount != 1)
     portrait_offset_x = 10;
     var portrait_offset_y = 0;
     
-    if (pinkportrait2 == 3986)
+    if (pinkportrait2 == 3995)
         portrait_offset_x += 25;
     
-    if (portrait2visibility == true && (pinkportrait2 == 7505 || pinkportrait2 == 4852 || pinkportrait2 == 2077))
+    if (portrait2visibility == true && (pinkportrait2 == 7519 || pinkportrait2 == 4862 || pinkportrait2 == 2079))
         portrait_offset_x += 4;
     
-    if (pinkportrait2 == 5408)
+    if (pinkportrait2 == 5420)
         portrait_offset_y -= 20;
     
-    if (pinkportrait2 == 2485 || pinkportrait2 == 7275)
+    if (pinkportrait2 == 2487 || pinkportrait2 == 7289)
     {
         if (portrait2_xscale == 2)
             draw_sprite_ext(spr_pinkghost_tail, tailindex2, xx + pinkportrait2_x, yy + 21 + portrait_offset_y, 2, 2, 0, c_white, pinkportraitalpha2 * 0.7);
@@ -199,7 +199,7 @@ if (i_ex(obj_pink_enemy))
 {
     tailindex += 0.16666666666666666;
     
-    if (pinkportrait == 1103)
+    if (pinkportrait == 1104)
     {
         _float_y = sin(tailindex * 1) * 2;
         portrait_offset_x = 10;
@@ -214,7 +214,7 @@ if (i_ex(obj_pink_enemy))
         portrait_offset_x = 0;
         var portrait_offset_y = 0;
         
-        if (portraitvisibility == true && (pinkportrait == 6743 || pinkportrait == 677 || pinkportrait == 5429 || pinkportrait == 2036))
+        if (portraitvisibility == true && (pinkportrait == 6755 || pinkportrait == 677 || pinkportrait == 5441 || pinkportrait == 2038))
             portrait_offset_x = 4;
         
         var _scale = 1;
@@ -225,10 +225,10 @@ if (i_ex(obj_pink_enemy))
             portrait_offset_x += 224;
         }
         
-        if (pinkportrait == 2588 || pinkportrait == 1086)
+        if (pinkportrait == 2590 || pinkportrait == 1087)
             pinkindex += 0.16666666666666666;
         
-        if (pinkportrait == 5219 || pinkportrait == 7354 || pinkportrait == 6552 || pinkportrait == 200)
+        if (pinkportrait == 5231 || pinkportrait == 7368 || pinkportrait == 6564 || pinkportrait == 200)
             draw_sprite_ext(spr_pinkspeaker_tail, tailindex, xx + pinkportrait_x + portrait_offset_x, yy + 21 + portrait_offset_y, portrait_xscale * _scale, 2, 0, c_white, pinkportraitalpha);
         
         draw_sprite_ext(pinkportrait, pinkindex, xx + pinkportrait_x + portrait_offset_x, yy + pinkportrait_y + portrait_offset_y, portrait_xscale * _scale, 2, 0, c_white, pinkportraitalpha);
@@ -375,16 +375,6 @@ else
             
             if (draw_chr == "\n")
             {
-                var remaining_string_length = string_length(write_string) - ltr;
-                var __writestring = string_copy(write_string, ltr, remaining_string_length);
-                
-                if (date3con == 1)
-                    _body_x = (camx + (camwidth / 2)) - (string_width(__writestring) / 2) - 8;
-                else if (date3con == 2)
-                    _body_x = (camx + (camwidth / 2)) - (string_width(__writestring) / 2) - 0;
-                else
-                    _body_x = (camx + (camwidth / 2)) - (string_width(__writestring) / 2) - 10;
-                _body_y += 28;
             }
             else if (__l == 0)
             {
@@ -427,7 +417,7 @@ else
             
             _body_x += (string_width(draw_chr) + 1);
             
-            if (draw_chr == "\n" && global.lang == "ja")
+            if (draw_chr == "#" && global.lang == "ja")
             {
                 var remaining_string_length = string_length(write_string) - ltr;
                 var __writestring = string_copy(write_string, ltr, remaining_string_length);
@@ -442,6 +432,23 @@ else
                 _body_y += 30;
             }
             
+            if (ltr == 24 && date3con == 0 && global.lang != "ja")
+            {
+                _body_x = camx + 200;
+                _body_y += 24;
+            }
+            
+            if (ltr == 12 && date3con == 1 && global.lang != "ja")
+            {
+                _body_x = camx + 220;
+                _body_y += 24;
+            }
+            
+            if (ltr == 12 && date3con == 2 && global.lang != "ja")
+            {
+                _body_x = camx + 230;
+                _body_y += 24;
+            }
         }
         
         draw_set_color(c_white);
@@ -1072,15 +1079,15 @@ if (show_intro_outro_surfaces == true && con == 0)
     tailindex += 0.16666666666666666;
     portrait_offset_x = 0;
     
-    if (pinkportrait == 5429)
+    if (pinkportrait == 5441)
         portrait_offset_x = 5;
     
-    if (pinkportrait == 6743 || pinkportrait == 677)
-        pinkportrait = 2036;
+    if (pinkportrait == 6755 || pinkportrait == 677)
+        pinkportrait = 2038;
     
     portrait_offset_x = 4;
     
-    if (pinkportrait == 5219)
+    if (pinkportrait == 5231)
         draw_sprite_ext(spr_pinkspeaker_tail, tailindex, xx + pinkportrait_x, yy + 21, portrait_xscale, 2, 0, c_white, pinkportraitalpha);
     
     draw_sprite_ext(pinkportrait, pinkindex, xx + pinkportrait_x + portrait_offset_x, yy + pinkportrait_y, portrait_xscale, 2, 0, c_white, pinkportraitalpha);
@@ -1163,7 +1170,7 @@ if (minigame_won == true)
     draw_set_alpha(1);
 }
 
-if (pinkportrait == 1103 && draw_box_timer > 20)
+if (pinkportrait == 1104 && draw_box_timer > 20)
 {
     if (con != 7)
     {

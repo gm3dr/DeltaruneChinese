@@ -706,9 +706,9 @@ if (global.myfight == 3)
         global.flag[1888] = 1;
         
         if (global.lang == "ja")
-            scr_act_charsprite_scale("susie", 8352, 1, 1);
+            scr_act_charsprite_scale("susie", 8367, 1, 1);
         else
-            scr_act_charsprite_scale("susie", 3965, 1, 1);
+            scr_act_charsprite_scale("susie", 3974, 1, 1);
         
         if (simulordersus == 0)
             actconsus = 20;

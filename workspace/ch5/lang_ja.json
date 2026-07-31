@@ -1,5 +1,5 @@
 {
-  "date": "1784253245039",
+  "date": "1785152579746",
   "DEVICE_CONTACT_slash_Step_0_gml_5_0": " ^9 ^8 %",
   "DEVICE_CONTACT_slash_Step_0_gml_6_0": "聞コエマスカ^6？\\M1 ^6 %",
   "DEVICE_CONTACT_slash_Step_0_gml_7_0": "^6 \\M0ワレワレハ^6& 接続サレテ& イマスカ^6？\\M1 ^6 ^6 %%",
@@ -17536,5 +17536,13 @@
   "obj_room_castle_tv_mike_slash_Step_0_gml_450_0": "＊ ボス^1　コイツに見せてやろうぜ^1。\n　 この像使った　練習のしかたをよ。/",
   "obj_room_castle_tv_mike_slash_Step_0_gml_452_0": "＊ あー^1…　ハ…ハ^1…それはー^1…\n　 せんでええやろ。/",
   "obj_room_castle_tv_mike_slash_Step_0_gml_454_0": "＊ でも^1　コイツも練習しないと\n　 マイクになれないんじゃ…？/",
-  "obj_room_castle_tv_mike_slash_Step_0_gml_456_0": "＊ コイツはマイクにならん…^1！\n　 もうええわ^1！　その像　どっかに\n　 捨ててき！/%"
+  "obj_room_castle_tv_mike_slash_Step_0_gml_456_0": "＊ コイツはマイクにならん…^1！\n　 もうええわ^1！　その像　どっかに\n　 捨ててき！/%",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_115_0": "＊ (ピンクボムだ^1。\n　 裏に　ダイヤルがついている)/",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_116_0": "＊ (爆弾のエグさを　調節できるようだ)/",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_117_0": "やさしめボム",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_118_0": "エグめボム",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_119_0": "デフォルト",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_127_0": "＊ (爆弾は　「やさしめ」になった)/%",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_136_0": "＊ (爆弾は　「エグめ」になった^1…\n　 他の何かも^1　エグくなったかも\n　 しれない)/%",
+  "obj_dw_fcastle_pinkroom_slash_Create_0_gml_145_0": "＊ (爆弾は　意図された設定のままに\n　 なった)/%"
 }

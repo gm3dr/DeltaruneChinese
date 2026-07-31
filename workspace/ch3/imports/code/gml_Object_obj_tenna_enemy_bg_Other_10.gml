@@ -117,9 +117,9 @@ if (paused == 0)
 
 draw_sprite_ext(spr_tenna_enemy_bg_parts, 0, xx, yy + 12, 2, 2, image_angle, c_white, image_alpha);
 var count = 0;
-mysprite[0] = 4809;
-mysprite[1] = 4809;
-mysprite[2] = 4809;
+mysprite[0] = 4810;
+mysprite[1] = 4810;
+mysprite[2] = 4810;
 
 for (var i = -12; i < 10; i += 2)
 {

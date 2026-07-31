@@ -97,6 +97,8 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_green_sign_welcome_pink", spr_green_sign_welcome_pink_ja);
             ds_map_add(sm, "spr_pink_mewers_live", spr_pink_mewers_live_ja);
             ds_map_add(sm, "spr_pink_mewers_live_dim", spr_pink_mewers_live_dim_ja);
+            ds_map_add(sm, "spr_pink_mewers_live_dim_easy", spr_pink_mewers_live_dim_ja_easy);
+            ds_map_add(sm, "spr_pink_mewers_live_dim_hard", spr_pink_mewers_live_dim_ja_hard);
             ds_map_add(sm, "spr_thrashfit_header", spr_thrashfit_header_ja);
             ds_map_add(sm, "spr_thrashstats_susie", spr_thrashstats_susie_ja);
             ds_map_add(sm, "spr_funnytext_dump_her", spr_funnytext_dump_her_ja);

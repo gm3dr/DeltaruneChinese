@@ -149,8 +149,8 @@ if (chart_ease > 0)
     draw_set_halign(fa_center);
     draw_set_color(spotlight_color[2]);
     draw_set_font(fnt_main);
-    draw_text_transformed(x + 60 + (110 * _inv_ease), _ystart - 60 - 30, stringsetloc("POPU", "obj_rhythmgame_slash_Draw_0_gml_38_0"), 2, 2, 0);
-    draw_text_transformed((x + camerawidth()) - 60 - (110 * _inv_ease), _ystart - 60 - 30, stringsetloc("LARITY", "obj_rhythmgame_slash_Draw_0_gml_39_0"), 2, 2, 0);
+    draw_sprite_ext(spr_rhythmgame_popularity, 0, x + 60 + (110 * _inv_ease), (_ystart - 60 - 30) + 4, 1, 1, 0, spotlight_color[2], 1);
+    draw_sprite_ext(spr_rhythmgame_popularity, 1, (x + camerawidth()) - 60 - (110 * _inv_ease), (_ystart - 60 - 30) + 4, 1, 1, 0, spotlight_color[2], 1);
     draw_set_halign(fa_left);
     draw_sprite_ext(spr_rhythmgame_spotlight, bg_con, x + (16 * image_xscale) + (110 * _inv_ease), (_ystart + 60) - (30 * chart_ease), image_xscale, image_yscale, image_angle, image_blend, image_alpha);
     draw_sprite_ext(spr_rhythmgame_spotlight, bg_con, (x + camerawidth()) - (16 * image_xscale) - (110 * _inv_ease), (_ystart + 60) - (30 * chart_ease), -image_xscale, image_yscale, image_angle, image_blend, image_alpha);

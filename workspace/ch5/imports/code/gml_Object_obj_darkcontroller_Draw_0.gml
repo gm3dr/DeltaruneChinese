@@ -517,10 +517,10 @@ if (global.menuno == 4)
         if (i == coord)
             chosen = 1;
         
-        var headssprite = 4649;
+        var headssprite = 4659;
         
         if (global.flag[1311] == 1)
-            headssprite = 4646;
+            headssprite = 4656;
         
         var dodraw = true;
         
@@ -743,7 +743,7 @@ if (global.menuno == 4)
             var showstat = false;
             var healcount = (global.mag[1] * 5) + 15 + (2 * global.flag[1045]);
             
-            if (global.flag[1569] == 1)
+            if (global.flag[852] == 1)
                 healcount = (global.mag[1] * 10) + (2 * global.flag[1045]);
             
             var healing = stringsetloc("Healing", "obj_darkcontroller_slash_Draw_0_gml_615_0_b");
@@ -984,10 +984,10 @@ if (global.menuno == 2)
         if (i == coord)
             chosen = 1;
         
-        var headssprite = 4649;
+        var headssprite = 4659;
         
         if (global.flag[1311] == 1)
-            headssprite = 4646;
+            headssprite = 4656;
         
         var dodraw = true;
         
@@ -1742,12 +1742,12 @@ if (haveflowery)
         statamt[4] = " ";
         statamt[5] = " ";
         var icon = [];
-        icon[0] = [4393, 1, 16777215, 0];
-        icon[1] = [4393, 4, 16777215, 0];
-        icon[2] = [4393, 5, 16777215, 0];
-        icon[3] = [4393, 21, -1, 2];
-        icon[4] = [4393, 21, -1, 0];
-        icon[5] = [4393, 21, -1, 0];
+        icon[0] = [4403, 1, 16777215, 0];
+        icon[1] = [4403, 4, 16777215, 0];
+        icon[2] = [4403, 5, 16777215, 0];
+        icon[3] = [4403, 21, -1, 2];
+        icon[4] = [4403, 21, -1, 0];
+        icon[5] = [4403, 21, -1, 0];
         var space = 27;
         
         if (global.submenu == 20)
@@ -1869,7 +1869,7 @@ if (haveflowery)
         
         var equipped = [stringsetloc("WinningSmile", "obj_darkcontroller_slash_Draw_0_gml_1584_0"), stringsetloc("PetalMantle", "obj_darkcontroller_slash_Draw_0_gml_1585_0"), stringsetloc("SundayBest", "obj_darkcontroller_slash_Draw_0_gml_1586_0")];
         var space = 30;
-        var icon = [[4393, 21], [4393, 4], [4393, 4]];
+        var icon = [[4403, 21], [4403, 4], [4403, 4]];
         var loff = 0;
         
         if (global.lang == "ja")

@@ -70,7 +70,7 @@ function get_chapter_title(arg0)
 
 function get_version()
 {
-    var version = "v22";
+    var version = "v23";
     return version;
 }
 

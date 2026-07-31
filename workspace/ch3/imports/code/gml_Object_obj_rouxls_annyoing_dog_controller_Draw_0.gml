@@ -53,7 +53,7 @@ if (con == 3 && timer > 60)
     draw_sprite_ext(spr_dog_walk, 0, dogloc[0] + (10 * dogspin), dogloc[1] + (10 * dogspin), scale, scale, -dogspin * 8, c_white, (alpha * 0.5) - (0.2 * dogspin));
     d3d_set_fog(false, c_black, 0, 0);
     var bloc = [460 + (dogspin * 8), 292];
-    var revline = 4820;
+    var revline = 4821;
     var bon = 0;
     
     if (global.lang == "ja")

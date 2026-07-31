@@ -201,7 +201,7 @@ if (con == 10)
     c_pannable(1);
     c_pan(425, 400, 1);
     c_var_lerp_instance(blackall, "image_alpha", 1, 0, 30);
-    c_var_lerp_instance(498, "volume", 0, 1, 30);
+    c_var_lerp_instance(499, "volume", 0, 1, 30);
     c_wait(50);
     c_sprite(spr_susie_shock_r);
     c_msgside("bottom");
@@ -215,7 +215,7 @@ if (con == 10)
     c_sprite(spr_flowery_pose_point_cooler);
     c_mus2("initloop", "flowery.ogg", 0);
     c_mus2("volume", 0.8, 0);
-    c_var_lerp_instance(498, "volume", 1, 0, 60);
+    c_var_lerp_instance(499, "volume", 1, 0, 60);
     c_wait_talk();
     c_sel(fl);
     c_walkto_actor(kr, 36, 0, 20);

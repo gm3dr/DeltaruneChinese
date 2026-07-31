@@ -733,7 +733,7 @@ if (rabble_start)
     {
         for (var i = 0; i < 20; i++)
         {
-            var sprite = ((i % 3) == 0) ? 2822 : 4285;
+            var sprite = ((i % 3) == 0) ? 2822 : 4286;
             var y_offset = ((i % 4) == 0) ? 0 : 20;
             fg_markers[i] = scr_dark_marker(camerax() + (i * 40), cameray() + view_hport[0] + 100, sprite);
             var delay = ((i % 4) == 0) ? 0 : 5;

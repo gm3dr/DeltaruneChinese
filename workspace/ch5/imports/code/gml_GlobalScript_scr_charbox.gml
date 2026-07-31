@@ -170,7 +170,10 @@ function scr_charbox()
             {
                 if (soloflowery)
                 {
-                    bname = scr_84_get_sprite("spr_bnameflowery");
+                    var bname = 4069;
+                    
+                    if (global.lang == "ja")
+                        bname = 5514;
                     
                     draw_sprite(spr_headflowery, global.faceaction[charpos[c]], xx + 13 + xchunk, (bpoff + b_offset + mmy[c]) - 11);
                     draw_sprite(bname, 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
@@ -192,7 +195,10 @@ function scr_charbox()
             {
                 if (haveflowery)
                 {
-                    bname = scr_84_get_sprite("spr_bnameflowery");
+                    var bname = 4069;
+                    
+                    if (global.lang == "ja")
+                        bname = 5514;
                     
                     draw_sprite(bname, 0, flx + 41, fly + 12);
                     

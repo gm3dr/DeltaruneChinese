@@ -258,6 +258,8 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_green_sign_owe_money_left", spr_green_sign_owe_money_left);
             ds_map_add(sm, "spr_pink_mewers_live", spr_pink_mewers_live);
             ds_map_add(sm, "spr_pink_mewers_live_dim", spr_pink_mewers_live_dim);
+            ds_map_add(sm, "spr_pink_mewers_live_dim_easy", spr_pink_mewers_live_dim_easy);
+            ds_map_add(sm, "spr_pink_mewers_live_dim_hard", spr_pink_mewers_live_dim_hard);
             ds_map_add(sm, "spr_thrashfit_header", spr_thrashfit_header);
             ds_map_add(sm, "spr_thrashstats_susie", spr_thrashstats_susie);
             var sndm = global.chemg_sound_map;

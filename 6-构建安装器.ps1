@@ -68,14 +68,9 @@ foreach ($p in @("linux", "win", "winold", "mac")) {
         Copy-Item "patch_chs_windowslinux_*.7z" $TargetDataDir
         
         Normalize-Timestamp $PlatformDir
-        .\tool\7z a -t7z -mx=9 -ms=on -mmt=on "temp\$p.7z" ".\$PlatformDir" 
-        
         $prefix = if ($p -eq "win") { "【Win10+（推荐）】" } else { "【Win7-】" }
         $file_name = "${prefix}三角符文汉化补丁-V$date"
-        
-        Build-SfxInstaller "$file_name.exe" $p
-        Compress-Archive -DestinationPath "$file_name.zip" -Path "$file_name.exe"
-        Remove-Item "$file_name.exe"
+        .\tool\7z a -t7z -mx=9 -ms=on -mmt=on "$file_name.7z" ".\$PlatformDir" 
     }
     # Linux 逻辑
     elseif ($p -eq "linux") { 
@@ -94,12 +89,6 @@ foreach ($p in @("linux", "win", "winold", "mac")) {
         Normalize-Timestamp $PlatformDir
         tar -czf "【macOS】三角符文汉化补丁-V$date.tar.gz" -C $PlatformDir . 
     }
-}
-
-# ---------- 处理 macOS DMG ----------
-if (Test-Path ".\patcher\mac.dmg") {
-    Write-Host "Packaging macOS DMG..."
-    Copy-Item ".\patcher\mac.dmg" "【macOS】三角符文汉化安装器-V$date.dmg"
 }
 
 # ---------- 收尾 ----------

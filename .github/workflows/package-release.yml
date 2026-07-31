@@ -58,14 +58,10 @@ jobs:
               (Get-Content -Raw $ReadmePath) -replace '\$\(CURRENT_TIME\)', $fixedTime -replace '\$\(CURRENT_DATE\)', $date | Set-Content -Encoding UTF8 $ReadmePath
               Copy-Item "cn_installer\汉化答疑QQ群1033065757-可以来此求助.jpg" "$extractDir\" -Force
 
-              $temp7z = "packed_$($target.Folder).7z"
-              7z a -t7z -mx=9 -ms=on -mmt=on $temp7z ".\$extractDir\*"
+              $zipName = "【$($target.Prefix)】三角符文汉化补丁-V$date.7z"
+              7z a -t7z -mx=9 -ms=on -mmt=on $zipName ".\$extractDir\*"
               
-              $exeName = "【$($target.Prefix)】三角符文汉化补丁-V$date.exe"
-              $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$($target.Folder)\config.txt`"+`"$temp7z`" `"$exeName`""
-              cmd.exe /d /c $cmdLine
               
-              $zipName = "【$($target.Prefix)】三角符文汉化补丁-V$date.zip"
               Compress-Archive -Path $exeName -DestinationPath $zipName
           }
 

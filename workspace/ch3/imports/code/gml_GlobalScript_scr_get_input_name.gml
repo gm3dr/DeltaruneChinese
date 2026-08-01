@@ -27,13 +27,11 @@ function scr_get_input_name(arg0)
         if (_control == global.button2)
             return "\\*C  ";
     }
-    
-    var left_bracket = (global.lang == "en") ? "[" : "[";
-    var right_bracket = (global.lang == "en") ? "]" : "]";
-    _control = left_bracket + global.asc_def[global.input_k[arg0]] + right_bracket;
-    
-    if (!is_string(_control))
-        _control = "[?]";
-    else
-        return _control;
+
+    if (!is_string(global.asc_def[global.input_k[arg0]]))
+        _control = "[??]"
+    else 
+        _control = "[" + global.asc_def[global.input_k[arg0]] + "]";
+
+    return _control;
 }

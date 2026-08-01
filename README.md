@@ -178,6 +178,7 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 5. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
 6. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>这个功能原本用于保证日文玩家名也能在英文时正常显示
 7. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
+8. 帮忙修复了 `scr_get_input_name` 遇到未定义绑键时会闪退的问题
 #### 第一章
 1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
 2. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章

@@ -85,12 +85,9 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 本地生成补丁需要如下依赖：
 
 - **.NET 10.0 SDK**（用于编译 `src/deltarunePacker.csproj`）
-- **Node.js & npm**（用于运行 `atlas_packer` 图集切片工具）
+- **Node.js & npm**（用于运行 `atlas_packer` 图集与字体生成工具）
 - **Steam 客户端**（且账户中拥有 DELTARUNE，以获取特定 Depot 的游戏文件）
 - （可选）如果需要拉取最新文本，需在根目录创建 `secrets.ps1` 存放你的 API Token。
-
-> [!IMPORTANT]
-> 在生成像素字体时需要调用 `bmfont64.exe` 程序，**必须保证文件路径没有任何汉字或特殊字符**。否则可能会因路径编码不匹配而报错。
 
 ## 工作流简介 (Powershell 脚本)
 
@@ -116,9 +113,10 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 > $env:URL = "翻译站网址"
 > ```
 
-### 3. `生成图集.ps1` (打包纹理贴图)
+### 3. `生成图集.ps1` (打包纹理贴图与字体图集)
 
-通过 `node atlas_packer/run.js` 根据 `template.mst` 模板，将散装的本地化贴图合成为游戏引擎使用的完整大图。
+通过 `node atlas_packer/run.js` 根据 `template.mst` 模板，将散装的本地化贴图合成为游戏引擎使用的完整大图。<br>
+同时通过 `node atlas_packer/generate_font.js` 根据 `fonts.cfg` 配置和 `font.mst` 模板，调用 `freetype2` 直接渲染 TTF 字体，生成各字体的字符图集到 `workspace/global/font/atlas/`。
 
 ### 4. `打包资源.ps1` (构建二进制 Data)
 
@@ -133,38 +131,40 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 ## 仓库结构
 
 ```text
-├── atlas_packer       # 图集生成工具
-│   ├── package.json
-│   ├── run.js         # 主脚本
-│   └── template.mst   # 模板
-├── cn_installer       # 汉化安装器、打包依赖、自解压模块
-├── prproj             # Adobe Premiere Pro 2025 工程项目
-├── src                # 汉化打包核心工具源码 (C#)
-│   ├── Importer.cs / Exporter.cs / Loader.cs / Program.cs
-│   └── lib            # 底层基础库（UndertaleModLib.dll, Underanalyzer.dll）
-├── tool               # 额外的辅助工具（7z.exe、bmfont64.exe、xdelta3.exe）
-└── workspace          # 汉化工作区
-    ├── ch1 ~ ch4      # 1 - 4章汉化资源（贴图、字体、文本、代码等）
-    ├── demo           # Demo 版汉化资源
-    ├── global         # 人名替换表、跨章节共享资源
-    ├── main           # 章节选择器汉化资源（主要是代码）
-    └── result         # 输出
+├── atlas_packer          # 图集与字体生成工具
+│   ├── package.json      # Node.js 依赖包
+│   ├── run.js            # 纹理贴图打包主脚本
+│   ├── generate_font.js  # 字体图集生成脚本（基于 freetype2 直接渲染）
+│   ├── pack_task.js      # 打包工作线程
+│   ├── template.mst      # 纹理贴图 cfg 模板
+│   └── font.mst          # 字体图集 cfg 模板
+├── cn_installer          # 汉化安装器、打包依赖、自解压模块
+├── prproj                # Adobe Premiere Pro 2025 工程项目
+├── src                   # 汉化打包核心工具源码
+│   ├── *.cs              # C# 源码
+│   └── lib               # 底层基础库（UndertaleModLib.dll, Underanalyzer.dll）
+├── tool                  # 额外的辅助工具（7z.exe、xdelta3.exe）
+└── workspace             # 汉化工作区
+    ├── ch*               # 各章节汉化资源（贴图、文本、代码等）
+    ├── demo              # Demo 版汉化资源
+    ├── global            # 跨章节共享资源
+    │   └── font          # 字体
+    │   └── *.json        # 人名翻译替换表
+    ├── main              # 章节选择器汉化资源（主要是代码）
+    └── result            # 输出
 
 ```
 
 > [!NOTE]
-> `.gitignore` 过滤了所有的临时目录（`temp`, `obj`, `bin`），底层依赖包（`node_modules`）、游戏本体文件（`data.win`, `game.ios`）、密钥文件（`secrets.*`）。在提交 PR 时请勿夹带此类文件。
+> `.gitignore` 过滤了所有的临时目录（`temp`, `obj`, `bin`），底层依赖包（`node_modules`）、游戏本体文件（`data.win`, `game.ios`）、字体生成产物（`workspace/global/font/atlas/`）、密钥文件（`secrets.*`）。在提交 PR 时请勿夹带此类文件。
 
 ### 每个章节对应 imports 内结构（workspace/ch\*/imports）
 - `atlas` 使用的纹理页图集，包含所有新纹理，使用 `node atlas_packer/run` 生成
 - `code` [修改过的 GML 代码](#%E4%BF%AE%E6%94%B9%E8%BF%87%E7%9A%84-gml-%E4%BB%A3%E7%A0%81%E5%AE%9E%E7%8E%B0workspacechimportscode)
-- `font` 字体
-  - `font` [原字体的补字字体](#%E8%A1%A5%E5%AD%97%E7%94%A8%E5%AD%97%E4%BD%93workspacechimportsfontfont)
-  - `pics` 原字体的字符单图
-  - `bmfc` 补字字体的 bmfont 基础配置
 - `pics` 贴图，用于生成纹理页图集
 - `pics_zhname` 人名翻译版贴图，用于生成纹理页图集
 - `text_src` 打包使用的语言文件
+
 > [!IMPORTANT]
 > 除了第三章 Tenna 的 `funnytext` 艺术字有特殊处理，自动居中外<br>
 > 其余贴图都需要保证大小与原本的相同，否则会报错
@@ -227,13 +227,26 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 13. 改动了 `obj_dw_cliff_climbrefresher` 来修复自动换行导致的显示异常
 14. 改动了 `obj_plat_foreground_writer` 来修复横版跳跃状态下互动文本错位的问题
 15. 改动了 `obj_84_lang_helper` 与 `obj_room_torielclass` 来实现 Toriel 黑板的人名翻译切换
-### 补字用字体（workspace/ch\*/imports/font/font）
+
+### 字体（`workspace/global/font/`）
+
+各章节通过 `fonts.cfg` 配置描述字体参数，使用 `node atlas_packer/generate_font.js` 调用 `freetype2` 直接渲染生成字符图集
+
 - `normal.ttf` SimSun 12x（中易宋体 内嵌点阵 12）<br>（修改过拼音、全角问号叹号、全角逗号句号、双层直角引号）
 - `battle.ttf` SimSun 16x（中易宋体 内嵌点阵 16）
 - `sans.ttf` 方正少儿（手机端主题提取的两万字大字库版）
 - `noelle.ttf` Boutique Bitmap 9x9 R（精品点阵体 9x9 R）
 - `8bit.ttf` Boutique Bitmap 9x9 B （精品点阵体 9x9 B）
 - `legend.ttf` 基于 DR 日文使用的 Maru Monica 补字，By 晓晓_Akatsuki
+
+#### `fonts.cfg`
+
+为 JSON 格式
+- `name` 字体原名
+- `path` 中文字体路径
+- `char_size` 字号
+- `offset_en` 英文字形偏移
+- `offset_cn` 中文字形偏移
 
 ### Adobe Premiere Pro 2025 工程项目（prproj）
 - `tennaIntroF1_compressed_28` [第三章的 Tenna 神人小视频](https://www.bilibili.com/video/BV15mT5zAEJS)

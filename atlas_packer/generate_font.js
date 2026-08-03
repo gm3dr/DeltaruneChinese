@@ -108,9 +108,8 @@ const dictWhole_p = Promise.all([
     ...chapters.map(chapter => fs.readFile(`workspace/${chapter}/imports/text_src/cn.json`, 'utf8')),
     ...[...chapters, 'main', 'demo'].map(chapter => fs.readdir(`workspace/${chapter}/imports/code`)
         .then(files => files.map(filename => fs.readFile(`workspace/${chapter}/imports/code/${filename}`, 'utf8')))
-        .then(x => x.flat())
     )
-]).then(x=>x.join());
+]).then(x => Promise.all(x.flat())).then(x => x.join());
 const pathOut = `workspace/global/font/atlas/`;
 await fs.rm(pathOut, { recursive: true, force: true });
 await fs.mkdir(pathOut, { recursive: true });

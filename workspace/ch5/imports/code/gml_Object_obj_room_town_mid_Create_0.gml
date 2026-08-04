@@ -55,8 +55,9 @@ if (global.flag[1324] > 0)
 if (global.flag[1324] < 3)
     layer_destroy("INSTANCES_LAMPS");
 //
+layer_create(993000, "OBJECTS_Buildings_Depth_993000_gm3dr");
 var store_marker = scr_marker(940, -50, (global.names >= 2) ? bg_zhname_building_store : bg_building_store);
-store_marker.depth = 993000;
+layer_add_instance("OBJECTS_Buildings_Depth_993000_gm3dr", store_marker);
 //
 if (scr_sideb_active())
 {

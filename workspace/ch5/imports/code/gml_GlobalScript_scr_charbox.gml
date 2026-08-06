@@ -169,14 +169,14 @@ function scr_charbox()
             if (c == 0)
             {
                 if (soloflowery)
-                {
-                    var bname = 4069;
+                {/*
+                    var bname = spr_bnameflowery;
                     
                     if (global.lang == "ja")
-                        bname = 5514;
-                    
+                        bname = spr_ja_bnameflowery;
+                    */
                     draw_sprite(spr_headflowery, global.faceaction[charpos[c]], xx + 13 + xchunk, (bpoff + b_offset + mmy[c]) - 11);
-                    draw_sprite(bname, 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
+                    draw_sprite(scr_84_get_sprite("spr_bnameflowery")/*bname*/, 0, xx + 51 + xchunk, bpoff + b_offset + 3 + mmy[c]);
                 }
                 else
                 {

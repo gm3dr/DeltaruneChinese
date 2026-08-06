@@ -202,6 +202,7 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 9. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
 10. 改动了 `obj_ch3_couch_video` 来实现 Tenna 小视频的人名翻译切换
 11. 改动了 `obj_rouxls_biplane_flag` 来实现 Rouxls 战飞机旗帜弹幕的人名翻译切换
+12. 改动了 `scr_charbox` 与 `scr_84_init_localization` 来实现战斗内 Rouxls 与 Lancer 按钮的人名翻译切换
 #### 第四章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
@@ -227,6 +228,7 @@ Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日
 13. 改动了 `obj_dw_cliff_climbrefresher` 来修复自动换行导致的显示异常
 14. 改动了 `obj_plat_foreground_writer` 来修复横版跳跃状态下互动文本错位的问题
 15. 改动了 `obj_84_lang_helper` 与 `obj_room_torielclass` 来实现 Toriel 黑板的人名翻译切换
+16. 改动了 `scr_charbox` 与 `scr_84_init_localization` 来实现战斗内 Flowery 队友的人名翻译切换
 
 ### 字体（`workspace/global/font/`）
 

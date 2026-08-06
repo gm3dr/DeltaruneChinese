@@ -207,11 +207,10 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
 3. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
-4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>
-Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
-1. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
-2. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
-3. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
+5. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
+6. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+7. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
 #### 第五章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换

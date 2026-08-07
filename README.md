@@ -193,7 +193,7 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 #### 第三章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 改动了 `obj_writer_quiz` 添加了汉字字符字宽逻辑
-3. 改动了 `scr_rhythmgame_lyrics` 使得音游小游戏强制使用日文方式显示字间隙
+3. 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
 4. 改动了 `obj_ch3_closet` 加长了 Tenna 发癫
 5. 改动了 `obj_watercooler`/`obj_holywatercooler` 把 Watercooler/Holywatercooler 说话逻辑改为和日文一样随机字符
 6. 改动了 `obj_rouxls_annyoing_dog_controller` 把 Rouxls 战的 `神烦狗 参战` 从英文的文本改为了和日文一样的贴图形式
@@ -205,16 +205,17 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 12. 改动了 `scr_charbox` 与 `scr_84_init_localization` 来实现战斗内 Rouxls 与 Lancer 按钮的人名翻译切换
 #### 第四章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
-2. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
-3. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
-4. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
-5. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
-6. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
-7. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+2. 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
+3. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
+4. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
+5. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
+6. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
+7. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+8. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
 #### 第五章
 1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
 2. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
-3. 改动了 `scr_rhythmgame_lyrics` 使得音游小游戏强制使用日文方式显示字间隙
+3. 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
 4. 改动了 `obj_ch5_DWCR01` 来修复泡泡对话不会正常结束消失的问题
 5. 改动了 `obj_ch5_LW20W_end` 来修正 Weird Route 结尾的显示效果
 6. 改动了 `obj_date_controller` 来修复 Pink 战约会阶段的何意味强制换行问题<br>以及帮忙修复了 Pink 战某些文本描边显示异常的问题

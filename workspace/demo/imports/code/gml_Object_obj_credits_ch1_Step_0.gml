@@ -131,7 +131,7 @@ if (timer == 668)
     line[0] = scr_84_get_lang_string_ch1("obj_credits_slash_Step_0_gml_119_0");
     line[1] = scr_84_get_lang_string_ch1("obj_credits_slash_Step_0_gml_120_0");
     line[2] = scr_84_get_lang_string_ch1("obj_credits_slash_Step_0_gml_121_0");
-    line[3] = "Snowdrake & Monster Kid Design";
+    line[3] = global.names >= 2 ? "雪铁龙 & 怪物小孩 设计" : "Snowdrake & 怪物小孩 设计";
     line[4] = "Magnolia Porter";
     line[5] = "";
     linecolor[0] = c_ltgray;

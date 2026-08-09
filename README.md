@@ -17,11 +17,11 @@
 > 选择 `管理 -> 浏览本地文件`
 
 ### 一键安装器
-1. 前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases/latest 下载安装器<br>
-2. *（仅限 macOS）* 将安装器移动到 `Applications` 目录下<br>
-3. 将汉化补丁放到安装器根目录 *（macOS 操作步骤见下文）*，打开安装器<br>
-4. *（仅限 macOS 或 Linux）* 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
-5. 点击「安装补丁」即可
+- 前往 https://github.com/gm3dr/DeltaruneChinesePatcher/releases/latest 下载安装器<br>
+- *（仅限 macOS）* 将安装器移动到 `Applications` 目录下<br>
+- 将汉化补丁放到安装器根目录 *（macOS 操作步骤见下文）*，打开安装器<br>
+- *（仅限 macOS 或 Linux）* 输入 DELTARUNE 安装目录（或「浏览」，选中 DELTARUNE 安装目录）<br>
+- 点击「安装补丁」即可
 
 > [!TIP]
 > Windows 版安装器可以全自动从 Steam 获取 DELTARUNE 安装路径<br>
@@ -171,68 +171,68 @@ GML 代码 `workspace/ch*/imports/code` 是从 DELTARUNE 游戏中，使用 Unde
 
 ### 修改过的 GML 代码实现（workspace/ch\*/imports/code）
 #### 通用
-1. 废话：把代码中硬编码没有走游戏多语言系统的文本改动了<br>修改了各种坐标值来微调文字显示位置和动画
-2. 改动了 `is_english` 使得游戏即使当 `lang` 为 `en` 时也会从语言文件夹中加载 json
-3. 改动了 `obj_writer` 添加了汉字字符字宽逻辑
-4. 改动了 `DEVICE_MENU`（读档界面）使得日文下显示的是`简体中文`而不是`English`
-5. 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
-6. 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>这个功能原本用于保证日文玩家名也能在英文时正常显示
-7. 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
-8. 帮忙修复了 `scr_get_input_name` 遇到未定义绑键时会闪退的问题
+- 废话：把代码中硬编码没有走游戏多语言系统的文本改动了<br>修改了各种坐标值来微调文字显示位置和动画
+- 改动了 `is_english` 使得游戏即使当 `lang` 为 `en` 时也会从语言文件夹中加载 json
+- 改动了 `obj_writer` 添加了汉字字符字宽逻辑
+- 改动了 `DEVICE_MENU`（读档界面）使得日文下显示的是`简体中文`而不是`English`
+- 改动了 `obj_credits` 覆盖掉了原有的日文本地化名单为汉化组名单
+- 改动了 `scr_kana_check` 去除了文本中含有日文时切换为日文字体的功能<br>这个功能原本用于保证日文玩家名也能在英文时正常显示
+- 改动了 `scr_change_language`、`obj_initializer2`、`scr_84_lang_load`、`scr_84_init_localization`、`DEVICE_MENU` 来实现人名翻译的切换<br>添加了变量 `global.names` 用于存储人名翻译选项的值，往 `true_config.ini` 里添加了 `NAMES` 项用来存储人名翻译选项的设定
+- 帮忙修复了 `scr_get_input_name` 遇到未定义绑键时会闪退的问题
 #### 第一章
-1. 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
-2. 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
-3. 改动了 `obj_town_event` 来实现 Sans 店名的人名翻译切换
-4. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+- 改动了 `obj_writer` 把后三章的``` ` ```保留特殊字符文本功能带回了第一章
+- 改动了 `obj_writer` 把后三章的`\n`换行逻辑带回了第一章
+- 改动了 `obj_town_event` 来实现 Sans 店名的人名翻译切换
+- 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
 #### 第二章
-1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
-2. `obj_welcometothecity_backinglights`，逐字效果的适配
-3. 改动了 `obj_town_event` 来实现 Sans 店名的人名翻译切换
-4. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
-5. 改动了 `obj_pipis_egg_bullet`/`obj_pipis_enemy` 来实现 Pipis 的人名翻译切换
+- 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+- `obj_welcometothecity_backinglights`，逐字效果的适配
+- 改动了 `obj_town_event` 来实现 Sans 店名的人名翻译切换
+- 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+- 改动了 `obj_pipis_egg_bullet`/`obj_pipis_enemy` 来实现 Pipis 的人名翻译切换
 #### 第三章
-1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
-2. 改动了 `obj_writer_quiz` 添加了汉字字符字宽逻辑
-3. 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
-4. 改动了 `obj_rhythmgame` 使得音游小游戏歌词强制使用日文方式显示字间隙
-5. 改动了 `obj_ch3_closet` 加长了 Tenna 发癫
-6. 改动了 `obj_watercooler`/`obj_holywatercooler` 把 Watercooler/Holywatercooler 说话逻辑改为和日文一样随机字符
-7. 改动了 `obj_rouxls_annyoing_dog_controller` 把 Rouxls 战的 `神烦狗 参战` 从英文的文本改为了和日文一样的贴图形式
-8. 改动了 `obj_room_green_room` 来实现 Ramb 位置上方的人名翻译切换
-9. 改动了 `obj_dw_ranking_t_explain` 来实现 T 级房间 Tenna 的人名翻译切换
-10. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
-11. 改动了 `obj_ch3_couch_video` 来实现 Tenna 小视频的人名翻译切换
-12. 改动了 `obj_rouxls_biplane_flag` 来实现 Rouxls 战飞机旗帜弹幕的人名翻译切换
-13. 改动了 `scr_charbox` 与 `scr_84_init_localization` 来实现战斗内 Rouxls 与 Lancer 按钮的人名翻译切换
+- 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+- 改动了 `obj_writer_quiz` 添加了汉字字符字宽逻辑
+- 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
+- 改动了 `obj_rhythmgame` 使得音游小游戏歌词强制使用日文方式显示字间隙
+- 改动了 `obj_ch3_closet` 加长了 Tenna 发癫
+- 改动了 `obj_watercooler`/`obj_holywatercooler` 把 Watercooler/Holywatercooler 说话逻辑改为和日文一样随机字符
+- 改动了 `obj_rouxls_annyoing_dog_controller` 把 Rouxls 战的 `神烦狗 参战` 从英文的文本改为了和日文一样的贴图形式
+- 改动了 `obj_room_green_room` 来实现 Ramb 位置上方的人名翻译切换
+- 改动了 `obj_dw_ranking_t_explain` 来实现 T 级房间 Tenna 的人名翻译切换
+- 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+- 改动了 `obj_ch3_couch_video` 来实现 Tenna 小视频的人名翻译切换
+- 改动了 `obj_rouxls_biplane_flag` 来实现 Rouxls 战飞机旗帜弹幕的人名翻译切换
+- 改动了 `scr_charbox` 与 `scr_84_init_localization` 来实现战斗内 Rouxls 与 Lancer 按钮的人名翻译切换
 #### 第四章
-1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
-2. 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
-3. 改动了 `obj_rhythmgame` 使得音游小游戏歌词强制使用日文方式显示字间隙
-4. 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
-5. 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
-6. 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
-7. 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
-8. 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
-9. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+- 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+- 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
+- 改动了 `obj_rhythmgame` 使得音游小游戏歌词强制使用日文方式显示字间隙
+- 清空了 `obj_dw_church_intro_guei_Draw_0` 来去除一个文本中的特殊字符<br>这条文本的中文译文中不含这个特殊字符
+- 改动了 `obj_takingtoolong` 来让 TAKING TOO LONG 不会 TAKING TOO LONG
+- 把 `obj_micmenu` 回退到了 Patch 1.02 之前的版本<br>Patch 1.02 为了允许麦克风有更多字符能显示，强制这里使用日文字体，所以回退到旧版
+- 改动了 `obj_room_town_mid` 来实现 Sans 店名的人名翻译切换
+- 改动了 `obj_84_lang_helper` 来实现 Toriel 黑板的人名翻译切换
+- 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
 #### 第五章
-1. 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
-2. 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
-3. 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
-4. 改动了 `obj_rhythmgame` 使得音游小游戏歌词强制使用日文方式显示字间隙
-5. 改动了 `obj_flowery_lyrics` 使得 Flowery 战歌词强制使用日文方式显示字间隙
-6. 改动了 `obj_ch5_DWCR01` 来修复泡泡对话不会正常结束消失的问题
-7. 改动了 `obj_ch5_LW20W_end` 来修正 Weird Route 结尾的显示效果
-8. 改动了 `obj_date_controller` 来修复 Pink 战约会阶段的何意味强制换行问题<br>以及帮忙修复了 Pink 战某些文本描边显示异常的问题
-9. 改动了 `obj_battlecontroller` 来修正 Netskie 战的查看文本显示
-10. 改动了 `obj_green_enemy` 来实现 Green 战斗中 Green 牌子的人名翻译切换
-11. 改动了 `obj_yellow_enemy` 来实现 Yellow 战斗中 Green 牌子的人名翻译切换
-12. 帮忙修复了 `obj_terracota_enemy` 的错误结束回合问题
-13. 改动了 `obj_yellow_trial_manager` 来修正审判介面手柄按钮偏移的问题
-14. 改动了 `obj_town_mid_conbini`、`obj_room_town_mid` 与 `obj_ch5_LWF02_bg` 来实现 Sans 店名的人名翻译切换
-15. 改动了 `obj_dw_cliff_climbrefresher` 来修复自动换行导致的显示异常
-16. 改动了 `obj_plat_foreground_writer` 来修复横版跳跃状态下互动文本错位的问题
-17. 改动了 `obj_84_lang_helper` 与 `obj_room_torielclass` 来实现 Toriel 黑板的人名翻译切换
-18. 改动了 `scr_charbox` 与 `scr_84_init_localization` 来实现战斗内 Flowery 队友的人名翻译切换
+- 改动了 `obj_fusionmenu` 来让存档点的`伙伴`页面字串不被横向压缩
+- 改动了 `scr_rhythmgame_draw` 来实现音游小游戏的人名翻译切换
+- 改动了 `scr_rhythmgame_lyrics` 使得歌词除了空格以外的字符强制使用日文方式显示字间隙
+- 改动了 `obj_rhythmgame` 使得音游小游戏歌词强制使用日文方式显示字间隙
+- 改动了 `obj_flowery_lyrics` 使得 Flowery 战歌词强制使用日文方式显示字间隙
+- 改动了 `obj_ch5_DWCR01` 来修复泡泡对话不会正常结束消失的问题
+- 改动了 `obj_ch5_LW20W_end` 来修正 Weird Route 结尾的显示效果
+- 改动了 `obj_date_controller` 来修复 Pink 战约会阶段的何意味强制换行问题<br>以及帮忙修复了 Pink 战某些文本描边显示异常的问题
+- 改动了 `obj_battlecontroller` 来修正 Netskie 战的查看文本显示
+- 改动了 `obj_green_enemy` 来实现 Green 战斗中 Green 牌子的人名翻译切换
+- 改动了 `obj_yellow_enemy` 来实现 Yellow 战斗中 Green 牌子的人名翻译切换
+- 帮忙修复了 `obj_terracota_enemy` 的错误结束回合问题
+- 改动了 `obj_yellow_trial_manager` 来修正审判介面手柄按钮偏移的问题
+- 改动了 `obj_town_mid_conbini`、`obj_room_town_mid` 与 `obj_ch5_LWF02_bg` 来实现 Sans 店名的人名翻译切换
+- 改动了 `obj_dw_cliff_climbrefresher` 来修复自动换行导致的显示异常
+- 改动了 `obj_plat_foreground_writer` 来修复横版跳跃状态下互动文本错位的问题
+- 改动了 `obj_84_lang_helper` 与 `obj_room_torielclass` 来实现 Toriel 黑板的人名翻译切换
+- 改动了 `scr_charbox` 与 `scr_84_init_localization` 来实现战斗内 Flowery 队友的人名翻译切换
 
 ### 字体（`workspace/global/font/`）
 

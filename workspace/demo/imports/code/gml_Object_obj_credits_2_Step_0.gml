@@ -161,7 +161,7 @@ if (timer == 805)
     
     if (global.lang == "en")
     {
-        line[6] = stringset("Magnolia Porter (Snowdrake, Monster Kid)");
+        line[6] = stringset(global.names >= 2 ? "Magnolia Porter (雪铁龙，怪物小孩)" : "Magnolia Porter (Snowdrake，怪物小孩)");
         line[7] = stringset(" ");
     }
     else

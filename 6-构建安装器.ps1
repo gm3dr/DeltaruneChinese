@@ -6,7 +6,6 @@
 # 并从 github.com/gm3dr/DeltaruneChinesePatcher 的 Release
 # 下载 Win/Mac/Linux/WinOld 安装器，并放到文件夹
 $ErrorActionPreference = "Stop"
-Set-StrictMode -Version Latest
 
 # ---------- 时间与环境变量 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
@@ -16,9 +15,10 @@ $ts        = Get-Date $fixedTime
 $TempDir = "temp"
 
 if ($IsWindows -or $env:OS -like "*Windows*") {
-    $env:PATH += "$PSScriptRoot/tool"
+    $env:PATH += ";$PSScriptRoot/tool"
 }
 
+Set-StrictMode -Version Latest
 # ---------- 验证前置依赖 ----------
 if (-not (Test-Path "patch_chs_windowslinux_*.7z")) {
     Write-Warning "未找到生成的补丁 7z 文件。请先运行 5-生成补丁.ps1"

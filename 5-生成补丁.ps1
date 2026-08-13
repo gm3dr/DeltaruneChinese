@@ -2,7 +2,6 @@
 # 5-生成补丁.ps1 - 生成基础补丁包
 # ===============================
 $ErrorActionPreference = "Stop"
-Set-StrictMode -Version Latest
 
 # ---------- 时间与环境变量 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
@@ -23,9 +22,10 @@ $PatchDirs = @{
 }
 
 if ($IsWindows -or $env:OS -like "*Windows*") {
-    $env:PATH += "$PSScriptRoot/tool"
+    $env:PATH += ";$PSScriptRoot/tool"
 }
 
+Set-StrictMode -Version Latest
 # ---------- 通用函数 ----------
 function New-CleanDir([string]$Path) {
     Remove-Item $Path -Recurse -Force -ErrorAction SilentlyContinue

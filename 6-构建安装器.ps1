@@ -18,7 +18,6 @@ if ($IsWindows -or $env:OS -like "*Windows*") {
     $env:PATH += ";$PSScriptRoot/tool"
 }
 
-Set-StrictMode -Version Latest
 # ---------- 验证前置依赖 ----------
 if (-not (Test-Path "patch_chs_windowslinux_*.7z")) {
     Write-Warning "未找到生成的补丁 7z 文件。请先运行 5-生成补丁.ps1"
@@ -32,10 +31,18 @@ function Normalize-Timestamp([string]$Path) {
 }
 
 function Build-SfxInstaller([string]$OutputFile, [string]$Platform) {
-    $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$Platform\config.txt`"+`"temp\$Platform.7z`" `"$OutputFile`""
-    cmd.exe /d /c $cmdLine
+    if ($IsWindows -or $env:OS -like "*Windows*") {
+        $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$Platform\config.txt`"+`"temp\$Platform.7z`" `"$OutputFile`""
+        cmd.exe /d /c $cmdLine
+    }
+    else {
+        $cmdLine = "cat `"cn_installer/7zS2.sfx`" `"cn_installer/$Platform/config.txt`" `"temp/$Platform.7z`" > `"$OutputFile`""
+        sh -c $cmdLine
+    }
     if ($LASTEXITCODE -ne 0) { throw "SFX binary merge failed for: $OutputFile" }
 }
+
+Set-StrictMode -Version Latest
 
 # ---------- 清理并初始化 ----------
 Remove-Item $TempDir -Recurse -Force -ErrorAction SilentlyContinue

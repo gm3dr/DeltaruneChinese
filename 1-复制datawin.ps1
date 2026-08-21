@@ -45,7 +45,7 @@ function Copy-File($src, $dest) {
 
 Write-Host "Starting file extraction..." -ForegroundColor Cyan
 
-# 4. 批量处理 Chapters 1-4 (合并循环逻辑)
+# 4. 批量处理 Chapters 1-5 (合并循环逻辑)
 1..5 | ForEach-Object {
     $ch = $_
     if ($ch -eq 1) {$file = "lang_en"} else { $file = "lang_ja" }

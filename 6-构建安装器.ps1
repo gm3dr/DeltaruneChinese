@@ -6,7 +6,6 @@
 # 并从 github.com/gm3dr/DeltaruneChinesePatcher 的 Release
 # 下载 Win/Mac/Linux/WinOld 安装器，并放到文件夹
 $ErrorActionPreference = "Stop"
-Set-StrictMode -Version Latest
 
 # ---------- 时间与环境变量 ----------
 $fixedTime = Get-Date -Format "yyyy-MM-dd HH:mm"
@@ -14,6 +13,10 @@ $date      = Get-Date -Format "yyMMdd"
 $ts        = Get-Date $fixedTime
 
 $TempDir = "temp"
+
+if ($IsWindows -or $env:OS -like "*Windows*") {
+    $env:PATH += ";$PSScriptRoot/tool"
+}
 
 # ---------- 验证前置依赖 ----------
 if (-not (Test-Path "patch_chs_windowslinux_*.7z")) {
@@ -28,10 +31,18 @@ function Normalize-Timestamp([string]$Path) {
 }
 
 function Build-SfxInstaller([string]$OutputFile, [string]$Platform) {
-    $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$Platform\config.txt`"+`"temp\$Platform.7z`" `"$OutputFile`""
-    cmd.exe /d /c $cmdLine
+    if ($IsWindows -or $env:OS -like "*Windows*") {
+        $cmdLine = "copy /b /y `"cn_installer\7zS2.sfx`"+`"cn_installer\$Platform\config.txt`"+`"temp\$Platform.7z`" `"$OutputFile`""
+        cmd.exe /d /c $cmdLine
+    }
+    else {
+        $cmdLine = "cat `"cn_installer/7zS2.sfx`" `"cn_installer/$Platform/config.txt`" `"temp/$Platform.7z`" > `"$OutputFile`""
+        sh -c $cmdLine
+    }
     if ($LASTEXITCODE -ne 0) { throw "SFX binary merge failed for: $OutputFile" }
 }
+
+Set-StrictMode -Version Latest
 
 # ---------- 清理并初始化 ----------
 Remove-Item $TempDir -Recurse -Force -ErrorAction SilentlyContinue
@@ -39,28 +50,28 @@ Remove-Item 【* -Force -ErrorAction SilentlyContinue
 
 # ---------- 构建各平台安装包 ----------
 foreach ($p in @("linux", "win", "winold", "mac")) {
-    if (-not (Test-Path "patcher\$p")) {
+    if (-not (Test-Path "patcher/$p")) {
         continue
     }
     Write-Host "Packaging installer for $p..."
-    $PlatformDir = "$TempDir\$p"
+    $PlatformDir = "$TempDir/$p"
     New-Item -ItemType Directory -Path $PlatformDir -Force | Out-Null
     
     # 复制 patcher 基础文件
-    Copy-Item "patcher\$p\*" $PlatformDir -Recurse -Force
-    $TargetDataDir = if ($p -eq "mac") { "$PlatformDir\DELTARUNE Chinese Patcher.app\Contents\MacOS" } else { $PlatformDir }
+    Copy-Item "patcher/$p/*" $PlatformDir -Recurse -Force
+    $TargetDataDir = if ($p -eq "mac") { "$PlatformDir/DELTARUNE Chinese Patcher.app/Contents/MacOS" } else { $PlatformDir }
     if ($p -eq "mac") {
         New-Item -ItemType Directory -Path $TargetDataDir -Force | Out-Null
     }
     
     # 生成 readme
-    $ReadmePath = "$TargetDataDir\汉化更新日志-readme-$date.txt"
-    Copy-Item "cn_installer\readme.txt" $ReadmePath
+    $ReadmePath = "$TargetDataDir/汉化更新日志-readme-$date.txt"
+    Copy-Item "cn_installer/readme.txt" $ReadmePath
     (Get-Content -Raw $ReadmePath) -replace '\$\(CURRENT_TIME\)', $fixedTime -replace '\$\(CURRENT_DATE\)', $date | 
         Set-Content -Encoding UTF8 $ReadmePath
     
     # 答疑图
-    Copy-Item "cn_installer\汉化答疑QQ群1033065757-可以来此求助.jpg" $TargetDataDir
+    Copy-Item "cn_installer/汉化答疑QQ群1033065757-可以来此求助.jpg" $TargetDataDir
 
     # Windows / WinOld 逻辑合并
     if ($p -in @("win", "winold")) { 
@@ -70,11 +81,11 @@ foreach ($p in @("linux", "win", "winold", "mac")) {
         Normalize-Timestamp $PlatformDir
         $prefix = if ($p -eq "win") { "【Win10+（推荐）】" } else { "【Win7-】" }
         $file_name = "${prefix}三角符文汉化补丁-V$date"
-        .\tool\7z a -t7z -mx=9 -ms=on -mmt=on "$file_name.7z" ".\$PlatformDir" 
+        7z a -t7z -mx=9 -ms=on -mmt=on "$file_name.7z" "./$PlatformDir" 
     }
     # Linux 逻辑
     elseif ($p -eq "linux") { 
-        Copy-Item "cn_installer\linux\*" $TargetDataDir -Recurse -Force
+        Copy-Item "cn_installer/linux/*" $TargetDataDir -Recurse -Force
         Copy-Item "patch_chs_windowslinux_*.7z" $TargetDataDir
         
         Normalize-Timestamp $PlatformDir
@@ -83,7 +94,7 @@ foreach ($p in @("linux", "win", "winold", "mac")) {
     # Mac 逻辑
     elseif ($p -eq "mac") {
         Copy-Item "patch_chs_macos_*.7z" $TargetDataDir
-        # $AppPath = "$PlatformDir\DELTARUNE Chinese Patcher.app"
+        # $AppPath = "$PlatformDir/DELTARUNE Chinese Patcher.app"
         # xattr -cr "$AppPath"
         # codesign --force --deep --sign - "$AppPath"
         Normalize-Timestamp $PlatformDir

@@ -57,6 +57,8 @@ jobs:
               Copy-Item "cn_installer\readme.txt" $ReadmePath -Force
               (Get-Content -Raw $ReadmePath) -replace '\$\(CURRENT_TIME\)', $fixedTime -replace '\$\(CURRENT_DATE\)', $date | Set-Content -Encoding UTF8 $ReadmePath
               Copy-Item "cn_installer\汉化答疑QQ群1033065757-可以来此求助.jpg" "$extractDir\" -Force
+              Move-Item "$extractDir\DELTARUNE Chinese Patcher.exe" "$extractDir\汉化一键安装器.exe"
+              Move-Item "$extractDir\DELTARUNE Chinese Patcher.pck" "$extractDir\汉化一键安装器.pck"
 
               $zipName = "【$($target.Prefix)】三角符文汉化补丁-V$date.7z"
               7z a -t7z -mx=9 -ms=on -mmt=on $zipName ".\$extractDir\*"
@@ -66,7 +68,7 @@ jobs:
         uses: actions/upload-artifact@v7
         with:
           name: Final_Installers_Windows
-          path: "*Win*三角符文汉化补丁*.zip"
+          path: "*Win*三角符文汉化补丁*.7z"
 
   # 2. Linux 环境打包
   build-linux:

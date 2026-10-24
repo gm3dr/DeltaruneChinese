@@ -29,13 +29,13 @@ When different language translations conflict, **this file shall prevail in its 
 - `workspace/ch*/imports/pics/`
 - `workspace/ch*/imports/pics_zhname/`
 
-使用 **[CC BY-NC-SA 4.0](./CC-BY-NC-SA-4.0.txt)** 协议许可。<br>
+使用 **[CC BY-NC-SA 4.0](./LICENSE.CC-BY-NC-SA-4.0.txt)** 协议许可。<br>
 在保留好人汉化组署名的前提下，您可以对补丁的文本和贴图进行修改，并合法使用，好人汉化组对修改后的内容不承担任何责任。
 
-使用 **[CC BY-NC-SA 4.0](./CC-BY-NC-SA-4.0.txt)** 授權條款許可。<br>
+使用 **[CC BY-NC-SA 4.0](./LICENSE.CC-BY-NC-SA-4.0.txt)** 授權條款許可。<br>
 在保留好人漢化組署名的前提下，您可以對補丁的文本和貼圖進行修改，併合法使用，好人漢化組對修改後的內容不承擔任何責任。
 
-Licensed under the **[CC BY-NC-SA 4.0](./CC-BY-NC-SA-4.0.txt)** license.<br>
+Licensed under the **[CC BY-NC-SA 4.0](./LICENSE.CC-BY-NC-SA-4.0.txt)** license.<br>
 Provided that the credit to 好人汉化组 is retained, you may modify and lawfully use the text and textures of the patch; 好人汉化组 assumes no responsibility for the modified content.
 
 ## 打包工具源码 & Powershell 脚本 Packer source codes & Powershell scripts
@@ -44,9 +44,9 @@ Provided that the credit to 好人汉化组 is retained, you may modify and lawf
 - `atlas_packer/*.js`
 - `*.ps1`
 
-在 **[GNU 通用公共许可证 v3 (GPL v3)](./GPLv3.txt)** 下开源。<br>
-在 **[GNU 通用公眾授權條款 v3 (GPL v3)](./GPLv3.txt)** 下開放原始程式碼。<br>
-Open sourced under the **[GNU General Public License v3 (GPL v3)](./GPLv3.txt)** license.
+在 **[GNU 通用公共许可证 v3 (GPL v3)](./LICENSE.GPLv3.txt)** 下开源。<br>
+在 **[GNU 通用公眾授權條款 v3 (GPL v3)](./LICENSE.GPLv3.txt)** 下開放原始程式碼。<br>
+Open sourced under the **[GNU General Public License v3 (GPL v3)](./LICENSE.GPLv3.txt)** license.
 
 ## GameMaker Language 代码 GameMaker Language Codes
 适用范围 適用範圍 Scope of application：

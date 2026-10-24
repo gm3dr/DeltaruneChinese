@@ -126,4 +126,4 @@ foreach ($t in $Tasks) { Build-Patch $t.Dir $t.Tag }
 
 # 清理中间文件
 Remove-Item $TempDir -Recurse -Force
-Write-Host "Phase 1 (Patch Generation) finished successfully."
+Write-Host "Patch generation finished successfully."

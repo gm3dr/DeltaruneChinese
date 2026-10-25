@@ -1,6 +1,13 @@
-﻿$ErrorActionPreference = "Stop"
-# 首先需要运行 steam://open/console打开控制台
-# 运行下列指令下载depot
+﻿#Requires -Version 7.0
+# 这里限制 pwsh7 放弃对 Windows PowerShell 5.1 的支持是后加的，
+# 后续所有脚本留了很多兼容 5.1 的代码，但我没有动，能跑就不用动（）
+
+# 1-复制data_win.ps1
+
+$ErrorActionPreference = "Stop"
+
+# 首先需要运行 steam://open/console 打开控制台
+# 运行下列指令下载 depot
 # download_depot 1671210 1671212
 # download_depot 1671210 1671213
 # download_depot 1690940 1690941
@@ -9,13 +16,10 @@
 # 1. 自动识别操作系统并设置 Steam 根目录
 $gameVer = "current"
 if ($IsWindows -or $env:OS -like "*Windows*") {
-    $DirInst = "C:/Program Files (x86)/Steam/steamapps/common/DELTARUNE"
     $AppsDir = "C:/Program Files (x86)/Steam/steamapps/content"
 } elseif ($IsMacOS) {
-    $DirInst = "$env:HOME/Library/Application Support/Steam/steamapps/common/DELTARUNE/DELTARUNE.app/Contents/Resources"
     $AppsDir = "$env:HOME/Library/Application Support/Steam/Steam.AppBundle/Steam/Contents/MacOS/steamapps/content"
 } elseif ($IsLinux) {
-    $DirInst = "$env:HOME/.local/share/Steam/steamapps/common/DELTARUNE"
     $AppsDir = "$env:HOME/.local/share/Steam/ubuntu12_32/steamapps/content"
 } else {
     Write-Error "Unsupported OS."
@@ -45,25 +49,25 @@ function Copy-File($src, $dest) {
 
 Write-Host "Starting file extraction..." -ForegroundColor Cyan
 
-# 4. 批量处理 Chapters 1-4 (合并循环逻辑)
+# 4. 批量处理 Chapters 1-5 (合并循环逻辑)
 1..5 | ForEach-Object {
     $ch = $_
     if ($ch -eq 1) {$file = "lang_en"} else { $file = "lang_ja" }
     if ($IsMacOS) { 
-        Copy-File (Join-Path $DirInst "chapter$ch`_mac/game.ios") "workspace/ch$ch/data.win"
-        Copy-File (Join-Path $DirInst "chapter$ch`_mac/lang/$file.json") "workspace/ch$ch/lang_ja.json"
+        Copy-File (Join-Path $DirMac "chapter$ch`_mac/game.ios") "workspace/ch$ch/data.win"
+        Copy-File (Join-Path $DirMac "chapter$ch`_mac/lang/$file.json") "workspace/ch$ch/lang_ja.json"
     }
     else {
-        Copy-File (Join-Path $DirInst "chapter$ch`_windows/data.win") "workspace/ch$ch/data.win"
-        Copy-File (Join-Path $DirInst "chapter$ch`_windows/lang/$file.json") "workspace/ch$ch/lang_ja.json"
+        Copy-File (Join-Path $DirWin "chapter$ch`_windows/data.win") "workspace/ch$ch/data.win"
+        Copy-File (Join-Path $DirWin "chapter$ch`_windows/lang/$file.json") "workspace/ch$ch/lang_ja.json"
     }
     Copy-File (Join-Path $DirWin "chapter$ch`_windows/data.win")  "data_win/$gameVer/ch$ch/data.win"
     Copy-File (Join-Path $DirMac "chapter$ch`_mac/game.ios")       "data_win/$gameVer/ch$ch/game.ios"
 }
 
 # 5. 处理 Main Launcher
-if ($IsMacOS) { Copy-File (Join-Path $DirInst "game.ios") "workspace/main/data.win" }
-else { Copy-File (Join-Path $DirInst "data.win") "workspace/main/data.win" }
+if ($IsMacOS) { Copy-File (Join-Path $DirMac "game.ios") "workspace/main/data.win" }
+else { Copy-File (Join-Path $DirWin "data.win") "workspace/main/data.win" }
 Copy-File (Join-Path $DirWin "data.win")  "data_win/$gameVer/main/data.win"
 Copy-File (Join-Path $DirMac "game.ios")  "data_win/$gameVer/main/game.ios"
 

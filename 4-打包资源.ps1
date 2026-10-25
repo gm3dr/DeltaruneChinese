@@ -1,3 +1,4 @@
+﻿#Requires -Version 7.0
 # 4-打包资源.ps1
 # 运行此脚本前请先安装 DotNet SDK 10
 Write-Host "Building dotnet project..."

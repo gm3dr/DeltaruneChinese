@@ -72,7 +72,7 @@
 # 由此开始是本仓库源码的内容<br>玩家看上面的就足够了
 
 ## 协议 License
-见 [LICENSE.md](./LICENSE/LICENSE.md)
+见 [LICENSE.md](./LICENSE.md)
 
 ## 依赖项 Prerequisites
 

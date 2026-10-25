@@ -1,4 +1,5 @@
-﻿# 2-下载文本.ps1
+﻿#Requires -Version 7.0
+# 2-下载文本.ps1
 
 # 内部成员可以创建 secrets.ps1，输入TOKEN拉取最新文本
 # $env:TOKEN = "..."

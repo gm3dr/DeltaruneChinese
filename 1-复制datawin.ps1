@@ -1,4 +1,11 @@
-﻿$ErrorActionPreference = "Stop"
+﻿#Requires -Version 7.0
+# 这里限制 pwsh7 放弃对 Windows PowerShell 5.1 的支持是后加的，
+# 后续所有脚本留了很多兼容 5.1 的代码，但我没有动，能跑就不用动（）
+
+# 1-复制data_win.ps1
+
+$ErrorActionPreference = "Stop"
+
 # 首先需要运行 steam://open/console打开控制台
 # 运行下列指令下载depot
 # download_depot 1671210 1671212

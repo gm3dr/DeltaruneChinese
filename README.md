@@ -78,6 +78,7 @@
 
 本地生成补丁需要如下依赖：
 
+- **Powershell 7+**（用于运行 PS1 脚本，考虑到下面对 .NET 10 的需求，建议直接使用 PowerShell 7.6+）
 - **.NET 10.0 SDK**（用于编译 `src/deltarunePacker.csproj`）
 - **Node.js & npm**（用于运行 `atlas_packer` 图集与字体生成工具）
 - **Steam 客户端**（且账户中拥有 DELTARUNE，以获取特定 Depot 的游戏文件）
@@ -107,7 +108,7 @@
 > $env:URL = "翻译站网址"
 > ```
 
-### 3. `生成图集.ps1` (打包纹理贴图与字体图集)
+### 3. `3.1-生成图集.ps1` 和 `3.2-生成字体.ps1` (打包纹理贴图与字体图集)
 
 通过 `node atlas_packer/run.js` 根据 `template.mst` 模板，将散装的本地化贴图合成为游戏引擎使用的完整大图。<br>
 同时通过 `node atlas_packer/generate_font.js` 根据 `fonts.cfg` 配置和 `font.mst` 模板，调用 `freetype2` 直接渲染 TTF 字体，生成各字体的字符图集到 `workspace/global/font/atlas/`。
@@ -119,6 +120,16 @@
 ### 5. `生成汉化补丁.ps1` (生成分发封包)
 
 调用 `xdelta3` 生成各平台的补丁差分文件，并调用 `7z` 打包补丁和安装器，构建出汉化补丁成品。
+
+### 补充
+
+理论上为跨平台，已在下列平台上测试完整运行打包脚本，详见 PR#13。注意这不代表非 Windows x64 平台做出的 patch 可以正常使用，这部分也许需要玩家自行测试。
+
+- 物理机：
+    - Windows 11 x64
+- 虚拟机：
+    - Debian 13, Ubuntu 26.04 LTS, Fedora 44, Arch Linux (含 SteamOS 3), FreeBSD 15-STABLE
+    - macOS 15.2 x86_64
 
 ---
 

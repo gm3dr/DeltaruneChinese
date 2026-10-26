@@ -46,17 +46,17 @@ Provided that you retain attribution to 好人汉化组 and comply with the othe
 
 在 **[GNU 通用公共许可证 v3 (GPL v3)](./LICENSE/LICENSE.GPLv3.md)** 下开源。<br>
 在 **[GNU 通用公眾授權條款 v3 (GPL v3)](./LICENSE/LICENSE.GPLv3.md)** 下開放原始程式碼。<br>
-Released under the **[GNU General Public License v3 (GPL v3)](./LICENSE/LICENSE.GPLv3.md)** license.
+Open-sourced under the **[GNU General Public License v3 (GPL v3)](./LICENSE/LICENSE.GPLv3.md)** license.
 
 ## GML 代码 GML 程式碼 GML Code
 适用范围 適用範圍 Scope of application:
 - `workspace/ch*/imports/code/`
 
-GML 代码是从 DELTARUNE 游戏中，使用 [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool) 工具解包并修改的。由于改动较小，无法分别列出，恕我们无法给出授权协议。<br>
+GameMaker Language 代码是从 DELTARUNE 游戏中，使用 [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool) 工具解包并修改的。由于改动较小，无法分别列出，恕我们无法给出授权协议。<br>
 您可自行决定是否使用或修改这些代码，风险自负，好人汉化组对于这些代码的改动不承担任何责任。
 
-GML 程式碼是從 DELTARUNE 遊戲中，使用 [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool) 工具解包並修改的。由於改動較小，無法分別列出，恕我們無法給出授權條款。<br>
+GameMaker Language 程式碼是從 DELTARUNE 遊戲中，使用 [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool) 工具解包並修改的。由於改動較小，無法分別列出，恕我們無法給出授權條款。<br>
 您可自行決定是否使用或修改這些程式碼，風險自負，好人漢化組對於這些程式碼的改動不承擔任何責任。
 
-The GML code was extracted from the DELTARUNE game and modified using the [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool). Since these changes are minor and cannot be listed individually, we are unable to provide a license.<br>
+The GameMaker Language code was extracted from the DELTARUNE game and modified using the [UndertaleModTool](https://github.com/UnderminersTeam/UndertaleModTool). Since these changes are minor and cannot be listed individually, we are unable to provide a license.<br>
 You may use or modify this code at your own discretion and at your own risk; 好人汉化组 assumes no responsibility for any changes to it.

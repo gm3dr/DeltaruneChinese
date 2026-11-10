@@ -216,6 +216,7 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_bnameflowery", spr_bnameflowery);
             ds_map_add(sm, "spr_green_sign_big", spr_green_sign_big);
             ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_battleblcon_v_thanks_green);
+            ds_map_add(sm, "spr_funnytext_ass", spr_funnytext_ass);
             }
             else
             {
@@ -230,6 +231,7 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_bnameflowery", spr_zhname_bnameflowery);
             ds_map_add(sm, "spr_green_sign_big", spr_zhname_green_sign_big);
             ds_map_add(sm, "spr_battleblcon_v_thanks_green", spr_zhname_battleblcon_v_thanks_green);
+            ds_map_add(sm, "spr_funnytext_ass", spr_zhname_funnytext_ass);
             }
             ds_map_add(sm, "spr_battlemsg", spr_battlemsg);
             ds_map_add(sm, "spr_btact", spr_btact);
@@ -244,7 +246,6 @@ function scr_84_init_localization()
             ds_map_add(sm, "spr_fieldmuslogo", spr_fieldmuslogo);
             ds_map_add(sm, "spr_shop_space_ui", spr_shop_space_ui);
             ds_map_add(sm, "spr_funnytext_dump_her", spr_funnytext_dump_her);
-            ds_map_add(sm, "spr_funnytext_ass", spr_funnytext_ass);
             ds_map_add(sm, "spr_face_queen", spr_face_queen);
             ds_map_add(sm, "bg_building_icee_sign_ch5", bg_building_icee_sign_ch5);
             ds_map_add(sm, "spr_dw_fcastle_second_diner_sign_en", spr_dw_fcastle_second_diner_sign_en);

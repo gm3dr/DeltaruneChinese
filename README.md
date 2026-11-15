@@ -81,7 +81,7 @@
 - **Powershell 7+**（用于运行 PS1 脚本，考虑到下面对 .NET 10 的需求，建议直接使用 PowerShell 7.6+）
 - **.NET 10.0 SDK**（用于编译 `src/deltarunePacker.csproj`）
 - **Node.js & npm**（用于运行 `atlas_packer` 图集与字体生成工具，只要不是太老的版本一般都可以）
-- **7-Zip & xdelta3**（用于生成 xdelta 格式的差分补丁并打包）
+- **7-Zip & XDelta3**（用于生成 `.xdelta` 格式的差分补丁并打包）
 - **Steam 客户端**（且账户中拥有 DELTARUNE，以获取特定 Depot 的游戏文件）
 - （可选）如果需要拉取最新文本，需在根目录创建 `secrets.ps1` 存放你的 API Token。
 
@@ -137,7 +137,7 @@
 
 > [!NOTE]
 > - 考虑到 .NET 11 已正式发布，如果需要保持使用 .NET 10，请在安装 .NET SDK 与 PowerShell 时自行为其添加相应的版本号标识
-> - 关于 7-Zip 和 xdelta3，Windows 平台会将 `tool` 目录下的 `7z.exe` 与 `xdelta3.exe` 添加到临时环境变量中作为兜底，其他平台则需要像以下内容一样自行安装并添加到 PATH 中。
+> - 关于 7-Zip 和 XDelta3，Windows 平台会将 `tool` 目录下的 `7z.exe` 与 `xdelta3.exe` 添加到临时环境变量中作为兜底，其他平台则需要像以下内容一样自行安装并添加到 PATH 中。
 
 <details>
 
@@ -223,7 +223,7 @@ dotnet tool install -g PowerShell
 
 <summary>Ubuntu</summary>
 
-需要 Ubuntu 26.04 及以上的 LTS 版本，在 26.04 之前的常规版本不确定是否有 `dotnet-sdk-10.0` 包
+需要 Ubuntu 24.04 及以上的 LTS 版本或 25.04 及以上的常规版本，其他版本官方 apt 源没有 `dotnet-sdk-10.0` 包，见[来源](https://learn.microsoft.com/zh-cn/dotnet/core/install/linux-ubuntu-install?pivots=os-linux-ubuntu-2404&tabs=dotnet10)
 
 依赖安装：
 ```bash
@@ -276,7 +276,7 @@ export "PATH=$HOME/dotnet-sdk:$PATH"
 npm install --prefix atlas_packer --os=freebsd
 ```
 
-此外，由于 FreeBSD 不会被 `$Is*` 的环境变量检测到系统，所以需要在 `./1-复制datawin.ps1` 的系统识别部分的 `else` 分支加你的游戏安装路径 + depot下载路径
+此外，由于 FreeBSD 不会被 `$Is*` 的环境变量检测到系统，所以需要在 `./1-复制datawin.ps1` 的系统识别部分的 `else` 分支加你的游戏安装路径 + Depot 下载路径
 
 示例（假设你已经切换到了用 `linux-steam-utils` 安装过 Steam 的用户）：
 ```powershell
@@ -322,7 +322,7 @@ dotnet tool install -g PowerShell
 
 <summary>macOS (ARM64)</summary>
 
-对于 ARM64 架构 (Apple Silicon) 的 macOS，直接用 brew 安装依赖应当就足够了，目前没有测试过，就不给出详细的安装命令了。
+对于 ARM64 架构 (Apple Silicon) 的 macOS，直接用 brew 安装依赖应当就足够了，目前未经测试，故暂不在此给出详细的安装命令。
 
 </details>
 

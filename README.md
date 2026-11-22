@@ -85,59 +85,13 @@
 - **Steam 客户端**（且账户中拥有 DELTARUNE，以获取特定 Depot 的游戏文件）
 - （可选）如果需要拉取最新文本，需在根目录创建 `secrets.ps1` 存放你的 API Token。
 
-## 工作流简介 (Powershell 脚本)
-
-所有打包过程已整合成 PS1 脚本，存放在根目录。直接按顺序运行即可：
-
-### 1. `复制datawin.ps1` (下载游戏)
-自动识别操作系统（Windows/macOS/Linux），并前往对应的 Steam 安装目录抓取所需文件。
-
-> [!IMPORTANT]
-> **运行此脚本前，请在系统浏览器输入 `steam://open/console` 或通过终端命令 `steam -console` 打开 Steam 控制台，并逐行输入以下命令，下载指定版本的游戏：**
-> - `download_depot 1671210 1671212`
-> - `download_depot 1671210 1671213`
-> - `download_depot 1690940 1690941`
-> - `download_depot 1690940 1690942`
-
-### 2. `下载文本.ps1` (拉取远端翻译，可选)
-通过 API 全自动下载第 1~5 章最新的中英文 `en.json` 与 `cn.json`。
-
-> [!TIP]
-> 在运行该脚本前，请确保您拥有“好人汉化组” Weblate 翻译站的访问权限。在仓库根目录新建 `secrets.ps1`：
-> ```powershell
-> $env:TOKEN = "你的 API Token"
-> $env:URL = "翻译站网址"
-> ```
-
-### 3. `3.1-生成图集.ps1` 和 `3.2-生成字库.ps1` (打包纹理贴图与字体图集)
-
-通过 `node atlas_packer/run.js` 根据 `template.mst` 模板，将散装的本地化贴图合成为游戏引擎使用的完整大图。<br>
-同时通过 `node atlas_packer/generate_font.js` 根据 `fonts.cfg` 配置和 `font.mst` 模板，调用 `freetype2` 直接渲染 TTF 字体，生成各字体的字符图集到 `workspace/global/font/atlas/`。
-
-### 4. `打包资源.ps1` (构建二进制 Data)
-
-调用 .NET 10 工具链编译打包器，并运行 `src` 目录下的 `deltarunePacker` 的资源导入工具，将汉化贴图、文本等导入到各章 data.win中。
-
-### 5. `生成汉化补丁.ps1` (生成分发封包)
-
-调用 `xdelta3` 生成各平台的补丁差分文件，并调用 `7z` 打包补丁，构建出汉化补丁成品。
-
-### 补充
-
-整个工作流理论上为跨平台，已在下列平台上测试完整运行打包脚本，详见 [PR #13](https://github.com/gm3dr/DeltaruneChinese/pull/13)。注意这不代表非 Windows x64 平台做出的 patch 可以正常使用，这部分也许需要玩家自行测试。
-
-- 物理机：
-    - Windows 11 x64
-    - Fedora 44, Arch Linux
-- 虚拟机：
-    - Debian 13, Ubuntu 26.04 LTS, FreeBSD 15-STABLE, SteamOS 3.8
-    - macOS 15.2 x86_64
-
-各平台依赖安装过程可参考以下内容，部分内容来源自 [@SystemFileB 的测试结果](https://github.com/SystemFileB/DeltaruneChinese-cross/discussions/1)：
+### 安装方式
+请根据所使用的系统进行选择：
 
 > [!NOTE]
 > - 考虑到 .NET 11 已正式发布，如果需要保持使用 .NET 10，请在安装 .NET SDK 与 PowerShell 时自行为其添加相应的版本号标识
-> - 关于 7-Zip 和 XDelta3，Windows 平台会将 `tool` 目录下的 `7z.exe` 与 `xdelta3.exe` 添加到临时环境变量中作为兜底，其他平台则需要像以下内容一样自行安装并添加到 PATH 中。
+> - 关于 7-Zip 和 XDelta3，Windows 平台会将 `tool` 目录下的 `7z.exe` 与 `xdelta3.exe` 添加到临时环境变量中作为兜底，其他平台则需要像以下内容一样自行安装。
+> - 对于 Linux 及 FreeBSD 平台，请自行将 `sudo` 替换为你所使用的提权工具
 
 <details>
 
@@ -167,10 +121,9 @@ dotnet tool install -g PowerShell
 
 <summary>Arch Linux (含 SteamOS 3)</summary>
 
-依赖安装：
 ```bash
 # 如果你使用的是 paru 而非 yay，请你在执行时把下面的 yay 换成 paru
-yay -S --needed powershell-bin xdelta3 tar 7zip curl npm nodejs dotnet-sdk
+yay -S --needed powershell-bin xdelta3 tar 7zip curl npm nodejs dotnet-sdk-10.0
 ```
 
 其中，[`powershell-bin`](https://aur.archlinux.org/packages/powershell-bin) 来自 AUR，其它包来自官方仓库  
@@ -178,7 +131,7 @@ yay -S --needed powershell-bin xdelta3 tar 7zip curl npm nodejs dotnet-sdk
 
 不使用 AUR 的依赖安装：
 ```bash
-sudo pacman -S --needed xdelta3 tar 7zip curl npm nodejs dotnet-sdk
+sudo pacman -S --needed xdelta3 tar 7zip curl npm nodejs dotnet-sdk-10.0
 dotnet tool install -g PowerShell
 
 # 随后，根据提示和你所使用的 shell，把 $HOME/.dotnet/tools 加到 PATH 里
@@ -223,9 +176,7 @@ dotnet tool install -g PowerShell
 
 <summary>Ubuntu</summary>
 
-需要 Ubuntu 24.04 及以上的 LTS 版本或 25.04 及以上的常规版本，其他版本官方 apt 源没有 `dotnet-sdk-10.0` 包，见[来源](https://learn.microsoft.com/zh-cn/dotnet/core/install/linux-ubuntu-install?pivots=os-linux-ubuntu-2404&tabs=dotnet10)
-
-依赖安装：
+需要 Ubuntu 24.04 及以上的 LTS 版本或常规版本，其他版本官方 apt 源没有 `dotnet-sdk-10.0` 包，见 [来源](https://learn.microsoft.com/zh-cn/dotnet/core/install/linux-ubuntu-install?pivots=os-linux-ubuntu-2404&tabs=dotnet10)
 ```bash
 sudo apt install xdelta3 tar 7zip curl npm nodejs dotnet-sdk-10.0
 
@@ -240,17 +191,30 @@ dotnet tool install -g PowerShell
 
 <summary>FreeBSD (实验性)</summary>
 
-#### 依赖安装
+**此平台相比其它平台补丁构建更容易失败 / 不可用，请自行承担风险！**
+
+更推荐启用 latest 分支的 pkg 源，以及 main 分支的 ports，以解决依赖问题
+
 ```sh
-# 用 root 用户执行
-pkg install xdelta3 7-zip curl npm node powershell python3 vips
+sudo pkg install xdelta3 7-zip curl npm node powershell python3 vips
+```
 
+FreeBSD ports 的 main 分支已有 .NET 10，可通过源代码编译安装：
+```sh
+cd /usr/ports/lang/dotnet
 
-# 随后，去 https://github.com/sec/dotnet-core-freebsd-source-build/releases/latest 下载 .NET SDK 10
+# 如果你已经启用了 latest 分支的 pkg 源，可以用以下命令从二进制安装依赖
+make install install-missing-packages
+
+sudo make reinstall clean
+```
+
+或者，可以从二进制安装 .NET 到用户：
+```sh
+# 去 https://github.com/sec/dotnet-core-freebsd-source-build/releases/latest 下载 .NET SDK 10
 # 或者用以下的命令安装 (请自行替换 URL 中的版本号 (如果有更新的版本) ，以及 FreeBSD 版本，这里是 FreeBSD 15 x64)
-# 要下载的东西很大，>1GB，记得留出充足的时间或直接改用aria2,axel等多线程下载工具
+# 要下载的东西很大，>1GB，记得留出充足的时间或直接改用 aria2, axel 等多线程下载工具
 
-# 用非 root 用户执行
 mkdir -p ~/dotnet-sdk/library-packs
 
 curl https://github.com/sec/dotnet-core-freebsd-source-build/releases/download/10.0.110-vmr/dotnet-sdk-10.0.110-freebsd.15-x64.tar.gz -o dotnet-sdk.tar.gz
@@ -262,13 +226,7 @@ tar -xf artifacts.tar.gz -C ~/dotnet-sdk/library-packs
 rm artifacts.tar.gz
 
 
-# 随后在 Shell 配置文件中把 ~/dotnet-sdk 放在 PATH 最前面
-# 配置文件位置：
-# fish: ~/.config/fish/config.fish
-# zsh: ~/.zshrc
-# bash: ~/.bashrc
-# sh: ~/.shrc
-export "PATH=$HOME/dotnet-sdk:$PATH"
+# 随后，根据提示和你所使用的 shell，把 $HOME/dotnet-sdk 加到 PATH 最前面
 ```
 
 进入本仓库目录后，需要手动安装 atlas_packer 依赖：
@@ -276,7 +234,7 @@ export "PATH=$HOME/dotnet-sdk:$PATH"
 npm install --prefix atlas_packer --os=freebsd
 ```
 
-此外，由于 FreeBSD 不会被 `$Is*` 的环境变量检测到系统，所以需要在 `./1-复制datawin.ps1` 的系统识别部分的 `else` 分支加你的游戏安装路径 + Depot 下载路径
+此外，由于 FreeBSD 不会被 `$Is*` 的环境变量检测到系统，所以需要在 `./1-复制datawin.ps1` 的系统识别部分的 `else` 分支添加你的 Depot 下载路径
 
 示例（假设你已经切换到了用 `linux-steam-utils` 安装过 Steam 的用户）：
 ```powershell
@@ -289,7 +247,7 @@ if ($IsWindows -or $env:OS -like "*Windows*") {
 } elseif ($IsLinux) {
     $AppsDir = "$env:HOME/.local/share/Steam/ubuntu12_32/steamapps/content"
 } else {
-    $AppsDir = "$env:HOME/.local/share/Steam/ubuntu12_32/steamapps/content" # 可以直接 Ctrl + C/V Linux 部分的代码 (
+    $AppsDir = "$env:HOME/.local/share/Steam/ubuntu12_32/steamapps/content" # 可以 Ctrl + C/V Linux 部分的代码 (
 }
 ```
 
@@ -299,7 +257,7 @@ if ($IsWindows -or $env:OS -like "*Windows*") {
 
 <summary>macOS (x86_64)</summary>
 
-对于 x86_64 架构 (Intel CPU) 的 macOS，由于 brew 已经开始逐步放弃对 x86_64 架构的支持，导致使用其安装时会需要现场编译相关依赖，故推荐[手动下载 .NET SDK 的 `.deb` 安装包](https://dotnet.microsoft.com/zh-cn/download/dotnet)进行安装，不过 PowerShell 和 Node.js 还是有相应安装命令可用的：
+对于 x86_64 架构 (Intel CPU) 的 macOS，由于 brew 已经开始逐步放弃对 x86_64 架构的支持，导致使用其安装时会需要现场编译相关依赖，故推荐 [手动下载 .NET SDK](https://dotnet.microsoft.com/zh-cn/download/dotnet) 进行安装，不过 PowerShell 和 Node.js 还是有相应安装命令可用的：
 
 ```bash
 # 以下内容来自 Node.js 官网
@@ -326,7 +284,54 @@ dotnet tool install -g PowerShell
 
 </details>
 
----
+## 工作流简介 (Powershell 脚本)
+
+所有打包过程已整合成 PS1 脚本，存放在根目录。直接按顺序运行即可：
+
+### 1. `复制datawin.ps1` (下载游戏)
+自动识别操作系统（Windows/macOS/Linux），并前往对应的 Steam 安装目录抓取所需文件。
+
+> [!IMPORTANT]
+> **运行此脚本前，请在系统浏览器输入 `steam://open/console` 或通过终端命令 `steam -console` 打开 Steam 控制台，并逐行输入以下命令，下载指定版本的游戏：**
+> - `download_depot 1671210 1671212`
+> - `download_depot 1671210 1671213`
+> - `download_depot 1690940 1690941`
+> - `download_depot 1690940 1690942`
+
+### 2. `下载文本.ps1` (拉取远端翻译，可选)
+通过 API 全自动下载第 1~5 章最新的中英文 `en.json` 与 `cn.json`。
+
+> [!TIP]
+> 在运行该脚本前，请确保您拥有“好人汉化组” Weblate 翻译站的访问权限。在仓库根目录新建 `secrets.ps1`：
+> ```powershell
+> $env:TOKEN = "你的 API Token"
+> $env:URL = "翻译站网址"
+> ```
+
+### 3. `3.1-生成图集.ps1` 和 `3.2-生成字库.ps1` (打包纹理贴图与字体图集)
+
+通过 `node atlas_packer/run.js` 根据 `template.mst` 模板，将散装的本地化贴图合成为游戏引擎使用的完整大图。<br>
+同时通过 `node atlas_packer/generate_font.js` 根据 `fonts.cfg` 配置和 `font.mst` 模板，调用 `freetype2` 直接渲染 TTF 字体，生成各字体的字符图集到 `workspace/global/font/atlas/`。
+
+### 4. `打包资源.ps1` (构建二进制 Data)
+
+调用 .NET 10 工具链编译打包器，并运行 `src` 目录下的 `deltarunePacker` 的资源导入工具，将汉化贴图、文本等导入到各章 data.win中。
+
+### 5. `生成汉化补丁.ps1` (生成分发封包)
+
+调用 `xdelta3` 生成各平台的补丁差分文件，并调用 `7z` 打包补丁，构建出汉化补丁成品。
+
+### 跨平台构建说明
+
+已在下列平台上测试完整运行打包脚本，详见 [PR #13](https://github.com/gm3dr/DeltaruneChinese/pull/13)。  
+目前不保证非 Windows x64 平台做出的 patch 可以正常使用，这部分也许需要玩家自行测试。
+
+- 物理机：
+    - Windows 11 x64
+    - Fedora 44, Arch Linux
+- 虚拟机：
+    - Debian 13, Ubuntu 26.04 LTS, FreeBSD 15.1-RELEASE-p2, SteamOS 3.8
+    - macOS 15.2 x86_64
 
 ## 仓库结构
 

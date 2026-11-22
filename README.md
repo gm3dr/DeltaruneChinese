@@ -315,7 +315,7 @@ dotnet tool install -g PowerShell
 
 ### 4. `打包资源.ps1` (构建二进制 Data)
 
-调用 .NET 10 工具链编译打包器，并运行 `src` 目录下的 `deltarunePacker` 的资源导入工具，将汉化贴图、文本等导入到各章 data.win中。
+调用 .NET 10 工具链编译打包器，并运行 `src` 目录下的 `deltarunePacker` 的资源导入工具，将汉化贴图、文本等导入到各章 data.win 中。
 
 ### 5. `生成汉化补丁.ps1` (生成分发封包)
 
